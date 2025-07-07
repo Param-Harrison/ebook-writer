@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Build outputs
+public/*.html
+public/*.pdf
+public/*.epub
+public/*.mobi
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*.bak
+.idea/
+.vscode/
+
+# Node modules (if any)
+node_modules/
+
+# Logs
+*.log
+
+# Misc
+*.tmp 

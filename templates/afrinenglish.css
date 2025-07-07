@@ -1,0 +1,86 @@
+body {
+  font-family: 'Quicksand', 'Georgia', serif;
+  background: #f6fafd;
+  color: #234;
+  margin: 0;
+  padding: 0;
+}
+.book-container {
+  max-width: 820px;
+  margin: 2.5rem auto;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 2.7rem 2.7rem 2.7rem 2.7rem;
+}
+h1, h2, h3 {
+  color: #2a6f97;
+  margin-top: 2.2rem;
+  font-family: 'Quicksand', 'Georgia', serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1.3rem;
+}
+h2 {
+  font-size: 1.45rem;
+  margin-bottom: 0.9rem;
+}
+h3 {
+  font-size: 1.13rem;
+  margin-bottom: 0.5rem;
+}
+blockquote {
+  border-left: 4px solid #2a6f97;
+  background: #e3f2fd;
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: #3a5a7a;
+  border-radius: 8px;
+}
+.box {
+  background: linear-gradient(90deg, #ffe0c3 0%, #ffd6e0 100%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 2px 12px rgba(255, 214, 224, 0.13);
+  font-weight: 500;
+  color: #a05a2c;
+  font-size: 1.08em;
+}
+code, pre {
+  background: #f0f4f8;
+  border-radius: 7px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', monospace;
+  color: #1a3a4a;
+  font-size: 1.03em;
+}
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+}
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+.columns > * {
+  flex: 1;
+}
+a {
+  color: #2a6f97;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #a05a2c;
+}
+hr {
+  border: none;
+  border-top: 1px solid #e3f2fd;
+  margin: 2.5rem 0;
+} 

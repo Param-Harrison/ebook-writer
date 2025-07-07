@@ -1,0 +1,32 @@
+{
+  "books": {
+    "afrinenglish-sample": {
+      "title": "The Joy of Learning English",
+      "author": "Afrin English",
+      "template": "afrinenglish",
+      "category": "english-learning",
+      "description": "A beautiful guide to mastering English"
+    },
+    "backendchallenges-sample": {
+      "title": "Backend Challenges: Level Up",
+      "author": "Backend Challenges",
+      "template": "backendchallenges", 
+      "category": "coding",
+      "description": "Intense coding challenges for backend developers"
+    }
+  },
+  "templates": {
+    "afrinenglish": {
+      "name": "Afrin English Template",
+      "description": "Colorful, elegant layout for English learning books",
+      "css": "afrinenglish.css",
+      "html": "afrinenglish.html"
+    },
+    "backendchallenges": {
+      "name": "Backend Challenges Template", 
+      "description": "Intense, code-focused layout for programming books",
+      "css": "backendchallenges.css",
+      "html": "backendchallenges.html"
+    }
+  }
+} 
