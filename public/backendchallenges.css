@@ -86,4 +86,142 @@ hr {
   border: none;
   border-top: 1px solid #e5e7eb;
   margin: 2.5rem 0;
+}
+
+/* Conversation styling for backendchallenges */
+.conversation {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  border-radius: 20px;
+  padding: 2.2rem;
+  margin: 2.2rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  max-width: 90%;
+  box-shadow: 
+    0 8px 32px rgba(37, 99, 235, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.conversation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1e40af 0%, #3b82f6 25%, #06b6d4 50%, #10b981 75%, #1e40af 100%);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.conversation blockquote {
+  margin: 1rem 0;
+  background: #fff;
+  border-left: none;
+  border-radius: 16px;
+  padding: 1.3rem 1.7rem;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.02);
+  position: relative;
+  max-width: 76%;
+  word-wrap: break-word;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.conversation blockquote:hover {
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* First speaker (You) - right aligned, elegant blue gradient */
+.conversation blockquote:nth-child(odd) {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  margin-left: auto;
+  border-bottom-right-radius: 6px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  position: relative;
+}
+
+/* Second speaker - left aligned, elegant white with subtle tint */
+.conversation blockquote:nth-child(even) {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  margin-right: auto;
+  border-bottom-left-radius: 6px;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  position: relative;
+}
+
+.conversation blockquote:first-child {
+  margin-top: 0;
+}
+
+.conversation blockquote:last-child {
+  margin-bottom: 0;
+}
+
+/* Speaker names styling */
+.conversation blockquote strong {
+  color: #1e40af;
+  font-size: 0.8em;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Message text styling */
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.5;
+  color: #1f2937;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .conversation {
+    padding: 1.8rem;
+    margin: 1.8rem 0;
+    max-width: 94%;
+    border-radius: 18px;
+  }
+  
+  .conversation blockquote {
+    max-width: 82%;
+    padding: 1.1rem 1.4rem;
+    margin: 0.9rem 0;
+  }
+  
+  .conversation blockquote strong {
+    font-size: 0.75em;
+    margin-bottom: 0.4rem;
+  }
+  
+  .conversation blockquote p {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .conversation blockquote {
+    max-width: 88%;
+    padding: 1rem 1.3rem;
+    margin: 0.7rem 0;
+  }
 } 
