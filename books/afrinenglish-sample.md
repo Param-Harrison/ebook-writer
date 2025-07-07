@@ -52,9 +52,14 @@ You are at a cozy café. You want to order a coffee and a sandwich.
 
 **Dialogue:**
 
+<div class="conversation">
 > **You:** "Hello! I'd like a coffee and a sandwich, please."
+
 > **Barista:** "Of course! Would you like anything else?"
+
 > **You:** "No, thank you. That's all."
+
+</div>
 
 **Useful Phrases:**
 
@@ -89,10 +94,16 @@ You want to invite friends to see a movie this weekend.
 
 **Conversation:**
 
+<div class="conversation">
 > **You:** "Hey Sarah! Are you free this weekend?"
+
 > **Sarah:** "I think so. What do you have in mind?"
+
 > **You:** "I was thinking we could see the new movie at the cinema."
+
 > **Sarah:** "That sounds great! What time?"
+
+</div>
 
 **Vocabulary Building:**
 
@@ -123,10 +134,16 @@ You're at a clothing store and need help finding the right size.
 
 **Store Dialogue:**
 
+<div class="conversation">
 > **You:** "Excuse me, do you have this shirt in a larger size?"
+
 > **Assistant:** "Let me check for you. What size are you looking for?"
+
 > **You:** "I usually wear medium, but this one seems small."
+
 > **Assistant:** "Here's a large. Would you like to try it on?"
+
+</div>
 
 **Shopping Vocabulary:**
 
@@ -155,9 +172,14 @@ You're meeting new people and want to share your interests.
 
 **Introduction:**
 
+<div class="conversation">
 > **You:** "Hi, I'm Alex. What do you like to do in your free time?"
+
 > **New Friend:** "I love reading and playing guitar. How about you?"
+
 > **You:** "I enjoy cooking and hiking. Do you like outdoor activities?"
+
+</div>
 
 **Hobby Expressions:**
 
@@ -220,9 +242,14 @@ Knowing how to ask for help is crucial when traveling.
 
 **Emergency Phrases:**
 
+<div class="conversation">
 > **You:** "Excuse me, I need help. I lost my wallet."
+
 > **Helper:** "Don't worry. Let me help you find it."
+
 > **You:** "Thank you so much. I'm really grateful."
+
+</div>
 
 **Important Vocabulary:**
 
@@ -255,10 +282,16 @@ Talking about apps, social media, and digital communication.
 
 **Tech Conversation:**
 
+<div class="conversation">
 > **Friend:** "Do you use Instagram?"
+
 > **You:** "Yes, I love sharing photos. Do you follow many people?"
+
 > **Friend:** "I follow about 200 people. How about you?"
+
 > **You:** "I follow around 150. I try to keep it manageable."
+
+</div>
 
 **Tech Vocabulary:**
 
