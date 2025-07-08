@@ -11,10 +11,10 @@ import argparse
 
 
 def add_pdf_font_adjustments(soup):
-    """Add CSS to reduce font sizes for more elegant PDF output."""
+    """Add CSS to reduce font sizes for more elegant PDF and EPUB output."""
     font_css = """
     <style>
-    /* PDF Font Size Adjustments for Elegance */
+    /* Font Size Adjustments for Elegance (PDF & EPUB) */
     
     /* Reduce base body font size */
     body {
@@ -146,12 +146,12 @@ def add_pdf_font_adjustments(soup):
     head = soup.find("head")
     if head:
         head.append(BeautifulSoup(font_css, "html.parser"))
-        print("✓ Added PDF font size adjustments for elegance")
+        print("✓ Added font size adjustments for elegance (PDF & EPUB)")
     return soup
 
 
 def process_html_for_pdf_fonts(html_file_path):
-    """Process HTML file to add PDF font size adjustments."""
+    """Process HTML file to add font size adjustments for PDF and EPUB."""
     with open(html_file_path, "r", encoding="utf-8") as f:
         html_content = f.read()
 
@@ -163,12 +163,12 @@ def process_html_for_pdf_fonts(html_file_path):
     # Write the processed HTML
     with open(html_file_path, "w", encoding="utf-8") as f:
         f.write(str(soup))
-    print(f"✓ Applied PDF font size adjustments: {html_file_path}")
+    print(f"✓ Applied font size adjustments: {html_file_path}")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Adjust font sizes for elegant PDF output"
+        description="Adjust font sizes for elegant PDF and EPUB output"
     )
     parser.add_argument("html_file", help="HTML file to process")
     args = parser.parse_args()
