@@ -218,7 +218,7 @@ echo "Cleaning up temporary files..."
 for book_dir in public/*/; do
     if [ -d "$book_dir" ]; then
         # Remove temporary PDF HTML files
-        #find "$book_dir" -name "*-pdf.html" -delete 2>/dev/null || true
+        find "$book_dir" -name "*-pdf.html" -delete 2>/dev/null || true
         # Remove PDF CSS files (they're regenerated each time)
         find "$book_dir" -name "*-pdf.css" -delete 2>/dev/null || true
         # Remove any temporary EPUB HTML files

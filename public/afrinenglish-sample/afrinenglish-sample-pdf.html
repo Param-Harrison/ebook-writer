@@ -306,6 +306,250 @@ figcaption {
         .mermaid-interactive { display: block; }
         .mermaid-fallback { display: none; }
         </style>
+<style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #49483e }
+.highlight { background: #272822; color: #F8F8F2 }
+.highlight .c { color: #959077 } /* Comment */
+.highlight .err { color: #ED007E; background-color: #1E0010 } /* Error */
+.highlight .esc { color: #F8F8F2 } /* Escape */
+.highlight .g { color: #F8F8F2 } /* Generic */
+.highlight .k { color: #66D9EF } /* Keyword */
+.highlight .l { color: #AE81FF } /* Literal */
+.highlight .n { color: #F8F8F2 } /* Name */
+.highlight .o { color: #FF4689 } /* Operator */
+.highlight .x { color: #F8F8F2 } /* Other */
+.highlight .p { color: #F8F8F2 } /* Punctuation */
+.highlight .ch { color: #959077 } /* Comment.Hashbang */
+.highlight .cm { color: #959077 } /* Comment.Multiline */
+.highlight .cp { color: #959077 } /* Comment.Preproc */
+.highlight .cpf { color: #959077 } /* Comment.PreprocFile */
+.highlight .c1 { color: #959077 } /* Comment.Single */
+.highlight .cs { color: #959077 } /* Comment.Special */
+.highlight .gd { color: #FF4689 } /* Generic.Deleted */
+.highlight .ge { color: #F8F8F2; font-style: italic } /* Generic.Emph */
+.highlight .ges { color: #F8F8F2; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #F8F8F2 } /* Generic.Error */
+.highlight .gh { color: #F8F8F2 } /* Generic.Heading */
+.highlight .gi { color: #A6E22E } /* Generic.Inserted */
+.highlight .go { color: #66D9EF } /* Generic.Output */
+.highlight .gp { color: #FF4689; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { color: #F8F8F2; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #959077 } /* Generic.Subheading */
+.highlight .gt { color: #F8F8F2 } /* Generic.Traceback */
+.highlight .kc { color: #66D9EF } /* Keyword.Constant */
+.highlight .kd { color: #66D9EF } /* Keyword.Declaration */
+.highlight .kn { color: #FF4689 } /* Keyword.Namespace */
+.highlight .kp { color: #66D9EF } /* Keyword.Pseudo */
+.highlight .kr { color: #66D9EF } /* Keyword.Reserved */
+.highlight .kt { color: #66D9EF } /* Keyword.Type */
+.highlight .ld { color: #E6DB74 } /* Literal.Date */
+.highlight .m { color: #AE81FF } /* Literal.Number */
+.highlight .s { color: #E6DB74 } /* Literal.String */
+.highlight .na { color: #A6E22E } /* Name.Attribute */
+.highlight .nb { color: #F8F8F2 } /* Name.Builtin */
+.highlight .nc { color: #A6E22E } /* Name.Class */
+.highlight .no { color: #66D9EF } /* Name.Constant */
+.highlight .nd { color: #A6E22E } /* Name.Decorator */
+.highlight .ni { color: #F8F8F2 } /* Name.Entity */
+.highlight .ne { color: #A6E22E } /* Name.Exception */
+.highlight .nf { color: #A6E22E } /* Name.Function */
+.highlight .nl { color: #F8F8F2 } /* Name.Label */
+.highlight .nn { color: #F8F8F2 } /* Name.Namespace */
+.highlight .nx { color: #A6E22E } /* Name.Other */
+.highlight .py { color: #F8F8F2 } /* Name.Property */
+.highlight .nt { color: #FF4689 } /* Name.Tag */
+.highlight .nv { color: #F8F8F2 } /* Name.Variable */
+.highlight .ow { color: #FF4689 } /* Operator.Word */
+.highlight .pm { color: #F8F8F2 } /* Punctuation.Marker */
+.highlight .w { color: #F8F8F2 } /* Text.Whitespace */
+.highlight .mb { color: #AE81FF } /* Literal.Number.Bin */
+.highlight .mf { color: #AE81FF } /* Literal.Number.Float */
+.highlight .mh { color: #AE81FF } /* Literal.Number.Hex */
+.highlight .mi { color: #AE81FF } /* Literal.Number.Integer */
+.highlight .mo { color: #AE81FF } /* Literal.Number.Oct */
+.highlight .sa { color: #E6DB74 } /* Literal.String.Affix */
+.highlight .sb { color: #E6DB74 } /* Literal.String.Backtick */
+.highlight .sc { color: #E6DB74 } /* Literal.String.Char */
+.highlight .dl { color: #E6DB74 } /* Literal.String.Delimiter */
+.highlight .sd { color: #E6DB74 } /* Literal.String.Doc */
+.highlight .s2 { color: #E6DB74 } /* Literal.String.Double */
+.highlight .se { color: #AE81FF } /* Literal.String.Escape */
+.highlight .sh { color: #E6DB74 } /* Literal.String.Heredoc */
+.highlight .si { color: #E6DB74 } /* Literal.String.Interpol */
+.highlight .sx { color: #E6DB74 } /* Literal.String.Other */
+.highlight .sr { color: #E6DB74 } /* Literal.String.Regex */
+.highlight .s1 { color: #E6DB74 } /* Literal.String.Single */
+.highlight .ss { color: #E6DB74 } /* Literal.String.Symbol */
+.highlight .bp { color: #F8F8F2 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #A6E22E } /* Name.Function.Magic */
+.highlight .vc { color: #F8F8F2 } /* Name.Variable.Class */
+.highlight .vg { color: #F8F8F2 } /* Name.Variable.Global */
+.highlight .vi { color: #F8F8F2 } /* Name.Variable.Instance */
+.highlight .vm { color: #F8F8F2 } /* Name.Variable.Magic */
+.highlight .il { color: #AE81FF } /* Literal.Number.Integer.Long */</style>
+<style>
+    pre {
+        padding: 1em;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 1.2em 0;
+    }
+    code:not(pre code) {
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.97em;
+        background: rgba(110, 118, 129, 0.15);
+        color: inherit;
+        border: none;
+    }
+    </style>
+<style>
+    .highlight, .highlight pre, pre {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0.5em 0 !important;
+        padding: 0.5em 1em !important;
+        background-clip: padding-box !important;
+        border-radius: 0.3em !important;
+    }
+    </style>
+
+<style>
+    /* Font Size Adjustments for Elegance (PDF & EPUB) */
+    
+    /* Reduce base body font size */
+    body {
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+    }
+    
+    /* Reduce heading sizes */
+    h1 {
+        font-size: 1.8rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    h2 {
+        font-size: 1.2rem !important;
+        margin-bottom: 0.7rem !important;
+    }
+    
+    h3 {
+        font-size: 1rem !important;
+        margin-bottom: 0.4rem !important;
+    }
+    
+    /* Reduce paragraph font size */
+    p {
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Reduce blockquote font size */
+    blockquote {
+        font-size: 0.9rem !important;
+        padding: 0.8rem 1.2rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Reduce conversation font sizes */
+    .conversation {
+        font-size: 0.9rem !important;
+        padding: 1rem !important;
+    }
+    
+    .conversation blockquote {
+        font-size: 0.85rem !important;
+    }
+    
+    .conversation blockquote p {
+        font-size: 0.85rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .conversation blockquote strong {
+        font-size: 0.7em !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Reduce box font size */
+    .box {
+        font-size: 0.9rem !important;
+        padding: 1rem 1.4rem !important;
+        margin: 1.2rem 0 !important;
+    }
+    
+    /* Reduce code font size */
+    code {
+        font-size: 0.85em !important;
+    }
+    
+    pre {
+        font-size: 0.85rem !important;
+        padding: 0.8rem !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Reduce list font size */
+    ul, ol {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    li {
+        margin: 0.3rem 0 !important;
+    }
+    
+    /* Reduce link font size */
+    a {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Reduce image caption font size */
+    figcaption {
+        font-size: 0.8em !important;
+        margin-top: 0.3rem !important;
+    }
+    
+    /* Reduce table font size */
+    table {
+        font-size: 0.9rem !important;
+    }
+    
+    th, td {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Ensure proper spacing for reduced fonts */
+    .book-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        max-width: none !important;
+    }
+    
+    /* Better line spacing for readability */
+    * {
+        line-height: 1.6 !important;
+    }
+    
+    /* Ensure code blocks don't overflow */
+    pre code {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+    }
+    </style>
 </head>
 <body>
 <div class="book-container">
