@@ -127,8 +127,12 @@ def add_pdf_font_adjustments(soup):
     
     /* Ensure proper spacing for reduced fonts */
     .book-container {
-        padding: 2rem 2rem 2rem 2rem !important;
-        margin: 2rem auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        max-width: none !important;
     }
     
     /* Better line spacing for readability */

@@ -100,7 +100,6 @@ def add_pdf_optimizations(css_content):
     pdf_css = """
     /* PDF-specific optimizations */
     @page {
-        margin: 1in;
         size: A4;
     }
     
