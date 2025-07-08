@@ -49,14 +49,17 @@ def add_pdf_font_adjustments(soup):
     blockquote {
         font-size: 0.9rem !important;
         padding: 0.8rem 1.2rem !important;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
     }
     
     /* Reduce conversation font sizes */
     .conversation {
         font-size: 0.9rem !important;
         padding: 1rem !important;
+        border: none !important;
+    }
+
+    .conversation::before {
+        background: none !important;
     }
     
     .conversation blockquote {
@@ -65,14 +68,14 @@ def add_pdf_font_adjustments(soup):
     
     .conversation blockquote p {
         font-size: 0.85rem !important;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
+        margin-top: 0rem !important;
+        margin-bottom: 0rem !important;
     }
     
     .conversation blockquote strong {
         font-size: 0.7em !important;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
+        margin-top: 0rem !important;
+        margin-bottom: 0rem !important;
     }
     
     /* Reduce box font size */
