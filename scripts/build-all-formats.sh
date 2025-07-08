@@ -137,11 +137,6 @@ build_book_all_formats() {
             echo "    Using regular HTML for EPUB..."
             epub_html_path="public/$book_name/$book_name-epub.html"
             cp "public/$book_name/$book_name.html" "$epub_html_path"
-            # Apply font adjustments to EPUB HTML if PDF HTML wasn't available
-            if command -v python3 &> /dev/null; then
-                echo "    Applying font adjustments to EPUB HTML..."
-                python3 scripts/fix-pdf-fonts.py "$epub_html_path" 2>/dev/null || echo "Warning: Skipping EPUB font adjustments."
-            fi
         fi
         
         # Inject EPUB-specific styles
@@ -153,7 +148,6 @@ build_book_all_formats() {
         # Build EPUB using the processed HTML
         pandoc "$epub_html_path" \
             -o "public/$book_name/$book_name.epub" \
-            --css="templates/$css_file" \
             --toc \
             --standalone \
             --metadata title="$title" \
