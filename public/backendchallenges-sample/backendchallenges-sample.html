@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style type="text/css">
+/* Theme palette and font variables */
+:root {
+  --background: #fff;
+  --foreground: #18181b;
+  --muted: #52525b;
+  --primary: #10b981; /* green accent */
+  --primary-dark: #047857;
+  --border: #e5e7eb;
+  --gray-bg: #f6f6f7;
+  --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.book-container {
+  max-width: 760px;
+  margin: 2.5rem auto;
+  background: var(--background);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+}
+
+h1, h2, h3 {
+  color: var(--foreground);
+  margin-top: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size: 2.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.3rem;
+}
+h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.7rem;
+  color: var(--foreground);
+}
+h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+  color: var(--foreground);
+}
+
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--gray-bg);
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: var(--muted);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.box {
+  background: linear-gradient(90deg, #fff 0%, #f0fdf4 100%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.08);
+  font-weight: 500;
+  color: var(--primary-dark);
+  font-size: 1.08em;
+  border: 1px solid var(--primary);
+}
+
+code, pre {
+  background: #18181b;
+  border-radius: 6px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', 'Menlo', 'Consolas', monospace;
+  color: #f0fdf4;
+  font-size: 1.01em;
+}
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  background: #18181b;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+.columns > * {
+  flex: 1;
+}
+a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--primary-dark);
+}
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* Conversation styling (chat bubble style, minimal) */
+.conversation {
+  background: var(--gray-bg);
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+  max-width: 100%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.conversation blockquote {
+  margin: 0.7rem 0;
+  background: #fff;
+  border-left: 3px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  box-shadow: none;
+  position: relative;
+  max-width: 75%;
+  word-wrap: break-word;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.conversation blockquote:nth-child(odd) {
+  background: #f0fdf4;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  border: 1px solid var(--primary);
+  position: relative;
+}
+
+.conversation blockquote:nth-child(even) {
+  background: #fff;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.conversation blockquote strong {
+  color: var(--primary-dark);
+  font-size: 0.75em;
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--foreground);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .conversation {
+    padding: 1rem;
+    margin: 1.2rem 0;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .conversation blockquote {
+    max-width: 90%;
+    padding: 0.7rem 0.9rem;
+    margin: 0.5rem 0;
+  }
+  .conversation blockquote strong {
+    font-size: 0.7em;
+    margin-bottom: 0.3rem;
+  }
+  .conversation blockquote p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 0.7rem;
+    border-radius: 8px;
+  }
+  .conversation blockquote {
+    max-width: 98%;
+    padding: 0.5rem 0.7rem;
+    margin: 0.3rem 0;
+  }
+} 
+</style>
+<meta charset="utf-8"/>
+<title>Backend Challenges: Level Up</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="backendchallenges.css" rel="stylesheet"/>
+<!-- Prism.js for code highlighting -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+<!-- Mermaid.js for diagrams -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+<style>
+        .mermaid-interactive { display: block; }
+        .mermaid-fallback { display: none; }
+        </style>
+</head>
+<body>
+<div class="book-container">
+<h1 id="backend-challenges-level-up">Backend Challenges: Level
+    Up</h1>
+<blockquote>
+<p>“Code is like humor. When you have to explain it, it’s bad.” —
+    Cory House</p>
+</blockquote>
+<div class="box">
+<p>Welcome to the backend coding challenge series! Each lesson is
+    designed to help you master real-world backend skills with clarity
+    and elegance. These challenges simulate actual production scenarios
+    you’ll encounter in your career.</p>
+</div>
+<h2 id="challenge-1-user-authentication-api">Challenge 1: User
+    Authentication API</h2>
+<p>Imagine you are building a modern web app. Your first task is to
+    create a simple authentication API.</p>
+<p><strong>Goal:</strong> Accept a username and password, and return
+    a token if valid.</p>
+<pre class="code-block"><code class="language-python">import hashlib
+import jwt
+import time
+from typing import Optional
+
+class AuthService:
+    def __init__(self, secret_key: str):
+        self.secret_key = secret_key
+        self.users = {
+            "admin": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"  # "password"
+        }
+
+    def authenticate(self, username: str, password: str) -&gt; Optional[str]:
+        if username in self.users:
+            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+            if hashed_password == self.users[username]:
+                payload = {
+                    "username": username,
+                    "exp": time.time() + 3600  # 1 hour
+                }
+                return jwt.encode(payload, self.secret_key, algorithm="HS256")
+        return None</code></pre>
+<p><strong>API Flow:</strong></p>
+<div class="mermaid">sequenceDiagram
+  participant Client
+  participant Server
+  participant Database
+  Client-&gt;&gt;Server: POST /login (username, password)
+  Server-&gt;&gt;Server: Hash password
+  Server-&gt;&gt;Database: Check credentials
+  Database--&gt;&gt;Server: User found/not found
+  Server--&gt;&gt;Client: 200 OK (JWT token) or 401 Unauthorized</div>
+<p><strong>Testing the API:</strong></p>
+<pre class="code-block"><code class="language-bash">curl -X POST http://localhost:8000/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "admin", "password": "password"}'</code></pre>
+<hr/>
+<h2 id="challenge-2-task-queue-with-rate-limiting">Challenge 2: Task
+    Queue with Rate Limiting</h2>
+<p>You need to design a background job queue that prevents
+    overloading your server.</p>
+<p><strong>Goal:</strong> Only allow 5 jobs per minute per user.</p>
+<pre class="code-block"><code class="language-python">from collections import defaultdict
+import time
+import threading
+from typing import Dict, List
+
+class RateLimitedQueue:
+    def __init__(self, max_jobs_per_minute: int = 5):
+        self.max_jobs = max_jobs_per_minute
+        self.user_jobs: Dict[str, List[float]] = defaultdict(list)
+        self.lock = threading.Lock()
+
+    def can_enqueue(self, user_id: str) -&gt; bool:
+        with self.lock:
+            now = time.time()
+            # Remove jobs older than 60 seconds
+            self.user_jobs[user_id] = [
+                t for t in self.user_jobs[user_id]
+                if now - t &lt; 60
+            ]
+
+            if len(self.user_jobs[user_id]) &lt; self.max_jobs:
+                self.user_jobs[user_id].append(now)
+                return True
+            return False
+
+    def get_user_stats(self, user_id: str) -&gt; Dict:
+        now = time.time()
+        recent_jobs = [t for t in self.user_jobs[user_id] if now - t &lt; 60]
+        return {
+            "jobs_this_minute": len(recent_jobs),
+            "can_enqueue": len(recent_jobs) &lt; self.max_jobs
+        }</code></pre>
+<p><strong>Queue Architecture:</strong></p>
+<div class="mermaid">graph TD
+  User--&gt;|enqueue job|Queue
+  Queue--&gt;|rate limit|Limiter
+  Limiter--&gt;|accept/reject|Queue
+  Queue--&gt;|process|Worker
+  Worker--&gt;|complete|Database</div>
+<p><strong>Usage Example:</strong></p>
+<pre class="code-block"><code class="language-python">queue = RateLimitedQueue(max_jobs_per_minute=5)
+
+# User tries to enqueue jobs
+user_id = "user123"
+for i in range(7):
+    if queue.can_enqueue(user_id):
+        print(f"Job {i+1} enqueued successfully")
+    else:
+        print(f"Job {i+1} rejected - rate limit exceeded")</code></pre>
+<hr/>
+<h2 id="challenge-3-database-connection-pool">Challenge 3: Database
+    Connection Pool</h2>
+<p>Design a robust database connection pool for high-traffic
+    applications.</p>
+<p><strong>Goal:</strong> Efficiently manage database connections
+    with proper error handling.</p>
+<pre class="code-block"><code class="language-python">import psycopg2
+from psycopg2 import pool
+import threading
+import time
+from typing import Optional
+from contextlib import contextmanager
+
+class DatabasePool:
+    def __init__(self, min_connections: int = 5, max_connections: int = 20):
+        self.pool = psycopg2.pool.ThreadedConnectionPool(
+            min_connections,
+            max_connections,
+            host="localhost",
+            database="myapp",
+            user="postgres",
+            password="secret"
+        )
+        self._lock = threading.Lock()
+        self._stats = {"connections_created": 0, "connections_used": 0}
+
+    @contextmanager
+    def get_connection(self):
+        conn = None
+        try:
+            conn = self.pool.getconn()
+            self._stats["connections_used"] += 1
+            yield conn
+        except Exception as e:
+            if conn:
+                conn.rollback()
+            raise e
+        finally:
+            if conn:
+                self.pool.putconn(conn)
+
+    def execute_query(self, query: str, params: tuple = None) -&gt; list:
+        with self.get_connection() as conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query, params)
+                return cursor.fetchall()
+
+    def get_stats(self) -&gt; dict:
+        return {
+            **self._stats,
+            "pool_size": self.pool.get_size(),
+            "available_connections": self.pool.get_available()
+        }</code></pre>
+<p><strong>Connection Pool Flow:</strong></p>
+<div class="mermaid">sequenceDiagram
+  participant App
+  participant Pool
+  participant Database
+  App-&gt;&gt;Pool: Request connection
+  Pool-&gt;&gt;Database: Get connection
+  Database--&gt;&gt;Pool: Connection ready
+  Pool--&gt;&gt;App: Connection provided
+  App-&gt;&gt;Database: Execute query
+  Database--&gt;&gt;App: Return results
+  App-&gt;&gt;Pool: Return connection
+  Pool-&gt;&gt;Database: Release connection</div>
+<hr/>
+<h2 id="challenge-4-caching-layer-with-ttl">Challenge 4: Caching
+    Layer with TTL</h2>
+<p>Implement a caching system with time-based expiration.</p>
+<p><strong>Goal:</strong> Reduce database load with intelligent
+    caching.</p>
+<pre class="code-block"><code class="language-python">import redis
+import json
+import time
+from typing import Any, Optional
+from functools import wraps
+
+class CacheManager:
+    def __init__(self, redis_host: str = "localhost", redis_port: int = 6379):
+        self.redis_client = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
+        self.default_ttl = 300  # 5 minutes
+
+    def set(self, key: str, value: Any, ttl: int = None) -&gt; bool:
+        try:
+            serialized_value = json.dumps(value)
+            return self.redis_client.setex(key, ttl or self.default_ttl, serialized_value)
+        except Exception as e:
+            print(f"Cache set error: {e}")
+            return False
+
+    def get(self, key: str) -&gt; Optional[Any]:
+        try:
+            value = self.redis_client.get(key)
+            return json.loads(value) if value else None
+        except Exception as e:
+            print(f"Cache get error: {e}")
+            return None
+
+    def delete(self, key: str) -&gt; bool:
+        try:
+            return bool(self.redis_client.delete(key))
+        except Exception as e:
+            print(f"Cache delete error: {e}")
+            return False
+
+    def clear_pattern(self, pattern: str) -&gt; int:
+        """Delete all keys matching pattern"""
+        try:
+            keys = self.redis_client.keys(pattern)
+            if keys:
+                return self.redis_client.delete(*keys)
+            return 0
+        except Exception as e:
+            print(f"Cache clear error: {e}")
+            return 0
+
+def cache_result(ttl: int = 300):
+    """Decorator to cache function results"""
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            cache_key = f"{func.__name__}:{hash(str(args) + str(kwargs))}"
+            cache_manager = CacheManager()
+
+            # Try to get from cache
+            cached_result = cache_manager.get(cache_key)
+            if cached_result is not None:
+                return cached_result
+
+            # Execute function and cache result
+            result = func(*args, **kwargs)
+            cache_manager.set(cache_key, result, ttl)
+            return result
+        return wrapper
+    return decorator</code></pre>
+<p><strong>Caching Strategy:</strong></p>
+<div class="mermaid">graph TD
+  A[Request] --&gt; B{Cache Hit?}
+  B --&gt;|Yes| C[Return Cached Data]
+  B --&gt;|No| D[Query Database]
+  D --&gt; E[Store in Cache]
+  E --&gt; F[Return Data]
+  C --&gt; G[Response]
+  F --&gt; G</div>
+<p><strong>Usage Example:</strong></p>
+<pre class="code-block"><code class="language-python">@cache_result(ttl=600)  # Cache for 10 minutes
+def get_user_profile(user_id: int) -&gt; dict:
+    # Simulate database query
+    return {"user_id": user_id, "name": "John Doe", "email": "john@example.com"}
+
+# First call hits database
+profile1 = get_user_profile(123)
+
+# Second call hits cache
+profile2 = get_user_profile(123)</code></pre>
+<hr/>
+<h2 id="challenge-5-api-rate-limiting-with-redis">Challenge 5: API
+    Rate Limiting with Redis</h2>
+<p>Implement sophisticated rate limiting using Redis for distributed
+    systems.</p>
+<p><strong>Goal:</strong> Prevent API abuse with sliding window rate
+    limiting.</p>
+<pre class="code-block"><code class="language-python">import redis
+import time
+import json
+from typing import Tuple
+from dataclasses import dataclass
+
+@dataclass
+class RateLimitConfig:
+    max_requests: int
+    window_seconds: int
+    burst_allowance: int = 0
+
+class RedisRateLimiter:
+    def __init__(self, redis_host: str = "localhost", redis_port: int = 6379):
+        self.redis_client = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
+
+    def is_allowed(self, key: str, config: RateLimitConfig) -&gt; Tuple[bool, dict]:
+        now = time.time()
+        window_start = now - config.window_seconds
+
+        # Use Redis pipeline for atomic operations
+        pipe = self.redis_client.pipeline()
+
+        # Remove old entries
+        pipe.zremrangebyscore(key, 0, window_start)
+
+        # Count current requests
+        pipe.zcard(key)
+
+        # Add current request
+        pipe.zadd(key, {str(now): now})
+
+        # Set expiry on the key
+        pipe.expire(key, config.window_seconds)
+
+        results = pipe.execute()
+        current_count = results[1]
+
+        # Check if within limits
+        is_allowed = current_count &lt;= config.max_requests
+
+        # Calculate remaining requests
+        remaining = max(0, config.max_requests - current_count)
+
+        return is_allowed, {
+            "limit": config.max_requests,
+            "remaining": remaining,
+            "reset_time": now + config.window_seconds,
+            "current_count": current_count
+        }
+
+    def get_user_limits(self, user_id: str) -&gt; dict:
+        """Get current rate limit status for a user"""
+        key = f"rate_limit:{user_id}"
+        config = RateLimitConfig(max_requests=100, window_seconds=3600)  # 100 requests per hour
+
+        is_allowed, stats = self.is_allowed(key, config)
+        return {
+            "user_id": user_id,
+            "allowed": is_allowed,
+            **stats
+        }</code></pre>
+<p><strong>Rate Limiting Flow:</strong></p>
+<div class="mermaid">sequenceDiagram
+  participant Client
+  participant API
+  participant Redis
+  participant Database
+  Client-&gt;&gt;API: Request
+  API-&gt;&gt;Redis: Check rate limit
+  Redis--&gt;&gt;API: Allow/Deny
+  alt Allowed
+    API-&gt;&gt;Database: Process request
+    Database--&gt;&gt;API: Response
+    API--&gt;&gt;Client: Success
+  else Denied
+    API--&gt;&gt;Client: 429 Too Many Requests
+  end</div>
+<p><strong>Middleware Integration:</strong></p>
+<pre class="code-block"><code class="language-python">from flask import Flask, request, jsonify
+from functools import wraps
+
+app = Flask(__name__)
+rate_limiter = RedisRateLimiter()
+
+def rate_limit(requests_per_hour: int = 100):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            user_id = request.headers.get('X-User-ID', 'anonymous')
+            config = RateLimitConfig(max_requests=requests_per_hour, window_seconds=3600)
+
+            is_allowed, stats = rate_limiter.is_allowed(f"api:{user_id}", config)
+
+            if not is_allowed:
+                return jsonify({
+                    "error": "Rate limit exceeded",
+                    "retry_after": stats["reset_time"]
+                }), 429
+
+            response = f(*args, **kwargs)
+            response.headers['X-RateLimit-Remaining'] = str(stats["remaining"])
+            response.headers['X-RateLimit-Reset'] = str(int(stats["reset_time"]))
+            return response
+        return decorated_function
+    return decorator
+
+@app.route('/api/data')
+@rate_limit(requests_per_hour=50)
+def get_data():
+    return {"data": "Your requested data"}</code></pre>
+<hr/>
+<h2 id="challenge-6-message-queue-with-dead-letter-queue">Challenge
+    6: Message Queue with Dead Letter Queue</h2>
+<p>Build a robust message processing system with error handling.</p>
+<p><strong>Goal:</strong> Ensure no messages are lost, even when
+    processing fails.</p>
+<pre class="code-block"><code class="language-python">import json
+import time
+import threading
+from typing import Callable, Any, Dict
+from dataclasses import dataclass
+from enum import Enum
+from collections import deque
+
+class MessageStatus(Enum):
+    PENDING = "pending"
+    PROCESSING = "processing"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    DEAD_LETTER = "dead_letter"
+
+@dataclass
+class Message:
+    id: str
+    data: Any
+    status: MessageStatus
+    retry_count: int = 0
+    max_retries: int = 3
+    created_at: float = None
+    processed_at: float = None
+
+    def __post_init__(self):
+        if self.created_at is None:
+            self.created_at = time.time()
+
+class MessageQueue:
+    def __init__(self):
+        self.main_queue = deque()
+        self.dead_letter_queue = deque()
+        self.processing_queue = deque()
+        self.lock = threading.Lock()
+        self.stats = {
+            "messages_processed": 0,
+            "messages_failed": 0,
+            "messages_dead_lettered": 0
+        }
+
+    def enqueue(self, data: Any) -&gt; str:
+        """Add message to main queue"""
+        message_id = f"msg_{int(time.time() * 1000)}"
+        message = Message(
+            id=message_id,
+            data=data,
+            status=MessageStatus.PENDING
+        )
+
+        with self.lock:
+            self.main_queue.append(message)
+
+        return message_id
+
+    def process_messages(self, handler: Callable, batch_size: int = 10):
+        """Process messages with error handling"""
+        while True:
+            batch = []
+
+            # Get batch of messages
+            with self.lock:
+                for _ in range(min(batch_size, len(self.main_queue))):
+                    if self.main_queue:
+                        message = self.main_queue.popleft()
+                        message.status = MessageStatus.PROCESSING
+                        batch.append(message)
+
+            # Process batch
+            for message in batch:
+                try:
+                    result = handler(message.data)
+                    message.status = MessageStatus.COMPLETED
+                    message.processed_at = time.time()
+                    self.stats["messages_processed"] += 1
+
+                except Exception as e:
+                    message.retry_count += 1
+
+                    if message.retry_count &gt;= message.max_retries:
+                        message.status = MessageStatus.DEAD_LETTER
+                        self.dead_letter_queue.append(message)
+                        self.stats["messages_dead_lettered"] += 1
+                        print(f"Message {message.id} moved to dead letter queue: {e}")
+                    else:
+                        message.status = MessageStatus.PENDING
+                        self.main_queue.append(message)
+                        self.stats["messages_failed"] += 1
+                        print(f"Message {message.id} failed, retrying ({message.retry_count}/{message.max_retries})")
+
+            time.sleep(0.1)  # Prevent busy waiting
+
+    def get_stats(self) -&gt; Dict:
+        with self.lock:
+            return {
+                **self.stats,
+                "main_queue_size": len(self.main_queue),
+                "dead_letter_size": len(self.dead_letter_queue),
+                "processing_size": len(self.processing_queue)
+            }
+
+    def retry_dead_letters(self, handler: Callable):
+        """Retry messages from dead letter queue"""
+        with self.lock:
+            while self.dead_letter_queue:
+                message = self.dead_letter_queue.popleft()
+                message.status = MessageStatus.PENDING
+                message.retry_count = 0
+                self.main_queue.append(message)</code></pre>
+<p><strong>Message Queue Architecture:</strong></p>
+<div class="mermaid">graph TD
+  A[Producer] --&gt; B[Main Queue]
+  B --&gt; C[Processor]
+  C --&gt; D{Success?}
+  D --&gt;|Yes| E[Completed]
+  D --&gt;|No| F{Retry Count &lt; Max?}
+  F --&gt;|Yes| B
+  F --&gt;|No| G[Dead Letter Queue]
+  G --&gt; H[Manual Retry]
+  H --&gt; B</div>
+<p><strong>Usage Example:</strong></p>
+<pre class="code-block"><code class="language-python">def email_handler(data):
+    """Simulate email sending with occasional failures"""
+    if "error" in data.get("to", ""):
+        raise Exception("Invalid email address")
+    print(f"Sending email to {data.get('to')}")
+    return True
+
+# Initialize queue
+queue = MessageQueue()
+
+# Start processor in background thread
+processor_thread = threading.Thread(
+    target=queue.process_messages,
+    args=(email_handler,),
+    daemon=True
+)
+processor_thread.start()
+
+# Enqueue messages
+queue.enqueue({"to": "user@example.com", "subject": "Welcome!"})
+queue.enqueue({"to": "error@example.com", "subject": "This will fail"})
+queue.enqueue({"to": "admin@example.com", "subject": "Report"})
+
+# Monitor stats
+import time
+time.sleep(2)
+print("Queue Stats:", queue.get_stats())</code></pre>
+<hr/>
+<h2 id="challenge-7-database-migration-system">Challenge 7: Database
+    Migration System</h2>
+<p>Create a version-controlled database migration system.</p>
+<p><strong>Goal:</strong> Safely evolve database schema with
+    rollback capabilities.</p>
+<pre class="code-block"><code class="language-python">import sqlite3
+import os
+import hashlib
+from typing import List, Dict, Optional
+from dataclasses import dataclass
+from datetime import datetime
+
+@dataclass
+class Migration:
+    version: int
+    name: str
+    up_sql: str
+    down_sql: str
+    checksum: str
+    applied_at: Optional[datetime] = None
+
+class MigrationManager:
+    def __init__(self, db_path: str):
+        self.db_path = db_path
+        self.migrations_table = "schema_migrations"
+        self._init_migrations_table()
+
+    def _init_migrations_table(self):
+        """Create migrations tracking table"""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(f"""
+                CREATE TABLE IF NOT EXISTS {self.migrations_table} (
+                    version INTEGER PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    checksum TEXT NOT NULL,
+                    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+    def _calculate_checksum(self, content: str) -&gt; str:
+        """Calculate SHA256 checksum of migration content"""
+        return hashlib.sha256(content.encode()).hexdigest()
+
+    def create_migration(self, name: str, up_sql: str, down_sql: str) -&gt; Migration:
+        """Create a new migration"""
+        # Get next version number
+        with sqlite3.connect(self.db_path) as conn:
+            result = conn.execute(f"SELECT MAX(version) FROM {self.migrations_table}")
+            max_version = result.fetchone()[0] or 0
+
+        version = max_version + 1
+        checksum = self._calculate_checksum(up_sql + down_sql)
+
+        return Migration(
+            version=version,
+            name=name,
+            up_sql=up_sql,
+            down_sql=down_sql,
+            checksum=checksum
+        )
+
+    def apply_migration(self, migration: Migration) -&gt; bool:
+        """Apply a migration"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                # Check if already applied
+                result = conn.execute(
+                    f"SELECT checksum FROM {self.migrations_table} WHERE version = ?",
+                    (migration.version,)
+                )
+                existing = result.fetchone()
+
+                if existing:
+                    if existing[0] != migration.checksum:
+                        raise Exception(f"Migration {migration.version} checksum mismatch")
+                    return True  # Already applied
+
+                # Apply migration
+                conn.execute(migration.up_sql)
+
+                # Record migration
+                conn.execute(
+                    f"INSERT INTO {self.migrations_table} (version, name, checksum) VALUES (?, ?, ?)",
+                    (migration.version, migration.name, migration.checksum)
+                )
+
+                migration.applied_at = datetime.now()
+                return True
+
+        except Exception as e:
+            print(f"Failed to apply migration {migration.version}: {e}")
+            return False
+
+    def rollback_migration(self, migration: Migration) -&gt; bool:
+        """Rollback a migration"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                # Check if migration is applied
+                result = conn.execute(
+                    f"SELECT checksum FROM {self.migrations_table} WHERE version = ?",
+                    (migration.version,)
+                )
+                if not result.fetchone():
+                    return True  # Not applied, nothing to rollback
+
+                # Rollback migration
+                conn.execute(migration.down_sql)
+
+                # Remove migration record
+                conn.execute(
+                    f"DELETE FROM {self.migrations_table} WHERE version = ?",
+                    (migration.version,)
+                )
+
+                return True
+
+        except Exception as e:
+            print(f"Failed to rollback migration {migration.version}: {e}")
+            return False
+
+    def get_applied_migrations(self) -&gt; List[Migration]:
+        """Get list of applied migrations"""
+        with sqlite3.connect(self.db_path) as conn:
+            result = conn.execute(
+                f"SELECT version, name, checksum, applied_at FROM {self.migrations_table} ORDER BY version"
+            )
+            return [
+                Migration(
+                    version=row[0],
+                    name=row[1],
+                    up_sql="",  # Not stored in DB
+                    down_sql="",  # Not stored in DB
+                    checksum=row[2],
+                    applied_at=datetime.fromisoformat(row[3]) if row[3] else None
+                )
+                for row in result.fetchall()
+            ]</code></pre>
+<p><strong>Migration Flow:</strong></p>
+<div class="mermaid">graph TD
+  A[Create Migration] --&gt; B[Version Control]
+  B --&gt; C[Apply Migration]
+  C --&gt; D[Update Schema]
+  D --&gt; E[Record Applied]
+  E --&gt; F[Success]
+  C --&gt; G[Rollback]
+  G --&gt; H[Restore Schema]
+  H --&gt; I[Remove Record]</div>
+<p><strong>Usage Example:</strong></p>
+<pre class="code-block"><code class="language-python"># Initialize migration manager
+manager = MigrationManager("app.db")
+
+# Create migrations
+migration1 = manager.create_migration(
+    name="create_users_table",
+    up_sql="""
+        CREATE TABLE users (
+            id INTEGER PRIMARY KEY,
+            username TEXT UNIQUE NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """,
+    down_sql="DROP TABLE users"
+)
+
+migration2 = manager.create_migration(
+    name="add_user_profiles",
+    up_sql="""
+        CREATE TABLE user_profiles (
+            user_id INTEGER PRIMARY KEY,
+            bio TEXT,
+            avatar_url TEXT,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+    """,
+    down_sql="DROP TABLE user_profiles"
+)
+
+# Apply migrations
+print("Applying migration 1...")
+manager.apply_migration(migration1)
+
+print("Applying migration 2...")
+manager.apply_migration(migration2)
+
+# Check applied migrations
+applied = manager.get_applied_migrations()
+print(f"Applied migrations: {[m.version for m in applied]}")</code></pre>
+<hr/>
+<h2 id="chapter-1-system-design-principles">Chapter 1: System Design
+    Principles</h2>
+<div class="box">
+<p><strong>Key Principles:</strong> Always design for failure,
+    implement proper error handling, and consider scalability from the
+    start. These challenges build upon each other to create robust,
+    production-ready systems.</p>
+</div>
+<p><strong>Architecture Patterns:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>Layered Architecture</strong> - Separate concerns
+    clearly</li>
+<li><strong>Microservices</strong> - Independent, scalable
+    services</li>
+<li><strong>Event-Driven</strong> - Loose coupling through
+    events</li>
+<li><strong>CQRS</strong> - Separate read and write operations</li>
+</ul>
+</div>
+<p><strong>System Design Flow:</strong></p>
+<div class="mermaid">graph TD
+  A[Requirements] --&gt; B[Architecture Design]
+  B --&gt; C[Implementation]
+  C --&gt; D[Testing]
+  D --&gt; E[Deployment]
+  E --&gt; F[Monitoring]
+  F --&gt; G[Iteration]</div>
+<hr/>
+<h2 id="chapter-2-performance-optimization">Chapter 2: Performance
+    Optimization</h2>
+<div class="box">
+<p><strong>Performance Tip:</strong> Always measure before
+    optimizing. Use profiling tools to identify bottlenecks, then apply
+    targeted optimizations.</p>
+</div>
+<p><strong>Optimization Strategies:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>Caching</strong> - Reduce database load</li>
+<li><strong>Connection Pooling</strong> - Reuse connections</li>
+<li><strong>Async Processing</strong> - Non-blocking operations</li>
+<li><strong>Database Indexing</strong> - Faster queries</li>
+</ul>
+</div>
+<p><strong>Performance Monitoring:</strong></p>
+<div class="mermaid">graph TD
+  A[Application] --&gt; B[Metrics Collection]
+  B --&gt; C[Performance Analysis]
+  C --&gt; D[Bottleneck Identification]
+  D --&gt; E[Optimization]
+  E --&gt; F[Performance Improvement]</div>
+<hr/>
+<h2 id="final-challenge-complete-system-integration">Final
+    Challenge: Complete System Integration</h2>
+<div class="box">
+<p><strong>Your Mission:</strong> Combine all the components you’ve
+    built into a complete, production-ready backend system. This is
+    where everything comes together!</p>
+</div>
+<p><strong>System Components:</strong></p>
+<div class="columns">
+<ul>
+<li>Authentication API with JWT tokens</li>
+<li>Rate-limited task queue</li>
+<li>Database connection pooling</li>
+<li>Redis caching layer</li>
+<li>Message queue with dead letter handling</li>
+<li>Database migration system</li>
+</ul>
+</div>
+<p><strong>Complete System Architecture:</strong></p>
+<div class="mermaid">graph TD
+  A[Client] --&gt; B[API Gateway]
+  B --&gt; C[Rate Limiter]
+  C --&gt; D[Auth Service]
+  D --&gt; E[Application Layer]
+  E --&gt; F[Cache Layer]
+  E --&gt; G[Message Queue]
+  E --&gt; H[Database Pool]
+  H --&gt; I[Database]
+  G --&gt; J[Workers]
+  J --&gt; I</div>
+<p><strong>Integration Checklist:</strong></p>
+<div class="mermaid">graph TD
+  A[Setup Infrastructure] --&gt; B[Configure Services]
+  B --&gt; C[Run Migrations]
+  C --&gt; D[Start Workers]
+  D --&gt; E[Load Testing]
+  E --&gt; F[Monitor Performance]
+  F --&gt; G[Production Ready]</div>
+<hr/>
+<h2 id="congratulations">Congratulations!</h2>
+<div class="box">
+<p>You’ve completed the comprehensive backend challenges! You now
+    have the skills to build robust, scalable backend systems that can
+    handle real-world production loads. Remember to always consider
+    security, performance, and maintainability in your designs.</p>
+</div>
+<p><strong>Next Steps:</strong></p>
+<div class="columns">
+<ul>
+<li>Implement monitoring and alerting</li>
+<li>Add comprehensive logging</li>
+<li>Set up CI/CD pipelines</li>
+<li>Learn about containerization and orchestration</li>
+<li>Explore cloud-native architectures</li>
+</ul>
+</div>
+<blockquote>
+<p>“The best code is no code at all.” — Jeff Atwood</p>
+</blockquote>
+</div>
+</body>
+</html> 

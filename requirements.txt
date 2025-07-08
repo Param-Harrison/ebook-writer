@@ -1,2 +1,5 @@
 pandoc-mermaid-filter
-beautifulsoup4 
+beautifulsoup4
+weasyprint
+lxml
+cairocffi 

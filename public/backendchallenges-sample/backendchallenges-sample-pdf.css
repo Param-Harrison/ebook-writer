@@ -1,0 +1,344 @@
+/* Theme palette and font variables */
+
+
+body {
+  font-family: 'Inter', Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: #18181b;
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.book-container {
+  max-width: 760px;
+  margin: 2.5rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px auto;
+  padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+}
+
+h1, h2, h3 {
+  color: #18181b;
+  margin-top: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  font-family: 'Inter', Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size: 2.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.3rem;
+}
+h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.7rem;
+  color: #18181b;
+}
+h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+  color: #52525b;
+}
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+  color: #18181b;
+}
+
+blockquote {
+  border-left: 4px solid #10b981;
+  background: #f6f6f7;
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: #52525b;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px auto;
+}
+
+.box {
+  background: #3b82f6;
+  border-radius: 8px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 2px 4px auto;
+  font-weight: 500;
+  color: #047857;
+  font-size: 1.08em;
+  border: 1px solid #10b981;
+}
+
+code, pre {
+  background: #18181b;
+  border-radius: 8px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', 'Menlo', 'Consolas', monospace;
+  color: #f0fdf4;
+  font-size: 1.01em;
+}
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  background: #18181b;
+  box-shadow: 0 2px 4px auto;
+}
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+.columns > * {
+  flex: 1;
+}
+a {
+  color: #10b981;
+  text-decoration: underline;
+  
+}
+a:hover {
+  color: #047857;
+}
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2.5rem 0;
+}
+
+/* Conversation styling (chat bubble style, minimal) */
+.conversation {
+  background: #f6f6f7;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin: 2rem 0;
+  border: 1px solid #e5e7eb;
+  max-width: 100%;
+  box-shadow: 0 2px 4px auto;
+  position: relative;
+}
+
+.conversation blockquote {
+  margin: 0.7rem 0;
+  background: #fff;
+  border-left: 3px solid #10b981;
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  box-shadow: 0 2px 4px auto;
+  position: relative;
+  max-width: 75%;
+  word-wrap: break-word;
+  border: 1px solid #e5e7eb;
+  
+}
+
+.conversation blockquote:auto {
+  background: #f0fdf4;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  border: 1px solid #10b981;
+  position: relative;
+}
+
+.conversation blockquote:auto {
+  background: #fff;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  border: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.conversation blockquote strong {
+  color: #047857;
+  font-size: 0.75em;
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-
+  
+}
+
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.6;
+  color: #18181b;
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .conversation {
+    padding: 1rem;
+    margin: 1.2rem 0;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  .conversation blockquote {
+    max-width: 90%;
+    padding: 0.7rem 0.9rem;
+    margin: 0.5rem 0;
+  }
+  .conversation blockquote strong {
+    font-size: 0.7em;
+    margin-bottom: 0.3rem;
+  }
+  .conversation blockquote p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 0.7rem;
+    border-radius: 8px;
+  }
+  .conversation blockquote {
+    max-width: 98%;
+    padding: 0.5rem 0.7rem;
+    margin: 0.3rem 0;
+  }
+} 
+    /* PDF-specific optimizations */
+    @page {
+        margin: 1in;
+        size: A4;
+    }
+    
+    /* Prevent page breaks in important elements */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+    
+    /* Keep code blocks together */
+    pre, code {
+        page-break-inside: avoid;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    /* Keep blockquotes together */
+    blockquote {
+        page-break-inside: avoid;
+        margin: 1em 0;
+    }
+    
+    /* Keep conversation blocks together */
+    .conversation {
+        page-break-inside: avoid;
+        margin: 1.5em 0;
+    }
+    
+    /* Keep tables together */
+    table {
+        page-break-inside: avoid;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    /* Ensure images don't overflow */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Better list formatting for PDF */
+    ul, ol {
+        margin-left: 1.5em;
+        page-break-inside: auto;
+    }
+    
+    /* Ensure boxes don't break across pages */
+    .box {
+        page-break-inside: avoid;
+        margin: 1em 0;
+    }
+    
+    /* Ensure columns don't break */
+    .columns {
+        page-break-inside: avoid;
+    }
+    
+    /* Mermaid diagram styling for all formats */
+    .mermaid {
+        text-align: center;
+        margin: 1em 0;
+        padding: 1em;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+    }
+    
+    /* Syntax highlighting fallbacks */
+    .highlight, pre {
+        background-color: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1em 0;
+    }
+    
+    /* Code block styling */
+    code {
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.9em;
+    }
+    
+    /* Inline code */
+    code:not(pre code) {
+        background-color: #f6f8fa;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+    }
+    
+    /* Prism.js fallback styles */
+    .token.comment, .token.prolog, .token.doctype, .token.cdata {
+        color: #6a737d;
+    }
+    
+    .token.punctuation {
+        color: #24292e;
+    }
+    
+    .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted {
+        color: #d73a49;
+    }
+    
+    .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted {
+        color: #032f62;
+    }
+    
+    .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+        color: #d73a49;
+    }
+    
+    .token.atrule, .token.attr-value, .token.keyword {
+        color: #d73a49;
+    }
+    
+    .token.function {
+        color: #6f42c1;
+    }
+    
+    .token.class-name {
+        color: #6f42c1;
+    }
+    
+    .token.regex, .token.important, .token.variable {
+        color: #e36209;
+    }
+    

@@ -23,11 +23,30 @@ A simple, Pandoc/Markdown/Mermaid-based ebook writer for creating beautifully la
 
 ### Prerequisites
 
-- [Pandoc](https://pandoc.org/installing.html) - for Markdown to HTML conversion
-- [jq](https://jqlang.github.io/jq/download/) - for JSON configuration parsing
-- [Python 3](https://www.python.org/downloads/) - for filters
+- [Python 3](https://www.python.org/downloads/) - for the entire system
+- [Homebrew](https://brew.sh/) (macOS) or [apt](https://ubuntu.com/) (Linux) - for system tools
 
-### Python Virtual Environment Setup
+**Note**: All other tools (pandoc, jq, WeasyPrint, Calibre) are automatically installed by the setup script.
+
+### Quick Setup
+
+Run the complete setup script to install everything automatically:
+
+```bash
+./setup.sh
+```
+
+This will:
+
+- Create and activate a Python virtual environment
+- Install all Python dependencies
+- Install system tools (pandoc, jq, WeasyPrint)
+- Make all scripts executable
+- Test the installation
+
+### Manual Setup (Alternative)
+
+If you prefer manual setup:
 
 1. Create a virtual environment:
    ```bash
@@ -37,13 +56,13 @@ A simple, Pandoc/Markdown/Mermaid-based ebook writer for creating beautifully la
    ```bash
    source .venv/bin/activate
    ```
-3. Upgrade pip (optional):
-   ```bash
-   pip install --upgrade pip
-   ```
-4. Install requirements:
+3. Install requirements:
    ```bash
    pip install -r requirements.txt
+   ```
+4. Setup ebook tools (optional, for EPUB/PDF/MOBI):
+   ```bash
+   ./scripts/setup-ebook-tools.sh
    ```
 
 ### List Available Books and Templates
@@ -78,13 +97,35 @@ Example:
 
 ### Build Books
 
+#### Quick Build (All Formats)
+
 ```bash
-# Build all books
+# Build all books in all formats (HTML, EPUB, PDF, MOBI)
+./build.sh
+```
+
+#### Individual Build Commands
+
+```bash
+# Build all books in HTML format
 ./scripts/build-html.sh
 
-# Build specific book
+# Build specific book in HTML format
 ./scripts/build-html.sh <book-name>
+
+# Build all books in all formats
+./scripts/build-all-formats.sh
+
+# Build specific book in all formats
+./scripts/build-all-formats.sh <book-name>
 ```
+
+### Supported Formats
+
+- **HTML**: Always available, beautiful web-ready output
+- **EPUB**: E-book format for most e-readers (requires pandoc)
+- **PDF**: Print-ready PDF with preserved styles (requires WeasyPrint)
+- **MOBI**: Kindle-compatible format (requires Calibre)
 
 ## Book Configuration
 
@@ -163,7 +204,6 @@ def hello():
 ## Roadmap
 
 - Add more beautiful templates
-- Export to PDF, EPUB, MOBI
 - Web-based editor
 - Template marketplace
 
@@ -182,5 +222,16 @@ To enable live Mermaid diagram rendering in your HTML output:
    pandoc books/afrinenglish-sample.md -o public/afrinenglish-sample.html --template=templates/afrinenglish.html --standalone --toc --highlight-style=pygments --filter pandoc-mermaid-filter
    ```
 3. **Or update your build script to use the filter.**
+
+## Multi-Format Generation
+
+This project now supports generating books in multiple formats while preserving styles:
+
+- **HTML**: Web-ready with full styling
+- **EPUB**: E-reader compatible
+- **PDF**: Print-ready with preserved layout
+- **MOBI**: Kindle compatible
+
+See [FORMATS.md](FORMATS.md) for detailed instructions on generating all formats.
 
 ---

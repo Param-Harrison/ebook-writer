@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style type="text/css">
+/* Theme palette and font variables */
+:root {
+  --background: #f7f8fa;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --gray-bg: #f3f4f6;
+  --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--gray-bg);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.book-container {
+  max-width: 820px;
+  margin: 2.5rem auto;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 2.7rem 2.7rem 2.7rem 2.7rem;
+}
+
+h1, h2, h3 {
+  color: var(--primary-dark);
+  margin-top: 2.2rem;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.3rem;
+}
+h2 {
+  font-size: 1.45rem;
+  margin-bottom: 0.9rem;
+  color: var(--primary);
+}
+h3 {
+  font-size: 1.13rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: #e3f2fd;
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.04);
+}
+
+blockquote + blockquote {
+  margin-top: 0.5rem;
+}
+
+blockquote blockquote {
+  margin-left: 1rem;
+  border-left-width: 2px;
+  background: #f8fbff;
+}
+
+/* Conversation styling (chat bubble style) */
+.conversation {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid #e2e8f0;
+  max-width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.conversation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 16px 16px 0 0;
+}
+
+.conversation blockquote {
+  margin: 0.8rem 0;
+  background: #fff;
+  border-left: none;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  max-width: 75%;
+  word-wrap: break-word;
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.conversation blockquote:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.conversation blockquote:nth-child(odd) {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  border: 1px solid #bae6fd;
+  position: relative;
+}
+
+.conversation blockquote:nth-child(even) {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.conversation blockquote strong {
+  color: var(--primary-dark);
+  font-size: 0.75em;
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.6;
+  color: #1e293b;
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .conversation {
+    padding: 2rem;
+    margin: 2rem 0;
+    max-width: 95%;
+    border-radius: 20px;
+  }
+  .conversation blockquote {
+    max-width: 85%;
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+  }
+  .conversation blockquote strong {
+    font-size: 0.75em;
+    margin-bottom: 0.5rem;
+  }
+  .conversation blockquote p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 1.8rem;
+    border-radius: 18px;
+  }
+  .conversation blockquote {
+    max-width: 90%;
+    padding: 1rem 1.3rem;
+    margin: 0.8rem 0;
+  }
+}
+
+.box {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #ddd6fe 100%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+  font-weight: 500;
+  color: #581c87;
+  font-size: 1.08em;
+  border: 1px solid #a855f7;
+}
+code, pre {
+  background: #f0f4f8;
+  border-radius: 7px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', monospace;
+  color: var(--primary-dark);
+  font-size: 1.03em;
+}
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+}
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+.columns > * {
+  flex: 1;
+}
+a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--secondary);
+}
+hr {
+  border: none;
+  border-top: 1px solid #e3f2fd;
+  margin: 2.5rem 0;
+} 
+</style>
+<meta charset="utf-8"/>
+<title>The Joy of Learning English</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="afrinenglish.css" rel="stylesheet"/>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+<style>
+        .mermaid-interactive { display: block; }
+        .mermaid-fallback { display: none; }
+        </style>
+</head>
+<body>
+<div class="book-container">
+<h1 id="the-joy-of-learning-english">The Joy of Learning
+    English</h1>
+<blockquote>
+<p>“Learning another language is like becoming another person.” —
+    Haruki Murakami</p>
+</blockquote>
+<div class="box">
+<p>Welcome to your journey of mastering English! This book is your
+    companion to joyful, expressive, and confident communication. Each
+    lesson builds upon the previous one, creating a solid foundation for
+    your English skills.</p>
+</div>
+<h2 id="lesson-1-a-morning-in-the-park">Lesson 1: A Morning in the
+    Park</h2>
+<p>Imagine you are walking in a beautiful park. The sun is shining,
+    birds are singing, and you greet a friend.</p>
+<p><strong>Story:</strong></p>
+<blockquote>
+<p>Anna walks into the park and sees her friend Ben. She smiles and
+    says, “Good morning, Ben! How are you today?” Ben replies, “I’m
+    doing great, thanks! The weather is perfect for a walk.”</p>
+</blockquote>
+<p><strong>Vocabulary:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>greet</strong> (verb): to say hello</li>
+<li><strong>smile</strong> (verb): to make a happy face<br/>
+</li>
+<li><strong>park</strong> (noun): a place with grass and trees</li>
+<li><strong>weather</strong> (noun): the condition of the air
+    outside</li>
+<li><strong>perfect</strong> (adjective): exactly right</li>
+</ul>
+</div>
+<p><strong>Practice:</strong></p>
+<div class="columns">
+<ul>
+<li>Try greeting someone in English today. Say, “Good morning!”</li>
+<li>Write down three things you see in a park.</li>
+<li>Practice the dialogue with a friend.</li>
+</ul>
+</div>
+<p><strong>Grammar Focus:</strong></p>
+<div class="mermaid">graph TD
+  A[Present Simple] --&gt; B[I am / You are]
+  A --&gt; C[He/She is]
+  A --&gt; D[We/They are]
+  B --&gt; E[How are you?]
+  C --&gt; F[How is she?]</div>
+<hr/>
+<h2 id="lesson-2-ordering-at-a-café">Lesson 2: Ordering at a
+    Café</h2>
+<p>You are at a cozy café. You want to order a coffee and a
+    sandwich.</p>
+<p><strong>Dialogue:</strong></p>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> “Hello! I’d like a coffee and a sandwich,
+    please.”</p>
+</blockquote>
+<blockquote>
+<p><strong>Barista:</strong> “Of course! Would you like anything
+    else?”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “No, thank you. That’s all.”</p>
+</blockquote>
+</div>
+<p><strong>Useful Phrases:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>I’d like…</strong> - polite way to order</li>
+<li><strong>Anything else?</strong> - asking for more items</li>
+<li><strong>That’s all.</strong> - finished ordering</li>
+<li><strong>Of course!</strong> - polite agreement</li>
+</ul>
+</div>
+<p><strong>Visualize:</strong></p>
+<div class="mermaid">graph TD
+  You--&gt;|order|Barista
+  Barista--&gt;|serve|You
+  You--&gt;|pay|Cashier
+  Cashier--&gt;|give change|You</div>
+<p><strong>Practice Exercise:</strong></p>
+<div class="box">
+<p><strong>Role Play:</strong> Practice this dialogue with a
+    partner. Switch roles and try different food items!</p>
+</div>
+<hr/>
+<h2 id="lesson-3-making-plans-with-friends">Lesson 3: Making Plans
+    with Friends</h2>
+<p>You want to invite friends to see a movie this weekend.</p>
+<p><strong>Conversation:</strong></p>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> “Hey Sarah! Are you free this weekend?”</p>
+</blockquote>
+<blockquote>
+<p><strong>Sarah:</strong> “I think so. What do you have in
+    mind?”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “I was thinking we could see the new movie
+    at the cinema.”</p>
+</blockquote>
+<blockquote>
+<p><strong>Sarah:</strong> “That sounds great! What time?”</p>
+</blockquote>
+</div>
+<p><strong>Vocabulary Building:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>free</strong> (adjective): not busy</li>
+<li><strong>weekend</strong> (noun): Saturday and Sunday</li>
+<li><strong>cinema</strong> (noun): movie theater</li>
+<li><strong>sounds great</strong> (phrase): good idea</li>
+</ul>
+</div>
+<p><strong>Making Plans Flow:</strong></p>
+<div class="mermaid">sequenceDiagram
+  participant You
+  participant Friend
+  You-&gt;&gt;Friend: Are you free?
+  Friend-&gt;&gt;You: Yes, what's the plan?
+  You-&gt;&gt;Friend: Let's go to the cinema
+  Friend-&gt;&gt;You: Great idea!</div>
+<hr/>
+<h2 id="lesson-4-shopping-for-clothes">Lesson 4: Shopping for
+    Clothes</h2>
+<p>You’re at a clothing store and need help finding the right
+    size.</p>
+<p><strong>Store Dialogue:</strong></p>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> “Excuse me, do you have this shirt in a
+    larger size?”</p>
+</blockquote>
+<blockquote>
+<p><strong>Assistant:</strong> “Let me check for you. What size are
+    you looking for?”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “I usually wear medium, but this one seems
+    small.”</p>
+</blockquote>
+<blockquote>
+<p><strong>Assistant:</strong> “Here’s a large. Would you like to
+    try it on?”</p>
+</blockquote>
+</div>
+<p><strong>Shopping Vocabulary:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>excuse me</strong> - polite way to get attention</li>
+<li><strong>larger size</strong> - bigger size</li>
+<li><strong>try on</strong> - put on clothes to see if they fit</li>
+<li><strong>usually</strong> - most of the time</li>
+</ul>
+</div>
+<p><strong>Shopping Process:</strong></p>
+<div class="mermaid">graph TD
+  A[Enter Store] --&gt; B[Find Item]
+  B --&gt; C[Check Size]
+  C --&gt; D[Try On]
+  D --&gt; E[Buy or Leave]</div>
+<hr/>
+<h2 id="lesson-5-talking-about-hobbies">Lesson 5: Talking About
+    Hobbies</h2>
+<p>You’re meeting new people and want to share your interests.</p>
+<p><strong>Introduction:</strong></p>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> “Hi, I’m Alex. What do you like to do in
+    your free time?”</p>
+</blockquote>
+<blockquote>
+<p><strong>New Friend:</strong> “I love reading and playing guitar.
+    How about you?”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “I enjoy cooking and hiking. Do you like
+    outdoor activities?”</p>
+</blockquote>
+</div>
+<p><strong>Hobby Expressions:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>I love…</strong> - strong like</li>
+<li><strong>I enjoy…</strong> - like doing something</li>
+<li><strong>How about you?</strong> - asking the same question
+    back</li>
+<li><strong>free time</strong> - time when you’re not working</li>
+</ul>
+</div>
+<p><strong>Hobby Categories:</strong></p>
+<div class="mermaid">graph TD
+  A[Hobbies] --&gt; B[Sports]
+  A --&gt; C[Arts]
+  A --&gt; D[Music]
+  A --&gt; E[Reading]
+  A --&gt; F[Cooking]
+  B --&gt; G[Football]
+  B --&gt; H[Swimming]
+  C --&gt; I[Drawing]
+  C --&gt; J[Photography]</div>
+<hr/>
+<h2 id="chapter-1-getting-started">Chapter 1: Getting Started</h2>
+<div class="columns">
+<ul>
+<li>English opens doors to new opportunities.</li>
+<li>Practice daily for best results.</li>
+<li>Don’t be afraid to make mistakes.</li>
+<li>Listen to native speakers when possible.</li>
+</ul>
+</div>
+<h2 id="chapter-2-visualize-progress">Chapter 2: Visualize
+    Progress</h2>
+<div class="mermaid">graph TD
+  Start --&gt; Practice
+  Practice --&gt; Confidence
+  Confidence --&gt; Fluency
+  Fluency --&gt; Mastery</div>
+<p><strong>Progress Tracking:</strong></p>
+<div class="box">
+<p><strong>Tip:</strong> Keep a journal of new words and phrases you
+    learn. Review them weekly to reinforce your memory!</p>
+</div>
+<hr/>
+<h2 id="lesson-6-emergency-situations">Lesson 6: Emergency
+    Situations</h2>
+<p>Knowing how to ask for help is crucial when traveling.</p>
+<p><strong>Emergency Phrases:</strong></p>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> “Excuse me, I need help. I lost my
+    wallet.”</p>
+</blockquote>
+<blockquote>
+<p><strong>Helper:</strong> “Don’t worry. Let me help you find
+    it.”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “Thank you so much. I’m really
+    grateful.”</p>
+</blockquote>
+</div>
+<p><strong>Important Vocabulary:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>emergency</strong> - urgent situation</li>
+<li><strong>lost</strong> - can’t find something</li>
+<li><strong>grateful</strong> - thankful</li>
+<li><strong>don’t worry</strong> - calming phrase</li>
+</ul>
+</div>
+<p><strong>Emergency Flow:</strong></p>
+<div class="mermaid">sequenceDiagram
+  participant You
+  participant Helper
+  participant Police
+  You-&gt;&gt;Helper: I need help
+  Helper-&gt;&gt;You: What's wrong?
+  You-&gt;&gt;Helper: I lost my wallet
+  Helper-&gt;&gt;Police: Call for assistance
+  Police-&gt;&gt;You: We'll help you</div>
+<hr/>
+<h2 id="lesson-7-technology-and-social-media">Lesson 7: Technology
+    and Social Media</h2>
+<p>Talking about apps, social media, and digital communication.</p>
+<p><strong>Tech Conversation:</strong></p>
+<div class="conversation">
+<blockquote>
+<p><strong>Friend:</strong> “Do you use Instagram?”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “Yes, I love sharing photos. Do you follow
+    many people?”</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> “I follow about 200 people. How about
+    you?”</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> “I follow around 150. I try to keep it
+    manageable.”</p>
+</blockquote>
+</div>
+<p><strong>Tech Vocabulary:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>app</strong> - application on phone</li>
+<li><strong>follow</strong> - subscribe to someone’s posts</li>
+<li><strong>manageable</strong> - easy to handle</li>
+<li><strong>share</strong> - post for others to see</li>
+</ul>
+</div>
+<p><strong>Social Media Types:</strong></p>
+<div class="mermaid">graph TD
+  A[Social Media] --&gt; B[Instagram]
+  A --&gt; C[Facebook]
+  A --&gt; D[Twitter]
+  A --&gt; E[TikTok]
+  B --&gt; F[Photos]
+  C --&gt; G[Friends]
+  D --&gt; H[News]
+  E --&gt; I[Videos]</div>
+<hr/>
+<h2 id="chapter-3-advanced-communication">Chapter 3: Advanced
+    Communication</h2>
+<div class="box">
+<p><strong>Advanced Tip:</strong> Learn to use connecting words like
+    “however,” “therefore,” and “meanwhile” to make your speech more
+    fluent and sophisticated.</p>
+</div>
+<p><strong>Connecting Words:</strong></p>
+<div class="columns">
+<ul>
+<li><strong>However</strong> - but, on the other hand</li>
+<li><strong>Therefore</strong> - so, as a result</li>
+<li><strong>Meanwhile</strong> - at the same time</li>
+<li><strong>Furthermore</strong> - in addition</li>
+</ul>
+</div>
+<p><strong>Complex Sentence Structure:</strong></p>
+<div class="mermaid">graph TD
+  A[Simple Sentence] --&gt; B[Add Connector]
+  B --&gt; C[Add Detail]
+  C --&gt; D[Complex Sentence]
+  D --&gt; E[More Natural Speech]</div>
+<hr/>
+<h2 id="final-challenge-real-world-application">Final Challenge:
+    Real-World Application</h2>
+<div class="box">
+<p><strong>Your Mission:</strong> Use everything you’ve learned to
+    have a 10-minute conversation in English with a native speaker or
+    language partner. Focus on using the phrases and vocabulary from all
+    lessons!</p>
+</div>
+<p><strong>Conversation Topics:</strong></p>
+<div class="columns">
+<ul>
+<li>Talk about your weekend plans</li>
+<li>Discuss your favorite hobbies</li>
+<li>Share a recent experience</li>
+<li>Ask for recommendations</li>
+</ul>
+</div>
+<p><strong>Success Checklist:</strong></p>
+<div class="mermaid">graph TD
+  A[Start Conversation] --&gt; B[Use Greetings]
+  B --&gt; C[Ask Questions]
+  C --&gt; D[Share Information]
+  D --&gt; E[Use Connectors]
+  E --&gt; F[End Politely]
+  F --&gt; G[Success!]</div>
+<hr/>
+<h2 id="congratulations">Congratulations!</h2>
+<div class="box">
+<p>You’ve completed the foundational English course! Remember,
+    language learning is a journey, not a destination. Keep practicing,
+    stay curious, and enjoy the process of becoming more confident in
+    English.</p>
+</div>
+<p><strong>Next Steps:</strong></p>
+<div class="columns">
+<ul>
+<li>Practice with native speakers</li>
+<li>Watch English movies and TV shows</li>
+<li>Read English books and articles</li>
+<li>Join English conversation groups</li>
+</ul>
+</div>
+<blockquote>
+<p>“The limits of my language mean the limits of my world.” — Ludwig
+    Wittgenstein</p>
+</blockquote>
+</div>
+</body>
+</html> 
