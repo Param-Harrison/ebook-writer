@@ -6,8 +6,8 @@ A beautiful, automated ebook generator that creates professional books in multip
 
 - **Multiple Formats**: HTML, PDF, and MOBI
 - **Beautiful Design**: Responsive layouts with embedded CSS
-- **Mermaid Diagrams**: Interactive charts and flowcharts
-- **Syntax Highlighting**: Code blocks with proper formatting
+- **Mermaid Diagrams**: Interactive charts and flowcharts (rendered as SVG in PDF)
+- **Syntax Highlighting**: Code blocks with proper formatting (Prism.js in HTML, optimized for PDF)
 - **Multiple Templates**: Different styles for different content types
 - **Automated Build**: One command builds everything
 
@@ -188,11 +188,11 @@ pip install weasyprint
 
 ## 🎯 Supported Formats
 
-| Format | Purpose     | Requirements |
-| ------ | ----------- | ------------ |
-| HTML   | Web viewing | None         |
-| PDF    | Printing    | WeasyPrint   |
-| MOBI   | Kindle      | Calibre      |
+| Format | Purpose     | Requirements             |
+| ------ | ----------- | ------------------------ |
+| HTML   | Web viewing | None                     |
+| PDF    | Printing    | WeasyPrint + mermaid-cli |
+| MOBI   | Kindle      | Calibre                  |
 
 ## 🤝 Contributing
 

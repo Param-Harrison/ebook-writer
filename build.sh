@@ -23,6 +23,16 @@ fi
 
 echo "✅ Virtual environment activated"
 
+# Clean up public directory to avoid accumulating files
+echo ""
+echo "🧹 Cleaning up public directory..."
+if [ -d "public" ]; then
+    rm -rf public/*
+    echo "✅ Public directory cleaned"
+else
+    echo "ℹ️ Public directory doesn't exist yet"
+fi
+
 # Build all books in all formats
 echo ""
 echo "🚀 Building all books in all formats..."

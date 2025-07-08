@@ -51,8 +51,11 @@ build_book_all_formats() {
         FILTER="--filter pandoc-mermaid-filter"
     fi
     
-    # Create output directories
+    # Create output directories and clean up any existing mermaid-images
     mkdir -p "public/$book_name"
+    if [ -d "public/$book_name/mermaid-images" ]; then
+        rm -rf "public/$book_name/mermaid-images"
+    fi
     
     # Build HTML first (as base for other formats)
     echo "  Building HTML..."
@@ -146,6 +149,17 @@ fi
 
 # Copy all CSS files to public/
 cp templates/*.css public/
+
+# Clean up temporary PDF HTML files to reduce git folder size
+echo "Cleaning up temporary files..."
+for book_dir in public/*/; do
+    if [ -d "$book_dir" ]; then
+        # Remove temporary PDF HTML files
+        find "$book_dir" -name "*-pdf.html" -delete 2>/dev/null || true
+        # Remove PDF CSS files (they're regenerated each time)
+        find "$book_dir" -name "*-pdf.css" -delete 2>/dev/null || true
+    fi
+done
 
 echo "Build complete! Check the public/ directory for output files."
 echo ""

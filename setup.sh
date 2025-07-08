@@ -204,6 +204,29 @@ else
     print_error "Calibre installation failed"
 fi
 
+# Check and install mermaid-cli for PDF mermaid rendering
+if ! command -v mmdc &> /dev/null; then
+    print_warning "mermaid-cli is not installed. Installing for PDF mermaid diagram rendering..."
+    if command -v npm &> /dev/null; then
+        print_info "Installing mermaid-cli via npm..."
+        npm install -g @mermaid-js/mermaid-cli
+        print_status "mermaid-cli installed via npm"
+    else
+        print_error "npm is not installed. Please install Node.js and npm first:"
+        print_info "Download from: https://nodejs.org/"
+        print_info "Then run: npm install -g @mermaid-js/mermaid-cli"
+    fi
+else
+    print_status "mermaid-cli found: $(mmdc --version)"
+fi
+
+# Test mermaid-cli
+if command -v mmdc &> /dev/null; then
+    print_status "mermaid-cli is working"
+else
+    print_warning "mermaid-cli is not available (PDF mermaid diagrams will not render)"
+fi
+
 echo ""
 echo "🎉 Setup Complete!"
 echo "=================="
@@ -218,7 +241,7 @@ echo ""
 echo "Supported formats:"
 echo "  • HTML: Always available"
 echo "  • EPUB: Full support (pandoc + Calibre)"
-echo "  • PDF: Full support (WeasyPrint)"
+echo "  • PDF: Full support (WeasyPrint + mermaid-cli for diagrams)"
 echo "  • MOBI: Full support (Calibre)"
 echo ""
 echo "Next steps:"
