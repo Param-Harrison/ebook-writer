@@ -45,6 +45,30 @@ body {
     margin: 0 !important;
     padding: 0 !important;
 }
+
+/* Code blocks */
+pre, code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95em;
+  line-height: 1.5;
+  color: #2a2a2a;
+  background-color: #f9f9f9;
+  padding: 0.75em;
+  border-radius: 6px;
+  overflow-x: auto;
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid #ddd;
+}
+
+/* Avoids nested background in pre > code */
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  display: block;
+}
 </style>
 """
 
