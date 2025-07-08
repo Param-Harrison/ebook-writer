@@ -1,10 +1,24 @@
+/* Theme palette and font variables */
+:root {
+  --background: #f7f8fa;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --gray-bg: #f3f4f6;
+  --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+}
+
 body {
-  font-family: 'Quicksand', 'Georgia', serif;
-  background: #f6fafd;
-  color: #234;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--gray-bg);
+  color: var(--foreground);
   margin: 0;
   padding: 0;
+  line-height: 1.8;
 }
+
 .book-container {
   max-width: 820px;
   margin: 2.5rem auto;
@@ -13,61 +27,68 @@ body {
   box-shadow: 0 8px 32px rgba(0,0,0,0.10);
   padding: 2.7rem 2.7rem 2.7rem 2.7rem;
 }
+
 h1, h2, h3 {
-  color: #2a6f97;
+  color: var(--primary-dark);
   margin-top: 2.2rem;
-  font-family: 'Quicksand', 'Georgia', serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
 h1 {
   font-size: 2.4rem;
   margin-bottom: 1.3rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.3rem;
 }
 h2 {
   font-size: 1.45rem;
   margin-bottom: 0.9rem;
+  color: var(--primary);
 }
 h3 {
   font-size: 1.13rem;
   margin-bottom: 0.5rem;
+  color: var(--secondary);
 }
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+}
+
 blockquote {
-  border-left: 4px solid #2a6f97;
+  border-left: 4px solid var(--primary);
   background: #e3f2fd;
   padding: 1.1rem 1.5rem;
   margin: 1.7rem 0;
   font-style: italic;
   color: #3a5a7a;
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.04);
 }
 
-/* Improve conversation spacing */
 blockquote + blockquote {
   margin-top: 0.5rem;
 }
 
-/* Add subtle visual separation for conversations */
 blockquote blockquote {
   margin-left: 1rem;
   border-left-width: 2px;
   background: #f8fbff;
 }
 
-/* Conversation styling */
+/* Conversation styling (chat bubble style) */
 .conversation {
-  background: linear-gradient(145deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%);
-  border-radius: 24px;
-  padding: 2.5rem;
-  margin: 2.5rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  max-width: 92%;
-  box-shadow: 
-    0 8px 32px rgba(99, 102, 241, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid #e2e8f0;
+  max-width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   position: relative;
-  backdrop-filter: blur(10px);
 }
 
 .conversation::before {
@@ -76,104 +97,84 @@ blockquote blockquote {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 25%, #ec4899 50%, #f59e0b 75%, #6366f1 100%);
-  border-radius: 24px 24px 0 0;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 16px 16px 0 0;
 }
 
 .conversation blockquote {
-  margin: 1.2rem 0;
+  margin: 0.8rem 0;
   background: #fff;
   border-left: none;
-  border-radius: 20px;
-  padding: 1.4rem 1.8rem;
-  box-shadow: 
-    0 4px 16px rgba(0, 0, 0, 0.06),
-    0 2px 4px rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   position: relative;
-  max-width: 78%;
+  max-width: 75%;
   word-wrap: break-word;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
 }
 
 .conversation blockquote:hover {
-  box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.12),
-    0 4px 8px rgba(0, 0, 0, 0.04);
-  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
-/* First speaker (You) - right aligned, elegant purple gradient */
 .conversation blockquote:nth-child(odd) {
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #ddd6fe 100%);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   margin-left: auto;
-  border-bottom-right-radius: 8px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-bottom-right-radius: 4px;
+  border: 1px solid #bae6fd;
   position: relative;
 }
 
-/* Second speaker - left aligned, elegant white with subtle tint */
 .conversation blockquote:nth-child(even) {
-  background: linear-gradient(135deg, #ffffff 0%, #fafbff 50%, #f8faff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   margin-right: auto;
-  border-bottom-left-radius: 8px;
-  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-bottom-left-radius: 4px;
+  border: 1px solid #e2e8f0;
   position: relative;
 }
 
-.conversation blockquote:first-child {
-  margin-top: 0;
-}
-
-.conversation blockquote:last-child {
-  margin-bottom: 0;
-}
-
-/* Speaker names styling */
 .conversation blockquote strong {
-  color: #4c1d95;
-  font-size: 0.8em;
+  color: var(--primary-dark);
+  font-size: 0.75em;
   display: block;
-  margin-bottom: 0.6rem;
-  font-weight: 700;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  opacity: 0.9;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
 }
 
-/* Message text styling */
 .conversation blockquote p {
   margin: 0;
   line-height: 1.6;
-  color: #1e1b4b;
+  color: #1e293b;
   font-size: 0.95em;
-  font-weight: 500;
+  font-weight: 400;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
   .conversation {
     padding: 2rem;
     margin: 2rem 0;
     max-width: 95%;
     border-radius: 20px;
   }
-  
   .conversation blockquote {
     max-width: 85%;
     padding: 1.2rem 1.5rem;
     margin: 1rem 0;
   }
-  
   .conversation blockquote strong {
     font-size: 0.75em;
     margin-bottom: 0.5rem;
   }
-  
   .conversation blockquote p {
     font-size: 0.9em;
   }
@@ -184,7 +185,6 @@ blockquote blockquote {
     padding: 1.8rem;
     border-radius: 18px;
   }
-  
   .conversation blockquote {
     max-width: 90%;
     padding: 1rem 1.3rem;
@@ -193,21 +193,22 @@ blockquote blockquote {
 }
 
 .box {
-  background: linear-gradient(90deg, #ffe0c3 0%, #ffd6e0 100%);
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #ddd6fe 100%);
   border-radius: 12px;
   padding: 1.4rem 1.8rem;
   margin: 1.7rem 0;
-  box-shadow: 0 2px 12px rgba(255, 214, 224, 0.13);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
   font-weight: 500;
-  color: #a05a2c;
+  color: #581c87;
   font-size: 1.08em;
+  border: 1px solid #a855f7;
 }
 code, pre {
   background: #f0f4f8;
   border-radius: 7px;
   padding: 0.22em 0.7em;
   font-family: 'Fira Mono', monospace;
-  color: #1a3a4a;
+  color: var(--primary-dark);
   font-size: 1.03em;
 }
 pre {
@@ -223,15 +224,203 @@ pre {
   flex: 1;
 }
 a {
-  color: #2a6f97;
+  color: var(--primary);
   text-decoration: underline;
   transition: color 0.2s;
 }
 a:hover {
-  color: #a05a2c;
+  color: var(--secondary);
 }
 hr {
   border: none;
   border-top: 1px solid #e3f2fd;
   margin: 2.5rem 0;
+} 
+
+/* Mermaid diagram styling */
+.mermaid {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  position: relative;
+}
+
+.mermaid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  border-radius: 12px 12px 0 0;
+}
+
+/* Mermaid node styling */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon {
+  fill: #f8fafc !important;
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+  rx: 8px !important;
+  ry: 8px !important;
+}
+
+.mermaid .node text {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  fill: var(--foreground) !important;
+}
+
+/* Mermaid edge styling */
+.mermaid .edgePath path {
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .edgeLabel {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  fill: var(--secondary) !important;
+  background: #ffffff !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Mermaid cluster styling */
+.mermaid .cluster rect {
+  fill: #f1f5f9 !important;
+  stroke: var(--accent) !important;
+  stroke-width: 1px !important;
+  rx: 6px !important;
+  ry: 6px !important;
+}
+
+.mermaid .cluster-label {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  fill: var(--primary-dark) !important;
+}
+
+/* Mermaid flowchart specific styling */
+.mermaid .flowchart-link {
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .flowchart-node {
+  fill: #f8fafc !important;
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+}
+
+/* Mermaid sequence diagram styling */
+.mermaid .actor {
+  fill: #f0f9ff !important;
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .messageText {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  fill: var(--foreground) !important;
+}
+
+/* Mermaid class diagram styling */
+.mermaid .classGroup .label {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  fill: var(--primary-dark) !important;
+}
+
+.mermaid .classGroup .attributes {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  fill: var(--foreground) !important;
+}
+
+/* Mermaid state diagram styling */
+.mermaid .stateGroup .state {
+  fill: #f0f9ff !important;
+  stroke: var(--primary) !important;
+  stroke-width: 2px !important;
+  rx: 8px !important;
+  ry: 8px !important;
+}
+
+.mermaid .stateGroup .stateLabel {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  fill: var(--foreground) !important;
+}
+
+/* Mermaid gantt chart styling */
+.mermaid .sectionTitle {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  fill: var(--primary-dark) !important;
+}
+
+.mermaid .task {
+  fill: var(--primary) !important;
+  stroke: var(--primary-dark) !important;
+  stroke-width: 1px !important;
+}
+
+.mermaid .taskText {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  fill: #ffffff !important;
+}
+
+/* Mermaid pie chart styling */
+.mermaid .pieTitleText {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  fill: var(--primary-dark) !important;
+}
+
+.mermaid .slice {
+  stroke: #ffffff !important;
+  stroke-width: 2px !important;
+}
+
+/* Responsive mermaid */
+@media (max-width: 768px) {
+  .mermaid {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .mermaid .node text {
+    font-size: 12px !important;
+  }
+  
+  .mermaid .edgeLabel {
+    font-size: 10px !important;
+  }
 } 
