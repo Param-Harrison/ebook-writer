@@ -9,188 +9,87 @@ import os
 from bs4 import BeautifulSoup
 import argparse
 
-
-def remove_prism_css(html_content):
-    """Remove Prism.js CSS links that can cause conflicts in PDF"""
-    soup = BeautifulSoup(html_content, "html.parser")
-
-    # Remove Prism CSS links
-    prism_css_links = soup.find_all("link", href=lambda x: x and "prism" in x.lower())
-    for link in prism_css_links:
-        link.decompose()
-        print("✓ Removed Prism CSS link")
-
-    # Remove Prism JS scripts
-    prism_scripts = soup.find_all("script", src=lambda x: x and "prism" in x.lower())
-    for script in prism_scripts:
-        script.decompose()
-        print("✓ Removed Prism JS script")
-
-    return str(soup)
+PRISM_CSS_PATH = os.path.join(os.path.dirname(__file__), "prism-vsc-dark-plus.min.css")
 
 
-def add_pdf_code_styles(html_content):
-    """Add PDF-specific code block styles to ensure readability"""
-    soup = BeautifulSoup(html_content, "html.parser")
+def embed_prism_css(soup):
+    """Embed Prism VSCode theme CSS into the HTML head."""
+    if not os.path.exists(PRISM_CSS_PATH):
+        print(f"Warning: Prism VSCode CSS not found at {PRISM_CSS_PATH}")
+        return soup
+    with open(PRISM_CSS_PATH, "r", encoding="utf-8") as f:
+        css = f.read()
+    style_tag = soup.new_tag("style")
+    style_tag.string = css
+    head = soup.find("head")
+    if head:
+        head.append(style_tag)
+        print("✓ Embedded Prism VSCode CSS for PDF")
+    return soup
 
-    # Create CSS for PDF code blocks
-    pdf_code_css = """
+
+def minimal_code_layout_css(soup):
+    """Add minimal layout CSS for code blocks (no color overrides)."""
+    layout_css = """
     <style>
-    /* PDF Code Block Overrides - Ensure readability */
-    pre, code {
-        background-color: #f6f8fa !important;
-        color: #24292e !important;
-        border: 1px solid #e1e4e8 !important;
-        border-radius: 6px !important;
-        padding: 16px !important;
-        margin: 1em 0 !important;
-        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
-        font-size: 0.9em !important;
-        line-height: 1.4 !important;
-        overflow-x: auto !important;
-        white-space: pre-wrap !important;
-        word-wrap: break-word !important;
+    pre {
+        padding: 1em;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 1.2em 0;
     }
-    
-    /* Inline code */
     code:not(pre code) {
-        background-color: #f6f8fa !important;
-        color: #24292e !important;
-        padding: 0.2em 0.4em !important;
-        border-radius: 3px !important;
-        font-size: 0.9em !important;
-    }
-    
-    /* Code inside pre blocks */
-    pre code {
-        background: transparent !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        font-size: inherit !important;
-        color: inherit !important;
-    }
-    
-    /* Remove any dark overlays */
-    .token, .highlight, .highlight * {
-        color: inherit !important;
-        background: transparent !important;
-    }
-    
-    /* Ensure syntax highlighting colors work */
-    .token.comment, .token.prolog, .token.doctype, .token.cdata {
-        color: #6a737d !important;
-    }
-    
-    .token.punctuation {
-        color: #24292e !important;
-    }
-    
-    .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted {
-        color: #d73a49 !important;
-    }
-    
-    .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted {
-        color: #032f62 !important;
-    }
-    
-    .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
-        color: #d73a49 !important;
-    }
-    
-    .token.atrule, .token.attr-value, .token.keyword {
-        color: #d73a49 !important;
-    }
-    
-    .token.function {
-        color: #6f42c1 !important;
-    }
-    
-    .token.class-name {
-        color: #6f42c1 !important;
-    }
-    
-    .token.regex, .token.important, .token.variable {
-        color: #e36209 !important;
-    }
-    
-    /* Code wrapper styling */
-    .code-wrapper {
-        border: 1px solid #e1e4e8 !important;
-        border-radius: 6px !important;
-        margin: 1em 0 !important;
-        overflow: hidden !important;
-    }
-    
-    .code-header {
-        background: #f6f8fa !important;
-        padding: 8px 16px !important;
-        border-bottom: 1px solid #e1e4e8 !important;
-        font-size: 12px !important;
-        color: #586069 !important;
-        font-weight: 600 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
-    }
-    
-    /* Hide interactive elements in PDF */
-    .mermaid-interactive {
-        display: none !important;
-    }
-    
-    .mermaid-fallback {
-        display: block !important;
-    }
-    
-    /* Ensure rendered mermaid images are visible */
-    .mermaid-rendered {
-        max-width: 100% !important;
-        height: auto !important;
-        display: block !important;
-        margin: 1em auto !important;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.97em;
+        background: rgba(110, 118, 129, 0.15);
+        color: inherit;
+        border: none;
     }
     </style>
     """
-
-    # Add the CSS to the head
     head = soup.find("head")
     if head:
-        head.append(BeautifulSoup(pdf_code_css, "html.parser"))
-        print("✓ Added PDF code block styles")
+        head.append(BeautifulSoup(layout_css, "html.parser"))
+        print("✓ Added minimal code block layout CSS for PDF")
+    return soup
 
+
+def remove_prism_links(html_content):
+    """Remove Prism.js CSS/JS links from HTML."""
+    soup = BeautifulSoup(html_content, "html.parser")
+    for link in soup.find_all("link", href=lambda x: x and "prism" in x.lower()):
+        link.decompose()
+    for script in soup.find_all("script", src=lambda x: x and "prism" in x.lower()):
+        script.decompose()
     return str(soup)
 
 
 def process_html_for_pdf(html_file_path):
-    """Process HTML file to fix code blocks for PDF"""
-
     with open(html_file_path, "r", encoding="utf-8") as f:
         html_content = f.read()
-
-    # Remove Prism CSS that can cause conflicts
-    html_content = remove_prism_css(html_content)
-
-    # Add PDF-specific code styles
-    html_content = add_pdf_code_styles(html_content)
-
+    # Remove Prism CDN links
+    html_content = remove_prism_links(html_content)
+    soup = BeautifulSoup(html_content, "html.parser")
+    # Embed Prism VSCode CSS
+    soup = embed_prism_css(soup)
+    # Add minimal layout CSS
+    soup = minimal_code_layout_css(soup)
     # Write the processed HTML
     with open(html_file_path, "w", encoding="utf-8") as f:
-        f.write(html_content)
-
+        f.write(str(soup))
     print(f"✓ Fixed code blocks for PDF: {html_file_path}")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Fix code block styling for PDF generation"
+        description="Fix code block styling for PDF generation (Prism VSCode theme)"
     )
     parser.add_argument("html_file", help="HTML file to process")
-
     args = parser.parse_args()
-
     if not os.path.exists(args.html_file):
         print(f"Error: HTML file not found: {args.html_file}")
         sys.exit(1)
-
     process_html_for_pdf(args.html_file)
 
 
