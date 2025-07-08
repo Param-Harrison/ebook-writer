@@ -34,7 +34,13 @@ fi
 # Function to build a single book in all formats
 build_book_all_formats() {
     local book_name=$1
-    echo "Building $book_name in all formats..."
+    local html_only=$2
+    
+    if [ "$html_only" = "--html-only" ]; then
+        echo "Building $book_name in HTML only (dev mode)..."
+    else
+        echo "Building $book_name in all formats..."
+    fi
     
     # Get book config from JSON
     book_config=$(jq -r ".books[\"$book_name\"]" "$CONFIG_FILE" 2>/dev/null)
@@ -84,12 +90,15 @@ build_book_all_formats() {
         python3 scripts/fix-prism-codeblocks.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping prism fix."
         python3 scripts/fix-css-links.py "public/$book_name/$book_name.html" "$css_file" 2>/dev/null || echo "Warning: Skipping CSS fix."
         python3 scripts/fix-mermaid-and-syntax.py "public/$book_name/$book_name.html" --format html 2>/dev/null || echo "Warning: Skipping mermaid/syntax fix."
-        # Render mermaid images for EPUB (same as PDF)
-        python3 scripts/render-mermaid-for-pdf.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid rendering for EPUB."
+        
+        # Render mermaid images only for production builds (not for HTML-only dev mode)
+        if [ "$html_only" != "--html-only" ]; then
+            python3 scripts/render-mermaid-for-pdf.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid rendering for EPUB."
+        fi
     fi
 
     # Build PDF using WeasyPrint (first, so we can use its processed HTML for EPUB)
-    if [ "$WEASYPRINT_AVAILABLE" = true ]; then
+    if [ "$html_only" != "--html-only" ] && [ "$WEASYPRINT_AVAILABLE" = true ]; then
         echo "  Building PDF..."
         
         # Create a copy of HTML for PDF processing
@@ -103,6 +112,8 @@ build_book_all_formats() {
             echo "    Processing HTML for PDF..."
             python3 scripts/render-mermaid-for-pdf.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping mermaid rendering for PDF."
             python3 scripts/fix-pdf-code-blocks.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping PDF code block fixes."
+            echo "    Adjusting font sizes for elegant PDF output..."
+            python3 scripts/fix-pdf-fonts.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping PDF font adjustments."
         fi
         
         # Preprocess CSS for PDF
@@ -114,43 +125,45 @@ build_book_all_formats() {
     fi
 
     # Build EPUB using PDF-processed HTML (better code highlighting and mermaid rendering)
-    echo "  Building EPUB..."
-    
-    # Use PDF-processed HTML for EPUB if available, otherwise use regular HTML
-    if [ "$WEASYPRINT_AVAILABLE" = true ] && [ -f "public/$book_name/$book_name-pdf.html" ]; then
-        echo "    Using PDF-processed HTML for EPUB (better code highlighting)..."
-        epub_html_path="public/$book_name/$book_name-epub.html"
-        cp "public/$book_name/$book_name-pdf.html" "$epub_html_path"
-    else
-        echo "    Using regular HTML for EPUB..."
-        epub_html_path="public/$book_name/$book_name-epub.html"
-        cp "public/$book_name/$book_name.html" "$epub_html_path"
-    fi
-    
-    # Inject EPUB-specific styles
-    if command -v python3 &> /dev/null; then
-        echo "    Injecting EPUB-specific styles..."
-        python3 scripts/fix-epub-styles.py "$epub_html_path" 2>/dev/null || echo "Warning: Skipping EPUB style injection."
-    fi
-    
-    # Build EPUB using the processed HTML
-    pandoc "$epub_html_path" \
-        -o "public/$book_name/$book_name.epub" \
-        --css="templates/$css_file" \
-        --toc \
-        --standalone \
-        --metadata title="$title" \
-        --metadata author="$author"
+    if [ "$html_only" != "--html-only" ]; then
+        echo "  Building EPUB..."
+        
+        # Use PDF-processed HTML for EPUB if available, otherwise use regular HTML
+        if [ "$WEASYPRINT_AVAILABLE" = true ] && [ -f "public/$book_name/$book_name-pdf.html" ]; then
+            echo "    Using PDF-processed HTML for EPUB (better code highlighting)..."
+            epub_html_path="public/$book_name/$book_name-epub.html"
+            cp "public/$book_name/$book_name-pdf.html" "$epub_html_path"
+        else
+            echo "    Using regular HTML for EPUB..."
+            epub_html_path="public/$book_name/$book_name-epub.html"
+            cp "public/$book_name/$book_name.html" "$epub_html_path"
+        fi
+        
+        # Inject EPUB-specific styles
+        if command -v python3 &> /dev/null; then
+            echo "    Injecting EPUB-specific styles..."
+            python3 scripts/fix-epub-styles.py "$epub_html_path" 2>/dev/null || echo "Warning: Skipping EPUB style injection."
+        fi
+        
+        # Build EPUB using the processed HTML
+        pandoc "$epub_html_path" \
+            -o "public/$book_name/$book_name.epub" \
+            --css="templates/$css_file" \
+            --toc \
+            --standalone \
+            --metadata title="$title" \
+            --metadata author="$author"
 
-    # Build MOBI from EPUB (always, regardless of PDF)
-    if [ "$CALIBRE_AVAILABLE" = true ]; then
-        echo "  Building MOBI from EPUB..."
-        ebook-convert "public/$book_name/$book_name.epub" "public/$book_name/$book_name.mobi" \
-            --title "$title" \
-            --authors "$author" \
-            --mobi-file-type both \
-            --pretty-print
-        echo "    ✓ MOBI built successfully"
+        # Build MOBI from EPUB (always, regardless of PDF)
+        if [ "$CALIBRE_AVAILABLE" = true ]; then
+            echo "  Building MOBI from EPUB..."
+            ebook-convert "public/$book_name/$book_name.epub" "public/$book_name/$book_name.mobi" \
+                --title "$title" \
+                --authors "$author" \
+                --mobi-file-type both \
+                --pretty-print
+            echo "    ✓ MOBI built successfully"
+        fi
     fi
     
     echo "✓ Built $book_name in all formats"
@@ -173,14 +186,25 @@ if [ $# -eq 0 ]; then
     for book_file in books/*.md; do
         if [ -f "$book_file" ]; then
             book_name=$(basename "$book_file" .md)
-            build_book_all_formats "$book_name"
+            build_book_all_formats "$book_name" ""
+        fi
+    done
+elif [ "$1" = "--html-only" ]; then
+    # Build all books in HTML only
+    echo "Building all books in HTML only (dev mode)..."
+    for book_file in books/*.md; do
+        if [ -f "$book_file" ]; then
+            book_name=$(basename "$book_file" .md)
+            build_book_all_formats "$book_name" "--html-only"
         fi
     done
 else
     # Build specific book
     book_name=$1
+    html_only=$2
+    
     if [ -f "books/$book_name.md" ]; then
-        build_book_all_formats "$book_name"
+        build_book_all_formats "$book_name" "$html_only"
     else
         echo "Error: Book $book_name.md not found"
         exit 1
