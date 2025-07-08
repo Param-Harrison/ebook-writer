@@ -49,31 +49,30 @@ def add_pdf_font_adjustments(soup):
     blockquote {
         font-size: 0.9rem !important;
         padding: 0.8rem 1.2rem !important;
-        margin: 1.2rem 0 !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
     }
     
     /* Reduce conversation font sizes */
     .conversation {
         font-size: 0.9rem !important;
         padding: 1rem !important;
-        margin: 1.5rem 0 !important;
     }
     
     .conversation blockquote {
         font-size: 0.85rem !important;
-        padding: 0.6rem 0.9rem !important;
-        margin: 0.5rem 0 !important;
     }
     
     .conversation blockquote p {
         font-size: 0.85rem !important;
-        line-height: 1.5 !important;
-        margin: 0.3rem 0 !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
     }
     
     .conversation blockquote strong {
         font-size: 0.7em !important;
-        margin-bottom: 0.3rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
     }
     
     /* Reduce box font size */
