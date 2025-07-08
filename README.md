@@ -1,237 +1,213 @@
 # Ebook Writer
 
-A simple, Pandoc/Markdown/Mermaid-based ebook writer for creating beautifully laid out English books (afrinenglish.com) and coding ebooks (backendchallenges.com).
+A beautiful, automated ebook generator that creates professional books in multiple formats with full styling preserved.
 
-## Features
+## ✨ Features
 
-- Write books in Markdown
-- Render to beautiful HTML with custom templates
-- Mermaid diagram support (with live rendering via pandoc-mermaid-filter)
-- Scalable system supporting many books of varying sizes (10-120+ pages)
-- Configuration-based book management
-- Multiple template support
+- **Multiple Formats**: HTML, PDF, and MOBI
+- **Beautiful Design**: Responsive layouts with embedded CSS
+- **Mermaid Diagrams**: Interactive charts and flowcharts
+- **Syntax Highlighting**: Code blocks with proper formatting
+- **Multiple Templates**: Different styles for different content types
+- **Automated Build**: One command builds everything
 
-## Project Structure
-
-- `books/` — Markdown source files and book configuration
-- `templates/` — Custom HTML/CSS templates for different book types
-- `public/` — Output HTML files
-- `scripts/` — Automation scripts for book and template management
-- `requirements.txt` — Python dependencies for filters
-
-## Quick Start
-
-### Prerequisites
-
-- [Python 3](https://www.python.org/downloads/) - for the entire system
-- [Homebrew](https://brew.sh/) (macOS) or [apt](https://ubuntu.com/) (Linux) - for system tools
-
-**Note**: All other tools (pandoc, jq, WeasyPrint, Calibre) are automatically installed by the setup script.
-
-### Quick Setup
-
-Run the complete setup script to install everything automatically:
+## 🚀 Quick Start
 
 ```bash
+# Setup everything
 ./setup.sh
-```
 
-This will:
-
-- Create and activate a Python virtual environment
-- Install all Python dependencies
-- Install system tools (pandoc, jq, WeasyPrint)
-- Make all scripts executable
-- Test the installation
-
-### Manual Setup (Alternative)
-
-If you prefer manual setup:
-
-1. Create a virtual environment:
-   ```bash
-   python3 -m venv .venv
-   ```
-2. Activate the virtual environment:
-   ```bash
-   source .venv/bin/activate
-   ```
-3. Install requirements:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Setup ebook tools (optional, for EPUB/PDF/MOBI):
-   ```bash
-   ./scripts/setup-ebook-tools.sh
-   ```
-
-### List Available Books and Templates
-
-```bash
-./scripts/list-books.sh
-```
-
-### Create a New Book
-
-```bash
-./scripts/new-book.sh <book-name> <template> [title] [author]
-```
-
-Example:
-
-```bash
-./scripts/new-book.sh my-english-book afrinenglish "My English Book" "John Doe"
-```
-
-### Create a New Template
-
-```bash
-./scripts/new-template.sh <template-name> <template-title> <description>
-```
-
-Example:
-
-```bash
-./scripts/new-template.sh modern "Modern Template" "Clean and modern design"
-```
-
-### Build Books
-
-#### Quick Build (All Formats)
-
-```bash
-# Build all books in all formats (HTML, EPUB, PDF, MOBI)
+# Build all books
 ./build.sh
 ```
 
-#### Individual Build Commands
+## 📁 Project Structure
+
+```
+ebook-writer/
+├── books/                    # Your markdown files
+│   ├── afrinenglish-sample.md
+│   └── backendchallenges-sample.md
+├── templates/                # Design templates
+│   ├── afrinenglish.css
+│   ├── afrinenglish.html
+│   ├── backendchallenges.css
+│   └── backendchallenges.html
+├── public/                   # Generated output
+│   ├── afrinenglish-sample/
+│   │   ├── afrinenglish-sample.html
+│   │   ├── afrinenglish-sample.pdf
+│   │   └── afrinenglish-sample.mobi
+│   └── backendchallenges-sample/
+│       ├── backendchallenges-sample.html
+│       ├── backendchallenges-sample.pdf
+│       └── backendchallenges-sample.mobi
+└── scripts/                  # Build automation
+```
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- Python 3.7+
+- Git
+
+### Setup
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone <your-repo-url>
+   cd ebook-writer
+   ```
+
+2. **Run the setup script:**
+
+   ```bash
+   ./setup.sh
+   ```
+
+   This will:
+
+   - Create a Python virtual environment
+   - Install all dependencies (pandoc, jq, WeasyPrint)
+   - Set up all tools
+   - Test the installation
+
+## 📖 Usage
+
+### Build All Books
 
 ```bash
-# Build all books in HTML format
-./scripts/build-html.sh
-
-# Build specific book in HTML format
-./scripts/build-html.sh <book-name>
-
-# Build all books in all formats
-./scripts/build-all-formats.sh
-
-# Build specific book in all formats
-./scripts/build-all-formats.sh <book-name>
+./build.sh
 ```
 
-### Supported Formats
+This generates all books in all formats:
 
-- **HTML**: Always available, beautiful web-ready output
-- **EPUB**: E-book format for most e-readers (requires pandoc)
-- **PDF**: Print-ready PDF with preserved styles (requires WeasyPrint)
-- **MOBI**: Kindle-compatible format (requires Calibre)
+- HTML files for web viewing
+- PDF files for printing
+- MOBI files for Kindle
 
-## Book Configuration
+### Build Specific Book
 
-Books are configured in `books/book-config.json`:
-
-```json
-{
-  "books": {
-    "book-name": {
-      "title": "Book Title",
-      "author": "Author Name",
-      "template": "template-name",
-      "category": "category",
-      "description": "Book description"
-    }
-  }
-}
+```bash
+./build.sh afrinenglish-sample
 ```
 
-## Templates
+### Individual Formats
 
-Each template consists of:
+```bash
+# HTML only
+./scripts/build-html.sh afrinenglish-sample
 
-- `templates/template-name.html` - Pandoc HTML template
-- `templates/template-name.css` - Custom CSS styling
-
-### Available Templates
-
-- **afrinenglish** - Colorful, elegant layout for English learning books
-- **backendchallenges** - Intense, code-focused layout for programming books
-
-## Writing Books
-
-Write your books in Markdown with these features:
-
-### Boxes
-
-```markdown
-<div class="box">
-
-Your content in a styled box
-
-</div>
+# PDF only
+python3 scripts/build-pdf.py public/afrinenglish-sample/afrinenglish-sample.html public/afrinenglish-sample/afrinenglish-sample.pdf
 ```
 
-### Multi-columns
+## 🎨 Customization
 
-```markdown
-<div class="columns">
+### Add New Book
 
-- Column 1 content
-- Column 2 content
-
-</div>
+```bash
+./scripts/new-book.sh my-new-book
 ```
 
-### Mermaid Diagrams
+### Create New Template
 
-````markdown
-```mermaid
-graph TD
-  A --> B
-  B --> C
+```bash
+./scripts/new-template.sh my-template
 ```
-````
 
-````
+### Modify Styling
 
-### Code Blocks
-```markdown
-```python
-def hello():
-    return "Hello, World!"
-````
+Edit the CSS files in `templates/`:
 
-## Roadmap
+- `afrinenglish.css` - For language learning books
+- `backendchallenges.css` - For technical content
 
-- Add more beautiful templates
-- Web-based editor
-- Template marketplace
+## 📱 Viewing Your Books
 
----
+- **HTML**: Open in any web browser
+- **PDF**: Use any PDF viewer (Adobe Reader, Preview, etc.)
+- **MOBI**: Transfer to Kindle device or use Kindle app
 
-## Advanced: Live Mermaid Rendering with Pandoc Filter
+## 🔧 Advanced Configuration
 
-To enable live Mermaid diagram rendering in your HTML output:
+### Book Configuration
 
-1. **Activate your virtual environment:**
-   ```bash
-   source .venv/bin/activate
-   ```
-2. **Build with the filter:**
-   ```bash
-   pandoc books/afrinenglish-sample.md -o public/afrinenglish-sample.html --template=templates/afrinenglish.html --standalone --toc --highlight-style=pygments --filter pandoc-mermaid-filter
-   ```
-3. **Or update your build script to use the filter.**
+Edit `books/book-config.json` to customize:
 
-## Multi-Format Generation
+- Book titles and authors
+- Template selection
+- Metadata
 
-This project now supports generating books in multiple formats while preserving styles:
+### Template System
 
-- **HTML**: Web-ready with full styling
-- **EPUB**: E-reader compatible
-- **PDF**: Print-ready with preserved layout
-- **MOBI**: Kindle compatible
+Create custom templates:
 
-See [FORMATS.md](FORMATS.md) for detailed instructions on generating all formats.
+1. Add CSS file to `templates/`
+2. Add HTML template to `templates/`
+3. Update `book-config.json`
 
----
+## 🆘 Troubleshooting
+
+### Common Issues
+
+**Build fails?**
+
+```bash
+# Reinstall dependencies
+./setup.sh
+```
+
+**Missing fonts?**
+
+```bash
+# Install system fonts
+./scripts/setup-ebook-tools.sh
+```
+
+**PDF not generating?**
+
+```bash
+# Install WeasyPrint
+pip install weasyprint
+```
+
+### Dependencies
+
+- **Pandoc**: Markdown to HTML conversion
+- **WeasyPrint**: HTML to PDF conversion
+- **Python packages**: See `requirements.txt`
+
+## 📚 Documentation
+
+- **Quick Start**: `QUICK_START.md`
+- **Complete Setup**: `COMPLETE_SETUP.md`
+- **Format Details**: `FORMATS.md`
+
+## 🎯 Supported Formats
+
+| Format | Purpose     | Requirements |
+| ------ | ----------- | ------------ |
+| HTML   | Web viewing | None         |
+| PDF    | Printing    | WeasyPrint   |
+| MOBI   | Kindle      | Calibre      |
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test with `./build.sh`
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- **Pandoc** for markdown processing
+- **WeasyPrint** for PDF generation
+- **Calibre** for MOBI conversion

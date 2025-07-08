@@ -13,15 +13,6 @@ if ! command -v jq &> /dev/null; then
     exit 1
 fi
 
-# Check if calibre is installed for EPUB/MOBI conversion
-if ! command -v ebook-convert &> /dev/null; then
-    echo "Warning: calibre is not installed. EPUB and MOBI conversion will be skipped."
-    echo "Install calibre from https://calibre-ebook.com/download"
-    CALIBRE_AVAILABLE=false
-else
-    CALIBRE_AVAILABLE=true
-fi
-
 # Check if weasyprint is available for PDF generation
 if ! python3 -c "import weasyprint" 2>/dev/null; then
     echo "Warning: weasyprint is not installed. PDF generation will be skipped."
@@ -96,25 +87,6 @@ build_book_all_formats() {
         python3 scripts/fix-mermaid-and-syntax.py "public/$book_name/$book_name.html" --format html 2>/dev/null || echo "Warning: Skipping mermaid/syntax fix."
     fi
     
-    # Build EPUB
-    if [ "$CALIBRE_AVAILABLE" = true ]; then
-        echo "  Building EPUB..."
-        # Preprocess CSS for EPUB
-        epub_css_path="public/$book_name/$book_name-epub.css"
-        python3 scripts/preprocess-css.py "templates/$css_file" "$epub_css_path" "epub"
-        
-        pandoc "books/$book_name.md" \
-            -o "public/$book_name/$book_name.epub" \
-            --template="templates/$html_file" \
-            --css="$epub_css_path" \
-            --toc \
-            --highlight-style=pygments \
-            --metadata title="$title" \
-            --metadata author="$author" \
-            --metadata language=en \
-            $FILTER
-    fi
-    
     # Build PDF using WeasyPrint
     if [ "$WEASYPRINT_AVAILABLE" = true ]; then
         echo "  Building PDF..."
@@ -123,19 +95,6 @@ build_book_all_formats() {
         python3 scripts/preprocess-css.py "templates/$css_file" "$pdf_css_path" "pdf"
         
         python3 scripts/build-pdf.py "public/$book_name/$book_name.html" "public/$book_name/$book_name.pdf" "$pdf_css_path"
-    fi
-    
-    # Build MOBI using Calibre
-    if [ "$CALIBRE_AVAILABLE" = true ]; then
-        echo "  Building MOBI..."
-        if [ -f "public/$book_name/$book_name.epub" ]; then
-            ebook-convert "public/$book_name/$book_name.epub" "public/$book_name/$book_name.mobi" \
-                --title "$title" \
-                --authors "$author" \
-                --language en
-        else
-            echo "  Warning: EPUB not available, skipping MOBI conversion"
-        fi
     fi
     
     echo "✓ Built $book_name in all formats"
@@ -179,10 +138,6 @@ echo "Build complete! Check the public/ directory for output files."
 echo ""
 echo "Available formats:"
 echo "- HTML: public/<book-name>/<book-name>.html"
-if [ "$CALIBRE_AVAILABLE" = true ]; then
-    echo "- EPUB: public/<book-name>/<book-name>.epub"
-    echo "- MOBI: public/<book-name>/<book-name>.mobi"
-fi
 if [ "$WEASYPRINT_AVAILABLE" = true ]; then
     echo "- PDF: public/<book-name>/<book-name>.pdf"
 fi 

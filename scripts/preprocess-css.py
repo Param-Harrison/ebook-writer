@@ -11,28 +11,31 @@ from pathlib import Path
 
 
 def extract_css_variables(css_content):
-    """Extract CSS custom properties (variables) from :root"""
+    """Extract CSS custom properties (variables) from :root and globally"""
     variables = {}
-    root_match = re.search(r":root\s*\{([^}]+)\}", css_content, re.DOTALL)
-    if root_match:
-        root_content = root_match.group(1)
-        # Extract variable definitions
-        var_matches = re.findall(r"--([^:]+):\s*([^;]+);", root_content)
-        for name, value in var_matches:
-            variables[f"--{name.strip()}"] = value.strip()
+    # Find all --foo: value; definitions
+    for match in re.finditer(r"--([a-zA-Z0-9-_]+):\s*([^;]+);", css_content):
+        variables[f"--{match.group(1).strip()}"] = match.group(2).strip()
     return variables
 
 
 def replace_css_variables(css_content, variables):
-    """Replace CSS variables with their actual values"""
+    """Replace all var(--foo) with their values, remove lines with unresolved var()"""
+    # Replace all var(--foo) with value
     for var_name, var_value in variables.items():
-        # Replace var(--variable-name) with actual value
         css_content = re.sub(rf"var\({re.escape(var_name)}\)", var_value, css_content)
+    # Remove any lines that still contain var(
+    css_content = "\n".join(
+        [line for line in css_content.splitlines() if "var(" not in line]
+    )
     return css_content
 
 
 def remove_unsupported_css(css_content):
     """Remove or replace CSS features not supported in EPUB/PDF/MOBI"""
+
+    # Remove all custom property definitions
+    css_content = re.sub(r"--[a-zA-Z0-9-_]+:\s*[^;]+;\s*", "", css_content)
 
     # Remove :root section (variables are already processed)
     css_content = re.sub(r":root\s*\{[^}]*\}", "", css_content)
@@ -62,9 +65,6 @@ def remove_unsupported_css(css_content):
     # Remove text-opacity (causes parsing errors)
     css_content = re.sub(r"text-opacity:\s*[^;]+;", "", css_content)
 
-    # Remove any remaining CSS custom properties that might cause issues
-    css_content = re.sub(r"--[^:]+:\s*[^;]+;", "", css_content)
-
     # Remove any remaining var() functions
     css_content = re.sub(r"var\([^)]+\)", "inherit", css_content)
 
@@ -73,6 +73,22 @@ def remove_unsupported_css(css_content):
 
     # Remove any remaining CSS functions that might cause issues
     css_content = re.sub(r"[a-zA-Z-]+\([^)]+\)", "auto", css_content)
+
+    # Remove any malformed CSS properties (like "text-" without value)
+    css_content = re.sub(r"text-[^:]+:\s*[^;]*;", "", css_content)
+
+    # Remove any properties that end with just a colon
+    css_content = re.sub(r"[a-zA-Z-]+:\s*;", "", css_content)
+
+    # Remove any properties with empty values
+    css_content = re.sub(
+        r"([a-zA-Z-]+):\s*([^;]*)\s*;",
+        lambda m: "" if not m.group(2).strip() else m.group(0),
+        css_content,
+    )
+
+    # Remove any empty lines
+    css_content = "\n".join([line for line in css_content.splitlines() if line.strip()])
 
     return css_content
 

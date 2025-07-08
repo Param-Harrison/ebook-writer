@@ -1,37 +1,49 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
+*$py.class
 *.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Virtual environments
+# Virtual environment
 .venv/
 venv/
 ENV/
+env/
 
-# Build outputs
-public/*.html
-public/*.pdf
-public/*.epub
-public/*.mobi
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# System files
+# OS
 .DS_Store
 Thumbs.db
 
-# Editor files
-*.swp
-*.swo
-*.bak
-.idea/
-.vscode/
+# Project specific
+public/*.html
+public/*.pdf
+public/*.mobi
+public/*.css
 
-# Node modules (if any)
-node_modules/
-
-# Logs
-*.log
-
-# Misc
-*.tmp 
+# Temporary files
+*.tmp
+*.temp 
