@@ -98,8 +98,10 @@ build_book_all_formats() {
         pdf_html_path="public/$book_name/$book_name-pdf.html"
         cp "public/$book_name/$book_name.html" "$pdf_html_path"
         
-        # Process HTML specifically for PDF (render mermaid, fix code blocks)
+        # Process HTML specifically for PDF (highlight code, render mermaid, fix code blocks)
         if command -v python3 &> /dev/null; then
+            echo "    Highlighting code blocks for PDF (Pygments)..."
+            python3 scripts/pygmentsify_codeblocks.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping Pygments highlighting."
             echo "    Processing HTML for PDF..."
             python3 scripts/render-mermaid-for-pdf.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping mermaid rendering for PDF."
             python3 scripts/fix-pdf-code-blocks.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping PDF code block fixes."

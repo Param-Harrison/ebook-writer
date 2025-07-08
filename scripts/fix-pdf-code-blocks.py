@@ -55,6 +55,29 @@ def minimal_code_layout_css(soup):
     return soup
 
 
+def override_highlight_border(soup):
+    """Add CSS to remove all external box styling from code blocks in PDF, but keep a little padding for readability."""
+    override_css = """
+    <style>
+    .highlight, .highlight pre, pre {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0.5em 0 !important;
+        padding: 0.5em 1em !important;
+        background-clip: padding-box !important;
+        border-radius: 0.3em !important;
+    }
+    </style>
+    """
+    head = soup.find("head")
+    if head:
+        head.append(BeautifulSoup(override_css, "html.parser"))
+        print(
+            "✓ Removed external box from code snippets for PDF (with padding for readability)"
+        )
+    return soup
+
+
 def remove_prism_links(html_content):
     """Remove Prism.js CSS/JS links from HTML."""
     soup = BeautifulSoup(html_content, "html.parser")
@@ -75,6 +98,8 @@ def process_html_for_pdf(html_file_path):
     soup = embed_prism_css(soup)
     # Add minimal layout CSS
     soup = minimal_code_layout_css(soup)
+    # Remove highlight border
+    soup = override_highlight_border(soup)
     # Write the processed HTML
     with open(html_file_path, "w", encoding="utf-8") as f:
         f.write(str(soup))
