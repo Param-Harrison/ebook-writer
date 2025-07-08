@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Render Mermaid diagrams as SVG for PDF generation
-Replaces mermaid divs with rendered SVG images for PDF compatibility
+Render Mermaid diagrams as PNG for PDF generation
+Replaces mermaid divs with rendered PNG images for PDF compatibility
+This avoids issues with SVG foreignObject elements in PDF rendering
 """
 
 import sys
@@ -26,8 +27,8 @@ def check_mermaid_cli():
         return False
 
 
-def render_mermaid_to_svg(mermaid_code, output_dir):
-    """Render Mermaid code to SVG using mermaid-cli"""
+def render_mermaid_to_png(mermaid_code, output_dir):
+    """Render Mermaid code to PNG using mermaid-cli"""
     try:
         # Create temporary input file
         with tempfile.NamedTemporaryFile(mode="w", suffix=".mmd", delete=False) as f:
@@ -36,7 +37,7 @@ def render_mermaid_to_svg(mermaid_code, output_dir):
 
         # Create output file path
         output_file = os.path.join(
-            output_dir, f"mermaid_{hash(mermaid_code) % 10000}.svg"
+            output_dir, f"mermaid_{hash(mermaid_code) % 10000}.png"
         )
 
         # Render using mermaid-cli
@@ -68,18 +69,18 @@ def render_mermaid_to_svg(mermaid_code, output_dir):
         return None
 
 
-def embed_svg_as_data_url(svg_file_path):
-    """Convert SVG file to data URL for embedding in HTML"""
+def embed_png_as_data_url(png_file_path):
+    """Convert PNG file to data URL for embedding in HTML"""
     try:
-        with open(svg_file_path, "r", encoding="utf-8") as f:
-            svg_content = f.read()
+        with open(png_file_path, "rb") as f:
+            png_content = f.read()
 
         # Encode as base64
-        svg_encoded = base64.b64encode(svg_content.encode("utf-8")).decode("utf-8")
-        return f"data:image/svg+xml;base64,{svg_encoded}"
+        png_encoded = base64.b64encode(png_content).decode("utf-8")
+        return f"data:image/png;base64,{png_encoded}"
 
     except Exception as e:
-        print(f"Error encoding SVG: {e}")
+        print(f"Error encoding PNG: {e}")
         return None
 
 
@@ -112,7 +113,7 @@ def process_html_for_pdf(html_file_path, output_dir=None):
         print("No Mermaid diagrams found in HTML")
         return True
 
-    print(f"Found {len(mermaid_divs)} Mermaid diagrams to render...")
+    print(f"Found {len(mermaid_divs)} Mermaid diagrams to render as PNG...")
 
     for i, div in enumerate(mermaid_divs):
         mermaid_code = div.get_text().strip()
@@ -122,12 +123,12 @@ def process_html_for_pdf(html_file_path, output_dir=None):
 
         print(f"Rendering diagram {i+1}/{len(mermaid_divs)}...")
 
-        # Render to SVG
-        svg_file = render_mermaid_to_svg(mermaid_code, output_dir)
+        # Render to PNG
+        png_file = render_mermaid_to_png(mermaid_code, output_dir)
 
-        if svg_file:
+        if png_file:
             # Convert to data URL
-            data_url = embed_svg_as_data_url(svg_file)
+            data_url = embed_png_as_data_url(png_file)
 
             if data_url:
                 # Replace div with img
@@ -142,7 +143,7 @@ def process_html_for_pdf(html_file_path, output_dir=None):
                 # Replace the div with the img
                 div.replace_with(img_tag)
 
-                print(f"✓ Rendered diagram {i+1}")
+                print(f"✓ Rendered diagram {i+1} as PNG")
             else:
                 print(f"✗ Failed to encode diagram {i+1}")
         else:
@@ -158,12 +159,12 @@ def process_html_for_pdf(html_file_path, output_dir=None):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Render Mermaid diagrams as SVG for PDF generation"
+        description="Render Mermaid diagrams as PNG for PDF generation"
     )
     parser.add_argument("html_file", help="HTML file to process")
     parser.add_argument(
         "--output-dir",
-        help="Directory to store SVG files (default: mermaid-images/ in same dir as HTML)",
+        help="Directory to store PNG files (default: mermaid-images/ in same dir as HTML)",
     )
 
     args = parser.parse_args()

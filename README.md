@@ -180,12 +180,6 @@ pip install weasyprint
 - **WeasyPrint**: HTML to PDF conversion
 - **Python packages**: See `requirements.txt`
 
-## 📚 Documentation
-
-- **Quick Start**: `QUICK_START.md`
-- **Complete Setup**: `COMPLETE_SETUP.md`
-- **Format Details**: `FORMATS.md`
-
 ## 🎯 Supported Formats
 
 | Format | Purpose     | Requirements             |
@@ -204,7 +198,7 @@ pip install weasyprint
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is private and copyrighted to Param Harrison (Secret SaaS OÜ).
 
 ## 🙏 Acknowledgments
 
