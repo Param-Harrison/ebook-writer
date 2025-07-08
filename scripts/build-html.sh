@@ -48,6 +48,35 @@ build_book() {
             --toc \
             --metadata title="$book_name" \
             $FILTER
+    elif [ "$template" = "paged" ]; then
+        # For paged template, use custom conversion
+        if command -v python3 &> /dev/null; then
+            # First convert to page-based HTML
+            python3 scripts/convert-to-pages.py "books/$book_name.md" "temp_pages.html"
+            
+            # Then use pandoc with the converted content
+            pandoc "temp_pages.html" \
+                -o "public/$book_name.html" \
+                --template="templates/$html_file" \
+                --css="$css_file" \
+                --standalone \
+                --metadata title="$book_name" \
+                $FILTER
+                
+            # Clean up temp file
+            rm -f "temp_pages.html"
+        else
+            echo "Warning: python3 not found, falling back to standard pandoc for paged template"
+            pandoc "books/$book_name.md" \
+                -o "public/$book_name.html" \
+                --template="templates/$html_file" \
+                --css="$css_file" \
+                --standalone \
+                --toc \
+                --highlight-style=pygments \
+                --metadata title="$book_name" \
+                $FILTER
+        fi
     else
         pandoc "books/$book_name.md" \
             -o "public/$book_name.html" \
@@ -62,8 +91,8 @@ build_book() {
     
     # Post-process to fix mermaid blocks
     if command -v python3 &> /dev/null; then
-        python3 scripts/fix-mermaid-blocks.py "public/$book_name.html"
-        python3 scripts/fix-prism-codeblocks.py "public/$book_name.html"
+        python3 scripts/fix-mermaid-blocks.py "public/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid fix."
+        python3 scripts/fix-prism-codeblocks.py "public/$book_name.html" 2>/dev/null || echo "Warning: Skipping prism fix."
     else
         echo "Warning: python3 not found, skipping mermaid/code block fix."
     fi

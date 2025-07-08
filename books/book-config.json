@@ -13,6 +13,13 @@
       "template": "backendchallenges", 
       "category": "coding",
       "description": "Intense coding challenges for backend developers"
+    },
+    "design-showcase": {
+      "title": "Design Elements Showcase",
+      "author": "Design System",
+      "template": "paged",
+      "category": "design",
+      "description": "A comprehensive showcase of design elements and components"
     }
   },
   "templates": {
@@ -27,6 +34,12 @@
       "description": "Intense, code-focused layout for programming books",
       "css": "backendchallenges.css",
       "html": "backendchallenges.html"
+    },
+    "paged": {
+      "name": "Paged Template",
+      "description": "Page-based layout with lesson navigation and progress tracking",
+      "css": "paged.css",
+      "html": "paged.html"
     }
   }
 } 
