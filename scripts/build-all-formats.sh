@@ -90,11 +90,24 @@ build_book_all_formats() {
     # Build PDF using WeasyPrint
     if [ "$WEASYPRINT_AVAILABLE" = true ]; then
         echo "  Building PDF..."
+        
+        # Create a copy of HTML for PDF processing
+        pdf_html_path="public/$book_name/$book_name-pdf.html"
+        cp "public/$book_name/$book_name.html" "$pdf_html_path"
+        
+        # Process HTML specifically for PDF (render mermaid, fix code blocks)
+        if command -v python3 &> /dev/null; then
+            echo "    Processing HTML for PDF..."
+            python3 scripts/render-mermaid-for-pdf.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping mermaid rendering for PDF."
+            python3 scripts/fix-pdf-code-blocks.py "$pdf_html_path" 2>/dev/null || echo "Warning: Skipping PDF code block fixes."
+        fi
+        
         # Preprocess CSS for PDF
         pdf_css_path="public/$book_name/$book_name-pdf.css"
         python3 scripts/preprocess-css.py "templates/$css_file" "$pdf_css_path" "pdf"
         
-        python3 scripts/build-pdf.py "public/$book_name/$book_name.html" "public/$book_name/$book_name.pdf" "$pdf_css_path"
+        # Build PDF using the processed HTML
+        python3 scripts/build-pdf.py "$pdf_html_path" "public/$book_name/$book_name.pdf" "$pdf_css_path"
     fi
     
     echo "✓ Built $book_name in all formats"
