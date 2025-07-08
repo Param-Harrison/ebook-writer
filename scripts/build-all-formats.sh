@@ -68,28 +68,15 @@ build_book_all_formats() {
     
     # Build HTML first (as base for other formats)
     echo "  Building HTML..."
-    if [ "$template" = "backendchallenges" ]; then
-        pandoc "books/$book_name.md" \
-            -o "public/$book_name/$book_name.html" \
-            --template="templates/$html_file" \
-            --css="$css_file" \
-            --standalone \
-            --toc \
-            --metadata title="$title" \
-            --metadata author="$author" \
-            $FILTER
-    else
-        pandoc "books/$book_name.md" \
-            -o "public/$book_name/$book_name.html" \
-            --template="templates/$html_file" \
-            --css="$css_file" \
-            --standalone \
-            --toc \
-            --highlight-style=pygments \
-            --metadata title="$title" \
-            --metadata author="$author" \
-            $FILTER
-    fi
+    pandoc "books/$book_name.md" \
+        -o "public/$book_name/$book_name.html" \
+        --template="templates/$html_file" \
+        --css="$css_file" \
+        --standalone \
+        --toc \
+        --metadata title="$title" \
+        --metadata author="$author" \
+        $FILTER
 
     # Post-process HTML
     if command -v python3 &> /dev/null; then
@@ -103,10 +90,23 @@ build_book_all_formats() {
 
     # Build EPUB using Pandoc from processed HTML
     echo "  Building EPUB..."
-    pandoc "public/$book_name/$book_name.html" \
+    
+    # Create a copy of HTML for EPUB processing
+    epub_html_path="public/$book_name/$book_name-epub.html"
+    cp "public/$book_name/$book_name.html" "$epub_html_path"
+    
+    # Inject EPUB-specific styles
+    if command -v python3 &> /dev/null; then
+        echo "    Injecting EPUB-specific styles..."
+        python3 scripts/fix-epub-styles.py "$epub_html_path" 2>/dev/null || echo "Warning: Skipping EPUB style injection."
+    fi
+    
+    # Build EPUB using the processed HTML
+    pandoc "$epub_html_path" \
         -o "public/$book_name/$book_name.epub" \
         --css="templates/$css_file" \
         --toc \
+        --standalone \
         --metadata title="$title" \
         --metadata author="$author"
     
@@ -191,6 +191,8 @@ for book_dir in public/*/; do
         find "$book_dir" -name "*-pdf.html" -delete 2>/dev/null || true
         # Remove PDF CSS files (they're regenerated each time)
         find "$book_dir" -name "*-pdf.css" -delete 2>/dev/null || true
+        # Remove any temporary EPUB HTML files
+        find "$book_dir" -name "*-epub.html" -delete 2>/dev/null || true
         # Remove any temporary MOBI HTML files
         find "$book_dir" -name "*-mobi*.html" -delete 2>/dev/null || true
     fi
@@ -203,6 +205,7 @@ echo "- HTML: public/<book-name>/<book-name>.html"
 if [ "$WEASYPRINT_AVAILABLE" = true ]; then
     echo "- PDF: public/<book-name>/<book-name>.pdf"
 fi
+echo "- EPUB: public/<book-name>/<book-name>.epub"
 if [ "$CALIBRE_AVAILABLE" = true ]; then
     echo "- MOBI: public/<book-name>/<book-name>.mobi"
 fi 

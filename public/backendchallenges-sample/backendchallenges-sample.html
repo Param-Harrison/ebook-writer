@@ -15,6 +15,19 @@
   --font-inter: 'Inter', Arial, Helvetica, sans-serif;
 }
 
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --foreground: #f0f0f0;
+    --muted: #a1a1aa;
+    --primary: #10b981;
+    --primary-dark: #34d399;
+    --border: #27272a;
+    --gray-bg: #18181b;
+  }
+}
+
 body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
   background: var(--background);
@@ -76,7 +89,7 @@ blockquote {
 }
 
 .box {
-  background: linear-gradient(90deg, #fff 0%, #f0fdf4 100%);
+  background: linear-gradient(90deg, var(--background) 0%, var(--gray-bg) 100%);
   border-radius: 12px;
   padding: 1.4rem 1.8rem;
   margin: 1.7rem 0;
@@ -167,7 +180,7 @@ figcaption {
 
 .conversation blockquote {
   margin: 0.7rem 0;
-  background: #fff;
+  background: var(--background);
   border-left: 3px solid var(--primary);
   border-radius: 8px;
   padding: 0.8rem 1.1rem;
@@ -180,7 +193,7 @@ figcaption {
 }
 
 .conversation blockquote:nth-child(odd) {
-  background: #f0fdf4;
+  background: var(--gray-bg);
   margin-left: auto;
   border-bottom-right-radius: 4px;
   border: 1px solid var(--primary);
@@ -188,7 +201,7 @@ figcaption {
 }
 
 .conversation blockquote:nth-child(even) {
-  background: #fff;
+  background: var(--background);
   margin-right: auto;
   border-bottom-left-radius: 4px;
   border: 1px solid var(--border);
@@ -252,6 +265,7 @@ figcaption {
 </style>
 <meta charset="utf-8"/>
 <title>Backend Challenges: Level Up</title>
+<meta content="light dark" name="color-scheme"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
