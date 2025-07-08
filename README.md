@@ -94,16 +94,6 @@ This generates all books in all formats:
 ./build.sh afrinenglish-sample
 ```
 
-### Individual Formats
-
-```bash
-# HTML only
-./scripts/build-html.sh afrinenglish-sample
-
-# PDF only
-python3 scripts/build-pdf.py public/afrinenglish-sample/afrinenglish-sample.html public/afrinenglish-sample/afrinenglish-sample.pdf
-```
-
 ## 🎨 Customization
 
 ### Add New Book

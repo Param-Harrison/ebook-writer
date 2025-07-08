@@ -88,29 +88,7 @@ build_book_all_formats() {
         python3 scripts/render-mermaid-for-pdf.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid rendering for EPUB."
     fi
 
-    # Build EPUB using Pandoc from processed HTML
-    echo "  Building EPUB..."
-    
-    # Create a copy of HTML for EPUB processing
-    epub_html_path="public/$book_name/$book_name-epub.html"
-    cp "public/$book_name/$book_name.html" "$epub_html_path"
-    
-    # Inject EPUB-specific styles
-    if command -v python3 &> /dev/null; then
-        echo "    Injecting EPUB-specific styles..."
-        python3 scripts/fix-epub-styles.py "$epub_html_path" 2>/dev/null || echo "Warning: Skipping EPUB style injection."
-    fi
-    
-    # Build EPUB using the processed HTML
-    pandoc "$epub_html_path" \
-        -o "public/$book_name/$book_name.epub" \
-        --css="templates/$css_file" \
-        --toc \
-        --standalone \
-        --metadata title="$title" \
-        --metadata author="$author"
-    
-    # Build PDF using WeasyPrint
+    # Build PDF using WeasyPrint (first, so we can use its processed HTML for EPUB)
     if [ "$WEASYPRINT_AVAILABLE" = true ]; then
         echo "  Building PDF..."
         
@@ -134,6 +112,35 @@ build_book_all_formats() {
         # Build PDF using the processed HTML
         python3 scripts/build-pdf.py "$pdf_html_path" "public/$book_name/$book_name.pdf" "$pdf_css_path"
     fi
+
+    # Build EPUB using PDF-processed HTML (better code highlighting and mermaid rendering)
+    echo "  Building EPUB..."
+    
+    # Use PDF-processed HTML for EPUB if available, otherwise use regular HTML
+    if [ "$WEASYPRINT_AVAILABLE" = true ] && [ -f "public/$book_name/$book_name-pdf.html" ]; then
+        echo "    Using PDF-processed HTML for EPUB (better code highlighting)..."
+        epub_html_path="public/$book_name/$book_name-epub.html"
+        cp "public/$book_name/$book_name-pdf.html" "$epub_html_path"
+    else
+        echo "    Using regular HTML for EPUB..."
+        epub_html_path="public/$book_name/$book_name-epub.html"
+        cp "public/$book_name/$book_name.html" "$epub_html_path"
+    fi
+    
+    # Inject EPUB-specific styles
+    if command -v python3 &> /dev/null; then
+        echo "    Injecting EPUB-specific styles..."
+        python3 scripts/fix-epub-styles.py "$epub_html_path" 2>/dev/null || echo "Warning: Skipping EPUB style injection."
+    fi
+    
+    # Build EPUB using the processed HTML
+    pandoc "$epub_html_path" \
+        -o "public/$book_name/$book_name.epub" \
+        --css="templates/$css_file" \
+        --toc \
+        --standalone \
+        --metadata title="$title" \
+        --metadata author="$author"
 
     # Build MOBI from EPUB (always, regardless of PDF)
     if [ "$CALIBRE_AVAILABLE" = true ]; then
