@@ -26,7 +26,7 @@ def get_book_metadata(book_name, config_file="books/book-config.json"):
 
         return {
             "title": book_config.get("title", "Unknown Title"),
-            "author": book_config.get("author", "Unknown Author"),
+            "author": book_config.get("author", "Param Harrison"),
             "template": book_config.get("template", "afrinenglish"),
             "css_file": template_config.get("css", "afrinenglish.css"),
             "html_file": template_config.get("html", "afrinenglish.html"),
@@ -37,7 +37,7 @@ def get_book_metadata(book_name, config_file="books/book-config.json"):
         print(f"Warning: Could not read book config: {e}")
         return {
             "title": book_name,
-            "author": "Unknown Author",
+            "author": "Param Harrison",
             "template": "afrinenglish",
             "css_file": "afrinenglish.css",
             "html_file": "afrinenglish.html",

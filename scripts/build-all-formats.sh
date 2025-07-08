@@ -52,7 +52,7 @@ build_book_all_formats() {
     
     # Get book metadata
     title=$(echo "$book_config" | jq -r '.title // "Unknown Title"')
-    author=$(echo "$book_config" | jq -r '.author // "Unknown Author"')
+    author=$(echo "$book_config" | jq -r '.author // "Param Harrison"')
     
     # Use pandoc-mermaid-filter if available in venv
     FILTER=""
