@@ -22,6 +22,15 @@ else
     WEASYPRINT_AVAILABLE=true
 fi
 
+# Check if calibre is available for MOBI generation
+if ! command -v ebook-convert &> /dev/null; then
+    echo "Warning: calibre is not installed. MOBI generation will be skipped."
+    echo "Install with: brew install --cask calibre"
+    CALIBRE_AVAILABLE=false
+else
+    CALIBRE_AVAILABLE=true
+fi
+
 # Function to build a single book in all formats
 build_book_all_formats() {
     local book_name=$1
@@ -81,14 +90,25 @@ build_book_all_formats() {
             --metadata author="$author" \
             $FILTER
     fi
-    
+
     # Post-process HTML
     if command -v python3 &> /dev/null; then
         python3 scripts/fix-mermaid-blocks.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid fix."
         python3 scripts/fix-prism-codeblocks.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping prism fix."
         python3 scripts/fix-css-links.py "public/$book_name/$book_name.html" "$css_file" 2>/dev/null || echo "Warning: Skipping CSS fix."
         python3 scripts/fix-mermaid-and-syntax.py "public/$book_name/$book_name.html" --format html 2>/dev/null || echo "Warning: Skipping mermaid/syntax fix."
+        # Render mermaid images for EPUB (same as PDF)
+        python3 scripts/render-mermaid-for-pdf.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid rendering for EPUB."
     fi
+
+    # Build EPUB using Pandoc from processed HTML
+    echo "  Building EPUB..."
+    pandoc "public/$book_name/$book_name.html" \
+        -o "public/$book_name/$book_name.epub" \
+        --css="templates/$css_file" \
+        --toc \
+        --metadata title="$title" \
+        --metadata author="$author"
     
     # Build PDF using WeasyPrint
     if [ "$WEASYPRINT_AVAILABLE" = true ]; then
@@ -113,6 +133,17 @@ build_book_all_formats() {
         
         # Build PDF using the processed HTML
         python3 scripts/build-pdf.py "$pdf_html_path" "public/$book_name/$book_name.pdf" "$pdf_css_path"
+    fi
+
+    # Build MOBI from EPUB (always, regardless of PDF)
+    if [ "$CALIBRE_AVAILABLE" = true ]; then
+        echo "  Building MOBI from EPUB..."
+        ebook-convert "public/$book_name/$book_name.epub" "public/$book_name/$book_name.mobi" \
+            --title "$title" \
+            --authors "$author" \
+            --mobi-file-type both \
+            --pretty-print
+        echo "    ✓ MOBI built successfully"
     fi
     
     echo "✓ Built $book_name in all formats"
@@ -160,6 +191,8 @@ for book_dir in public/*/; do
         find "$book_dir" -name "*-pdf.html" -delete 2>/dev/null || true
         # Remove PDF CSS files (they're regenerated each time)
         find "$book_dir" -name "*-pdf.css" -delete 2>/dev/null || true
+        # Remove any temporary MOBI HTML files
+        find "$book_dir" -name "*-mobi*.html" -delete 2>/dev/null || true
     fi
 done
 
@@ -169,4 +202,7 @@ echo "Available formats:"
 echo "- HTML: public/<book-name>/<book-name>.html"
 if [ "$WEASYPRINT_AVAILABLE" = true ]; then
     echo "- PDF: public/<book-name>/<book-name>.pdf"
+fi
+if [ "$CALIBRE_AVAILABLE" = true ]; then
+    echo "- MOBI: public/<book-name>/<book-name>.mobi"
 fi 
