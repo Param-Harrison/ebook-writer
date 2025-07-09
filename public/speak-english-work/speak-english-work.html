@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style type="text/css">
+/* Theme palette and font variables */
+:root {
+  --background: #fff;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --gray-bg: #f3f4f6;
+  --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+  /* WhatsApp colors */
+  --whatsapp-green: #25D366;
+  --whatsapp-light-green: #DCF8C6;
+  --whatsapp-gray: #E8E8E8;
+  --whatsapp-dark-gray: #262626;
+  --whatsapp-light-gray: #F0F0F0;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --foreground: #f0f0f0;
+    --primary: #60a5fa;
+    --primary-dark: #93c5fd;
+    --secondary: #fbbf24;
+    --accent: #34d399;
+    --gray-bg: #18181b;
+    /* Dark WhatsApp colors */
+    --whatsapp-green: #25D366;
+    --whatsapp-light-green: #1C2A1C;
+    --whatsapp-gray: #2A2A2A;
+    --whatsapp-dark-gray: #E8E8E8;
+    --whatsapp-light-gray: #1A1A1A;
+  }
+}
+
+body {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.book-container {
+  max-width: 820px;
+  margin: 2.5rem auto;
+  background: var(--background);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 2.7rem 2.7rem 2.7rem 2.7rem;
+}
+
+h1, h2, h3 {
+  color: var(--primary-dark);
+  margin-top: 2.2rem;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.3rem;
+}
+h2 {
+  font-size: 1.45rem;
+  margin-bottom: 0.9rem;
+  color: var(--primary);
+}
+h3 {
+  font-size: 1.13rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: #e3f2fd;
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.04);
+}
+
+blockquote + blockquote {
+  margin-top: 0.5rem;
+}
+
+blockquote blockquote {
+  margin-left: 1rem;
+  border-left-width: 2px;
+  background: #f8fbff;
+}
+
+/* Conversation styling (WhatsApp-like) */
+.conversation {
+  background: var(--whatsapp-light-gray);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin: 2rem 0;
+  border: 1px solid #e0e0e0;
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.conversation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--whatsapp-green);
+  border-radius: 12px 12px 0 0;
+}
+
+.conversation blockquote {
+  margin: 0.5rem 0;
+  background: var(--whatsapp-light-green);
+  border-left: none;
+  border-radius: 18px;
+  padding: 0.8rem 1rem;
+  box-shadow: none;
+  position: relative;
+  max-width: 70%;
+  word-wrap: break-word;
+  border: none;
+  transition: none;
+  color: var(--whatsapp-dark-gray);
+  font-style: normal;
+}
+
+.conversation blockquote:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.conversation blockquote:nth-child(odd) {
+  background: var(--whatsapp-light-green);
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  border: none;
+  position: relative;
+}
+
+.conversation blockquote:nth-child(even) {
+  background: var(--whatsapp-gray);
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  border: none;
+  position: relative;
+}
+
+.conversation blockquote strong {
+  color: #666666;
+  font-size: 0.75em;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.4;
+  color: var(--whatsapp-dark-gray);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .conversation {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .conversation blockquote {
+    max-width: 80%;
+    padding: 0.7rem 0.9rem;
+    margin: 0.4rem 0;
+  }
+  .conversation blockquote strong {
+    font-size: 0.7em;
+    margin-bottom: 0.2rem;
+  }
+  .conversation blockquote p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
+  .conversation blockquote {
+    max-width: 85%;
+    padding: 0.6rem 0.8rem;
+    margin: 0.3rem 0;
+  }
+}
+
+.box {
+  background: linear-gradient(135deg, var(--gray-bg) 0%, var(--background) 50%, var(--gray-bg) 100%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+  font-weight: 500;
+  color: var(--primary-dark);
+  font-size: 1.08em;
+  border: 1px solid var(--primary);
+}
+
+code, pre {
+  background: var(--gray-bg);
+  border-radius: 7px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', monospace;
+  color: var(--foreground);
+  font-size: 1.03em;
+}
+
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+}
+
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+
+.columns > * {
+  flex: 1;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--secondary);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+  display: block;
+  background: transparent;
+}
+
+figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+figure img {
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  color: var(--foreground);
+  opacity: 0.8;
+  font-style: italic;
+} 
+</style>
+<meta charset="utf-8"/>
+<title>Speak English at Work – The Friendly Way</title>
+<meta content="light dark" name="color-scheme"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="afrinenglish.css" rel="stylesheet"/>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+<style>
+        .mermaid-interactive { display: block; }
+        .mermaid-fallback { display: none; }
+        </style>
+</head>
+<body>
+<div class="book-container">
+<figure>
+<img alt="Cover" src="books/images/speak-english-work.jpg"/>
+<figcaption aria-hidden="true">Cover</figcaption>
+</figure>
+<h1 id="speak-english-at-work-the-friendly-way">Speak English at
+    Work – The Friendly Way</h1>
+<blockquote>
+<p>This book is part of the <a href="https://afrinenglish.com?ref=speak-english-work">Afrin English
+    Speaking Challenge</a>, a daily practice system designed to help
+    real people build real fluency — one simple conversation at a
+    time.</p>
+</blockquote>
+<h2 id="who-is-this-book-for">Who Is This Book For?</h2>
+<ul>
+<li>Beginners to intermediate English speakers (A2–B1)</li>
+<li>Anyone who works in an office with English communication</li>
+<li>Newcomers to remote, international, or hybrid work settings</li>
+<li>Learners who feel shy about “sounding natural” at work</li>
+<li>Job seekers preparing for an English-speaking role</li>
+</ul>
+<h2 id="how-to-use-this-book">How to Use This Book</h2>
+<ul>
+<li><strong>Read each conversation out loud</strong> — with a
+    partner, teacher, or yourself</li>
+<li><strong>Use the “🗣️ Say This Again” line</strong> to shadow and
+    memorize</li>
+<li><strong>Learn 3–5 useful expressions</strong> in every
+    conversation</li>
+<li><strong>Try writing your own version</strong> at the end of each
+    section</li>
+<li><strong>Use the practice prompts</strong> to review and build
+    fluency</li>
+</ul>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li>Saying Hello the Friendly Way</li>
+<li>Morning Small Talk at the Desk</li>
+<li>Asking for Help Politely</li>
+<li>Giving a Quick Update</li>
+<li>Joining a Team Meeting</li>
+<li>Asking Someone to Wait</li>
+<li>Making a Suggestion in a Meeting</li>
+<li>Praising a Coworker</li>
+<li>Asking for Time Off</li>
+<li>Wrapping Up the Week</li>
+<li>Talking Deadlines and Priorities</li>
+<li>Welcoming a New Team Member</li>
+<li>Sharing Your Screen in a Call</li>
+<li>Discussing a Problem at Work</li>
+<li>Giving Feedback the Nice Way</li>
+<li>Saying Sorry for a Mistake</li>
+<li>Talking About Your Weekend</li>
+<li>Checking In on a Task</li>
+<li>Saying No Politely</li>
+<li>Saying Goodbye (Final Day at Work)</li>
+</ol>
+<h2 id="saying-hello-the-friendly-way">1. Saying Hello the Friendly
+    Way</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Morning, Jenna! How’s it going?</p>
+</blockquote>
+<blockquote>
+<p><strong>Jenna:</strong> Morning! Not bad. You?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Pretty good. I finally slept well.</p>
+</blockquote>
+<blockquote>
+<p><strong>Jenna:</strong> That’s a win! Any weekend plans?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Just a lazy one—maybe a movie night.</p>
+</blockquote>
+<blockquote>
+<p><strong>Jenna:</strong> Sounds perfect. Enjoy!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Morning! How’s it going?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>How’s it going?</li>
+<li>Slept well</li>
+<li>That’s a win!</li>
+<li>Lazy weekend</li>
+<li>Sounds perfect</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Lazy</strong> – not busy, relaxed</li>
+<li><strong>Enjoy</strong> – have a good time</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2–3 lines about what you usually say to coworkers on Monday
+    morning.</p>
+</blockquote>
+<h2 id="morning-small-talk-at-the-desk">2. Morning Small Talk at the
+    Desk</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Did you catch that new series on
+    Netflix?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Yes! The ending was wild.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I didn’t expect that twist at all.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Same here. That actor really nailed
+    it.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I hope there’s a second season.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Me too. Let’s talk about it after
+    lunch!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Did you catch that new series?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Catch a show</li>
+<li>Didn’t expect that</li>
+<li>Twist (in a story)</li>
+<li>Nailed it</li>
+<li>Talk about it later</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Twist</strong> – an unexpected turn in a story</li>
+<li><strong>Nailed it</strong> – did it very well or perfectly</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of a show you recently watched. Describe it in 2 lines.</p>
+</blockquote>
+<h2 id="asking-for-help-politely">3. Asking for Help Politely</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Hey, could you look over this document when
+    you have a minute?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Sure thing. Want me to check the
+    formatting too?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Yes please! I think the layout looks
+    odd.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Okay, I’ll take a look after this
+    call.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Thanks so much. I really appreciate it!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Could you look over this when you have a minute?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Look over</li>
+<li>When you have a minute</li>
+<li>Sure thing</li>
+<li>I appreciate it</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Layout</strong> – the arrangement or structure of
+    something</li>
+<li><strong>Formatting</strong> – how text and elements are
+    organized in a document</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write a polite message asking for help with a task at work.</p>
+</blockquote>
+<h2 id="giving-a-quick-update">4. Giving a Quick Update</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Just a quick update—we’re almost done with
+    the draft.</p>
+</blockquote>
+<blockquote>
+<p><strong>Team Lead:</strong> Great! When do you think it’ll be
+    ready?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> By lunchtime. I just need to review one
+    section.</p>
+</blockquote>
+<blockquote>
+<p><strong>Team Lead:</strong> Perfect. Send it once you’re
+    done.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Will do. Thanks!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Just a quick update—we’re almost done.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Quick update</li>
+<li>Almost done</li>
+<li>One section left</li>
+<li>Will do</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Draft</strong> – an unfinished version of a
+    document</li>
+<li><strong>Review</strong> – check or look over carefully</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of a task you’re working on. Write 1–2 sentences updating your
+    team.</p>
+</blockquote>
+<h2 id="joining-a-team-meeting">5. Joining a Team Meeting</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Hey team, can everyone hear me okay?</p>
+</blockquote>
+<blockquote>
+<p><strong>Alex:</strong> Yep, loud and clear.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Awesome. I’ll start with a quick
+    update.</p>
+</blockquote>
+<blockquote>
+<p><strong>Maya:</strong> Go ahead.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> We completed the user testing, and results
+    look promising.</p>
+</blockquote>
+<blockquote>
+<p><strong>Maya:</strong> Great work! Can you share the
+    highlights?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Sure. I’ll share my screen in a second.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Can everyone hear me okay?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Loud and clear</li>
+<li>Quick update</li>
+<li>Go ahead</li>
+<li>Share my screen</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Highlights</strong> – main points or most important
+    parts</li>
+<li><strong>User testing</strong> – testing a product with real
+    users</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2–3 lines you’d say to start an online meeting.</p>
+</blockquote>
+<h2 id="asking-someone-to-wait">6. Asking Someone to Wait</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> One sec, let me find that file.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> No problem, I’ve got time.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Alright, just opening it now… okay, here we
+    go.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Great! Can you send it over?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Done. Let me know if it looks okay.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Got it. Thanks!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    One sec, let me find that file.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>One sec</li>
+<li>I’ve got time</li>
+<li>Opening it now</li>
+<li>Let me know if it looks okay</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>One sec</strong> – one second, a very short time</li>
+<li><strong>Got it</strong> – I received it or I understand</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write a short dialogue where you ask someone to wait for a
+    moment.</p>
+</blockquote>
+<h2 id="making-a-suggestion-in-a-meeting">7. Making a Suggestion in
+    a Meeting</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Maybe we could test this idea with a small
+    group?</p>
+</blockquote>
+<blockquote>
+<p><strong>Manager:</strong> I like that. Any thoughts on who we
+    could ask?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Maybe the marketing interns—they’re free
+    this week.</p>
+</blockquote>
+<blockquote>
+<p><strong>Manager:</strong> Good call. Can you draft a plan by
+    tomorrow?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Absolutely. I’ll send a rough outline
+    tonight.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Maybe we could test this idea with a small group?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Maybe we could…</li>
+<li>Good call</li>
+<li>Draft a plan</li>
+<li>Rough outline</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Interns</strong> – people working temporarily to gain
+    experience</li>
+<li><strong>Outline</strong> – a basic plan or summary</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of a new idea for your team. How would you suggest it?</p>
+</blockquote>
+<h2 id="praising-a-coworker">8. Praising a Coworker</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> That was a fantastic presentation! Super
+    clear.</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> Thank you! I was nervous about the
+    timing.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Didn’t show at all. You looked
+    confident.</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> Appreciate that. I practiced a
+    lot!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> It paid off—everyone was really
+    impressed.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    That was a fantastic presentation!</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Fantastic presentation</li>
+<li>Didn’t show at all</li>
+<li>You looked confident</li>
+<li>It paid off</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Confident</strong> – sure of yourself</li>
+<li><strong>Paid off</strong> – had a good result after effort</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2–3 sentences you could say to praise a teammate.</p>
+</blockquote>
+<h2 id="asking-for-time-off">9. Asking for Time Off</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Would it be okay if I took Friday off?</p>
+</blockquote>
+<blockquote>
+<p><strong>Manager:</strong> Sure. Are there any deadlines you’ll
+    miss?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I’ll finish the report Thursday. It should
+    be fine.</p>
+</blockquote>
+<blockquote>
+<p><strong>Manager:</strong> Sounds good. Thanks for the
+    heads-up.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Appreciate it!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Would it be okay if I took Friday off?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Would it be okay…</li>
+<li>Deadline</li>
+<li>Heads-up</li>
+<li>Appreciate it</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Heads-up</strong> – early notice or warning</li>
+<li><strong>Deadline</strong> – the last time something must be
+    done</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of a day off you might request. Write a short version of your
+    request.</p>
+</blockquote>
+<h2 id="wrapping-up-the-week">10. Wrapping Up the Week</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> That’s a wrap for me—heading out now.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Enjoy your weekend! Any plans?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Nothing big. Just hoping to sleep in!</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> That sounds perfect. Rest up.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> You too. See you Monday!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    That’s a wrap for me—heading out now.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>That’s a wrap</li>
+<li>Heading out</li>
+<li>Sleep in</li>
+<li>Rest up</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Wrap</strong> – finish or end</li>
+<li><strong>Sleep in</strong> – wake up later than usual</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write what you usually say before leaving work on a Friday.</p>
+</blockquote>
+<h2 id="talking-deadlines-and-priorities">11. Talking Deadlines and
+    Priorities</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Hey, is the report still due on
+    Thursday?</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Yes, but the client asked if we could
+    prioritize the visuals.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Got it. I’ll shift focus to the charts
+    first.</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Great. Let me know if you need help
+    formatting.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Will do. I’ll circle back by tomorrow.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Is the report still due on Thursday?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Due on Thursday</li>
+<li>Prioritize the visuals</li>
+<li>Shift focus</li>
+<li>Circle back</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Prioritize</strong> – to treat something as more
+    important</li>
+<li><strong>Circle back</strong> – return to the topic or task
+    later</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2–3 lines about something you need to prioritize this
+    week.</p>
+</blockquote>
+<h2 id="welcoming-a-new-team-member">12. Welcoming a New Team
+    Member</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Hey, you must be Daniel! Welcome to the
+    team.</p>
+</blockquote>
+<blockquote>
+<p><strong>Daniel:</strong> Thanks! It’s great to be here.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Let me know if you need anything—I’ve got
+    extra cables and notebooks.</p>
+</blockquote>
+<blockquote>
+<p><strong>Daniel:</strong> Appreciate it! I’m just setting up
+    now.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Cool. We usually grab coffee at 10 if you
+    want to join.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Welcome to the team!</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>You must be…</li>
+<li>Let me know if…</li>
+<li>Appreciate it</li>
+<li>Grab coffee</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Setting up</strong> – getting things ready or
+    arranged</li>
+<li><strong>Join</strong> – take part in something</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Imagine you’re welcoming a new colleague. What would you say?</p>
+</blockquote>
+<h2 id="sharing-your-screen-in-a-call">13. Sharing Your Screen in a
+    Call</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Let me share my screen—can everyone see
+    this slide?</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Yep, looks good!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> So this chart shows our Q2 growth. Any
+    questions?</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Just one—what does the blue line
+    represent?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That’s our marketing reach. I’ll explain
+    more in a sec.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Let me share my screen—can everyone see this?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Share my screen</li>
+<li>Looks good</li>
+<li>Any questions?</li>
+<li>In a sec</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Slide</strong> – a page in a presentation</li>
+<li><strong>Represent</strong> – show or stand for something</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 1–2 lines you’d use when showing something in a meeting.</p>
+</blockquote>
+<h2 id="discussing-a-problem-at-work">14. Discussing a Problem at
+    Work</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> I’ve noticed a few bugs in the latest
+    update.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Oh? Can you show me where?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Sure, this dropdown isn’t working on
+    mobile.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Got it. I’ll flag that for the dev
+    team.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Thanks. I’ll write up a quick report.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    I’ve noticed a few bugs in the update.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I’ve noticed</li>
+<li>Show me where</li>
+<li>Flag that</li>
+<li>Write up a quick report</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Bug</strong> – an error or issue in software</li>
+<li><strong>Flag</strong> – to highlight or mark for attention</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Describe a small problem you’ve had at work and how you shared
+    it.</p>
+</blockquote>
+<h2 id="giving-feedback-the-nice-way">15. Giving Feedback the Nice
+    Way</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Can I give you some quick feedback on your
+    draft?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Of course! I’d love that.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Overall it’s great—just a few small
+    things.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Sure, hit me.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Maybe shorten the intro and add an example
+    at the end?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Good idea. Thanks for being
+    honest!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Can I give you some quick feedback?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Quick feedback</li>
+<li>Overall it’s great</li>
+<li>A few small things</li>
+<li>Good idea</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Intro</strong> – introduction</li>
+<li><strong>Honest</strong> – truthful, direct</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of one small suggestion you could give a coworker. Write how
+    you’d say it.</p>
+</blockquote>
+<h2 id="saying-sorry-for-a-mistake">16. Saying Sorry for a
+    Mistake</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> I just realized I sent the wrong link.
+    Sorry about that!</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> No worries—it happens.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I’ve sent the correct one now.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Got it. Thanks for fixing it
+    quickly.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I’ll double-check next time.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    I just realized I sent the wrong link.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I just realized</li>
+<li>Sorry about that</li>
+<li>No worries</li>
+<li>Double-check</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Double-check</strong> – to check again carefully</li>
+<li><strong>Correct</strong> – the right one</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write a short message saying sorry and how you fixed the
+    problem.</p>
+</blockquote>
+<h2 id="talking-about-your-weekend">17. Talking About Your
+    Weekend</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> So, how was your weekend?</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Pretty relaxing. I just watched movies
+    and slept in.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Nice! I went hiking on Sunday. The weather
+    was perfect.</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> That sounds amazing. Where did you
+    go?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Lahemaa. The forest trails are so peaceful
+    there.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    How was your weekend?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Pretty relaxing</li>
+<li>Slept in</li>
+<li>Went hiking</li>
+<li>Peaceful</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Slept in</strong> – woke up late</li>
+<li><strong>Peaceful</strong> – calm and quiet</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Describe your last weekend in 3 sentences.</p>
+</blockquote>
+<h2 id="checking-in-on-a-task">18. Checking In on a Task</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Hey, just checking in—any update on the
+    client proposal?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Yes, I’m finalizing it today.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Great. Let me know if you need input from
+    me.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Will do. I’ll send you a draft by
+    3.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Perfect. Thanks!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Just checking in—any update on…?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Just checking in</li>
+<li>Finalizing it</li>
+<li>Let me know if you need input</li>
+<li>Send a draft</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Proposal</strong> – a formal suggestion or plan</li>
+<li><strong>Input</strong> – advice, ideas, or feedback</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2 lines to follow up on a task politely.</p>
+</blockquote>
+<h2 id="saying-no-politely">19. Saying No Politely</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> I’d love to help, but I’m swamped this
+    week.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Totally get it. Maybe next week?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That should work. Let’s touch base
+    Monday.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Sounds good. Thanks for letting me
+    know!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> No problem!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    I’d love to help, but I’m swamped this week.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I’d love to help, but…</li>
+<li>Swamped</li>
+<li>Touch base</li>
+<li>Letting me know</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Swamped</strong> – extremely busy</li>
+<li><strong>Touch base</strong> – reconnect or check in later</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of a way to say no politely. Write 1–2 lines.</p>
+</blockquote>
+<h2 id="saying-goodbye-final-day-at-work">20. Saying Goodbye (Final
+    Day at Work)</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Well, today’s my last day. I just wanted to
+    say thank you all!</p>
+</blockquote>
+<blockquote>
+<p><strong>Team:</strong> We’ll miss you! Good luck on your new
+    journey.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I’ve learned so much here—it’s been a great
+    experience.</p>
+</blockquote>
+<blockquote>
+<p><strong>Team:</strong> Keep in touch, okay?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Definitely. I’ll share my new contact
+    info.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Today’s my last day. Thank you all!</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Last day</li>
+<li>Good luck</li>
+<li>Keep in touch</li>
+<li>Share contact info</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Journey</strong> – new experience or phase in life</li>
+<li><strong>Experience</strong> – knowledge gained from doing
+    something</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2–3 sentences you’d say on your last day at work.</p>
+</blockquote>
+<h2 id="you-did-it">🎉 You Did It!</h2>
+<div class="box">
+<p>You’ve taken a big step toward speaking better English at work.
+    Whether you’re in your first job, working remotely, or just want to
+    feel more confident — this book was only the beginning.</p>
+<p>But your journey doesn’t stop here.</p>
+<p>Keep speaking English every day with the <strong><a href="https://afrinenglish.com?ref=speak-english-work">AfrinEnglish.com
+    365-Day Speaking Challenge</a></strong>.</p>
+<p>You’ll get:</p>
+<ul>
+<li>🗓️ <strong>Daily prompts and speaking tasks</strong></li>
+<li>📝 <strong>Printable templates and speaking
+    journal</strong></li>
+<li>🎯 <strong>A clear roadmap from A1 to B2</strong></li>
+</ul>
+<p>Join thousands of learners building habits, not just
+    vocabulary.</p>
+<p>👉 <strong>Start today at <a href="https://afrinenglish.com?ref=speak-english-work">AfrinEnglish.com</a></strong>
+    — your daily English companion.</p>
+</div>
+</div>
+</body>
+</html> 

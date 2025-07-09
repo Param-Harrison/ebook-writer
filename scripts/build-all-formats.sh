@@ -72,6 +72,19 @@ build_book_all_formats() {
         rm -rf "public/$book_name/mermaid-images"
     fi
     
+    # Find cover image for EPUB/MOBI
+    COVER_IMAGE=""
+    if [ -f "books/images/${book_name}.jpg" ]; then
+        COVER_IMAGE="books/images/${book_name}.jpg"
+    elif [ -f "books/images/default.jpg" ]; then
+        COVER_IMAGE="books/images/default.jpg"
+    fi
+    COVER_OPTION=""
+    if [ -n "$COVER_IMAGE" ]; then
+        COVER_OPTION="--epub-cover-image=$COVER_IMAGE"
+        echo "  Found cover image for EPUB/MOBI: $COVER_IMAGE"
+    fi
+    
     # Build HTML first (as base for other formats)
     echo "  Building HTML..."
     pandoc "books/$book_name.md" \
@@ -151,9 +164,8 @@ build_book_all_formats() {
             --toc \
             --standalone \
             --metadata title="$title" \
-            --metadata author="$author"
-
-        # Build MOBI from EPUB (always, regardless of PDF)
+            --metadata author="$author" \
+            $COVER_OPTION
         if [ "$CALIBRE_AVAILABLE" = true ]; then
             echo "  Building MOBI from EPUB..."
             ebook-convert "public/$book_name/$book_name.epub" "public/$book_name/$book_name.mobi" \

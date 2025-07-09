@@ -245,6 +245,73 @@ def fix_mermaid_and_syntax_highlighting(css_content):
         border-radius: 4px;
     }
     
+    /* WhatsApp conversation styling for all formats */
+    .conversation {
+        background: #F0F0F0;
+        border-radius: 12px;
+        padding: 1.2rem;
+        margin: 2rem 0;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .conversation::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #25D366;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .conversation blockquote {
+        background: #DCF8C6;
+        border: none;
+        border-radius: 18px;
+        padding: 0.8rem 1rem;
+        margin: 0.5rem 0;
+        box-shadow: none;
+        color: #262626;
+        font-style: normal;
+        max-width: 70%;
+        word-wrap: break-word;
+    }
+    
+    .conversation blockquote:nth-child(odd) {
+        background: #DCF8C6;
+        margin-left: auto;
+        border-bottom-right-radius: 4px;
+        border: none;
+    }
+    
+    .conversation blockquote:nth-child(even) {
+        background: #E8E8E8;
+        margin-right: auto;
+        border-bottom-left-radius: 4px;
+        border: none;
+    }
+    
+    .conversation blockquote strong {
+        color: #666666;
+        font-size: 0.75em;
+        display: block;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        opacity: 0.8;
+    }
+    
+    .conversation blockquote p {
+        margin: 0;
+        line-height: 1.4;
+        color: #262626;
+        font-size: 0.95em;
+        font-weight: 400;
+    }
+    
     /* Syntax highlighting fallbacks */
     .highlight, pre {
         background-color: #f6f8fa;

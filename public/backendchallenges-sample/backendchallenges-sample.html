@@ -13,6 +13,12 @@
   --border: #e5e7eb;
   --gray-bg: #f6f6f7;
   --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+  /* WhatsApp colors */
+  --whatsapp-green: #25D366;
+  --whatsapp-light-green: #DCF8C6;
+  --whatsapp-gray: #E8E8E8;
+  --whatsapp-dark-gray: #262626;
+  --whatsapp-light-gray: #F0F0F0;
 }
 
 /* Dark theme support */
@@ -25,6 +31,12 @@
     --primary-dark: #34d399;
     --border: #27272a;
     --gray-bg: #18181b;
+    /* Dark WhatsApp colors */
+    --whatsapp-green: #25D366;
+    --whatsapp-light-green: #1C2A1C;
+    --whatsapp-gray: #2A2A2A;
+    --whatsapp-dark-gray: #E8E8E8;
+    --whatsapp-light-gray: #1A1A1A;
   }
 }
 
@@ -166,53 +178,66 @@ figcaption {
   font-style: italic;
 }
 
-/* Conversation styling (chat bubble style, minimal) */
+/* Conversation styling (WhatsApp-like, minimal) */
 .conversation {
-  background: var(--gray-bg);
-  border-radius: 14px;
+  background: var(--whatsapp-light-gray);
+  border-radius: 12px;
   padding: 1.2rem;
   margin: 2rem 0;
-  border: 1px solid var(--border);
+  border: 1px solid #e0e0e0;
   max-width: 100%;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+.conversation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--whatsapp-green);
+  border-radius: 12px 12px 0 0;
 }
 
 .conversation blockquote {
-  margin: 0.7rem 0;
-  background: var(--background);
-  border-left: 3px solid var(--primary);
-  border-radius: 8px;
-  padding: 0.8rem 1.1rem;
+  margin: 0.5rem 0;
+  background: var(--whatsapp-light-green);
+  border-left: none;
+  border-radius: 18px;
+  padding: 0.8rem 1rem;
   box-shadow: none;
   position: relative;
-  max-width: 75%;
+  max-width: 70%;
   word-wrap: break-word;
-  border: 1px solid var(--border);
-  transition: all 0.2s ease;
+  border: none;
+  transition: none;
+  color: var(--whatsapp-dark-gray);
+  font-style: normal;
 }
 
 .conversation blockquote:nth-child(odd) {
-  background: var(--gray-bg);
+  background: var(--whatsapp-light-green);
   margin-left: auto;
   border-bottom-right-radius: 4px;
-  border: 1px solid var(--primary);
+  border: none;
   position: relative;
 }
 
 .conversation blockquote:nth-child(even) {
-  background: var(--background);
+  background: var(--whatsapp-gray);
   margin-right: auto;
   border-bottom-left-radius: 4px;
-  border: 1px solid var(--border);
+  border: none;
   position: relative;
 }
 
 .conversation blockquote strong {
-  color: var(--primary-dark);
+  color: #666666;
   font-size: 0.75em;
   display: block;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -221,8 +246,8 @@ figcaption {
 
 .conversation blockquote p {
   margin: 0;
-  line-height: 1.6;
-  color: var(--foreground);
+  line-height: 1.4;
+  color: var(--whatsapp-dark-gray);
   font-size: 0.95em;
   font-weight: 400;
 }
@@ -233,18 +258,18 @@ figcaption {
   }
   .conversation {
     padding: 1rem;
-    margin: 1.2rem 0;
+    margin: 1.5rem 0;
     max-width: 100%;
     border-radius: 10px;
   }
   .conversation blockquote {
-    max-width: 90%;
+    max-width: 80%;
     padding: 0.7rem 0.9rem;
-    margin: 0.5rem 0;
+    margin: 0.4rem 0;
   }
   .conversation blockquote strong {
     font-size: 0.7em;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
   }
   .conversation blockquote p {
     font-size: 0.9em;
@@ -253,12 +278,12 @@ figcaption {
 
 @media (max-width: 480px) {
   .conversation {
-    padding: 0.7rem;
+    padding: 0.8rem;
     border-radius: 8px;
   }
   .conversation blockquote {
-    max-width: 98%;
-    padding: 0.5rem 0.7rem;
+    max-width: 85%;
+    padding: 0.6rem 0.8rem;
     margin: 0.3rem 0;
   }
 } 

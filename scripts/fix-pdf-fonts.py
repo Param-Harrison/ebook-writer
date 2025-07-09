@@ -51,31 +51,66 @@ def add_pdf_font_adjustments(soup):
         padding: 0.8rem 1.2rem !important;
     }
     
-    /* Reduce conversation font sizes */
+    /* WhatsApp-style conversation adjustments for PDF */
     .conversation {
         font-size: 0.9rem !important;
         padding: 1rem !important;
-        border: none !important;
+        border: 1px solid #e0e0e0 !important;
+        background: #F0F0F0 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        margin: 1.5rem 0 !important;
     }
 
     .conversation::before {
-        background: none !important;
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 2px !important;
+        background: #25D366 !important;
+        border-radius: 10px 10px 0 0 !important;
     }
     
     .conversation blockquote {
         font-size: 0.85rem !important;
+        background: #DCF8C6 !important;
+        border: none !important;
+        border-radius: 18px !important;
+        padding: 0.6rem 0.8rem !important;
+        margin: 0.3rem 0 !important;
+        box-shadow: none !important;
+        color: #262626 !important;
+        font-style: normal !important;
+    }
+    
+    .conversation blockquote:nth-child(odd) {
+        background: #DCF8C6 !important;
+        margin-left: auto !important;
+        border-bottom-right-radius: 4px !important;
+        border: none !important;
+    }
+    
+    .conversation blockquote:nth-child(even) {
+        background: #E8E8E8 !important;
+        margin-right: auto !important;
+        border-bottom-left-radius: 4px !important;
+        border: none !important;
     }
     
     .conversation blockquote p {
         font-size: 0.85rem !important;
-        margin-top: 0rem !important;
-        margin-bottom: 0rem !important;
+        margin: 0 !important;
+        line-height: 1.3 !important;
+        color: #262626 !important;
     }
     
     .conversation blockquote strong {
         font-size: 0.7em !important;
-        margin-top: 0rem !important;
-        margin-bottom: 0rem !important;
+        margin: 0 !important;
+        color: #666666 !important;
+        opacity: 0.8 !important;
     }
     
     /* Reduce box font size */

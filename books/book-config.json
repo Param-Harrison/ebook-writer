@@ -2,7 +2,7 @@
   "books": {
     "afrinenglish-sample": {
       "title": "The Joy of Learning English",
-      "author": "Afrin English",
+      "author": "AfrinEnglish.com",
       "template": "afrinenglish",
       "category": "english-learning",
       "description": "A beautiful guide to mastering English"
@@ -10,9 +10,16 @@
     "backendchallenges-sample": {
       "title": "Backend Challenges: Level Up",
       "author": "Backend Challenges",
-      "template": "backendchallenges", 
+      "template": "backendchallenges",
       "category": "coding",
       "description": "Intense coding challenges for backend developers"
+    },
+    "speak-english-work": {
+      "title": "Speak English at Work – The Friendly Way",
+      "author": "AfrinEnglish.com",
+      "template": "afrinenglish",
+      "category": "general",
+      "description": "Real Office Conversations Made Simple"
     }
   },
   "templates": {
@@ -23,10 +30,10 @@
       "html": "afrinenglish.html"
     },
     "backendchallenges": {
-      "name": "Backend Challenges Template", 
+      "name": "Backend Challenges Template",
       "description": "Intense, code-focused layout for programming books",
       "css": "backendchallenges.css",
       "html": "backendchallenges.html"
     }
   }
-} 
+}
