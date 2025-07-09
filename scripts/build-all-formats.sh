@@ -72,17 +72,21 @@ build_book_all_formats() {
         rm -rf "public/$book_name/mermaid-images"
     fi
     
-    # Find cover image for EPUB/MOBI
+    # Copy cover image to book's output directory (for all formats)
     COVER_IMAGE=""
     if [ -f "books/images/${book_name}.jpg" ]; then
         COVER_IMAGE="books/images/${book_name}.jpg"
     elif [ -f "books/images/default.jpg" ]; then
         COVER_IMAGE="books/images/default.jpg"
     fi
-    COVER_OPTION=""
+    
     if [ -n "$COVER_IMAGE" ]; then
-        COVER_OPTION="--epub-cover-image=$COVER_IMAGE"
-        echo "  Found cover image for EPUB/MOBI: $COVER_IMAGE"
+        cp "$COVER_IMAGE" "public/$book_name/cover.jpg"
+        echo "  ✓ Copied cover image to public/$book_name/cover.jpg"
+        COVER_OPTION="--epub-cover-image=public/$book_name/cover.jpg"
+    else
+        echo "  ⚠️ No cover image found for $book_name"
+        COVER_OPTION=""
     fi
     
     # Build HTML first (as base for other formats)
@@ -104,6 +108,12 @@ build_book_all_formats() {
         python3 scripts/fix-css-links.py "public/$book_name/$book_name.html" "$css_file" 2>/dev/null || echo "Warning: Skipping CSS fix."
         python3 scripts/fix-mermaid-and-syntax.py "public/$book_name/$book_name.html" --format html 2>/dev/null || echo "Warning: Skipping mermaid/syntax fix."
         
+        # Add cover image to HTML (only if cover was copied)
+        if [ -n "$COVER_IMAGE" ]; then
+            echo "    Adding cover image to HTML..."
+            python3 scripts/add-cover-to-html.py "public/$book_name/$book_name.html" "$book_name" 2>/dev/null || echo "Warning: Skipping cover image addition."
+        fi
+        
         # Render mermaid images only for production builds (not for HTML-only dev mode)
         if [ "$html_only" != "--html-only" ]; then
             python3 scripts/render-mermaid-for-pdf.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid rendering for EPUB."
@@ -114,9 +124,15 @@ build_book_all_formats() {
     if [ "$html_only" != "--html-only" ] && [ "$WEASYPRINT_AVAILABLE" = true ]; then
         echo "  Building PDF..."
         
-        # Create a copy of HTML for PDF processing
+        # Create a clean copy of HTML for PDF processing (without cover image)
         pdf_html_path="public/$book_name/$book_name-pdf.html"
         cp "public/$book_name/$book_name.html" "$pdf_html_path"
+        
+        # Remove cover image from PDF HTML if it exists
+        if [ -n "$COVER_IMAGE" ]; then
+            echo "    Removing cover image from PDF..."
+            python3 scripts/remove-cover-from-pdf.py "$pdf_html_path" 2>/dev/null || echo "Warning: Could not remove cover image from PDF HTML."
+        fi
         
         # Process HTML specifically for PDF (highlight code, render mermaid, fix code blocks)
         if command -v python3 &> /dev/null; then

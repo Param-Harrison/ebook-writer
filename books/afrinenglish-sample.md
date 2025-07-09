@@ -1,7 +1,3 @@
-
-
-
-
 # The Joy of Learning English
 
 > "Learning another language is like becoming another person." — Haruki Murakami
