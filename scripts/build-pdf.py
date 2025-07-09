@@ -31,6 +31,25 @@ def fix_html_for_pdf(html_file_path, css_file_path):
     # Get the directory of the HTML file for resolving relative paths
     html_dir = os.path.dirname(os.path.abspath(html_file_path))
 
+    # Check for cover image in the same directory
+    cover_image_path = os.path.join(html_dir, "cover.jpg")
+    if os.path.exists(cover_image_path):
+        # Add cover image to the beginning of the content with absolute path
+        cover_html = f'<img src="file://{os.path.abspath(cover_image_path)}" alt="Book Cover" style="width: 100%; height: auto; max-width: 210mm; display: block; margin: 0 auto;">'
+        # Insert at the beginning of the body content
+        body_start = html_content.find("<body")
+        if body_start != -1:
+            # Find the opening of the first div or content
+            content_start = html_content.find("<div", body_start)
+            if content_start != -1:
+                html_content = (
+                    html_content[:content_start]
+                    + cover_html
+                    + "\n"
+                    + html_content[content_start:]
+                )
+        print(f"✓ Added cover image to PDF: {cover_image_path}")
+
     # Read and embed CSS
     if css_file_path and os.path.exists(css_file_path):
         with open(css_file_path, "r", encoding="utf-8") as f:
