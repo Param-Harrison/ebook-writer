@@ -309,10 +309,183 @@ figcaption {
         .mermaid-interactive { display: block; }
         .mermaid-fallback { display: none; }
         </style>
-</head>
+<style>
+/* Table of Contents Styles */
+.toc-container {
+  background: var(--gray-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toc-title {
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.3rem !important;
+  color: var(--primary-dark) !important;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav {
+  margin: 0;
+}
+
+.toc-row {
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.toc-link {
+  color: var(--foreground);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+  background: rgba(59, 130, 246, 0.1);
+  padding-left: 0.5rem;
+}
+
+.toc-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 2rem;
+}
+
+.toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+}
+
+.toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 4rem;
+}
+
+.toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-left: 5rem;
+}
+
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    page-break-after: always;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .toc-link {
+    color: #333;
+  }
+  
+  .toc-link:hover {
+    color: #333;
+    background: none;
+    padding-left: 0.2rem;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .toc-level-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .toc-level-3 {
+    margin-left: 1rem;
+  }
+  
+  .toc-level-4 {
+    margin-left: 1.5rem;
+  }
+  
+  .toc-level-5 {
+    margin-left: 2rem;
+  }
+  
+  .toc-level-6 {
+    margin-left: 2.5rem;
+  }
+}
+</style></head>
 <body>
 <div class="book-container">
-<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/>
+<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/><div class="toc-container">
+<h2 class="toc-title">Table of Contents</h2>
+<nav class="toc-nav">
+<div class="toc-row toc-level-1"><a class="toc-link" href="#backend-challenges-level-up">Backend Challenges: Level Up</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-1-user-authentication-api">Challenge 1: User Authentication API</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-2-task-queue-with-rate-limiting">Challenge 2: Task Queue with Rate Limiting</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#remove-jobs-older-than-60-seconds">Remove jobs older than 60 seconds</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#user-tries-to-enqueue-jobs">User tries to enqueue jobs</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-3-database-connection-pool">Challenge 3: Database Connection Pool</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-4-caching-layer-with-ttl">Challenge 4: Caching Layer with TTL</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#try-to-get-from-cache">Try to get from cache</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#execute-function-and-cache-result">Execute function and cache result</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#simulate-database-query">Simulate database query</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#first-call-hits-database">First call hits database</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#second-call-hits-cache">Second call hits cache</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-5-api-rate-limiting-with-redis">Challenge 5: API Rate Limiting with Redis</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#use-redis-pipeline-for-atomic-operations">Use Redis pipeline for atomic operations</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#remove-old-entries">Remove old entries</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#count-current-requests">Count current requests</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#add-current-request">Add current request</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#set-expiry-on-the-key">Set expiry on the key</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#check-if-within-limits">Check if within limits</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#calculate-remaining-requests">Calculate remaining requests</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-6-message-queue-with-dead-letter-queue">Challenge 6: Message Queue with Dead Letter Queue</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#get-batch-of-messages">Get batch of messages</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#process-batch">Process batch</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#initialize-queue">Initialize queue</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#start-processor-in-background-thread">Start processor in background thread</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#enqueue-messages">Enqueue messages</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#monitor-stats">Monitor stats</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#challenge-7-database-migration-system">Challenge 7: Database Migration System</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#get-next-version-number">Get next version number</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#check-if-already-applied">Check if already applied</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#apply-migration">Apply migration</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#record-migration">Record migration</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#check-if-migration-is-applied">Check if migration is applied</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#rollback-migration">Rollback migration</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#remove-migration-record">Remove migration record</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#initialize-migration-manager">Initialize migration manager</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#create-migrations">Create migrations</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#apply-migrations">Apply migrations</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#check-applied-migrations">Check applied migrations</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#chapter-1-system-design-principles">Chapter 1: System Design Principles</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#chapter-2-performance-optimization">Chapter 2: Performance Optimization</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#final-challenge-complete-system-integration">Final Challenge: Complete System Integration</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#congratulations">Congratulations!</a></div>
+</nav>
+</div>
 <h1 id="backend-challenges-level-up">Backend Challenges: Level
     Up</h1>
 <blockquote>

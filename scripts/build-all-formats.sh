@@ -118,6 +118,9 @@ build_book_all_formats() {
         if [ "$html_only" != "--html-only" ]; then
             python3 scripts/render-mermaid-for-pdf.py "public/$book_name/$book_name.html" 2>/dev/null || echo "Warning: Skipping mermaid rendering for EPUB."
         fi
+
+        # Add dynamic TOC for HTML only (not for PDF/EPUB/MOBI)
+        python3 scripts/generate-toc.py "books/$book_name.md" "public/$book_name/$book_name.html" --title "Table of Contents" --after-cover || echo "Warning: Skipping TOC generation."
     fi
 
     # Build PDF using WeasyPrint (first, so we can use its processed HTML for EPUB)
@@ -167,6 +170,10 @@ build_book_all_formats() {
             epub_html_path="public/$book_name/$book_name-epub.html"
             cp "public/$book_name/$book_name.html" "$epub_html_path"
         fi
+        
+        # Remove TOC from EPUB HTML (EPUB has its own native TOC)
+        echo "    Removing TOC from EPUB..."
+        python3 scripts/remove-toc-from-epub.py "$epub_html_path" 2>/dev/null || echo "Warning: Could not remove TOC from EPUB HTML."
         
         # Inject EPUB-specific styles
         if command -v python3 &> /dev/null; then

@@ -316,15 +316,168 @@ figcaption {
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
     mermaid.initialize({ startOnLoad: true });
   </script>
-
 <style>
         .mermaid-interactive { display: block; }
         .mermaid-fallback { display: none; }
         </style>
-</head>
+<style>
+/* Table of Contents Styles */
+.toc-container {
+  background: var(--gray-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toc-title {
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.3rem !important;
+  color: var(--primary-dark) !important;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav {
+  margin: 0;
+}
+
+.toc-row {
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.toc-link {
+  color: var(--foreground);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+  background: rgba(59, 130, 246, 0.1);
+  padding-left: 0.5rem;
+}
+
+.toc-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 2rem;
+}
+
+.toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+}
+
+.toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 4rem;
+}
+
+.toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-left: 5rem;
+}
+
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    page-break-after: always;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .toc-link {
+    color: #333;
+  }
+  
+  .toc-link:hover {
+    color: #333;
+    background: none;
+    padding-left: 0.2rem;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .toc-level-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .toc-level-3 {
+    margin-left: 1rem;
+  }
+  
+  .toc-level-4 {
+    margin-left: 1.5rem;
+  }
+  
+  .toc-level-5 {
+    margin-left: 2rem;
+  }
+  
+  .toc-level-6 {
+    margin-left: 2.5rem;
+  }
+}
+</style></head>
 <body>
 <div class="book-container">
-<img src="cover.jpg" alt="Book Cover" style="width:100%;display:block;margin-bottom:2rem;">
+<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/><div class="toc-container">
+<h2 class="toc-title">Table of Contents</h2>
+<nav class="toc-nav">
+<div class="toc-row toc-level-1"><a class="toc-link" href="#speak-english-at-work-the-friendly-way">Speak English at Work – The Friendly Way</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#who-is-this-book-for">Who Is This Book For?</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#how-to-use-this-book">How to Use This Book</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#saying-hello-the-friendly-way">1. Saying Hello the Friendly Way</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#morning-small-talk-at-the-desk">2. Morning Small Talk at the Desk</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#asking-for-help-politely">3. Asking for Help Politely</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#giving-a-quick-update">4. Giving a Quick Update</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#joining-a-team-meeting">5. Joining a Team Meeting</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#asking-someone-to-wait">6. Asking Someone to Wait</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#making-a-suggestion-in-a-meeting">7. Making a Suggestion in a Meeting</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#praising-a-coworker">8. Praising a Coworker</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#asking-for-time-off">9. Asking for Time Off</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#wrapping-up-the-week">10. Wrapping Up the Week</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-deadlines-and-priorities">11. Talking Deadlines and Priorities</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#welcoming-a-new-team-member">12. Welcoming a New Team Member</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#sharing-your-screen-in-a-call">13. Sharing Your Screen in a Call</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#discussing-a-problem-at-work">14. Discussing a Problem at Work</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#giving-feedback-the-nice-way">15. Giving Feedback the Nice Way</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#saying-sorry-for-a-mistake">16. Saying Sorry for a Mistake</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-your-weekend">17. Talking About Your Weekend</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#checking-in-on-a-task">18. Checking In on a Task</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#saying-no-politely">19. Saying No Politely</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#saying-goodbye-final-day-at-work">20. Saying Goodbye (Final Day at Work)</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#you-did-it">🎉 You Did It!</a></div>
+</nav>
+</div>
 <h1 id="speak-english-at-work-the-friendly-way">Speak English at
     Work – The Friendly Way</h1>
 <blockquote>
@@ -354,29 +507,6 @@ figcaption {
 <li><strong>Use the practice prompts</strong> to review and build
     fluency</li>
 </ul>
-<h2 id="table-of-contents">Table of Contents</h2>
-<ol type="1">
-<li>Saying Hello the Friendly Way</li>
-<li>Morning Small Talk at the Desk</li>
-<li>Asking for Help Politely</li>
-<li>Giving a Quick Update</li>
-<li>Joining a Team Meeting</li>
-<li>Asking Someone to Wait</li>
-<li>Making a Suggestion in a Meeting</li>
-<li>Praising a Coworker</li>
-<li>Asking for Time Off</li>
-<li>Wrapping Up the Week</li>
-<li>Talking Deadlines and Priorities</li>
-<li>Welcoming a New Team Member</li>
-<li>Sharing Your Screen in a Call</li>
-<li>Discussing a Problem at Work</li>
-<li>Giving Feedback the Nice Way</li>
-<li>Saying Sorry for a Mistake</li>
-<li>Talking About Your Weekend</li>
-<li>Checking In on a Task</li>
-<li>Saying No Politely</li>
-<li>Saying Goodbye (Final Day at Work)</li>
-</ol>
 <h2 id="saying-hello-the-friendly-way">1. Saying Hello the Friendly
     Way</h2>
 <div class="conversation">

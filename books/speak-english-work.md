@@ -18,29 +18,6 @@
 - **Try writing your own version** at the end of each section
 - **Use the practice prompts** to review and build fluency
 
-## Table of Contents
-
-1. Saying Hello the Friendly Way
-2. Morning Small Talk at the Desk
-3. Asking for Help Politely
-4. Giving a Quick Update
-5. Joining a Team Meeting
-6. Asking Someone to Wait
-7. Making a Suggestion in a Meeting
-8. Praising a Coworker
-9. Asking for Time Off
-10. Wrapping Up the Week
-11. Talking Deadlines and Priorities
-12. Welcoming a New Team Member
-13. Sharing Your Screen in a Call
-14. Discussing a Problem at Work
-15. Giving Feedback the Nice Way
-16. Saying Sorry for a Mistake
-17. Talking About Your Weekend
-18. Checking In on a Task
-19. Saying No Politely
-20. Saying Goodbye (Final Day at Work)
-
 ## 1. Saying Hello the Friendly Way
 
 <div class="conversation">

@@ -320,10 +320,153 @@ figcaption {
         .mermaid-interactive { display: block; }
         .mermaid-fallback { display: none; }
         </style>
-</head>
+<style>
+/* Table of Contents Styles */
+.toc-container {
+  background: var(--gray-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toc-title {
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.3rem !important;
+  color: var(--primary-dark) !important;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav {
+  margin: 0;
+}
+
+.toc-row {
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.toc-link {
+  color: var(--foreground);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+  background: rgba(59, 130, 246, 0.1);
+  padding-left: 0.5rem;
+}
+
+.toc-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 2rem;
+}
+
+.toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+}
+
+.toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 4rem;
+}
+
+.toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-left: 5rem;
+}
+
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    page-break-after: always;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .toc-link {
+    color: #333;
+  }
+  
+  .toc-link:hover {
+    color: #333;
+    background: none;
+    padding-left: 0.2rem;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .toc-level-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .toc-level-3 {
+    margin-left: 1rem;
+  }
+  
+  .toc-level-4 {
+    margin-left: 1.5rem;
+  }
+  
+  .toc-level-5 {
+    margin-left: 2rem;
+  }
+  
+  .toc-level-6 {
+    margin-left: 2.5rem;
+  }
+}
+</style></head>
 <body>
 <div class="book-container">
-<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/>
+<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/><div class="toc-container">
+<h2 class="toc-title">Table of Contents</h2>
+<nav class="toc-nav">
+<div class="toc-row toc-level-1"><a class="toc-link" href="#the-joy-of-learning-english">The Joy of Learning English</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-1-a-morning-in-the-park">Lesson 1: A Morning in the Park</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-2-ordering-at-a-caf">Lesson 2: Ordering at a Café</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-3-making-plans-with-friends">Lesson 3: Making Plans with Friends</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-4-shopping-for-clothes">Lesson 4: Shopping for Clothes</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-5-talking-about-hobbies">Lesson 5: Talking About Hobbies</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#chapter-1-getting-started">Chapter 1: Getting Started</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#chapter-2-visualize-progress">Chapter 2: Visualize Progress</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-6-emergency-situations">Lesson 6: Emergency Situations</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#lesson-7-technology-and-social-media">Lesson 7: Technology and Social Media</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#chapter-3-advanced-communication">Chapter 3: Advanced Communication</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#final-challenge-real-world-application">Final Challenge: Real-World Application</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#congratulations">Congratulations!</a></div>
+</nav>
+</div>
 <h1 id="the-joy-of-learning-english">The Joy of Learning
     English</h1>
 <blockquote>
