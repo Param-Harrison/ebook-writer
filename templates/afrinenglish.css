@@ -298,4 +298,118 @@ figcaption {
   color: var(--foreground);
   opacity: 0.8;
   font-style: italic;
+}
+
+/* Table of Contents Styles */
+.toc-container {
+  background: var(--gray-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.toc-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav {
+  margin: 0;
+}
+
+.toc-row {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.toc-link {
+  color: var(--foreground);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+}
+
+.toc-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+}
+
+.toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 2rem;
+}
+
+.toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+}
+
+.toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 4rem;
+}
+
+.toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-left: 5rem;
+}
+
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    background: transparent;
+  }
+  .toc-row {
+    margin: 0.2rem 0;
+  }
+}
+
+/* Mobile responsive for TOC */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .toc-level-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .toc-level-3 {
+    margin-left: 1rem;
+  }
+  
+  .toc-level-4 {
+    margin-left: 1.5rem;
+  }
+  
+  .toc-level-5 {
+    margin-left: 2rem;
+  }
+  
+  .toc-level-6 {
+    margin-left: 2.5rem;
+  }
 } 
