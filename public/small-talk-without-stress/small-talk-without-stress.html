@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style type="text/css">
+/* Theme palette and font variables */
+:root {
+  --background: #fff;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --gray-bg: #f3f4f6;
+  --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+  /* WhatsApp colors */
+  --whatsapp-green: #25D366;
+  --whatsapp-light-green: #DCF8C6;
+  --whatsapp-gray: #E8E8E8;
+  --whatsapp-dark-gray: #262626;
+  --whatsapp-light-gray: #F0F0F0;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --foreground: #f0f0f0;
+    --primary: #60a5fa;
+    --primary-dark: #93c5fd;
+    --secondary: #fbbf24;
+    --accent: #34d399;
+    --gray-bg: #18181b;
+    /* Dark WhatsApp colors */
+    --whatsapp-green: #25D366;
+    --whatsapp-light-green: #1C2A1C;
+    --whatsapp-gray: #2A2A2A;
+    --whatsapp-dark-gray: #E8E8E8;
+    --whatsapp-light-gray: #1A1A1A;
+  }
+}
+
+body {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.book-container {
+  max-width: 820px;
+  margin: 2.5rem auto;
+  background: var(--background);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 2.7rem 2.7rem 2.7rem 2.7rem;
+}
+
+h1, h2, h3 {
+  color: var(--primary-dark);
+  margin-top: 2.2rem;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.3rem;
+}
+h2 {
+  font-size: 1.45rem;
+  margin-bottom: 0.9rem;
+  color: var(--primary);
+}
+h3 {
+  font-size: 1.13rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: #e3f2fd;
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.04);
+}
+
+blockquote + blockquote {
+  margin-top: 0.5rem;
+}
+
+blockquote blockquote {
+  margin-left: 1rem;
+  border-left-width: 2px;
+  background: #f8fbff;
+}
+
+/* Conversation styling (WhatsApp-like) */
+.conversation {
+  background: var(--whatsapp-light-gray);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin: 2rem 0;
+  border: 1px solid #e0e0e0;
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.conversation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--whatsapp-green);
+  border-radius: 12px 12px 0 0;
+}
+
+.conversation blockquote {
+  margin: 0.5rem 0;
+  background: var(--whatsapp-light-green);
+  border-left: none;
+  border-radius: 18px;
+  padding: 0.8rem 1rem;
+  box-shadow: none;
+  position: relative;
+  max-width: 70%;
+  word-wrap: break-word;
+  border: none;
+  transition: none;
+  color: var(--whatsapp-dark-gray);
+  font-style: normal;
+}
+
+.conversation blockquote:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.conversation blockquote:nth-child(odd) {
+  background: var(--whatsapp-light-green);
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  border: none;
+  position: relative;
+}
+
+.conversation blockquote:nth-child(even) {
+  background: var(--whatsapp-gray);
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  border: none;
+  position: relative;
+}
+
+.conversation blockquote strong {
+  color: #666666;
+  font-size: 0.75em;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.4;
+  color: var(--whatsapp-dark-gray);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .conversation {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .conversation blockquote {
+    max-width: 80%;
+    padding: 0.7rem 0.9rem;
+    margin: 0.4rem 0;
+  }
+  .conversation blockquote strong {
+    font-size: 0.7em;
+    margin-bottom: 0.2rem;
+  }
+  .conversation blockquote p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
+  .conversation blockquote {
+    max-width: 85%;
+    padding: 0.6rem 0.8rem;
+    margin: 0.3rem 0;
+  }
+}
+
+.box {
+  background: linear-gradient(135deg, var(--gray-bg) 0%, var(--background) 50%, var(--gray-bg) 100%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+  font-weight: 500;
+  color: var(--primary-dark);
+  font-size: 1.08em;
+  border: 1px solid var(--primary);
+}
+
+code, pre {
+  background: var(--gray-bg);
+  border-radius: 7px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', monospace;
+  color: var(--foreground);
+  font-size: 1.03em;
+}
+
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+}
+
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+
+.columns > * {
+  flex: 1;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--secondary);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+  display: block;
+  background: transparent;
+}
+
+figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+figure img {
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  color: var(--foreground);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Table of Contents Styles */
+.toc-container {
+  background: var(--gray-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.toc-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav {
+  margin: 0;
+}
+
+.toc-row {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.toc-link {
+  color: var(--foreground);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+}
+
+.toc-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+}
+
+.toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 2rem;
+}
+
+.toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+}
+
+.toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 4rem;
+}
+
+.toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-left: 5rem;
+}
+
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    background: transparent;
+  }
+  .toc-row {
+    margin: 0.2rem 0;
+  }
+}
+
+/* Mobile responsive for TOC */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .toc-level-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .toc-level-3 {
+    margin-left: 1rem;
+  }
+  
+  .toc-level-4 {
+    margin-left: 1.5rem;
+  }
+  
+  .toc-level-5 {
+    margin-left: 2rem;
+  }
+  
+  .toc-level-6 {
+    margin-left: 2.5rem;
+  }
+} 
+</style>
+<meta charset="utf-8"/>
+<title>Small Talk Without Stress – The Friendly Way</title>
+<meta content="light dark" name="color-scheme"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="afrinenglish.css" rel="stylesheet"/>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+<style>
+        .mermaid-interactive { display: block; }
+        .mermaid-fallback { display: none; }
+        </style>
+</head>
+<body>
+<div class="book-container">
+<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/><div class="toc-container">
+<h2 class="toc-title">Table of Contents</h2>
+<nav class="toc-nav">
+<div class="toc-row toc-level-1"><a class="toc-link" href="#small-talk-without-stress-the-friendly-way">Small Talk Without Stress – The Friendly Way</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#who-is-this-book-for">Who Is This Book For?</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#how-to-use-this-book">How to Use This Book</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#saying-hello-in-the-elevator">1. Saying Hello in the Elevator</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#chatting-about-the-weather">2. Chatting About the Weather</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#waiting-for-a-meeting-to-start">3. Waiting for a Meeting to Start</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-the-weekend-plans">4. Talking About the Weekend Plans</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#asking-about-their-day">5. Asking About Their Day</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#discussing-a-tv-show-or-movie">6. Discussing a TV Show or Movie</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#complimenting-someones-outfit">7. Complimenting Someone's Outfit</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-lunch-plans">8. Talking About Lunch Plans</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#sharing-something-funny">9. Sharing Something Funny</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-hobbies">10. Talking About Hobbies</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#reacting-to-good-news">11. Reacting to Good News</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#small-talk-during-a-coffee-break">12. Small Talk During a Coffee Break</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#wishing-someone-a-good-weekend">13. Wishing Someone a Good Weekend</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-travel-plans">14. Talking About Travel Plans</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#asking-how-someone-is-feeling">15. Asking How Someone Is Feeling</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#celebrating-a-birthday-at-work">16. Celebrating a Birthday at Work</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-a-pet">17. Talking About a Pet</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#asking-about-someones-holiday">18. Asking About Someone's Holiday</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#talking-about-the-news-lightly">19. Talking About the News (Lightly)</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#wishing-someone-a-good-morning">20. Wishing Someone a Good Morning</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#you-did-it">🎉 You Did It!</a></div>
+</nav>
+</div>
+<h1 id="small-talk-without-stress-the-friendly-way">Small Talk
+    Without Stress – The Friendly Way</h1>
+<blockquote>
+<p>This book is part of the <a href="https://afrinenglish.com?ref=small-talk-stress">Afrin English
+    Speaking Challenge</a>, a daily practice system designed to help
+    real people build real fluency — one simple conversation at a
+    time.</p>
+</blockquote>
+<h2 id="who-is-this-book-for">Who Is This Book For?</h2>
+<ul>
+<li>Beginners to intermediate English speakers (A2–B1)</li>
+<li>Anyone who feels nervous about casual conversations</li>
+<li>People who want to make friends at work or in daily life</li>
+<li>Learners who want to sound natural in everyday situations</li>
+<li>Anyone who wants to feel more confident in social settings</li>
+</ul>
+<h2 id="how-to-use-this-book">How to Use This Book</h2>
+<ul>
+<li><strong>Read each conversation out loud</strong> — with a
+    partner, teacher, or yourself</li>
+<li><strong>Use the “🗣️ Say This Again” line</strong> to shadow and
+    memorize</li>
+<li><strong>Learn 3–5 useful expressions</strong> in every
+    conversation</li>
+<li><strong>Try writing your own version</strong> at the end of each
+    section</li>
+<li><strong>Use the practice prompts</strong> to review and build
+    fluency</li>
+</ul>
+<h2 id="saying-hello-in-the-elevator">1. Saying Hello in the
+    Elevator</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Morning! Going up?</p>
+</blockquote>
+<blockquote>
+<p><strong>Stranger:</strong> Yes, floor 8. You?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Same here. Nice weather today.</p>
+</blockquote>
+<blockquote>
+<p><strong>Stranger:</strong> It is! Finally some sunshine.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Makes Monday a bit easier.</p>
+</blockquote>
+<blockquote>
+<p><strong>Stranger:</strong> Definitely. Have a good day!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Morning! Going up?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Going up?</li>
+<li>Nice weather today</li>
+<li>Makes Monday easier</li>
+<li>Have a good day</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Elevator</strong> – lift, moving box between floors</li>
+<li><strong>Sunshine</strong> – bright light from the sun</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write 2–3 lines about what you’d say to someone in an elevator.</p>
+</blockquote>
+<h2 id="chatting-about-the-weather">2. Chatting About the
+    Weather</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Can you believe this rain?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> I know! I forgot my umbrella.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Same here. At least it’s not too cold.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> True. Could be worse.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Hopefully it clears up by lunch.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Fingers crossed!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Can you believe this rain?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I know!</li>
+<li>At least it’s not…</li>
+<li>Could be worse</li>
+<li>Fingers crossed</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Umbrella</strong> – protection from rain</li>
+<li><strong>Clears up</strong> – weather becomes better</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of today’s weather. Write 2 lines about it.</p>
+</blockquote>
+<h2 id="waiting-for-a-meeting-to-start">3. Waiting for a Meeting to
+    Start</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Hey! You’re early too?</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Yep, trying to look organized!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Same here. I always come 5 minutes
+    early.</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Good habit. Less stress.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Agreed. Let’s hope today’s meeting is
+    short.</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Here’s hoping!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Hey! You’re early too?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Trying to look organized</li>
+<li>Good habit</li>
+<li>Less stress</li>
+<li>Here’s hoping</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Organized</strong> – well-planned and tidy</li>
+<li><strong>Habit</strong> – something you do regularly</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write what you’d say to someone waiting for a meeting.</p>
+</blockquote>
+<h2 id="talking-about-the-weekend-plans">4. Talking About the
+    Weekend Plans</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Got any weekend plans?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Thinking of going to the movies.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Nice! What are you seeing?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> That new action movie. You?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Just relaxing at home probably.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Sometimes that’s the best plan.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Got any weekend plans?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Thinking of…</li>
+<li>What are you seeing?</li>
+<li>Just relaxing</li>
+<li>Sometimes that’s the best</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Action movie</strong> – exciting film with lots of
+    movement</li>
+<li><strong>Relaxing</strong> – resting and feeling calm</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write about your weekend plans in 2–3 lines.</p>
+</blockquote>
+<h2 id="asking-about-their-day">5. Asking About Their Day</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> How’s your day going?</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> Pretty busy, but good. You?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Same here. Lots of emails to answer.</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> I hear that. Never-ending inbox.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Right? At least it’s almost lunch.</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> That’s what keeps me going!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    How’s your day going?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Pretty busy, but good</li>
+<li>Lots of emails</li>
+<li>Never-ending inbox</li>
+<li>Keeps me going</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Inbox</strong> – email folder</li>
+<li><strong>Never-ending</strong> – seems to go on forever</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Ask someone about their day and respond naturally.</p>
+</blockquote>
+<h2 id="discussing-a-tv-show-or-movie">6. Discussing a TV Show or
+    Movie</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Did you watch that new series on
+    Netflix?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Yes! The ending was crazy.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I didn’t see that twist coming at all.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Me neither. That actor was
+    amazing.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I hope there’s a second season.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Same here. Let’s talk about it
+    later!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Did you watch that new series?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>The ending was crazy</li>
+<li>Didn’t see that coming</li>
+<li>Twist</li>
+<li>Second season</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Twist</strong> – unexpected turn in a story</li>
+<li><strong>Series</strong> – TV show with multiple episodes</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of a show you watched recently. Describe it briefly.</p>
+</blockquote>
+<h2 id="complimenting-someones-outfit">7. Complimenting Someone’s
+    Outfit</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> I love your shirt! That color looks great
+    on you.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Thank you! I just got it yesterday.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Really? Where did you find it?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> At that new store downtown.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I’ll have to check it out.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> You should! They have great stuff.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    I love your shirt! That color looks great on you.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Looks great on you</li>
+<li>Just got it</li>
+<li>Check it out</li>
+<li>Great stuff</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Outfit</strong> – clothes you’re wearing</li>
+<li><strong>Downtown</strong> – center of the city</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write a compliment about someone’s clothes.</p>
+</blockquote>
+<h2 id="talking-about-lunch-plans">8. Talking About Lunch Plans</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> What are you doing for lunch?</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Probably just grabbing a sandwich.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Want to join me? I’m going to that new
+    café.</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Sure! What time?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Around 12:30? I’ll meet you in the
+    lobby.</p>
+</blockquote>
+<blockquote>
+<p><strong>Teammate:</strong> Perfect. See you then!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    What are you doing for lunch?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Grabbing a sandwich</li>
+<li>Want to join me?</li>
+<li>New café</li>
+<li>Meet you in the lobby</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Café</strong> – small restaurant</li>
+<li><strong>Lobby</strong> – entrance area of a building</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write how you’d invite someone to lunch.</p>
+</blockquote>
+<h2 id="sharing-something-funny">9. Sharing Something Funny</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> You won’t believe what happened this
+    morning.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> What? Tell me!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I put my shirt on inside out and didn’t
+    notice until lunch.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> No way! That’s hilarious.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I know! I felt so silly.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> At least you noticed eventually!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    You won’t believe what happened this morning.</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Tell me!</li>
+<li>No way!</li>
+<li>That’s hilarious</li>
+<li>Felt so silly</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Inside out</strong> – with the wrong side showing</li>
+<li><strong>Eventually</strong> – finally, after some time</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Think of something funny that happened to you. Write 2 lines about
+    it.</p>
+</blockquote>
+<h2 id="talking-about-hobbies">10. Talking About Hobbies</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> What do you do for fun?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> I love photography. You?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I’m into hiking. Do you take photos of
+    nature?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Sometimes! Mostly street
+    photography.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That sounds interesting. Do you have a
+    camera?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Just my phone, but it works
+    great.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    What do you do for fun?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I love photography</li>
+<li>I’m into hiking</li>
+<li>Street photography</li>
+<li>Works great</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Photography</strong> – taking pictures</li>
+<li><strong>Hiking</strong> – walking in nature for fun</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write about your hobby in 2–3 lines.</p>
+</blockquote>
+<h2 id="reacting-to-good-news">11. Reacting to Good News</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> I got the job!</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> That’s amazing! Congratulations!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Thanks! I’m so excited.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> When do you start?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Next Monday. I can’t wait.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> You deserve it. Well done!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    That’s amazing! Congratulations!</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I’m so excited</li>
+<li>When do you start?</li>
+<li>I can’t wait</li>
+<li>You deserve it</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Congratulations</strong> – words of praise for
+    success</li>
+<li><strong>Deserve</strong> – earned through effort</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write how you’d react to someone’s good news.</p>
+</blockquote>
+<h2 id="small-talk-during-a-coffee-break">12. Small Talk During a
+    Coffee Break</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Need a coffee break?</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> Definitely. My brain is fried.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Same here. Want to grab one together?</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> Sure! I need the caffeine.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Coffee is life, right?</p>
+</blockquote>
+<blockquote>
+<p><strong>Coworker:</strong> Absolutely. Without it, I’m
+    useless.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Need a coffee break?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>My brain is fried</li>
+<li>Grab one together</li>
+<li>Coffee is life</li>
+<li>I’m useless</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Fried</strong> – very tired (slang)</li>
+<li><strong>Caffeine</strong> – chemical in coffee that keeps you
+    awake</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write how you’d ask someone to take a coffee break.</p>
+</blockquote>
+<h2 id="wishing-someone-a-good-weekend">13. Wishing Someone a Good
+    Weekend</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Have a great weekend!</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> You too! Any plans?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Just relaxing. You?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Going to visit my parents.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That sounds nice. Enjoy!</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Thanks! See you Monday.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Have a great weekend!</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>You too</li>
+<li>Any plans?</li>
+<li>That sounds nice</li>
+<li>See you Monday</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Relaxing</strong> – resting and feeling calm</li>
+<li><strong>Visit</strong> – go to see someone</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write what you’d say when wishing someone a good weekend.</p>
+</blockquote>
+<h2 id="talking-about-travel-plans">14. Talking About Travel
+    Plans</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Are you going anywhere this summer?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Thinking of going to Spain.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That sounds amazing! Have you been
+    before?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> No, first time. I’m excited.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> You’ll love it. The food is incredible.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> I can’t wait to try the paella.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Are you going anywhere this summer?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Thinking of going</li>
+<li>First time</li>
+<li>You’ll love it</li>
+<li>Can’t wait to try</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Paella</strong> – Spanish rice dish</li>
+<li><strong>Incredible</strong> – very good, amazing</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write about a place you’d like to visit.</p>
+</blockquote>
+<h2 id="asking-how-someone-is-feeling">15. Asking How Someone Is
+    Feeling</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> How are you feeling today?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Much better, thanks. How about you?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Pretty good. Did you get some rest?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Yes, finally slept well last night.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That’s good. Sleep makes everything
+    better.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> It really does. I feel human again.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    How are you feeling today?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Much better</li>
+<li>Did you get some rest?</li>
+<li>Makes everything better</li>
+<li>Feel human again</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Rest</strong> – sleep or relaxation</li>
+<li><strong>Human</strong> – normal, like yourself</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write how you’d ask someone how they’re feeling.</p>
+</blockquote>
+<h2 id="celebrating-a-birthday-at-work">16. Celebrating a Birthday
+    at Work</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Happy birthday! How old are you today?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Thanks! I’m turning 28.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Nice! Any big plans for tonight?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Just dinner with friends.
+    Low-key.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That sounds perfect. Enjoy your day!</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Thanks! I appreciate it.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Happy birthday! How old are you today?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>I’m turning 28</li>
+<li>Big plans</li>
+<li>Low-key</li>
+<li>Enjoy your day</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Low-key</strong> – simple, not fancy</li>
+<li><strong>Appreciate</strong> – feel thankful for</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write a birthday greeting in 1–2 lines.</p>
+</blockquote>
+<h2 id="talking-about-a-pet">17. Talking About a Pet</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Do you have any pets?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Yes! I have a dog named Max.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That’s cute! What kind of dog?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> He’s a golden retriever. Very
+    friendly.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I love golden retrievers. How old is
+    he?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> He’s three. Still acts like a puppy.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Do you have any pets?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>What kind of dog?</li>
+<li>Golden retriever</li>
+<li>Very friendly</li>
+<li>Acts like a puppy</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Golden retriever</strong> – popular dog breed</li>
+<li><strong>Puppy</strong> – young dog</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write about a pet you have or would like to have.</p>
+</blockquote>
+<h2 id="asking-about-someones-holiday">18. Asking About Someone’s
+    Holiday</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> How was your holiday?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Amazing! I didn’t want to come
+    back.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That’s the best kind of vacation.</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> I brought back some souvenirs.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Nice! What did you get?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Some local chocolate. Want to try
+    some?</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    How was your holiday?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Didn’t want to come back</li>
+<li>Best kind of vacation</li>
+<li>Brought back souvenirs</li>
+<li>Want to try some?</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Souvenirs</strong> – things you buy to remember a
+    trip</li>
+<li><strong>Local</strong> – from the area you visited</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write how you’d ask about someone’s vacation.</p>
+</blockquote>
+<h2 id="talking-about-the-news-lightly">19. Talking About the News
+    (Lightly)</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Did you see that story about the
+    weather?</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Yes! Crazy how hot it’s been.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> I know. Climate change is real.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> Scary stuff. We need to do
+    something.</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> At least people are talking about it
+    now.</p>
+</blockquote>
+<blockquote>
+<p><strong>Friend:</strong> True. Every little bit helps.</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Did you see that story about the weather?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Crazy how…</li>
+<li>Climate change</li>
+<li>Scary stuff</li>
+<li>Every little bit helps</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Climate change</strong> – long-term weather changes</li>
+<li><strong>Scary</strong> – frightening, worrying</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write a casual comment about something in the news.</p>
+</blockquote>
+<h2 id="wishing-someone-a-good-morning">20. Wishing Someone a Good
+    Morning</h2>
+<div class="conversation">
+<blockquote>
+<p><strong>You:</strong> Good morning! How did you sleep?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Morning! Pretty well, thanks.
+    You?</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> Not bad. Ready for the day?</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> As ready as I’ll ever be!</p>
+</blockquote>
+<blockquote>
+<p><strong>You:</strong> That’s the spirit. Let’s do this!</p>
+</blockquote>
+<blockquote>
+<p><strong>Colleague:</strong> Here we go!</p>
+</blockquote>
+</div>
+<p><strong>🗣️ Say This Again</strong><br/>
+    Good morning! How did you sleep?</p>
+<p><strong>💡 Useful Phrases to Remember</strong></p>
+<ul>
+<li>Pretty well</li>
+<li>Ready for the day</li>
+<li>That’s the spirit</li>
+<li>Here we go</li>
+</ul>
+<p><strong>📖 Vocabulary Builder</strong></p>
+<ul>
+<li><strong>Spirit</strong> – attitude, mood</li>
+<li><strong>Ready</strong> – prepared for something</li>
+</ul>
+<blockquote>
+<p><strong>✏️ Try It Yourself</strong><br/>
+    Write how you’d greet someone in the morning.</p>
+</blockquote>
+<h2 id="you-did-it">🎉 You Did It!</h2>
+<div class="box">
+<p>You’ve taken a big step toward feeling comfortable with small
+    talk in English. Whether you’re at work, meeting new people, or just
+    want to sound more natural — this book was only the beginning.</p>
+<p>But your journey doesn’t stop here.</p>
+<p>Keep speaking English every day with the <strong><a href="https://afrinenglish.com?ref=small-talk-stress">AfrinEnglish.com
+    365-Day Speaking Challenge</a></strong>.</p>
+<p>You’ll get:</p>
+<ul>
+<li>🗓️ <strong>Daily prompts and speaking tasks</strong></li>
+<li>📝 <strong>Printable templates and speaking
+    journal</strong></li>
+<li>🎯 <strong>A clear roadmap from A1 to B2</strong></li>
+</ul>
+<p>Join thousands of learners building habits, not just
+    vocabulary.</p>
+<p>👉 <strong>Start today at <a href="https://afrinenglish.com?ref=small-talk-stress">AfrinEnglish.com</a></strong>
+    — your daily English companion.</p>
+</div>
+</div>
+</body>
+</html> 

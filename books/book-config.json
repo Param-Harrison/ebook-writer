@@ -20,6 +20,27 @@
       "template": "afrinenglish",
       "category": "general",
       "description": "Real Office Conversations Made Simple"
+    },
+    "small-talk-without-stress": {
+      "title": "Small Talk Without Stress – The Friendly Way",
+      "author": "AfrinEnglish.com",
+      "template": "afrinenglish",
+      "category": "english-learning",
+      "description": "Friendly English for Everyday Conversations"
+    },
+    "30-english-mistakes-i-fixed": {
+      "title": "30 English Mistakes I Fixed (And How)",
+      "author": "AfrinEnglish.com",
+      "template": "afrinenglish",
+      "category": "english-learning",
+      "description": "Common Grammar Mistakes and How to Fix Them"
+    },
+    "afrinenglish-daily-practice-kit": {
+      "title": "Afrin English Daily Practice Templates",
+      "author": "AfrinEnglish.com",
+      "template": "daily-practice-kit",
+      "category": "english-learning",
+      "description": "Build Your English Speaking Habit – One Day at a Time"
     }
   },
   "templates": {
@@ -34,6 +55,12 @@
       "description": "Intense, code-focused layout for programming books",
       "css": "backendchallenges.css",
       "html": "backendchallenges.html"
+    },
+    "daily-practice-kit": {
+      "name": "Daily Practice Kit Template",
+      "description": "Interactive practice templates and trackers for daily English learning",
+      "css": "daily-practice-kit.css",
+      "html": "daily-practice-kit.html"
     }
   }
 }
