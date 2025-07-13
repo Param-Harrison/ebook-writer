@@ -123,6 +123,9 @@ blockquote blockquote {
   margin: 2rem 0;
   position: relative;
   overflow: hidden;
+  /* Page break controls for PDF */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .practice-template::before {
@@ -153,6 +156,9 @@ blockquote blockquote {
   padding: 1.5rem;
   margin: 1rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  /* Prevent breaking within sections */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .template-section h4 {
@@ -243,6 +249,9 @@ blockquote blockquote {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   font-size: 0.9rem;
+  /* Prevent table from breaking across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .tracker-table th {
@@ -340,6 +349,55 @@ blockquote blockquote {
 
 .template-streak .practice-template::before {
   background: var(--practice-purple);
+}
+
+/* Page break controls for PDF */
+@media print {
+  /* Force each template to start on a new page */
+  .practice-template {
+    page-break-before: always;
+    break-before: page;
+  }
+  
+  /* Prevent breaking within templates */
+  .practice-template {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Prevent breaking within sections */
+  .template-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Prevent breaking within tables */
+  .tracker-table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* TOC styling for print */
+  .toc-container {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  
+  .toc-row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Ensure proper spacing */
+  h2 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  
+  h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
 }
 
 /* Responsive design */
@@ -559,16 +617,6 @@ figcaption {
   margin-left: 5rem;
   color: var(--foreground);
   font-size: 0.9rem;
-}
-
-@media print {
-  .toc-container {
-    break-inside: avoid;
-  }
-  
-  .toc-row {
-    break-inside: avoid;
-  }
 }
 
 @media (max-width: 768px) {

@@ -39,6 +39,8 @@ Let's begin.
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 ## 1. Daily Speaking Journal
 
 <div class="practice-template template-journal">
@@ -69,6 +71,8 @@ Use this at the end of the day to reflect.
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 ## 2. 1-Minute Talk Prompt
 
 <div class="practice-template template-talk">
@@ -98,6 +102,8 @@ Some ideas:
 </div>
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 ## 3. Real Situation Roleplay
 
@@ -133,6 +139,8 @@ Some ideas:
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 ## 4. Shadowing Practice Sheet
 
 <div class="practice-template template-shadowing">
@@ -166,6 +174,8 @@ Shadowing = listen and repeat the same sentence, with same tone.
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 ## 5. Describe a Person Prompt
 
 <div class="practice-template template-describe">
@@ -194,6 +204,8 @@ Optional prompts:
 </div>
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 ## 6. A Day in My Life Timeline
 
@@ -226,6 +238,8 @@ Speak about your full day using time phrases and verbs.
 </div>
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 ## 7. Confidence Tracker
 
@@ -277,6 +291,8 @@ Track how you feel about speaking English today.
 </div>
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 ## 8. 30-Day Streak Tracker
 
@@ -498,6 +514,8 @@ Use these templates as part of your daily routine. Speak a little every day. Ref
 You've got this. Let's keep speaking!
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 ## Progress Tracking
 

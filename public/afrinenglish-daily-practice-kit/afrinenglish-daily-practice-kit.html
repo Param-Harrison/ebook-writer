@@ -128,6 +128,9 @@ blockquote blockquote {
   margin: 2rem 0;
   position: relative;
   overflow: hidden;
+  /* Page break controls for PDF */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .practice-template::before {
@@ -158,6 +161,9 @@ blockquote blockquote {
   padding: 1.5rem;
   margin: 1rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  /* Prevent breaking within sections */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .template-section h4 {
@@ -248,6 +254,9 @@ blockquote blockquote {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   font-size: 0.9rem;
+  /* Prevent table from breaking across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .tracker-table th {
@@ -345,6 +354,55 @@ blockquote blockquote {
 
 .template-streak .practice-template::before {
   background: var(--practice-purple);
+}
+
+/* Page break controls for PDF */
+@media print {
+  /* Force each template to start on a new page */
+  .practice-template {
+    page-break-before: always;
+    break-before: page;
+  }
+  
+  /* Prevent breaking within templates */
+  .practice-template {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Prevent breaking within sections */
+  .template-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Prevent breaking within tables */
+  .tracker-table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* TOC styling for print */
+  .toc-container {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  
+  .toc-row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Ensure proper spacing */
+  h2 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  
+  h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
 }
 
 /* Responsive design */
@@ -566,16 +624,6 @@ figcaption {
   font-size: 0.9rem;
 }
 
-@media print {
-  .toc-container {
-    break-inside: avoid;
-  }
-  
-  .toc-row {
-    break-inside: avoid;
-  }
-}
-
 @media (max-width: 768px) {
   .toc-container {
     padding: 1rem;
@@ -727,6 +775,8 @@ figcaption {
 </tbody>
 </table>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="daily-speaking-journal">1. Daily Speaking Journal</h2>
 <section class="practice-template template-journal" id="daily-speaking-journal-1">
 <h3>Daily Speaking Journal</h3>
@@ -745,6 +795,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="minute-talk-prompt">2. 1-Minute Talk Prompt</h2>
 <section class="practice-template template-talk" id="minute-talk-prompt-1">
 <h3>1-Minute Talk Prompt</h3>
@@ -765,6 +817,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="real-situation-roleplay">3. Real Situation Roleplay</h2>
 <section class="practice-template template-roleplay" id="real-situation-roleplay-1">
 <h3>Real Situation Roleplay</h3>
@@ -789,6 +843,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="shadowing-practice-sheet">4. Shadowing Practice Sheet</h2>
 <section class="practice-template template-shadowing" id="shadowing-practice-sheet-1">
 <h3>Shadowing Practice Sheet</h3>
@@ -812,6 +868,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="describe-a-person-prompt">5. Describe a Person Prompt</h2>
 <section class="practice-template template-describe" id="describe-a-person-prompt-1">
 <h3>Describe a Person Prompt</h3>
@@ -832,6 +890,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="a-day-in-my-life-timeline">6. A Day in My Life Timeline</h2>
 <section class="practice-template template-timeline" id="a-day-in-my-life-timeline-1">
 <h3>A Day in My Life Timeline</h3>
@@ -852,6 +912,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="confidence-tracker">7. Confidence Tracker</h2>
 <section class="practice-template template-confidence" id="confidence-tracker-1">
 <h3>Confidence Tracker</h3>
@@ -894,6 +956,8 @@ figcaption {
 </div>
 </section>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="day-streak-tracker">8. 30-Day Streak Tracker</h2>
 <section class="practice-template template-streak" id="day-streak-tracker-1">
 <h3>30-Day Streak Tracker</h3>
@@ -1383,6 +1447,8 @@ figcaption {
     the natural way.</p>
 <p>You’ve got this. Let’s keep speaking!</p>
 <hr/>
+<div style="page-break-before: always;">
+</div>
 <h2 id="progress-tracking">Progress Tracking</h2>
 <section class="practice-template" id="monthly-progress-overview">
 <h3>Monthly Progress Overview</h3>
