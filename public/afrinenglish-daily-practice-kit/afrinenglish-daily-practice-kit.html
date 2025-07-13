@@ -544,111 +544,120 @@ figcaption {
   font-size: 0.9rem;
 }
 
-/* Table of contents styling */
+/* Table of Contents Styles */
 .toc-container {
-  background: var(--tracker-bg);
+  background: var(--gray-bg);
   border-radius: 12px;
   padding: 1.5rem;
   margin: 2rem 0;
-  border: 1px solid var(--tracker-border);
 }
 
 .toc-title {
-  color: var(--practice-green);
-  font-size: 1.2rem;
-  font-weight: 600;
+  margin-top: 0;
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
 }
 
 .toc-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin: 0;
 }
 
 .toc-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.8rem;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-}
-
-.toc-row:hover {
-  background: var(--background);
+  margin: 0.5rem 0;
+  line-height: 1.4;
 }
 
 .toc-link {
-  color: var(--practice-blue);
+  color: var(--foreground);
   text-decoration: none;
-  font-weight: 500;
-  flex: 1;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: color 0.2s;
 }
 
 .toc-link:hover {
-  color: var(--practice-green);
+  color: var(--primary);
 }
 
 .toc-level-1 {
   font-weight: 600;
-  color: var(--practice-green);
+  font-size: 1.1rem;
+  color: var(--primary-dark);
 }
 
 .toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
   margin-left: 1rem;
-  color: var(--practice-blue);
 }
 
 .toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
   margin-left: 2rem;
-  color: var(--practice-orange);
 }
 
 .toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
   margin-left: 3rem;
-  color: var(--practice-purple);
 }
 
 .toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
   margin-left: 4rem;
-  color: var(--foreground);
 }
 
 .toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
   margin-left: 5rem;
-  color: var(--foreground);
-  font-size: 0.9rem;
 }
 
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    background: transparent;
+  }
+
+  .toc-row {
+    margin: 0.2rem 0;
+  }
+}
+
+/* Mobile responsive for TOC */
 @media (max-width: 768px) {
   .toc-container {
     padding: 1rem;
+    margin: 1.5rem 0;
   }
-  
+
   .toc-level-2 {
     margin-left: 0.5rem;
   }
-  
+
   .toc-level-3 {
     margin-left: 1rem;
   }
-  
+
   .toc-level-4 {
     margin-left: 1.5rem;
   }
-  
+
   .toc-level-5 {
     margin-left: 2rem;
   }
-  
+
   .toc-level-6 {
     margin-left: 2.5rem;
   }
-} 
+}
 </style>
 <meta charset="utf-8"/>
 <title>Afrin English Daily Practice Templates</title>
@@ -673,23 +682,14 @@ figcaption {
 <nav class="toc-nav">
 <div class="toc-row toc-level-1"><a class="toc-link" href="#afrin-english-daily-practice-templates">Afrin English Daily Practice Templates</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#welcome">Welcome!</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#whats-inside">What's Inside</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#daily-speaking-journal">1. Daily Speaking Journal</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#daily-speaking-journal">Daily Speaking Journal</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#1-minute-talk-prompt">2. 1-Minute Talk Prompt</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#1-minute-talk-prompt">1-Minute Talk Prompt</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#real-situation-roleplay">3. Real Situation Roleplay</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#real-situation-roleplay">Real Situation Roleplay</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#shadowing-practice-sheet">4. Shadowing Practice Sheet</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#shadowing-practice-sheet">Shadowing Practice Sheet</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#describe-a-person-prompt">5. Describe a Person Prompt</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#describe-a-person-prompt">Describe a Person Prompt</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#a-day-in-my-life-timeline">6. A Day in My Life Timeline</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#a-day-in-my-life-timeline">A Day in My Life Timeline</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#confidence-tracker">7. Confidence Tracker</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#confidence-tracker">Confidence Tracker</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#30-day-streak-tracker">8. 30-Day Streak Tracker</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#30-day-streak-tracker">30-Day Streak Tracker</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#daily-speaking-journal">Daily Speaking Journal</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#1-minute-talk-prompt">1-Minute Talk Prompt</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#real-situation-roleplay">Real Situation Roleplay</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#shadowing-practice-sheet">Shadowing Practice Sheet</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#describe-a-person-prompt">Describe a Person Prompt</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#a-day-in-my-life-timeline">A Day in My Life Timeline</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#confidence-tracker">Confidence Tracker</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#30-day-streak-tracker">30-Day Streak Tracker</a></div>
 <div class="toc-row toc-level-3"><a class="toc-link" href="#final-note">Final Note</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#progress-tracking">Progress Tracking</a></div>
 <div class="toc-row toc-level-3"><a class="toc-link" href="#monthly-progress-overview">Monthly Progress Overview</a></div>
@@ -699,7 +699,6 @@ figcaption {
     Practice Templates</h1>
 <p><strong>Build Your English Speaking Habit – One Day at a
     Time</strong> <strong>CEFR Level: A1–B1</strong></p>
-<hr/>
 <h2 id="welcome">Welcome!</h2>
 <p>This is not a textbook — it’s your daily toolkit to speak English
     more, with confidence and less stress.</p>
@@ -716,70 +715,10 @@ figcaption {
 <p>You only need a few minutes a day to use this workbook. Speaking
     builds confidence. Confidence builds fluency.</p>
 <p>Let’s begin.</p>
-<hr/>
-<h2 id="whats-inside">What’s Inside</h2>
-<table>
-<colgroup>
-<col style="width: 4%"/>
-<col style="width: 33%"/>
-<col style="width: 62%"/>
-</colgroup>
-<thead>
-<tr>
-<th>#</th>
-<th>Template Name</th>
-<th>Why It Helps</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Daily Speaking Journal</td>
-<td>Reflects on real English use each day</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1-Minute Talk Prompt</td>
-<td>Builds fluency with short, focused speech</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Real Situation Roleplay</td>
-<td>Practices real-life scenes like asking, helping</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Shadowing Practice Sheet</td>
-<td>Improves pronunciation, tone, and flow</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Describe a Person Prompt</td>
-<td>Expands fluency through people-based vocabulary</td>
-</tr>
-<tr>
-<td>6</td>
-<td>A Day in My Life Timeline</td>
-<td>Practices speaking about your full routine</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Confidence Tracker</td>
-<td>Builds emotional consistency and motivation</td>
-</tr>
-<tr>
-<td>8</td>
-<td>30-Day Streak Tracker</td>
-<td>Tracks speaking habit visually</td>
-</tr>
-</tbody>
-</table>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="daily-speaking-journal">1. Daily Speaking Journal</h2>
-<section class="practice-template template-journal" id="daily-speaking-journal-1">
-<h3>Daily Speaking Journal</h3>
+<section class="practice-template template-journal" id="daily-speaking-journal">
+<h2>Daily Speaking Journal</h2>
 <p>Use this at the end of the day to reflect.</p>
 <div class="template-section">
 <p><strong>Date:</strong> ____________  Day ___ / 30</p>
@@ -794,12 +733,10 @@ figcaption {
 </div>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="minute-talk-prompt">2. 1-Minute Talk Prompt</h2>
-<section class="practice-template template-talk" id="minute-talk-prompt-1">
-<h3>1-Minute Talk Prompt</h3>
+<section class="practice-template template-talk" id="minute-talk-prompt">
+<h2>1-Minute Talk Prompt</h2>
 <p>Choose a topic and speak for 60 seconds — no stopping.</p>
 <div class="template-section">
 <p><strong>Date:</strong> ____________ <strong>Topic:</strong>
@@ -816,12 +753,10 @@ figcaption {
 </div>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="real-situation-roleplay">3. Real Situation Roleplay</h2>
-<section class="practice-template template-roleplay" id="real-situation-roleplay-1">
-<h3>Real Situation Roleplay</h3>
+<section class="practice-template template-roleplay" id="real-situation-roleplay">
+<h2>Real Situation Roleplay</h2>
 <p>Practice scenes you’ll face in real life — at work, outside, or
     home.</p>
 <div class="template-section">
@@ -842,12 +777,10 @@ figcaption {
 </div>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="shadowing-practice-sheet">4. Shadowing Practice Sheet</h2>
-<section class="practice-template template-shadowing" id="shadowing-practice-sheet-1">
-<h3>Shadowing Practice Sheet</h3>
+<section class="practice-template template-shadowing" id="shadowing-practice-sheet">
+<h2>Shadowing Practice Sheet</h2>
 <p>Shadowing = listen and repeat the same sentence, with same
     tone.</p>
 <div class="template-section">
@@ -867,12 +800,10 @@ figcaption {
 </div>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="describe-a-person-prompt">5. Describe a Person Prompt</h2>
-<section class="practice-template template-describe" id="describe-a-person-prompt-1">
-<h3>Describe a Person Prompt</h3>
+<section class="practice-template template-describe" id="describe-a-person-prompt">
+<h2>Describe a Person Prompt</h2>
 <p>Use this page to describe someone using English — what they look
     like, how they act, etc.</p>
 <div class="template-section">
@@ -889,12 +820,10 @@ figcaption {
 </ul>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="a-day-in-my-life-timeline">6. A Day in My Life Timeline</h2>
-<section class="practice-template template-timeline" id="a-day-in-my-life-timeline-1">
-<h3>A Day in My Life Timeline</h3>
+<section class="practice-template template-timeline" id="a-day-in-my-life-timeline">
+<h2>A Day in My Life Timeline</h2>
 <p>Speak about your full day using time phrases and verbs.</p>
 <div class="template-section">
 <p><strong>Date:</strong> ____________</p>
@@ -911,12 +840,10 @@ figcaption {
     ___________________________</p>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="confidence-tracker">7. Confidence Tracker</h2>
-<section class="practice-template template-confidence" id="confidence-tracker-1">
-<h3>Confidence Tracker</h3>
+<section class="practice-template template-confidence" id="confidence-tracker">
+<h2>Confidence Tracker</h2>
 <p>Track how you feel about speaking English today.</p>
 <div class="template-section">
 <p><strong>Date:</strong> ____________</p>
@@ -955,12 +882,10 @@ figcaption {
 </div>
 </div>
 </section>
-<hr/>
 <div style="page-break-before: always;">
 </div>
-<h2 id="day-streak-tracker">8. 30-Day Streak Tracker</h2>
-<section class="practice-template template-streak" id="day-streak-tracker-1">
-<h3>30-Day Streak Tracker</h3>
+<section class="practice-template template-streak" id="day-streak-tracker">
+<h2>30-Day Streak Tracker</h2>
 <p>Tick a box every day you speak or shadow something in
     English.</p>
 <div class="template-section">
@@ -1437,7 +1362,6 @@ figcaption {
 <p>Don’t break the chain! Even 2 minutes counts.</p>
 </div>
 </section>
-<hr/>
 <h3 id="final-note">Final Note</h3>
 <p>This workbook is part of the <strong>AfrinEnglish.com 365-Day
     Speaking Challenge</strong> — a powerful habit system for real-world
@@ -1446,7 +1370,6 @@ figcaption {
     every day. Reflect a little every night. And let your English grow
     the natural way.</p>
 <p>You’ve got this. Let’s keep speaking!</p>
-<hr/>
 <div style="page-break-before: always;">
 </div>
 <h2 id="progress-tracking">Progress Tracking</h2>
@@ -1466,7 +1389,6 @@ figcaption {
     ___________________________</p>
 </div>
 </section>
-<hr/>
 <p><em>This workbook is designed to be printed and used daily. Each
     template can be photocopied for multiple uses throughout your
     learning journey.</em></p>

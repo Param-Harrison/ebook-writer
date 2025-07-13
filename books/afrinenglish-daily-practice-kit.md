@@ -3,8 +3,6 @@
 **Build Your English Speaking Habit – One Day at a Time**
 **CEFR Level: A1–B1**
 
----
-
 ## Welcome!
 
 This is not a textbook — it's your daily toolkit to speak English more, with confidence and less stress.
@@ -22,30 +20,11 @@ You only need a few minutes a day to use this workbook. Speaking builds confiden
 
 Let's begin.
 
----
-
-## What's Inside
-
-| #   | Template Name             | Why It Helps                                    |
-| --- | ------------------------- | ----------------------------------------------- |
-| 1   | Daily Speaking Journal    | Reflects on real English use each day           |
-| 2   | 1-Minute Talk Prompt      | Builds fluency with short, focused speech       |
-| 3   | Real Situation Roleplay   | Practices real-life scenes like asking, helping |
-| 4   | Shadowing Practice Sheet  | Improves pronunciation, tone, and flow          |
-| 5   | Describe a Person Prompt  | Expands fluency through people-based vocabulary |
-| 6   | A Day in My Life Timeline | Practices speaking about your full routine      |
-| 7   | Confidence Tracker        | Builds emotional consistency and motivation     |
-| 8   | 30-Day Streak Tracker     | Tracks speaking habit visually                  |
-
----
-
 <div style="page-break-before: always;"></div>
-
-## 1. Daily Speaking Journal
 
 <div class="practice-template template-journal">
 
-### Daily Speaking Journal
+## Daily Speaking Journal
 
 Use this at the end of the day to reflect.
 
@@ -69,15 +48,11 @@ Use this at the end of the day to reflect.
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 2. 1-Minute Talk Prompt
 
 <div class="practice-template template-talk">
 
-### 1-Minute Talk Prompt
+## 1-Minute Talk Prompt
 
 Choose a topic and speak for 60 seconds — no stopping.
 
@@ -101,15 +76,11 @@ Some ideas:
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 3. Real Situation Roleplay
 
 <div class="practice-template template-roleplay">
 
-### Real Situation Roleplay
+## Real Situation Roleplay
 
 Practice scenes you'll face in real life — at work, outside, or home.
 
@@ -137,15 +108,11 @@ Some ideas:
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 4. Shadowing Practice Sheet
 
 <div class="practice-template template-shadowing">
 
-### Shadowing Practice Sheet
+## Shadowing Practice Sheet
 
 Shadowing = listen and repeat the same sentence, with same tone.
 
@@ -172,15 +139,11 @@ Shadowing = listen and repeat the same sentence, with same tone.
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 5. Describe a Person Prompt
 
 <div class="practice-template template-describe">
 
-### Describe a Person Prompt
+## Describe a Person Prompt
 
 Use this page to describe someone using English — what they look like, how they act, etc.
 
@@ -203,15 +166,11 @@ Optional prompts:
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 6. A Day in My Life Timeline
 
 <div class="practice-template template-timeline">
 
-### A Day in My Life Timeline
+## A Day in My Life Timeline
 
 Speak about your full day using time phrases and verbs.
 
@@ -237,15 +196,11 @@ Speak about your full day using time phrases and verbs.
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 7. Confidence Tracker
 
 <div class="practice-template template-confidence">
 
-### Confidence Tracker
+## Confidence Tracker
 
 Track how you feel about speaking English today.
 
@@ -290,15 +245,11 @@ Track how you feel about speaking English today.
 
 </div>
 
----
-
 <div style="page-break-before: always;"></div>
-
-## 8. 30-Day Streak Tracker
 
 <div class="practice-template template-streak">
 
-### 30-Day Streak Tracker
+## 30-Day Streak Tracker
 
 Tick a box every day you speak or shadow something in English.
 
@@ -503,8 +454,6 @@ Don't break the chain! Even 2 minutes counts.
 
 </div>
 
----
-
 ### Final Note
 
 This workbook is part of the **AfrinEnglish.com 365-Day Speaking Challenge** — a powerful habit system for real-world fluency.
@@ -512,8 +461,6 @@ This workbook is part of the **AfrinEnglish.com 365-Day Speaking Challenge** —
 Use these templates as part of your daily routine. Speak a little every day. Reflect a little every night. And let your English grow the natural way.
 
 You've got this. Let's keep speaking!
-
----
 
 <div style="page-break-before: always;"></div>
 
@@ -542,7 +489,5 @@ You've got this. Let's keep speaking!
 </div>
 
 </div>
-
----
 
 _This workbook is designed to be printed and used daily. Each template can be photocopied for multiple uses throughout your learning journey._
