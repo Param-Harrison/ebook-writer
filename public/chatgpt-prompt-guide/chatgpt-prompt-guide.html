@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style type="text/css">
+/* Theme palette and font variables */
+:root {
+  --background: #fff;
+  --foreground: #171717;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --gray-bg: #f3f4f6;
+  --font-inter: 'Inter', Arial, Helvetica, sans-serif;
+  /* WhatsApp colors */
+  --whatsapp-green: #25D366;
+  --whatsapp-light-green: #DCF8C6;
+  --whatsapp-gray: #E8E8E8;
+  --whatsapp-dark-gray: #262626;
+  --whatsapp-light-gray: #F0F0F0;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --foreground: #f0f0f0;
+    --primary: #60a5fa;
+    --primary-dark: #93c5fd;
+    --secondary: #fbbf24;
+    --accent: #34d399;
+    --gray-bg: #18181b;
+    /* Dark WhatsApp colors */
+    --whatsapp-green: #25D366;
+    --whatsapp-light-green: #1C2A1C;
+    --whatsapp-gray: #2A2A2A;
+    --whatsapp-dark-gray: #E8E8E8;
+    --whatsapp-light-gray: #1A1A1A;
+  }
+}
+
+body {
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.book-container {
+  max-width: 820px;
+  margin: 2.5rem auto;
+  background: var(--background);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 2.7rem 2.7rem 2.7rem 2.7rem;
+}
+
+h1, h2, h3 {
+  color: var(--primary-dark);
+  margin-top: 2.2rem;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.3rem;
+}
+h2 {
+  font-size: 1.45rem;
+  margin-bottom: 0.9rem;
+  color: var(--primary);
+}
+h3 {
+  font-size: 1.13rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+p {
+  margin: 1.2em 0;
+  line-height: 1.8;
+  font-size: 1.08rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: #e3f2fd;
+  padding: 1.1rem 1.5rem;
+  margin: 1.7rem 0;
+  font-style: italic;
+  color: #3a5a7a;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.04);
+}
+
+blockquote + blockquote {
+  margin-top: 0.5rem;
+}
+
+blockquote blockquote {
+  margin-left: 1rem;
+  border-left-width: 2px;
+  background: #f8fbff;
+}
+
+/* Conversation styling (WhatsApp-like) */
+.conversation {
+  background: var(--whatsapp-light-gray);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin: 2rem 0;
+  border: 1px solid #e0e0e0;
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.conversation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--whatsapp-green);
+  border-radius: 12px 12px 0 0;
+}
+
+.conversation blockquote {
+  margin: 0.5rem 0;
+  background: var(--whatsapp-light-green);
+  border-left: none;
+  border-radius: 18px;
+  padding: 0.8rem 1rem;
+  box-shadow: none;
+  position: relative;
+  max-width: 70%;
+  word-wrap: break-word;
+  border: none;
+  transition: none;
+  color: var(--whatsapp-dark-gray);
+  font-style: normal;
+}
+
+.conversation blockquote:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.conversation blockquote:nth-child(odd) {
+  background: var(--whatsapp-light-green);
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  border: none;
+  position: relative;
+}
+
+.conversation blockquote:nth-child(even) {
+  background: var(--whatsapp-gray);
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  border: none;
+  position: relative;
+}
+
+.conversation blockquote strong {
+  color: #666666;
+  font-size: 0.75em;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.conversation blockquote p {
+  margin: 0;
+  line-height: 1.4;
+  color: var(--whatsapp-dark-gray);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .book-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .conversation {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .conversation blockquote {
+    max-width: 80%;
+    padding: 0.7rem 0.9rem;
+    margin: 0.4rem 0;
+  }
+  .conversation blockquote strong {
+    font-size: 0.7em;
+    margin-bottom: 0.2rem;
+  }
+  .conversation blockquote p {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .conversation {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
+  .conversation blockquote {
+    max-width: 85%;
+    padding: 0.6rem 0.8rem;
+    margin: 0.3rem 0;
+  }
+}
+
+.box {
+  background: linear-gradient(135deg, var(--gray-bg) 0%, var(--background) 50%, var(--gray-bg) 100%);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  margin: 1.7rem 0;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+  font-weight: 500;
+  color: var(--primary-dark);
+  font-size: 1.08em;
+  border: 1px solid var(--primary);
+}
+
+code, pre {
+  background: var(--gray-bg);
+  border-radius: 7px;
+  padding: 0.22em 0.7em;
+  font-family: 'Fira Mono', monospace;
+  color: var(--foreground);
+  font-size: 1.03em;
+}
+
+pre {
+  margin: 1.2em 0;
+  overflow-x: auto;
+}
+
+.columns {
+  display: flex;
+  gap: 2.2rem;
+  margin: 1.7rem 0;
+}
+
+.columns > * {
+  flex: 1;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--secondary);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+  display: block;
+  background: transparent;
+}
+
+figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+figure img {
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  color: var(--foreground);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Table of Contents Styles */
+.toc-container {
+  background: var(--gray-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.toc-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.toc-nav {
+  margin: 0;
+}
+
+.toc-row {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.toc-link {
+  color: var(--foreground);
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+}
+
+.toc-level-1 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+}
+
+.toc-level-2 {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.toc-level-3 {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 2rem;
+}
+
+.toc-level-4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+}
+
+.toc-level-5 {
+  font-weight: 400;
+  font-size: 0.85rem;
+  margin-left: 4rem;
+}
+
+.toc-level-6 {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-left: 5rem;
+}
+
+/* PDF-specific TOC styles */
+@media print {
+  .toc-container {
+    background: transparent;
+  }
+  .toc-row {
+    margin: 0.2rem 0;
+  }
+}
+
+/* Mobile responsive for TOC */
+@media (max-width: 768px) {
+  .toc-container {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .toc-level-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .toc-level-3 {
+    margin-left: 1rem;
+  }
+  
+  .toc-level-4 {
+    margin-left: 1.5rem;
+  }
+  
+  .toc-level-5 {
+    margin-left: 2rem;
+  }
+  
+  .toc-level-6 {
+    margin-left: 2.5rem;
+  }
+} 
+</style>
+<meta charset="utf-8"/>
+<title>ChatGPT Prompt Guide for English Learners</title>
+<meta content="light dark" name="color-scheme"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="afrinenglish.css" rel="stylesheet"/>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+<style>
+        .mermaid-interactive { display: block; }
+        .mermaid-fallback { display: none; }
+        </style>
+</head>
+<body>
+<div class="book-container">
+<img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/><div class="toc-container">
+<h2 class="toc-title">Table of Contents</h2>
+<nav class="toc-nav">
+<div class="toc-row toc-level-1"><a class="toc-link" href="#chatgpt-prompt-guide-for-english-learners">ChatGPT Prompt Guide for English Learners</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#how-to-use-this-guide">How to Use This Guide</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#speaking-practice-prompts">Speaking Practice Prompts</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#simple-daily-life">Simple Daily Life</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#work-study">Work &amp; Study</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#technology-social-media">Technology &amp; Social Media</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#health-fitness">Health &amp; Fitness</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#travel-culture">Travel &amp; Culture</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#roleplay-situations">Roleplay Situations</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#listening-practice-prompts">Listening Practice Prompts</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#short-stories-dialogue">Short Stories &amp; Dialogue</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#business-professional">Business &amp; Professional</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#entertainment-media">Entertainment &amp; Media</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#science-technology">Science &amp; Technology</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#listening-for-keywords">Listening for Keywords</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#shadowing">Shadowing</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#reading-practice-prompts">Reading Practice Prompts</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#paragraph-reading">Paragraph Reading</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#academic-educational">Academic &amp; Educational</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#lifestyle-personal-development">Lifestyle &amp; Personal Development</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#current-events-news">Current Events &amp; News</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#vocabulary-focus">Vocabulary Focus</a></div>
+<div class="toc-row toc-level-3"><a class="toc-link" href="#functional-reading">Functional Reading</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#grammar-fix-prompts">Grammar Fix Prompts</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#reusable-prompts-for-habit-practice">Reusable Prompts for Habit Practice</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#want-to-practice-for-a-year">Want to Practice for a Year?</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#quick-start-guide">Quick Start Guide</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#pro-tips">Pro Tips</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#ready-to-start">Ready to Start?</a></div>
+</nav>
+</div>
+<h1 id="chatgpt-prompt-guide-for-english-learners">ChatGPT Prompt
+    Guide for English Learners</h1>
+<blockquote>
+<p><em>Use AI to Practice Speaking, Listening, and Reading —
+    Anytime, Anywhere</em></p>
+</blockquote>
+<div class="box">
+<p>This guide helps you turn <strong>ChatGPT</strong> (or any AI
+    assistant) into your personal English tutor. You don’t need perfect
+    grammar. You need <strong>daily use</strong> — and these prompts
+    give you exactly that.</p>
+<p>Whether you’re speaking alone, reading aloud, or listening for
+    fluency, this guide shows you <strong>what to say</strong> and
+    <strong>how to practice</strong> with ChatGPT — every day.</p>
+</div>
+<hr/>
+<h2 id="how-to-use-this-guide">How to Use This Guide</h2>
+<p>Each prompt category below is designed for real English growth.
+    To use it:</p>
+<ol type="1">
+<li><strong>Open ChatGPT</strong></li>
+<li><strong>Copy &amp; paste the prompt</strong></li>
+<li><strong>Follow ChatGPT’s reply and keep the conversation
+    going</strong></li>
+<li><strong>Repeat the same prompt with new topics each
+    time</strong></li>
+</ol>
+<p>You can practice:</p>
+<div class="columns">
+<ul>
+<li>Speaking (reply out loud, ask follow-up questions)</li>
+<li>Listening (ask ChatGPT to read things aloud with voice or
+    slowly)</li>
+<li>Reading (read texts it gives you, ask meaning or
+    pronunciation)</li>
+</ul>
+</div>
+<hr/>
+<h2 id="speaking-practice-prompts">Speaking Practice Prompts</h2>
+<p>These help you start conversations with ChatGPT and practice
+    fluency.</p>
+<h3 id="simple-daily-life">Simple Daily Life</h3>
+<div class="columns">
+<ul>
+<li>Ask me 5 questions about my morning routine. Wait after each
+    one.</li>
+<li>Let’s pretend we’re meeting at a café. You ask the first
+    question.</li>
+<li>I want to practice describing people. Ask me to describe 3
+    friends.</li>
+<li>Ask me about my favorite food and why I like it.</li>
+<li>Let’s talk about my hobbies. Ask me 3 questions about what I
+    enjoy doing.</li>
+<li>Ask me about my family and where I’m from.</li>
+<li>Let’s discuss my daily schedule. Ask me about my typical
+    day.</li>
+<li>Ask me about my goals and dreams for the future.</li>
+<li>Let’s talk about my hometown. Ask me 4 questions about where I
+    grew up.</li>
+<li>Ask me about my favorite movies and why I like them.</li>
+</ul>
+</div>
+<h3 id="work-study">Work &amp; Study</h3>
+<div class="columns">
+<ul>
+<li>Pretend to be my coworker. Let’s talk about a project
+    deadline.</li>
+<li>You’re my teacher. Ask how my homework is going.</li>
+<li>You’re my manager. Ask me for a progress update.</li>
+<li>Let’s roleplay a job interview. You’re the interviewer.</li>
+<li>Ask me about my career goals and what I want to achieve.</li>
+<li>Pretend to be my study partner. Let’s discuss my exam
+    preparation.</li>
+<li>You’re my mentor. Ask me about my professional development.</li>
+<li>Let’s talk about workplace challenges. Ask me about difficult
+    situations.</li>
+<li>Ask me about my skills and what I’m good at.</li>
+<li>Let’s discuss my work-life balance. Ask me about my
+    routine.</li>
+</ul>
+</div>
+<h3 id="technology-social-media">Technology &amp; Social Media</h3>
+<div class="columns">
+<ul>
+<li>Ask me about my favorite apps and how I use them.</li>
+<li>Let’s talk about social media. Ask me about my online
+    habits.</li>
+<li>Ask me about my experience with new technology.</li>
+<li>Let’s discuss online shopping. Ask me about my preferences.</li>
+<li>Ask me about my favorite websites and why I visit them.</li>
+<li>Let’s talk about digital privacy. Ask me about my concerns.</li>
+<li>Ask me about my experience with video calls and meetings.</li>
+<li>Let’s discuss online learning. Ask me about my experience.</li>
+<li>Ask me about my favorite gadgets and why I like them.</li>
+<li>Let’s talk about internet safety. Ask me about my
+    practices.</li>
+</ul>
+</div>
+<h3 id="health-fitness">Health &amp; Fitness</h3>
+<div class="columns">
+<ul>
+<li>Ask me about my exercise routine and fitness goals.</li>
+<li>Let’s talk about healthy eating. Ask me about my diet.</li>
+<li>Ask me about my sleep habits and how I feel in the morning.</li>
+<li>Let’s discuss stress management. Ask me about my coping
+    strategies.</li>
+<li>Ask me about my experience with meditation or relaxation.</li>
+<li>Let’s talk about mental health. Ask me about my well-being.</li>
+<li>Ask me about my experience with doctors and medical care.</li>
+<li>Let’s discuss healthy lifestyle choices. Ask me about my
+    habits.</li>
+<li>Ask me about my favorite sports or physical activities.</li>
+<li>Let’s talk about work-life balance and self-care.</li>
+</ul>
+</div>
+<h3 id="travel-culture">Travel &amp; Culture</h3>
+<div class="columns">
+<ul>
+<li>Ask me about my travel experiences and favorite
+    destinations.</li>
+<li>Let’s talk about different cultures. Ask me about my
+    experiences.</li>
+<li>Ask me about my experience with different cuisines.</li>
+<li>Let’s discuss language learning. Ask me about my journey.</li>
+<li>Ask me about my experience with cultural festivals and
+    celebrations.</li>
+<li>Let’s talk about international friends. Ask me about my
+    connections.</li>
+<li>Ask me about my experience with different customs and
+    traditions.</li>
+<li>Let’s discuss cultural differences. Ask me about my
+    observations.</li>
+<li>Ask me about my dream travel destinations and why.</li>
+<li>Let’s talk about cultural exchange programs and
+    experiences.</li>
+</ul>
+</div>
+<h3 id="roleplay-situations">Roleplay Situations</h3>
+<div class="columns">
+<ul>
+<li>Act like a waiter. I’ll order a meal.</li>
+<li>You’re a tourist. Ask me how to get to the train station.</li>
+<li>Pretend to be a shop assistant. I want to return something.</li>
+<li>You’re a doctor. I’m coming for a checkup.</li>
+<li>Act like a hotel receptionist. I need to check in.</li>
+<li>You’re a taxi driver. Ask me where I want to go.</li>
+<li>Pretend to be a bank teller. I need to open an account.</li>
+<li>You’re a travel agent. I want to plan a vacation.</li>
+<li>Act like a hairdresser. I want to get my hair cut.</li>
+<li>You’re a librarian. I need help finding a book.</li>
+</ul>
+</div>
+<hr/>
+<h2 id="listening-practice-prompts">Listening Practice Prompts</h2>
+<p>Use these to ask ChatGPT to speak to you, tell stories, or
+    simulate audio-based situations.</p>
+<blockquote>
+<p>(Use voice-read mode or read aloud slowly and ask comprehension
+    questions.)</p>
+</blockquote>
+<h3 id="short-stories-dialogue">Short Stories &amp; Dialogue</h3>
+<div class="columns">
+<ul>
+<li>Tell me a short story (5–6 sentences) about someone going to the
+    market.</li>
+<li>Read a conversation between two people at the airport. Then ask
+    me questions.</li>
+<li>Tell me a story about a person learning to cook for the first
+    time.</li>
+<li>Read a dialogue between a teacher and student about
+    homework.</li>
+<li>Tell me a story about someone making new friends at work.</li>
+<li>Read a conversation between neighbors discussing the
+    weather.</li>
+<li>Tell me a story about a family planning a weekend trip.</li>
+<li>Read a dialogue between a customer and shop assistant.</li>
+<li>Tell me a story about someone overcoming a challenge.</li>
+<li>Read a conversation between friends making weekend plans.</li>
+</ul>
+</div>
+<h3 id="business-professional">Business &amp; Professional</h3>
+<div class="columns">
+<ul>
+<li>Tell me a story about a successful business meeting.</li>
+<li>Read a conversation between colleagues discussing a
+    project.</li>
+<li>Tell me a story about someone starting their own business.</li>
+<li>Read a dialogue between a manager and employee about goals.</li>
+<li>Tell me a story about a challenging work situation.</li>
+<li>Read a conversation about workplace diversity and
+    inclusion.</li>
+<li>Tell me a story about someone networking at a conference.</li>
+<li>Read a dialogue about work-life balance in the office.</li>
+<li>Tell me a story about a team working together on a
+    deadline.</li>
+<li>Read a conversation about professional development and
+    training.</li>
+</ul>
+</div>
+<h3 id="entertainment-media">Entertainment &amp; Media</h3>
+<div class="columns">
+<ul>
+<li>Tell me a story about someone discovering a new hobby.</li>
+<li>Read a conversation about favorite movies and TV shows.</li>
+<li>Tell me a story about attending a live concert or event.</li>
+<li>Read a dialogue about social media and its impact.</li>
+<li>Tell me a story about someone learning to play an
+    instrument.</li>
+<li>Read a conversation about books and reading preferences.</li>
+<li>Tell me a story about a memorable birthday celebration.</li>
+<li>Read a dialogue about gaming and online entertainment.</li>
+<li>Tell me a story about someone trying a new form of art.</li>
+<li>Read a conversation about music and favorite artists.</li>
+</ul>
+</div>
+<h3 id="science-technology">Science &amp; Technology</h3>
+<div class="columns">
+<ul>
+<li>Tell me a story about someone learning to use new
+    technology.</li>
+<li>Read a conversation about artificial intelligence and its
+    future.</li>
+<li>Tell me a story about a scientific discovery or innovation.</li>
+<li>Read a dialogue about renewable energy and sustainability.</li>
+<li>Tell me a story about someone working in a tech startup.</li>
+<li>Read a conversation about space exploration and astronomy.</li>
+<li>Tell me a story about medical advances and healthcare.</li>
+<li>Read a dialogue about cybersecurity and online safety.</li>
+<li>Tell me a story about someone studying environmental
+    science.</li>
+<li>Read a conversation about robotics and automation.</li>
+</ul>
+</div>
+<h3 id="listening-for-keywords">Listening for Keywords</h3>
+<div class="columns">
+<ul>
+<li>Say 5 short sentences with the word ‘buy’. I will repeat
+    them.</li>
+<li>Say 3 sentences slowly. I’ll try to repeat them exactly.</li>
+<li>Say 4 sentences with the word ‘work’. I’ll repeat each one.</li>
+<li>Say 5 sentences with the word ‘like’. I’ll try to copy your
+    pronunciation.</li>
+<li>Say 3 sentences with the word ‘time’. I’ll repeat them
+    back.</li>
+<li>Say 4 sentences with the word ‘go’. I’ll practice saying
+    them.</li>
+<li>Say 5 sentences with the word ‘make’. I’ll repeat them
+    exactly.</li>
+<li>Say 3 sentences with the word ‘think’. I’ll copy your
+    intonation.</li>
+<li>Say 4 sentences with the word ‘know’. I’ll practice
+    pronunciation.</li>
+<li>Say 5 sentences with the word ‘see’. I’ll repeat them
+    slowly.</li>
+</ul>
+</div>
+<h3 id="shadowing">Shadowing</h3>
+<div class="columns">
+<ul>
+<li>Say one sentence. Then say it again slowly so I can shadow
+    it.</li>
+<li>Let’s do sentence shadowing. One sentence at a time. Pause after
+    each.</li>
+<li>Say a sentence about daily routine. I’ll shadow your
+    pronunciation.</li>
+<li>Say a sentence about food. I’ll repeat it exactly as you say
+    it.</li>
+<li>Say a sentence about travel. I’ll shadow your intonation.</li>
+<li>Say a sentence about work. I’ll copy your rhythm and
+    stress.</li>
+<li>Say a sentence about family. I’ll repeat it with your
+    accent.</li>
+<li>Say a sentence about hobbies. I’ll shadow your
+    pronunciation.</li>
+<li>Say a sentence about weather. I’ll copy your speaking
+    style.</li>
+<li>Say a sentence about shopping. I’ll repeat it exactly.</li>
+</ul>
+</div>
+<hr/>
+<h2 id="reading-practice-prompts">Reading Practice Prompts</h2>
+<p>Copy these to get short reading material you can use to read
+    aloud and understand.</p>
+<h3 id="paragraph-reading">Paragraph Reading</h3>
+<div class="columns">
+<ul>
+<li>Give me a short paragraph (3–4 lines) about someone’s daily
+    routine. I will read it aloud.</li>
+<li>Show me a small news story for A2-level learners to read
+    aloud.</li>
+<li>Give me a paragraph about cooking a simple meal. I’ll read it
+    slowly.</li>
+<li>Show me a short article about healthy eating habits.</li>
+<li>Give me a paragraph about traveling to a new city. I’ll practice
+    reading it.</li>
+<li>Show me a brief description of a famous landmark.</li>
+<li>Give me a paragraph about starting a new job. I’ll read it
+    aloud.</li>
+<li>Show me a short text about environmental protection.</li>
+<li>Give me a paragraph about learning a new skill. I’ll practice
+    pronunciation.</li>
+<li>Show me a brief article about technology in daily life.</li>
+</ul>
+</div>
+<h3 id="academic-educational">Academic &amp; Educational</h3>
+<div class="columns">
+<ul>
+<li>Give me a paragraph about the history of a famous
+    invention.</li>
+<li>Show me a short text about different learning styles and
+    methods.</li>
+<li>Give me a paragraph about the importance of education in
+    society.</li>
+<li>Show me a brief article about famous scientists and their
+    discoveries.</li>
+<li>Give me a paragraph about the benefits of studying abroad.</li>
+<li>Show me a short text about different academic subjects and
+    careers.</li>
+<li>Give me a paragraph about the evolution of technology in
+    education.</li>
+<li>Show me a brief article about research methods and academic
+    writing.</li>
+<li>Give me a paragraph about the role of libraries in
+    learning.</li>
+<li>Show me a short text about online education and digital
+    learning.</li>
+</ul>
+</div>
+<h3 id="lifestyle-personal-development">Lifestyle &amp; Personal
+    Development</h3>
+<div class="columns">
+<ul>
+<li>Give me a paragraph about building good habits and
+    routines.</li>
+<li>Show me a short text about mindfulness and mental
+    well-being.</li>
+<li>Give me a paragraph about setting and achieving personal
+    goals.</li>
+<li>Show me a brief article about time management strategies.</li>
+<li>Give me a paragraph about building confidence and
+    self-esteem.</li>
+<li>Show me a short text about networking and building
+    relationships.</li>
+<li>Give me a paragraph about overcoming fears and challenges.</li>
+<li>Show me a brief article about creativity and innovation.</li>
+<li>Give me a paragraph about financial literacy and money
+    management.</li>
+<li>Show me a short text about leadership skills and qualities.</li>
+</ul>
+</div>
+<h3 id="current-events-news">Current Events &amp; News</h3>
+<div class="columns">
+<ul>
+<li>Give me a paragraph about a recent technological
+    advancement.</li>
+<li>Show me a short news article about environmental
+    conservation.</li>
+<li>Give me a paragraph about a cultural event or festival.</li>
+<li>Show me a brief article about global health and wellness
+    trends.</li>
+<li>Give me a paragraph about economic changes and their
+    impact.</li>
+<li>Show me a short text about social media trends and their
+    effects.</li>
+<li>Give me a paragraph about sports events and their
+    significance.</li>
+<li>Show me a brief article about political developments and
+    policies.</li>
+<li>Give me a paragraph about entertainment industry news.</li>
+<li>Show me a short text about scientific discoveries and
+    research.</li>
+</ul>
+</div>
+<h3 id="vocabulary-focus">Vocabulary Focus</h3>
+<div class="columns">
+<ul>
+<li>Give me a paragraph using 5 A1-level verbs. Then help me
+    understand each.</li>
+<li>Show me a reading with 3 new words. After I read, explain
+    them.</li>
+<li>Give me a text with 4 common adjectives. Help me learn their
+    meanings.</li>
+<li>Show me a paragraph with 3 business vocabulary words. Explain
+    each one.</li>
+<li>Give me a reading with 5 everyday nouns. Help me understand
+    them.</li>
+<li>Show me a text with 4 phrasal verbs. Explain what each
+    means.</li>
+<li>Give me a paragraph with 3 academic words. Help me learn
+    them.</li>
+<li>Show me a reading with 5 descriptive words. Explain their
+    meanings.</li>
+<li>Give me a text with 4 travel vocabulary words. Help me
+    understand.</li>
+<li>Show me a paragraph with 3 emotion words. Explain each one.</li>
+</ul>
+</div>
+<h3 id="functional-reading">Functional Reading</h3>
+<div class="columns">
+<ul>
+<li>Show me a simple email from a teacher to a student.</li>
+<li>Give me a text message conversation between two friends making
+    plans.</li>
+<li>Show me a restaurant menu with prices and descriptions.</li>
+<li>Give me a weather forecast for the week.</li>
+<li>Show me a job advertisement for an office position.</li>
+<li>Give me a train schedule with times and destinations.</li>
+<li>Show me a recipe with ingredients and instructions.</li>
+<li>Give me a hotel booking confirmation email.</li>
+<li>Show me a shopping list with items and quantities.</li>
+<li>Give me a doctor’s appointment reminder message.</li>
+</ul>
+</div>
+<hr/>
+<h2 id="grammar-fix-prompts">Grammar Fix Prompts</h2>
+<p>These help you correct mistakes and learn naturally.</p>
+<div class="columns">
+<ul>
+<li>I’ll write 3 sentences. Please correct them and explain.</li>
+<li>Here’s my sentence: ‘He don’t like it.’ Please fix it and show 2
+    examples.</li>
+<li>Check my sentence: ‘I am agree.’ Correct me and ask a
+    follow-up.</li>
+</ul>
+</div>
+<hr/>
+<h2 id="reusable-prompts-for-habit-practice">Reusable Prompts for
+    Habit Practice</h2>
+<p>These can be used every day by just changing the topic:</p>
+<div class="columns">
+<ul>
+<li>Ask me 3 questions about any topic. Help me answer them
+    better.</li>
+<li>Let’s roleplay a real situation — today you choose.</li>
+<li>Give me one listening, one speaking, and one reading task for
+    today.</li>
+<li>Correct me when I make a mistake while speaking. Let’s practice
+    a conversation.</li>
+</ul>
+</div>
+<hr/>
+<h2 id="want-to-practice-for-a-year">Want to Practice for a
+    Year?</h2>
+<p>Join the Afrin English Speaking Challenge at <a href="https://afrinenglish.com">AfrinEnglish.com</a></p>
+<p>Use these prompts in your 365-day habit, or pair with:</p>
+<div class="columns">
+<ul>
+<li>Speaking Journal Templates</li>
+<li>Daily Tracker Pages</li>
+<li>Mini eBooks for Real Conversations</li>
+</ul>
+</div>
+<hr/>
+<h2 id="quick-start-guide">Quick Start Guide</h2>
+<p>Week 1: Start with 10 minutes daily</p>
+<ul>
+<li>Day 1-2: Speaking prompts</li>
+<li>Day 3-4: Listening prompts</li>
+<li>Day 5-6: Reading prompts</li>
+<li>Day 7: Grammar fix prompts</li>
+</ul>
+<p>Week 2: Increase to 15 minutes daily</p>
+<ul>
+<li>Mix all types of prompts</li>
+<li>Try roleplay situations</li>
+<li>Start tracking your progress</li>
+</ul>
+<p>Week 3+: Build your habit</p>
+<ul>
+<li>20+ minutes daily</li>
+<li>Use reusable prompts</li>
+<li>Practice with real topics you care about</li>
+</ul>
+<hr/>
+<h2 id="pro-tips">Pro Tips</h2>
+<div class="columns">
+<ul>
+<li>Be consistent - 10 minutes daily beats 2 hours once a week</li>
+<li>Speak out loud - even when alone, practice pronunciation</li>
+<li>Ask follow-ups - keep conversations going naturally</li>
+<li>Use real topics - practice with things you actually want to talk
+    about</li>
+<li>Don’t worry about mistakes - focus on communication, not
+    perfection</li>
+</ul>
+</div>
+<hr/>
+<h2 id="ready-to-start">Ready to Start?</h2>
+<p>Pick one prompt from this guide and try it right now. Remember:
+    The best time to start is now, and the best way to improve is to
+    practice every day.</p>
+<blockquote>
+<p>Your First Practice: Choose one prompt from the Speaking Practice
+    section and try it with ChatGPT right now. Don’t wait for the
+    perfect moment — start today!</p>
+</blockquote>
+</div>
+<hr/>
+<p><em>Happy learning! Remember: Every conversation is practice,
+    every mistake is learning, and every day you practice is a step
+    toward fluency.</em></p>
+</body>
+</html> 

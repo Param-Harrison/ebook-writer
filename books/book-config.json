@@ -41,6 +41,13 @@
       "template": "daily-practice-kit",
       "category": "english-learning",
       "description": "Build Your English Speaking Habit – One Day at a Time"
+    },
+    "chatgpt-prompt-guide": {
+      "title": "ChatGPT Prompt Guide for English Learners",
+      "author": "AfrinEnglish.com",
+      "template": "afrinenglish",
+      "category": "english-learning",
+      "description": "Use AI to Practice Speaking, Listening, and Reading — Anytime, Anywhere"
     }
   },
   "templates": {
