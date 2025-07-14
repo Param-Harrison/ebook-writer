@@ -211,7 +211,18 @@ blockquote blockquote {
   word-wrap: break-word;
 }
 
-/* Checkbox styling */
+/* Ensure checkbox and label are on same line */
+input[type="checkbox"] {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .checkbox-group {
   display: flex;
   flex-direction: column;
@@ -680,7 +691,7 @@ figcaption {
 <img alt="Book Cover" src="cover.jpg" style="width:100%;display:block;margin-bottom:2rem;"/><div class="toc-container">
 <h2 class="toc-title">Table of Contents</h2>
 <nav class="toc-nav">
-<div class="toc-row toc-level-1"><a class="toc-link" href="#afrin-english-daily-practice-templates">Afrin English Daily Practice Templates</a></div>
+<div class="toc-row toc-level-1"><a class="toc-link" href="#afrin-english-daily-practice-kit">Afrin English Daily Practice Kit</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#welcome">Welcome!</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#daily-speaking-journal">Daily Speaking Journal</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#1-minute-talk-prompt">1-Minute Talk Prompt</a></div>
@@ -689,14 +700,19 @@ figcaption {
 <div class="toc-row toc-level-2"><a class="toc-link" href="#describe-a-person-prompt">Describe a Person Prompt</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#a-day-in-my-life-timeline">A Day in My Life Timeline</a></div>
 <div class="toc-row toc-level-2"><a class="toc-link" href="#confidence-tracker">Confidence Tracker</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#30-day-streak-tracker">30-Day Streak Tracker</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#daily-streak-tracker">Daily Streak Tracker</a></div>
+<div class="toc-row toc-level-2"><a class="toc-link" href="#monthly-progress-overview">Monthly Progress Overview</a></div>
 <div class="toc-row toc-level-3"><a class="toc-link" href="#final-note">Final Note</a></div>
-<div class="toc-row toc-level-2"><a class="toc-link" href="#progress-tracking">Progress Tracking</a></div>
-<div class="toc-row toc-level-3"><a class="toc-link" href="#monthly-progress-overview">Monthly Progress Overview</a></div>
 </nav>
 </div>
-<h1 id="afrin-english-daily-practice-templates">Afrin English Daily
-    Practice Templates</h1>
+<h1 id="afrin-english-daily-practice-kit">Afrin English Daily
+    Practice Kit</h1>
+<blockquote>
+<p>This book is part of the <a href="https://afrinenglish.com?ref=daily-practice-kit">Afrin English
+    Speaking Challenge</a>, a daily practice system designed to help
+    real people build real fluency — one simple conversation at a
+    time.</p>
+</blockquote>
 <p><strong>Build Your English Speaking Habit – One Day at a
     Time</strong> <strong>CEFR Level: A1–B1</strong></p>
 <h2 id="welcome">Welcome!</h2>
@@ -715,8 +731,6 @@ figcaption {
 <p>You only need a few minutes a day to use this workbook. Speaking
     builds confidence. Confidence builds fluency.</p>
 <p>Let’s begin.</p>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-journal" id="daily-speaking-journal">
 <h2>Daily Speaking Journal</h2>
 <p>Use this at the end of the day to reflect.</p>
@@ -733,14 +747,12 @@ figcaption {
 </div>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-talk" id="minute-talk-prompt">
 <h2>1-Minute Talk Prompt</h2>
 <p>Choose a topic and speak for 60 seconds — no stopping.</p>
 <div class="template-section">
-<p><strong>Date:</strong> ____________ <strong>Topic:</strong>
-    ___________________________</p>
+<p><strong>Date:</strong> ____________</p>
+<p><strong>Topic:</strong> ___________________________</p>
 <p>Some ideas:</p>
 <ul>
 <li>My favorite dish is…</li>
@@ -753,15 +765,13 @@ figcaption {
 </div>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-roleplay" id="real-situation-roleplay">
 <h2>Real Situation Roleplay</h2>
 <p>Practice scenes you’ll face in real life — at work, outside, or
     home.</p>
 <div class="template-section">
-<p><strong>Date:</strong> ____________ <strong>Scene Title:</strong>
-    ___________________________</p>
+<p><strong>Date:</strong> ____________</p>
+<p><strong>Scene Title:</strong> ___________________________</p>
 <p>Some ideas:</p>
 <ul>
 <li>Asking for directions</li>
@@ -777,15 +787,14 @@ figcaption {
 </div>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-shadowing" id="shadowing-practice-sheet">
 <h2>Shadowing Practice Sheet</h2>
 <p>Shadowing = listen and repeat the same sentence, with same
     tone.</p>
 <div class="template-section">
-<p><strong>Date:</strong> ____________ <strong>Audio/Video
-    Title:</strong> ___________________________</p>
+<p><strong>Date:</strong> ____________</p>
+<p><strong>Audio/Video Title:</strong>
+    ___________________________</p>
 <p><strong>Sentence I shadowed:</strong></p>
 <div class="form-field" contenteditable="true" placeholder="Write the sentence you shadowed...">
 </div>
@@ -800,15 +809,14 @@ figcaption {
 </div>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-describe" id="describe-a-person-prompt">
 <h2>Describe a Person Prompt</h2>
 <p>Use this page to describe someone using English — what they look
     like, how they act, etc.</p>
 <div class="template-section">
-<p><strong>Date:</strong> ____________ <strong>Who I’m
-    describing:</strong> ___________________________</p>
+<p><strong>Date:</strong> ____________</p>
+<p><strong>Who I’m describing:</strong>
+    ___________________________</p>
 <p><strong>3–5 Sentences About Them:</strong></p>
 <div class="form-field" contenteditable="true" placeholder="Write 3-5 sentences describing this person...">
 </div>
@@ -820,8 +828,6 @@ figcaption {
 </ul>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-timeline" id="a-day-in-my-life-timeline">
 <h2>A Day in My Life Timeline</h2>
 <p>Speak about your full day using time phrases and verbs.</p>
@@ -840,17 +846,15 @@ figcaption {
     ___________________________</p>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
 <section class="practice-template template-confidence" id="confidence-tracker">
 <h2>Confidence Tracker</h2>
 <p>Track how you feel about speaking English today.</p>
 <div class="template-section">
 <p><strong>Date:</strong> ____________</p>
-<div class="confidence-score">
-<p><strong>Confidence Score:</strong> 😫 1  😐 2  🙂 3  😀 4  💪
-    5</p>
-</div>
+<section class="confidence-score">
+<p><strong>Confidence Score:</strong></p>
+<p>😫 1  😐 2  🙂 3  😀 4  💪 5</p>
+</section>
 <p><strong>What helped or hurt my confidence?</strong></p>
 <div class="form-field" contenteditable="true" placeholder="What made you feel more or less confident today?">
 </div>
@@ -858,523 +862,40 @@ figcaption {
 <div class="form-field" contenteditable="true" placeholder="What small improvement did you notice?">
 </div>
 <p><strong>Tomorrow I want to:</strong></p>
-<div class="checkbox-group">
-<div class="checkbox-item">
-<p><input id="goal1" type="checkbox"/> <label for="goal1">Speak to
-    someone</label></p>
-</div>
-<div class="checkbox-item">
-<p><input id="goal2" type="checkbox"/> <label for="goal2">Watch
-    English video + shadow</label></p>
-</div>
-<div class="checkbox-item">
-<p><input id="goal3" type="checkbox"/> <label for="goal3">Try a new
-    sentence</label></p>
-</div>
-<div class="checkbox-item">
-<p><input id="goal4" type="checkbox"/> <label for="goal4">Record
-    myself speaking</label></p>
-</div>
-<div class="checkbox-item">
-<p><input id="goal5" type="checkbox"/> <label for="goal5">Use 2 new
-    words</label></p>
-</div>
-</div>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Speak to someone</label></li>
+<li><label><input type="checkbox"/>Watch English video +
+    shadow</label></li>
+<li><label><input type="checkbox"/>Try a new sentence</label></li>
+<li><label><input type="checkbox"/>Record myself
+    speaking</label></li>
+<li><label><input type="checkbox"/>Use 2 new words</label></li>
+</ul>
 </div>
 </section>
-<div style="page-break-before: always;">
-</div>
-<section class="practice-template template-streak" id="day-streak-tracker">
-<h2>30-Day Streak Tracker</h2>
-<p>Tick a box every day you speak or shadow something in
-    English.</p>
+<section class="practice-template template-streak" id="daily-streak-tracker">
+<h2>Daily Streak Tracker</h2>
+<p>Track your daily English speaking habit.</p>
 <div class="template-section">
-<table class="tracker-table">
-<thead>
-<tr>
-<th>
-    Day
-    </th>
-<th>
-    Spoke Today
-    </th>
-<th>
-    Shadowed Today
-    </th>
-<th>
-    Notes
-    </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-    1
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
+<p><strong>Date:</strong> ____________</p>
+<p><strong>Day:</strong> ____________ / 30</p>
+<p><strong>Today I:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Spoke English</label></li>
+<li><label><input type="checkbox"/>Shadowed something</label></li>
+<li><label><input type="checkbox"/>Used new words</label></li>
+<li><label><input type="checkbox"/>Practiced
+    pronunciation</label></li>
+</ul>
+<p><strong>Brief notes about today:</strong></p>
+<div class="form-field" contenteditable="true" placeholder="What did you practice today?">
 </div>
-</td>
-</tr>
-<tr>
-<td>
-    2
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
+<p><strong>Tomorrow’s goal:</strong></p>
+<div class="form-field" contenteditable="true" placeholder="What will you try tomorrow?">
 </div>
-</td>
-</tr>
-<tr>
-<td>
-    3
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    4
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    5
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    6
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    7
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    8
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    9
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    10
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    11
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    12
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    13
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    14
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    15
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    16
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    17
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    18
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    19
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    20
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    21
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    22
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    23
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    24
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    25
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    26
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    27
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    28
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    29
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-<tr>
-<td>
-    30
-    </td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<input type="checkbox"/>
-</td>
-<td>
-<div class="form-field" contenteditable="true" placeholder="Brief notes...">
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Don’t break the chain! Even 2 minutes counts.</p>
 </div>
 </section>
-<h3 id="final-note">Final Note</h3>
-<p>This workbook is part of the <strong>AfrinEnglish.com 365-Day
-    Speaking Challenge</strong> — a powerful habit system for real-world
-    fluency.</p>
-<p>Use these templates as part of your daily routine. Speak a little
-    every day. Reflect a little every night. And let your English grow
-    the natural way.</p>
-<p>You’ve got this. Let’s keep speaking!</p>
-<div style="page-break-before: always;">
-</div>
-<h2 id="progress-tracking">Progress Tracking</h2>
-<section class="practice-template" id="monthly-progress-overview">
-<h3>Monthly Progress Overview</h3>
+<h2 id="monthly-progress-overview">Monthly Progress Overview</h2>
 <div class="template-section">
 <p><strong>Month:</strong> ___________________________</p>
 <p><strong>Days Completed:</strong> ______ / 30</p>
@@ -1388,7 +909,14 @@ figcaption {
 <p><strong>Next Month’s Goal:</strong>
     ___________________________</p>
 </div>
-</section>
+<h3 id="final-note">Final Note</h3>
+<p>This workbook is part of the <strong>AfrinEnglish.com 365-Day
+    Speaking Challenge</strong> — a powerful habit system for real-world
+    fluency.</p>
+<p>Use these templates as part of your daily routine. Speak a little
+    every day. Reflect a little every night. And let your English grow
+    the natural way.</p>
+<p>You’ve got this. Let’s keep speaking!</p>
 <p><em>This workbook is designed to be printed and used daily. Each
     template can be photocopied for multiple uses throughout your
     learning journey.</em></p>

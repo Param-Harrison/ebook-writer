@@ -1,4 +1,6 @@
-# Afrin English Daily Practice Templates
+# Afrin English Daily Practice Kit
+
+> This book is part of the [Afrin English Speaking Challenge](https://afrinenglish.com?ref=daily-practice-kit), a daily practice system designed to help real people build real fluency — one simple conversation at a time.
 
 **Build Your English Speaking Habit – One Day at a Time**
 **CEFR Level: A1–B1**
@@ -19,8 +21,6 @@ These pages are used by learners in the **Afrin English Speaking Challenge**, a 
 You only need a few minutes a day to use this workbook. Speaking builds confidence. Confidence builds fluency.
 
 Let's begin.
-
-<div style="page-break-before: always;"></div>
 
 <div class="practice-template template-journal">
 
@@ -48,8 +48,6 @@ Use this at the end of the day to reflect.
 
 </div>
 
-<div style="page-break-before: always;"></div>
-
 <div class="practice-template template-talk">
 
 ## 1-Minute Talk Prompt
@@ -59,6 +57,7 @@ Choose a topic and speak for 60 seconds — no stopping.
 <div class="template-section">
 
 **Date:** \_\_\_\_\_\_\_\_\_\_\_\_
+
 **Topic:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 Some ideas:
@@ -76,8 +75,6 @@ Some ideas:
 
 </div>
 
-<div style="page-break-before: always;"></div>
-
 <div class="practice-template template-roleplay">
 
 ## Real Situation Roleplay
@@ -87,6 +84,7 @@ Practice scenes you'll face in real life — at work, outside, or home.
 <div class="template-section">
 
 **Date:** \_\_\_\_\_\_\_\_\_\_\_\_
+
 **Scene Title:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 Some ideas:
@@ -108,8 +106,6 @@ Some ideas:
 
 </div>
 
-<div style="page-break-before: always;"></div>
-
 <div class="practice-template template-shadowing">
 
 ## Shadowing Practice Sheet
@@ -119,6 +115,7 @@ Shadowing = listen and repeat the same sentence, with same tone.
 <div class="template-section">
 
 **Date:** \_\_\_\_\_\_\_\_\_\_\_\_
+
 **Audio/Video Title:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 **Sentence I shadowed:**
@@ -139,8 +136,6 @@ Shadowing = listen and repeat the same sentence, with same tone.
 
 </div>
 
-<div style="page-break-before: always;"></div>
-
 <div class="practice-template template-describe">
 
 ## Describe a Person Prompt
@@ -150,6 +145,7 @@ Use this page to describe someone using English — what they look like, how the
 <div class="template-section">
 
 **Date:** \_\_\_\_\_\_\_\_\_\_\_\_
+
 **Who I'm describing:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 **3–5 Sentences About Them:**
@@ -165,8 +161,6 @@ Optional prompts:
 </div>
 
 </div>
-
-<div style="page-break-before: always;"></div>
 
 <div class="practice-template template-timeline">
 
@@ -196,8 +190,6 @@ Speak about your full day using time phrases and verbs.
 
 </div>
 
-<div style="page-break-before: always;"></div>
-
 <div class="practice-template template-confidence">
 
 ## Confidence Tracker
@@ -208,10 +200,13 @@ Track how you feel about speaking English today.
 
 **Date:** \_\_\_\_\_\_\_\_\_\_\_\_
 
-<div class="confidence-score">
+<Section class="confidence-score">
+
 **Confidence Score:**
+
 😫 1  😐 2  🙂 3  😀 4  💪 5
-</div>
+
+</Section>
 
 **What helped or hurt my confidence?**
 
@@ -223,252 +218,48 @@ Track how you feel about speaking English today.
 
 **Tomorrow I want to:**
 
-<div class="checkbox-group">
-<div class="checkbox-item">
-<input type="checkbox" id="goal1"> <label for="goal1">Speak to someone</label>
-</div>
-<div class="checkbox-item">
-<input type="checkbox" id="goal2"> <label for="goal2">Watch English video + shadow</label>
-</div>
-<div class="checkbox-item">
-<input type="checkbox" id="goal3"> <label for="goal3">Try a new sentence</label>
-</div>
-<div class="checkbox-item">
-<input type="checkbox" id="goal4"> <label for="goal4">Record myself speaking</label>
-</div>
-<div class="checkbox-item">
-<input type="checkbox" id="goal5"> <label for="goal5">Use 2 new words</label>
-</div>
-</div>
+- [ ] Speak to someone
+- [ ] Watch English video + shadow
+- [ ] Try a new sentence
+- [ ] Record myself speaking
+- [ ] Use 2 new words
 
 </div>
 
 </div>
-
-<div style="page-break-before: always;"></div>
 
 <div class="practice-template template-streak">
 
-## 30-Day Streak Tracker
+## Daily Streak Tracker
 
-Tick a box every day you speak or shadow something in English.
+Track your daily English speaking habit.
 
 <div class="template-section">
 
-<table class="tracker-table">
-<thead>
-<tr>
-<th>Day</th>
-<th>Spoke Today</th>
-<th>Shadowed Today</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>2</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>3</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>4</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>5</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>6</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>7</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>8</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>9</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>10</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>11</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>12</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>13</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>14</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>15</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>16</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>17</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>18</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>19</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>20</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>21</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>22</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>23</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>24</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>25</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>26</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>27</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>28</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>29</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-<tr>
-<td>30</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><div class="form-field" contenteditable="true" placeholder="Brief notes..."></div></td>
-</tr>
-</tbody>
-</table>
+**Date:** \_\_\_\_\_\_\_\_\_\_\_\_
 
-Don't break the chain! Even 2 minutes counts.
+**Day:** \_\_\_\_\_\_\_\_\_\_\_\_ / 30
+
+**Today I:**
+
+- [ ] Spoke English
+- [ ] Shadowed something
+- [ ] Used new words
+- [ ] Practiced pronunciation
+
+**Brief notes about today:**
+
+<div class="form-field" contenteditable="true" placeholder="What did you practice today?"></div>
+
+**Tomorrow's goal:**
+
+<div class="form-field" contenteditable="true" placeholder="What will you try tomorrow?"></div>
 
 </div>
 
 </div>
 
-### Final Note
-
-This workbook is part of the **AfrinEnglish.com 365-Day Speaking Challenge** — a powerful habit system for real-world fluency.
-
-Use these templates as part of your daily routine. Speak a little every day. Reflect a little every night. And let your English grow the natural way.
-
-You've got this. Let's keep speaking!
-
-<div style="page-break-before: always;"></div>
-
-## Progress Tracking
-
-<div class="practice-template">
-
-### Monthly Progress Overview
+## Monthly Progress Overview
 
 <div class="template-section">
 
@@ -488,6 +279,12 @@ You've got this. Let's keep speaking!
 
 </div>
 
-</div>
+### Final Note
+
+This workbook is part of the **AfrinEnglish.com 365-Day Speaking Challenge** — a powerful habit system for real-world fluency.
+
+Use these templates as part of your daily routine. Speak a little every day. Reflect a little every night. And let your English grow the natural way.
+
+You've got this. Let's keep speaking!
 
 _This workbook is designed to be printed and used daily. Each template can be photocopied for multiple uses throughout your learning journey._

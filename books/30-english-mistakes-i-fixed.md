@@ -345,7 +345,9 @@
 ❌ **Wrong:** Let's discuss about it.
 
 ✅ **Correct:** Let's **discuss** it.
+
 ✅ **Correct:** We need to **discuss** the problem.
+
 ✅ **Correct:** She wants to **discuss** the results.
 
 </div>
@@ -375,7 +377,9 @@
 ❌ **Wrong:** I very like it.
 
 ✅ **Correct:** I **really like** it.
+
 ✅ **Correct:** I **really like** her energy.
+
 ✅ **Correct:** They **really like** this song.
 
 </div>
@@ -405,7 +409,9 @@
 ❌ **Wrong:** I'm agree with his opinion.
 
 ✅ **Correct:** I **agree** with his opinion.
+
 ✅ **Correct:** We **agree** with the suggestion.
+
 ✅ **Correct:** She **agrees** with the team.
 
 </div>
@@ -435,7 +441,9 @@
 ❌ **Wrong:** I am going always to work by bus.
 
 ✅ **Correct:** I **always go** to work by bus.
+
 ✅ **Correct:** He **always takes** the train.
+
 ✅ **Correct:** We **usually drive** to school.
 
 </div>
@@ -466,7 +474,9 @@
 ❌ **Wrong:** He don't has any friends.
 
 ✅ **Correct:** He **doesn't have** any friends.
+
 ✅ **Correct:** She **doesn't have** much time.
+
 ✅ **Correct:** It **doesn't have** a solution.
 
 </div>
@@ -496,7 +506,9 @@
 ❌ **Wrong:** I want that you help me.
 
 ✅ **Correct:** I **want you to help** me.
+
 ✅ **Correct:** She **wants me to stay**.
+
 ✅ **Correct:** They **want us to join**.
 
 </div>
@@ -526,7 +538,9 @@
 ❌ **Wrong:** I am thinking it's a good idea.
 
 ✅ **Correct:** I **think** it's a good idea.
+
 ✅ **Correct:** He **thinks** it will work.
+
 ✅ **Correct:** I **don't think** so.
 
 </div>
@@ -556,7 +570,9 @@
 ❌ **Wrong:** I didn't saw her at the party.
 
 ✅ **Correct:** I **didn't see** her at the party.
+
 ✅ **Correct:** He **didn't see** the message.
+
 ✅ **Correct:** We **didn't see** the signs.
 
 </div>
@@ -586,7 +602,9 @@
 ❌ **Wrong:** I'm used to wake up early.
 
 ✅ **Correct:** I'm **used to waking up** early.
+
 ✅ **Correct:** She's **used to working** late.
+
 ✅ **Correct:** They're **used to living** in cold weather.
 
 </div>
@@ -616,7 +634,9 @@
 ❌ **Wrong:** He told that he is tired.
 
 ✅ **Correct:** He **said that** he is tired.
+
 ✅ **Correct:** She **said that** it's okay.
+
 ✅ **Correct:** They **said** they were busy.
 
 </div>
@@ -646,7 +666,9 @@
 ❌ **Wrong:** I have been to there.
 
 ✅ **Correct:** I **have been there**.
+
 ✅ **Correct:** She **has been there** before.
+
 ✅ **Correct:** We **have been there** many times.
 
 </div>
@@ -676,7 +698,9 @@
 ❌ **Wrong:** I am study English.
 
 ✅ **Correct:** I **am studying** English.
+
 ✅ **Correct:** She **is studying** medicine.
+
 ✅ **Correct:** They **are studying** for the exam.
 
 </div>
@@ -706,7 +730,9 @@
 ❌ **Wrong:** I am not like this movie.
 
 ✅ **Correct:** I **don't like** this movie.
+
 ✅ **Correct:** She **doesn't like** spicy food.
+
 ✅ **Correct:** We **don't like** the weather.
 
 </div>
@@ -736,7 +762,9 @@
 ❌ **Wrong:** I am going to home.
 
 ✅ **Correct:** I **am going home**.
+
 ✅ **Correct:** She **is going home** early.
+
 ✅ **Correct:** They **are going home** now.
 
 </div>
@@ -766,7 +794,9 @@
 ❌ **Wrong:** I have 25 years old.
 
 ✅ **Correct:** I **am 25 years old**.
+
 ✅ **Correct:** She **is 30 years old**.
+
 ✅ **Correct:** He **is 40 years old**.
 
 </div>
@@ -796,7 +826,9 @@
 ❌ **Wrong:** I am working since 2 hours.
 
 ✅ **Correct:** I **have been working for** 2 hours.
+
 ✅ **Correct:** She **has been studying for** 3 hours.
+
 ✅ **Correct:** They **have been waiting for** 1 hour.
 
 </div>
@@ -826,7 +858,9 @@
 ❌ **Wrong:** I am agree with you.
 
 ✅ **Correct:** I **agree** with you.
+
 ✅ **Correct:** She **agrees** with the plan.
+
 ✅ **Correct:** We **agree** on this decision.
 
 </div>
@@ -856,7 +890,9 @@
 ❌ **Wrong:** I am not understand.
 
 ✅ **Correct:** I **don't understand**.
+
 ✅ **Correct:** She **doesn't understand** the question.
+
 ✅ **Correct:** We **don't understand** the instructions.
 
 </div>
@@ -886,7 +922,9 @@
 ❌ **Wrong:** I am thinking about you.
 
 ✅ **Correct:** I **think about** you.
+
 ✅ **Correct:** She **thinks about** her family.
+
 ✅ **Correct:** We **think about** the future.
 
 </div>
@@ -916,7 +954,9 @@
 ❌ **Wrong:** I am going to there.
 
 ✅ **Correct:** I **am going there**.
+
 ✅ **Correct:** She **is going there** tomorrow.
+
 ✅ **Correct:** They **are going there** now.
 
 </div>
