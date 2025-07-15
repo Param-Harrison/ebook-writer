@@ -48,6 +48,13 @@
       "template": "afrinenglish",
       "category": "english-learning",
       "description": "Use AI to Practice Speaking, Listening, and Reading — Anytime, Anywhere"
+    },
+    "what-would-you-say": {
+      "title": "What Would You Say? Real English for Real Situations",
+      "author": "AfrinEnglish.com",
+      "template": "afrinenglish",
+      "category": "english-learning",
+      "description": "Polite, practical English for 40+ real-life situations with model responses and explanations."
     }
   },
   "templates": {
