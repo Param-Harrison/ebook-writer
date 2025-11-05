@@ -2,6 +2,34 @@
 
 Hyplab is a platform for building AI agent simulations. It is a set of powerful, reusable components that can be assembled into any product we can imagine.
 
+### The Big Picture
+
+```mermaid
+flowchart TB
+    Business[Business Problem] --> Platform[Hyplab Platform]
+    Platform --> UseCase1[Test Ads]
+    Platform --> UseCase2[Test Products]
+    Platform --> UseCase3[Focus Groups]
+    Platform --> UseCase4[Market Research]
+    Platform --> UseCase5[Generate Data]
+    
+    UseCase1 --> Agents[AI Agents]
+    UseCase2 --> Agents
+    UseCase3 --> Agents
+    UseCase4 --> Agents
+    UseCase5 --> Agents
+    
+    Agents --> Results[Results]
+    Results --> Insights[Business Insights]
+```
+
+**In simple terms:**
+
+- You have a business problem (Which ad works best? Will people buy this product?)
+- Hyplab creates fake people (AI agents) with different personalities
+- These agents react to your ads, products, or questions
+- You get back answers about what works and what doesn't, and use these answers to make better business decisions
+
 -----
 
 ## Chapter 1: Our Foundational Philosophy
@@ -33,32 +61,27 @@ This chapter defines each core component we need to build. We will design them t
 This is the master blueprint for our entire core system, which we call `hyplab-core-agent`. It shows the six main components and how they connect.
 
 ```mermaid
-graph TB
-    subgraph "hyplab-core-agent - The Core Foundation"
-        A[The Digital Agent] --> B[The Digital Environment]
-        A --> C[The Memory]
-        A --> D[The Brain - Action Engine]
-        B --> E[The Translator]
-        D --> E
-        C --> E
-        F[The Director - Controller] --> A
-        F --> B
-        F --> G[The Shortcut - Cache]
-    end
-    
-    E --> H[The Big Brain - External LLM APIs]
-    G --> I[Saved Simulations - Storage]
+flowchart LR
+    Agent[Digital Agent] --> Env[Environment]
+    Agent --> Memory[Memory]
+    Agent --> Brain[Action Engine]
+    Brain --> Translator[LLM Client]
+    Memory --> Translator
+    Translator --> LLM[External LLM APIs]
+    Director[Director] --> Agent
+    Director --> Env
+    Director --> Cache[Cache]
 ```
 
 ### Component 1: The 'Translator' (`hyplab-llm-client`)
 
   * **What It Is:** This is the first component we must build. It's a "universal translator" that lets our system talk to any "Big Brain" (like OpenAI's GPT-4, Azure OpenAI, or Anthropic's Claude) on the internet.
 
-  * **Why We Need It:** This one component handles all external communication. If we ever want to switch from OpenAI to a cheaper or better "Big Brain" provider, we only have to update this *one component*, not our entire system. This is a critical strategic decision. Everything else depends on LLM calls, so this component must handle provider switching, caching responses to save costs, retrying failed requests, and tracking usage.
+  * **Why we need it:** This one component handles all external communication. If we ever want to switch from OpenAI to a cheaper or better "Big Brain" provider, we only have to update this *one component*, not our entire system. This is a critical strategic decision. Everything else depends on LLM calls, so this component must handle provider switching, caching responses to save costs, retrying failed requests, and tracking usage.
 
-  * **How It Works:** Takes a message list and parameters, routes to the appropriate provider adapter (OpenAI, Azure, Anthropic), checks cache first (if enabled) using a hash of the input, makes API call with retry logic and exponential backoff, parses response, and returns structured output. Caches results to avoid duplicate expensive calls.
+  * **How it works:** Takes a message list and parameters, routes to the appropriate provider adapter (OpenAI, Azure, Anthropic), checks cache first (if enabled) using a hash of the input, makes API call with retry logic and exponential backoff, parses response, and returns structured output. Caches results to avoid duplicate expensive calls.
 
-  * **Key Features to Build:**
+  * **Key features to build:**
 
     1.  **Multi-Provider Support:** It must have different "adapters" to speak the specific language of OpenAI, Azure, Anthropic, etc. We use a factory pattern to select the right adapter.
 
@@ -71,18 +94,14 @@ graph TB
 <!-- end list -->
 
 ```mermaid
-graph TB
-    A[hyplab-llm-client] --> B[Provider Factory]
-    B --> C[OpenAI Adapter]
-    B --> D[Azure Adapter]
-    B --> E[Anthropic Adapter]
+flowchart TB
+    Client[LLM Client] --> Factory[Provider Factory]
+    Factory --> OpenAI[OpenAI]
+    Factory --> Azure[Azure]
+    Factory --> Anthropic[Anthropic]
     
-    A --> F[Cache Manager]
-    A --> G[Retry Handler]
-    A --> H[Response Parser]
-    
-    F --> I[Hash-based Cache]
-    G --> J[Exponential Backoff]
+    Client --> Cache[Cache]
+    Client --> Retry[Retry Logic]
 ```
 
 **Configuration Format:**
@@ -114,11 +133,11 @@ exponential_backoff_factor = 2.0
 
   * **What It Is:** This is the core "actor" in our system. Each "Digital Agent" is a simulated human with a unique personality, background, and set of beliefs. They are the ones who will test our products, react to our ads, and participate in our focus groups.
 
-  * **Why We Need It:** These are the agents who make our simulations real. Without them, we have an empty simulation. They embody the personas that react to ads, test products, and participate in discussions. Each agent contains a persona specification (who they are), mental state (current emotions, goals, context), and memory interface.
+  * **Why we need it:** These are the agents who make our simulations real. Without them, we have an empty simulation. They embody the personas that react to ads, test products, and participate in discussions. Each agent contains a persona specification (who they are), mental state (current emotions, goals, context), and memory interface.
 
-  * **How It Works:** When an agent receives input, it retrieves relevant memories (both recent events and long-term knowledge), combines this with its persona and current mental state, sends everything to the action engine for LLM-based response generation, then stores the interaction in memory. The agent can change context, make other agents accessible for communication, and generate actions in response to stimuli.
+  * **How it works:** When an agent receives input, it retrieves relevant memories (both recent events and long-term knowledge), combines this with its persona and current mental state, sends everything to the action engine for LLM-based response generation, then stores the interaction in memory. The agent can change context, make other agents accessible for communication, and generate actions in response to stimuli.
 
-  * **Key Features to Build:**
+  * **Key features to build:**
 
     1.  **A "Persona Card":** A simple data file (like JSON) that defines *who* this person is: their age, job, personality traits (Big Five), preferences, beliefs, behaviors, long-term goals, and communication style. This is their static "DNA."
 
@@ -131,20 +150,15 @@ exponential_backoff_factor = 2.0
 <!-- end list -->
 
 ```mermaid
-graph TB
-    A[hyplab-agent] --> B[Persona Card - Their DNA]
-    A --> C[Current State - Their Mood]
-    A --> D[Port for Memory Component]
-    A --> E[Port for Brain Component]
+flowchart TB
+    Agent[Digital Agent] --> Persona[Persona Card]
+    Agent --> State[Current State]
+    Agent --> Memory[Memory]
+    Agent --> Brain[Action Engine]
     
-    B --> B1[Demographics - Age, Job]
-    B --> B2[Personality Traits - Big Five]
-    B --> B3[Preferences and Beliefs]
-    
-    C --> C1[Emotions]
-    C --> C2[Goals]
-    C --> C3[Context]
-    C --> C4[Location]
+    Persona --> Demographics[Demographics]
+    Persona --> Traits[Personality Traits]
+    State --> Emotions[Emotions & Goals]
 ```
 
 **Persona Data Format:**
@@ -200,11 +214,11 @@ graph TB
 
   * **What It Is:** This component plugs into the "Digital Agent." It gives them a functional memory so they can remember past conversations and experiences.
 
-  * **Why We Need It:** An agent who forgets what you said 30 seconds ago is not realistic or useful. This component allows our agents to have context-aware, multi-turn conversations and recall past experiences. Without memory, agents feel robotic—they forget previous interactions and can't build on past conversations.
+  * **Why we need it:** An agent who forgets what you said 30 seconds ago is not realistic or useful. This component allows our agents to have context-aware, multi-turn conversations and recall past experiences. Without memory, agents feel robotic—they forget previous interactions and can't build on past conversations.
 
-  * **How It Works:** The memory system has two parts. **Episodic memory** stores recent events in order (conversations, thoughts, actions) with a fixed prefix (always include first N events) and lookback window (last M events). **Semantic memory** stores information as vector embeddings, allowing relevance-based retrieval. When retrieving, it combines both: recent events + semantically relevant past knowledge. This gives agents both immediate context and long-term recall.
+  * **How it works:** The memory system has two parts. **Episodic memory** stores recent events in order (conversations, thoughts, actions) with a fixed prefix (always include first N events) and lookback window (last M events). **Semantic memory** stores information as vector embeddings, allowing relevance-based retrieval. When retrieving, it combines both: recent events + semantically relevant past knowledge. This gives agents both immediate context and long-term recall.
 
-  * **Key Features to Build:**
+  * **Key features to build:**
 
     1.  **A "Short-Term Diary" (Episodic Memory):** A list of *exactly* what just happened (e.g., "Lisa just asked me about a new soda..."). This provides immediate conversational context. We maintain a fixed prefix (first few events) and a lookback window (last N events) to ensure important context is always included.
 
@@ -215,17 +229,12 @@ graph TB
 <!-- end list -->
 
 ```mermaid
-graph TB
-    A[hyplab-memory] --> B[Short-Term Diary - Recent events]
-    A --> C[Long-Term Encyclopedia - Smart search]
+flowchart LR
+    Memory[Memory System] --> Episodic[Episodic Memory]
+    Memory --> Semantic[Semantic Memory]
     
-    B --> B1[Fixed Prefix - first N events]
-    B --> B2[Lookback Window - last M events]
-    B --> B3[Episode Consolidation]
-    
-    C --> C1[Vector Embeddings]
-    C --> C2[Semantic Search]
-    C --> C3[Relevance Retrieval]
+    Episodic --> Recent[Recent Events]
+    Semantic --> Search[Vector Search]
 ```
 
 **Memory Retrieval Parameters:**
@@ -256,11 +265,11 @@ graph TB
 
   * **What It Is:** This powerful component also plugs into the "Digital Agent." It's the "decision-maker"—the system that converts agent state (persona + memories + stimulus) into LLM prompts, calls the LLM, parses responses into structured actions, and validates quality.
 
-  * **Why We Need It:** This is where the "magic" happens—turning agent specifications into realistic behavior. The "Brain" is what *uses* the Persona and Memory to decide what to do or say next. It handles the complex prompt engineering, ensures actions match the persona, and validates quality before returning.
+  * **Why we need it:** This is where the "magic" happens—turning agent specifications into realistic behavior. The "Brain" is what *uses* the Persona and Memory to decide what to do or say next. It handles the complex prompt engineering, ensures actions match the persona, and validates quality before returning.
 
-  * **How It Works:** Builds a dynamic prompt from persona spec, mental state, relevant memories (episodic + semantic), and current stimulus. Sends to LLM with structured output format (JSON). Parses JSON response into action objects (TALK, THINK, DONE). Optionally validates quality (persona adherence, consistency, fluency) and regenerates if needed. Uses Mustache templates for prompt construction.
+  * **How it works:** Builds a dynamic prompt from persona spec, mental state, relevant memories (episodic + semantic), and current stimulus. Sends to LLM with structured output format (JSON). Parses JSON response into action objects (TALK, THINK, DONE). Optionally validates quality (persona adherence, consistency, fluency) and regenerates if needed. Uses Mustache templates for prompt construction.
 
-  * **Key Features to Build:**
+  * **Key features to build:**
 
     1.  **A "Prompt Builder":** This piece gathers all the information: "Who am I?" (from Persona), "What do I remember?" (from Memory), "What's happening now?" (from Current State), and "What's the stimulus?" (from input). It constructs a comprehensive system prompt and user message.
 
@@ -273,20 +282,18 @@ graph TB
 <!-- end list -->
 
 ```mermaid
-graph TB
-    A[hyplab-action-engine] --> B[Prompt Builder]
-    A --> C[Link to Translator]
-    A --> D[Response Parser]
-    A --> E[Quality Checker - Optional]
+sequenceDiagram
+    participant Agent
+    participant Brain[Action Engine]
+    participant Prompt[Prompt Builder]
+    participant LLM[LLM Client]
     
-    B --> B1[Adds Persona]
-    B --> B2[Adds Memories]
-    B --> B3[Adds Current Situation]
-    
-    E --> E1[Persona Adherence]
-    E --> E2[Self-Consistency]
-    E --> E3[Fluency Check]
-    E --> E4[Regeneration]
+    Agent->>Brain: Generate Action
+    Brain->>Prompt: Build Prompt
+    Prompt->>LLM: Send Request
+    LLM->>Brain: Return JSON
+    Brain->>Brain: Parse & Validate
+    Brain->>Agent: Return Action
 ```
 
 **Action Response Format (from LLM):**
@@ -316,11 +323,11 @@ graph TB
 
   * **What It Is:** This is the "simulation room." It's the digital space where we *put* our "Digital Agents" to live and interact. It manages agent-to-agent communication, coordinates simulation steps, and tracks time progression.
 
-  * **Why We Need It:** Agents can't just float in a void. The "Environment" is what manages the simulation. It knows who is in the room, manages time, and acts as the "conversation router." Without it, agents can't talk to each other, and we can't coordinate multi-agent interactions.
+  * **Why we need it:** Agents can't just float in a void. The "Environment" is what manages the simulation. It knows who is in the room, manages time, and acts as the "conversation router." Without it, agents can't talk to each other, and we can't coordinate multi-agent interactions.
 
-  * **How It Works:** Maintains a registry of all agents. When an agent generates an action, the environment routes it to the intended target(s). Executes steps where all agents act (in parallel or sequentially), advances simulated time, and tracks all communications for analysis. Supports broadcasting (to all agents) and targeted routing (to specific agents).
+  * **How it works:** Maintains a registry of all agents. When an agent generates an action, the environment routes it to the intended target(s). Executes steps where all agents act (in parallel or sequentially), advances simulated time, and tracks all communications for analysis. Supports broadcasting (to all agents) and targeted routing (to specific agents).
 
-  * **Key Features to Build:**
+  * **Key features to build:**
 
     1.  **A "Guest List" (Agent Registry):** A list of every "Digital Agent" currently in the simulation, with a mapping from name to agent object.
 
@@ -333,17 +340,15 @@ graph TB
 <!-- end list -->
 
 ```mermaid
-graph TB
-    A[hyplab-environment] --> B[Guest List]
-    A --> C[Conversation Router]
-    A --> D[Turn Manager]
-    A --> E[Clock]
+flowchart TB
+    Env[Environment] --> Registry[Agent Registry]
+    Env --> Router[Message Router]
+    Env --> Manager[Step Manager]
     
-    C --> C1[Broadcast - to everyone]
-    C --> C2[Targeted Route - to one person]
-    
-    D --> D1[Parallel Execution]
-    D --> D2[Sequential Execution]
+    Router --> Broadcast[Broadcast to All]
+    Router --> Target[Target Specific Agent]
+    Manager --> Parallel[Parallel Mode]
+    Manager --> Sequential[Sequential Mode]
 ```
 
 **Action Format:**
@@ -370,11 +375,11 @@ graph TB
 
   * **What It Is:** This is *our* tool, the "Director's Chair." It's not *in* the simulation; it *controls* the simulation from the outside. It manages simulation lifecycle, saves/restores state, and implements caching to avoid re-running expensive LLM calls.
 
-  * **Why We Need It:** Simulations are expensive (LLM calls) and slow. We *must* have "Save" and "Load" buttons to be efficient. The controller enables resumable simulations, state checkpoints, and hash-based caching so identical steps don't need to re-run. This makes testing 100x faster.
+  * **Why we need it:** Simulations are expensive (LLM calls) and slow. We *must* have "Save" and "Load" buttons to be efficient. The controller enables resumable simulations, state checkpoints, and hash-based caching so identical steps don't need to re-run. This makes testing 100x faster.
 
-  * **How It Works:** Manages simulation lifecycle (start, pause, stop). Tracks all agents and environments. Implements transaction boundaries (begin/checkpoint/end) for state saving. Uses hash-based caching where cache key = hash of state, so identical states return cached results. Enables state restoration from checkpoints.
+  * **How it works:** Manages simulation lifecycle (start, pause, stop). Tracks all agents and environments. Implements transaction boundaries (begin/checkpoint/end) for state saving. Uses hash-based caching where cache key = hash of state, so identical states return cached results. Enables state restoration from checkpoints.
 
-  * **Key Features to Build:**
+  * **Key features to build:**
 
     1.  **A "Save/Load" System:** The ability to "freeze" the entire simulation (every agent's mood, memory, etc.) and save it to a file, then load it back up later. This is done via JSON serialization of all agent and environment states.
 
@@ -385,16 +390,10 @@ graph TB
 <!-- end list -->
 
 ```mermaid
-graph TB
-    A[hyplab-simulation-controller] --> B[Save/Load System]
-    A --> C[Shortcut System - Caching]
-    A --> D[Start/Pause/Stop Controls]
-    
-    B --> B1[Save current state to file]
-    B --> B2[Load state from file]
-    
-    C --> C1[Checks if this exact step has been run]
-    C --> C2[If yes, skips the work and loads the result]
+flowchart LR
+    Controller[Director] --> Save[Save/Load]
+    Controller --> Cache[Cache]
+    Controller --> Lifecycle[Lifecycle]
 ```
 
 **Required Interfaces:**
@@ -443,12 +442,12 @@ With the 6 core components, our foundation is complete. We'll add two "utility" 
 Now we have our 6 core components and 2 utilities. Here is the logical order to build them, from the simplest to the most complex. This is the roadmap for the engineering team.
 
 ```mermaid
-graph TD
-    A[Step 1: Build The Translator] --> B[Step 2: Build The Digital Agent]
-    B --> C[Step 3: Build The Digital Environment]
-    C --> D[Step 4: Build The Memory Component]
-    D --> E[Step 5: Build The Brain Component]
-    E --> F[Step 6: Build The Director]
+flowchart TD
+    Step1[Step 1: Translator] --> Step2[Step 2: Digital Agent]
+    Step2 --> Step3[Step 3: Environment]
+    Step3 --> Step4[Step 4: Memory]
+    Step4 --> Step5[Step 5: Brain]
+    Step5 --> Step6[Step 6: Director]
 ```
 
 **Why this order?**
@@ -465,8 +464,6 @@ graph TD
 
 6. **The 'Director' last:** Add state management and caching. This makes the system production-ready and efficient.
 
-**Timeline:** Approximately 12-14 weeks for the core, plus 2 weeks for utilities.
-
 -----
 
 ## Chapter 4: Building Our First Products (The Use Cases)
@@ -480,25 +477,10 @@ All our products will be built using the **same 4-phase pattern**. This simple, 
 ### The Universal 4-Phase Build Plan
 
 ```mermaid
-graph TD
-    A[Phase 1: Setup] --> B[Phase 2: Simulation]
-    B --> C[Phase 3: Extraction]
-    C --> D[Phase 4: Analysis]
-    
-    A --> A1[controller.begin]
-    A --> A2[persona_factory.generate]
-    A --> A3[environment.create]
-    
-    B --> B1[agent.listen_and_act]
-    B --> B2[environment.run]
-    B --> B3[environment.broadcast]
-    
-    C --> C1[extractor.extract_from_agent]
-    C --> C2[extractor.extract_from_world]
-    
-    D --> D1[Convert to DataFrame]
-    D --> D2[Domain Analysis]
-    D --> D3[Generate Report]
+flowchart LR
+    Setup[Setup] --> Simulate[Simulate]
+    Simulate --> Extract[Extract]
+    Extract --> Analyze[Analyze]
 ```
 
 **1. Phase 1: Setup**
@@ -523,7 +505,7 @@ graph TD
 
    * Collect the simple, structured answers and find the result (e.g., "Which ad won?"). Convert to DataFrame, apply domain-specific analysis (statistics, sentiment, ranking), and generate reports.
 
-### How It Works Internally
+### How it works Internally
 
 **When an agent receives a stimulus:**
 
@@ -564,21 +546,23 @@ graph TD
   * **Core Components Used:** Director, Translator, Persona Factory, Digital Agent (x50), Memory, Brain, Digital Environment, Extraction Utility.
 
 ```mermaid
-graph TD
-    A[Start: Initialize Director] --> B[Create 50 Agents via Persona Factory]
-    B --> C[Target: Males 18-25, Sports Interest]
-    C --> D[Place Agents in Environment]
-    D --> E[Set Context: TV Broke, Need Replacement]
-    E --> F[Split Agents into 3 Groups]
-    F --> G1[Group 1: Show Ad #1]
-    F --> G2[Group 2: Show Ad #2]
-    F --> G3[Group 3: Show Ad #3]
-    G1 --> H[Agents React & Remember]
-    G2 --> H
-    G3 --> H
-    H --> I[Extract: Which Ad Did They Choose?]
-    I --> J[Analyze: Count Votes, Sentiment]
-    J --> K[Result: Ad #2 Wins, Ad #1 Most Emotional]
+sequenceDiagram
+    participant User
+    participant Director
+    participant Factory[Persona Factory]
+    participant Agents[50 Agents]
+    participant Env[Environment]
+    participant Extractor
+    
+    User->>Director: Initialize
+    User->>Factory: Create Agents
+    Factory->>Agents: Generate Personas
+    User->>Env: Add Agents
+    User->>Agents: Set Context
+    User->>Agents: Show 3 Ads
+    Agents->>Agents: React & Store
+    User->>Extractor: Extract
+    Extractor->>User: Results
 ```
 
   **How It Works:**
@@ -606,19 +590,13 @@ graph TD
   * **Core Components Used:** All the same components as Use Case 1.
 
 ```mermaid
-graph TD
-    A[Start: Initialize Director] --> B[Create 100 Agents via Persona Factory]
-    B --> C[Target: Busy Professionals, Health-Conscious]
-    C --> D[Place Agents in Environment]
-    D --> E[Set Context: At Grocery Store, Need Quick Lunch]
-    E --> F[Broadcast Product Description]
-    F --> G[Product: Ready-to-Drink Bottled Gazpacho]
-    G --> H[Include Price & Features]
-    H --> I[Agents Think & Form Opinions]
-    I --> J[Extract: Interest Level, Purchase Intent]
-    J --> K[Extract: Main Concerns, Feature Requests]
-    K --> L[Analyze: Average Interest, Purchase Rate]
-    L --> M[Result: 3/10 Interest, 80% Say Price Too High]
+flowchart TD
+    Start[Initialize] --> Create[Create Agents]
+    Create --> Setup[Set Context]
+    Setup --> Present[Present Product]
+    Present --> React[Agents React]
+    React --> Extract[Extract Data]
+    Extract --> Result[Analyze Results]
 ```
 
   **How It Works:**
@@ -646,28 +624,29 @@ graph TD
   * **Core Components Used:** All the same components, but we'll use the Digital Environment differently for multi-agent interactions.
 
 ```mermaid
-graph TD
-    A[Start: Initialize Director] --> B[Create 8 Hand-Crafted Expert Agents]
-    B --> C[Lisa: Senior Designer]
-    B --> D[Marcos: Lead Engineer]
-    B --> E[6 Other Experts]
-    C --> F[Place All in One Environment]
-    D --> F
-    E --> F
-    F --> G[Enable All-to-All Communication]
-    G --> H[Facilitator: Opening Question]
-    H --> I[What's Your Biggest Daily Problem?]
-    I --> J[Run 4 Steps: Agents Talk to Each Other]
-    J --> K[Agent 1 Shares Idea]
-    K --> L[Agent 2 Responds & Builds On It]
-    L --> M[Agent 3 Adds Different Perspective]
-    M --> N[Conversation Unfolds Naturally]
-    N --> O[Facilitator: Follow-Up Question]
-    O --> P[Add Details: How Integrate with Word?]
-    P --> Q[Run 2 More Steps]
-    Q --> R[Extract: All Ideas from Conversation]
-    R --> S[Extract: Themes, Consensus, Disagreements]
-    S --> T[Result: 5 Ideas Generated, Consensus on Idea #3]
+sequenceDiagram
+    participant Facilitator
+    participant Lisa
+    participant Marcos
+    participant Others[Other Experts]
+    participant Env[Environment]
+    
+    Facilitator->>Env: Broadcast Question
+    Env->>Lisa: Question
+    Env->>Marcos: Question
+    Env->>Others: Question
+    
+    Lisa->>Env: Shares Idea
+    Env->>Marcos: Idea
+    Marcos->>Env: Builds On It
+    Env->>Others: Conversation
+    Others->>Env: Adds Perspective
+    
+    Facilitator->>Env: Follow-up
+    Env->>Lisa: Discuss
+    Env->>Marcos: Discuss
+    
+    Facilitator->>Facilitator: Extract Results
 ```
 
   **How It Works:**
@@ -695,25 +674,12 @@ graph TD
   * **Core Components Used:** All the same components, plus statistical analysis tools.
 
 ```mermaid
-graph TD
-    A[Start: Initialize Director] --> B[Create 50 Agents via Persona Factory]
-    B --> C[Target: Americans, Age 18-65, Diverse Occupations]
-    C --> D[Place Agents in Environment]
-    D --> E[Set Context: Market Research Survey]
-    E --> F[Present Research Question]
-    F --> G[Would You Buy Ready-to-Drink Gazpacho?]
-    G --> H[Rate 1-5: Never to Certainly]
-    H --> I[Each Agent Responds Based on Personality]
-    I --> J[Agent 1: Health-Conscious, Rates 4]
-    I --> K[Agent 2: Price-Sensitive, Rates 2]
-    I --> L[Agent 3: Convenience-Focused, Rates 5]
-    J --> M[Extract All Responses]
-    K --> M
-    L --> M
-    M --> N[Extract: Name, Rating, Justification]
-    N --> O[Analyze: Response Distribution]
-    O --> P[Calculate: Percentage Positive 4-5]
-    P --> Q[Result: Market Looks Promising if >30%]
+flowchart LR
+    Create[Create Agents] --> Question[Present Question]
+    Question --> Responses[Agents Respond]
+    Responses --> Extract[Extract Data]
+    Extract --> Analyze[Calculate Stats]
+    Analyze --> Result[Get Results]
 ```
 
   **How It Works:**
@@ -741,29 +707,13 @@ graph TD
   * **Core Components Used:** All the same components, plus schema management and data validation.
 
 ```mermaid
-graph TD
-    A[Start: Initialize Director] --> B[Define Data Schema]
-    B --> C[Fields: Age, Income, Purchase Behavior]
-    B --> D[Types: Numbers, Categories, Text]
-    B --> E[Constraints: Ranges, Valid Values]
-    C --> F[Generate Personas via Factory]
-    D --> F
-    E --> F
-    F --> G[Match Target Distribution]
-    G --> H[Place Agents in Environment]
-    H --> I[Simulate Relevant Interactions]
-    I --> J[Agents Make Purchases]
-    I --> K[Agents Express Preferences]
-    I --> L[Agents Demonstrate Behaviors]
-    J --> M[Extract Structured Data]
-    K --> M
-    L --> M
-    M --> N[Match Schema Fields]
-    N --> O[Validate Data Quality]
-    O --> P[Check Realism & Consistency]
-    P --> Q[Export to CSV/JSON/Parquet]
-    Q --> R[Validate Distribution Matches Target]
-    R --> S[Result: Realistic Synthetic Dataset]
+flowchart TD
+    Schema[Define Schema] --> Generate[Generate Personas]
+    Generate --> Simulate[Simulate Interactions]
+    Simulate --> Extract[Extract Data]
+    Extract --> Validate[Validate Quality]
+    Validate --> Export[Export Data]
+    Export --> Result[Dataset Ready]
 ```
 
   **How It Works:**
@@ -804,24 +754,19 @@ Our design philosophy is simple and powerful:
 
 ```mermaid
 mindmap
-  root((hyplab-core-agent))
-    Separation of Concerns
-      Agents: Persona and Behavior
-      Environments: Interaction
-      Memory: Information Storage
-      Controllers: Lifecycle
-    Composability
-      Agents to Any Environment
-      Memory to Any Agent
-      Factories to Any Scenario
-    Extensibility
-      Custom Environments
-      Custom Action Types
-      Custom Memory Systems
-    Testability
-      Mock LLM Client
-      Test Agents Independently
-      Isolated Environments
+  root((Design Principles))
+    Separation
+      Single Responsibility
+      Independent Components
+    Composition
+      Mix & Match
+      Reusable Parts
+    Extension
+      Custom Components
+      New Use Cases
+    Testing
+      Mock Components
+      Isolated Tests
 ```
 
 ### Success Metrics

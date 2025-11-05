@@ -113,6 +113,237 @@ The key is understanding what each database is good at. Then choosing the right 
 
 Your database choice should serve your needs, not someone else's opinions.
 
+### Why do you need database data types?
+
+You created tables. You added columns. Data was stored.
+
+But then you wondered: what data types should you use? Integer? String? Decimal? Boolean? What's the difference?
+
+That's when you realized: you need to understand database data types.
+
+**Data types** define what kind of data can be stored. They enforce constraints. They optimize storage.
+
+Think of it like different containers.
+
+Without proper types, you store everything as strings. Inefficient. No validation.
+
+With proper types, you use appropriate types. Efficient. Validated.
+
+In your backend, common data types include:
+
+- **Integer** — whole numbers
+- **Decimal/Numeric** — precise decimal numbers
+- **String/Varchar** — text data
+- **Boolean** — true/false
+- **Date/Time** — date and time values
+- **JSON** — structured data
+- **UUID** — unique identifiers
+
+Type selection matters:
+- **Storage** — different types use different storage
+- **Performance** — proper types are faster
+- **Validation** — types enforce constraints
+- **Operations** — types enable operations
+
+Without proper types, data is inefficient. Validation is weak.
+
+With proper types, data is efficient. Validation is strong.
+
+Data types are fundamental. Choose the right ones.
+
+### Why do you need database views?
+
+You had tables. You queried them. Everything worked.
+
+But then you noticed: complex queries were repeated. Multiple queries joined the same tables. Business logic was scattered.
+
+That's when you realized: you need database views.
+
+**Views** are virtual tables. They're based on queries. They look like tables but contain no data. They're computed on demand.
+
+Think of it like a window.
+
+Without views, you look directly at tables. You see raw data.
+
+With views, you look through a window. You see processed data.
+
+In your backend, views include:
+
+- **Simple views** — based on single table
+- **Complex views** — based on joins, aggregations
+- **Materialized views** — pre-computed, stored results
+- **Updatable views** — can update underlying tables
+
+View benefits:
+- **Simplification** — hide complexity from queries
+- **Security** — restrict access to specific columns/rows
+- **Consistency** — same query logic everywhere
+- **Performance** — materialized views pre-compute results
+
+View use cases:
+- **Complex queries** — encapsulate complex joins
+- **Data security** — hide sensitive columns
+- **Business logic** — represent business concepts
+- **Reporting** — pre-aggregated data
+
+Materialized views:
+- **Pre-computed** — results stored, not computed on demand
+- **Faster queries** — instant results
+- **Refresh required** — need to refresh when data changes
+- **Storage cost** — takes up storage space
+
+Without views, complex queries are repeated. Logic is scattered. Maintenance is hard.
+
+With views, complex queries are encapsulated. Logic is centralized. Maintenance is easier.
+
+Views are essential for complex schemas. Use them to simplify and secure.
+
+### Why do you need database stored procedures and functions?
+
+You wrote queries. They worked. Data was retrieved.
+
+But then you noticed: business logic was in application code. Complex queries were repeated. Database operations were scattered.
+
+That's when you realized: you need stored procedures and functions.
+
+**Stored procedures** are database functions. They contain SQL logic. They're stored in the database. They're called like functions.
+
+**Functions** return values. They're used in queries. They compute values.
+
+Think of it like a recipe.
+
+Without stored procedures, you cook from scratch each time. Inefficient.
+
+With stored procedures, you follow a recipe. Efficient. Consistent.
+
+In your backend, stored procedures include:
+
+- **Business logic** — complex operations in database
+- **Performance** — executed near data, faster
+- **Security** — control access through procedures
+- **Consistency** — same logic everywhere
+
+Stored procedure benefits:
+- **Performance** — faster than application code
+- **Security** — users call procedures, not tables
+- **Consistency** — same logic across applications
+- **Maintainability** — update once, affects all
+
+Stored procedure drawbacks:
+- **Database lock-in** — harder to migrate
+- **Testing** — harder to test than application code
+- **Versioning** — harder to version control
+
+Functions:
+- **Return values** — used in SELECT statements
+- **Reusable** — use in multiple queries
+- **Computed columns** — derive values
+
+Without stored procedures, logic is in application. Database is just storage.
+
+With stored procedures, logic is in database. Database is smart.
+
+Stored procedures are powerful. Use them when appropriate.
+
+### Why do you need database triggers?
+
+You had tables. Data was inserted. Updates were made.
+
+But then you needed: automatic actions on data changes. Audit logs. Denormalized data. Cascading updates.
+
+That's when you realized: you need database triggers.
+
+**Triggers** are automatic actions. They fire on events. Insert, update, delete. They execute automatically.
+
+Think of it like an automatic response.
+
+Without triggers, you manually do things after changes. You forget sometimes.
+
+With triggers, things happen automatically. You never forget.
+
+In your backend, triggers include:
+
+- **BEFORE triggers** — execute before operation
+- **AFTER triggers** — execute after operation
+- **INSTEAD OF triggers** — replace operation (for views)
+- **Row-level triggers** — fire for each row
+- **Statement-level triggers** — fire once per statement
+
+Trigger use cases:
+- **Audit logging** — log all changes
+- **Data validation** — validate before insert/update
+- **Denormalization** — maintain denormalized data
+- **Cascading updates** — update related data
+- **Business rules** — enforce business rules
+
+Trigger benefits:
+- **Automatic** — no application code needed
+- **Consistent** — always execute
+- **Secure** — can't be bypassed
+- **Performance** — execute in database
+
+Trigger considerations:
+- **Hidden logic** — logic in database, not visible
+- **Debugging** — harder to debug
+- **Performance** — can slow down operations
+- **Complexity** — can make system complex
+
+Without triggers, you manually handle side effects. You forget sometimes. Logic is scattered.
+
+With triggers, side effects are automatic. You never forget. Logic is centralized.
+
+Triggers are powerful. Use them carefully.
+
+### Why do you need database maintenance operations?
+
+You had a database. Queries ran. Data was stored.
+
+But then you noticed: queries got slower. Indexes got bloated. Statistics were outdated.
+
+That's when you realized: you need database maintenance.
+
+**Maintenance operations** keep databases healthy. They optimize performance. They reclaim space. They update statistics.
+
+Think of it like car maintenance.
+
+Without maintenance, the car runs. But it gets slower. Less efficient.
+
+With maintenance, the car runs well. Stays fast. Stays efficient.
+
+In your backend, maintenance includes:
+
+**VACUUM (PostgreSQL):**
+- **Reclaims space** — removes dead tuples
+- **Updates statistics** — updates query planner stats
+- **Prevents bloat** — keeps tables/indexes compact
+- **Auto-vacuum** — runs automatically
+
+**ANALYZE:**
+- **Updates statistics** — helps query planner
+- **Better plans** — query planner makes better decisions
+- **Performance** — queries run faster
+
+**REINDEX:**
+- **Rebuilds indexes** — fixes corrupted indexes
+- **Reduces bloat** — reclaims index space
+- **Performance** — faster index lookups
+
+**CHECKPOINT:**
+- **Flushes data** — writes dirty pages to disk
+- **Recovery** — reduces recovery time
+- **Consistency** — ensures data is persisted
+
+Maintenance schedules:
+- **Automatic** — database handles automatically
+- **Manual** — schedule during low traffic
+- **Monitoring** — monitor when maintenance is needed
+
+Without maintenance, databases degrade. Performance suffers. Space is wasted.
+
+With maintenance, databases stay healthy. Performance is maintained. Space is used efficiently.
+
+Database maintenance is essential. Schedule it regularly.
+
 ### Why do you need to design your database schema?
 
 You had a database. You started creating tables. Users. Orders. Products. Everything seemed fine.
@@ -176,6 +407,45 @@ erDiagram
     }
 ```
 
+### Why do you need to understand HTTP methods?
+
+You built APIs. You used GET, POST, PUT, DELETE. Everything worked.
+
+But then you wondered: what's the difference? When should you use which? What about PATCH? OPTIONS? HEAD?
+
+That's when you realized: you need to understand HTTP methods.
+
+**HTTP methods** define what action to perform. They're verbs. They specify intent.
+
+Think of it like different actions.
+
+GET is like reading. You retrieve data.
+
+POST is like creating. You create new resources.
+
+In your backend, HTTP methods include:
+
+- **GET** — retrieve data (idempotent, safe)
+- **POST** — create resources (not idempotent)
+- **PUT** — update entire resource (idempotent)
+- **PATCH** — partial update (idempotent)
+- **DELETE** — delete resource (idempotent)
+- **OPTIONS** — get allowed methods
+- **HEAD** — get headers only
+
+Method selection:
+- **GET** — for reading
+- **POST** — for creating
+- **PUT** — for full updates
+- **PATCH** — for partial updates
+- **DELETE** — for deleting
+
+Without understanding methods, you use methods incorrectly. APIs are confusing.
+
+With proper methods, APIs are clear. Intent is obvious.
+
+HTTP methods are fundamental. Use them correctly.
+
 ### Why do you need to understand HTTP and HTTPS?
 
 You built a backend. You created APIs. Users could access your app.
@@ -232,6 +502,327 @@ With HTTP knowledge, you understand the foundation. You can debug issues. You ca
 
 HTTP is the language of the web. Learn it well.
 
+### Why do you need to understand HTTP headers?
+
+You built APIs. You used HTTP. Requests worked. Responses were returned.
+
+But then you wondered: what are headers? What do they do? Which headers should you use? How do you set them?
+
+That's when you realized: you need to understand HTTP headers.
+
+**HTTP headers** are metadata for requests and responses. They provide context. They control behavior. They enable features.
+
+Think of it like shipping labels.
+
+Without headers, you just send a package. No context. No instructions.
+
+With headers, you add labels. Destination, handling instructions, content type. Clear context.
+
+In your backend, headers include:
+
+**Request Headers:**
+- **Authorization** — authentication credentials
+- **Content-Type** — request body format (application/json)
+- **Accept** — response format preference
+- **User-Agent** — client information
+- **Accept-Language** — language preference
+- **Accept-Encoding** — compression preference
+- **If-Modified-Since** — conditional requests
+- **If-None-Match** — ETag validation
+
+**Response Headers:**
+- **Content-Type** — response format (application/json)
+- **Content-Length** — response size
+- **Cache-Control** — caching instructions
+- **ETag** — resource version identifier
+- **Last-Modified** — modification timestamp
+- **Set-Cookie** — set cookies
+- **Location** — redirect URL
+- **Retry-After** — when to retry after error
+
+**Custom Headers:**
+- **X-Request-ID** — request tracking
+- **X-RateLimit-Remaining** — rate limit status
+- **X-API-Version** — API version
+
+Header usage:
+- **Required headers** — Content-Type, Authorization
+- **Optional headers** — caching, compression
+- **Custom headers** — application-specific
+
+Without understanding headers, you miss features. Caching doesn't work. Compression doesn't work. Authentication fails.
+
+With proper headers, features work. Caching works. Compression works. Authentication succeeds.
+
+HTTP headers are essential. Use them correctly.
+
+### Why do you need to understand HTTP/2 and HTTP/3?
+
+You used HTTP/1.1. Requests worked. Everything was fine.
+
+But then you noticed: multiple requests required multiple connections. Headers were sent repeatedly. Performance was limited.
+
+That's when you realized: you need to understand HTTP/2 and HTTP/3.
+
+**HTTP/2** improves HTTP/1.1. It multiplexes requests. It compresses headers. It enables server push.
+
+**HTTP/3** uses QUIC. It's faster. It's more reliable. It handles network changes better.
+
+Think of it like transportation evolution.
+
+HTTP/1.1 is like a single-lane road. One request per connection.
+
+HTTP/2 is like a multi-lane highway. Multiple requests per connection.
+
+HTTP/3 is like a smart highway. Faster, more reliable.
+
+In your backend, HTTP/2 includes:
+
+- **Multiplexing** — multiple requests on one connection
+- **Header compression** — HPACK compresses headers
+- **Server push** — server pushes resources proactively
+- **Binary protocol** — more efficient than text
+- **Stream prioritization** — prioritize important requests
+
+HTTP/3 includes:
+- **QUIC protocol** — UDP-based, faster than TCP
+- **Built-in encryption** — TLS 1.3 built-in
+- **Connection migration** — handles network changes
+- **Reduced latency** — faster connection establishment
+
+HTTP/2 benefits:
+- **Faster** — multiplexing reduces latency
+- **Efficient** — header compression saves bandwidth
+- **Better UX** — server push improves performance
+
+HTTP/3 benefits:
+- **Faster** — QUIC is faster than TCP
+- **More reliable** — handles network issues better
+- **Lower latency** — faster connection setup
+
+Without HTTP/2/3, you're limited by HTTP/1.1. Performance suffers.
+
+With HTTP/2/3, you get better performance. Latency reduces. UX improves.
+
+HTTP/2 and HTTP/3 are the future. Use them for better performance.
+
+### Why do you need to understand TCP vs UDP?
+
+You understood TCP/IP. Data traveled reliably. Everything worked.
+
+But then you wondered: what about UDP? When should you use TCP? When should you use UDP?
+
+That's when you realized: you need to understand TCP vs UDP.
+
+**TCP (Transmission Control Protocol)** is reliable. It guarantees delivery. It ensures order. It's slower.
+
+**UDP (User Datagram Protocol)** is fast. It doesn't guarantee delivery. It doesn't ensure order. It's faster.
+
+Think of it like delivery services.
+
+TCP is like registered mail. Guaranteed delivery. Tracked. Slower.
+
+UDP is like regular mail. Fast. But might get lost.
+
+In your backend:
+
+**TCP:**
+- **Reliable** — guarantees delivery
+- **Ordered** — ensures order
+- **Connection-oriented** — establishes connection
+- **Error checking** — detects and corrects errors
+- **Use cases** — HTTP, database connections, file transfers
+
+**UDP:**
+- **Fast** — no connection overhead
+- **Unreliable** — no delivery guarantee
+- **Unordered** — no order guarantee
+- **Lightweight** — less overhead
+- **Use cases** — DNS, video streaming, gaming, real-time
+
+TCP vs UDP selection:
+- **TCP** — when reliability matters (HTTP, database)
+- **UDP** — when speed matters (gaming, streaming)
+- **Both** — many systems use both
+
+Without understanding TCP vs UDP, you use TCP for everything. Performance suffers when speed matters.
+
+With proper selection, you use the right protocol. Performance is optimal.
+
+TCP vs UDP knowledge is essential. Choose the right one.
+
+### Why do you need to understand DNS and TCP/IP?
+
+You typed a URL. The browser connected. The page loaded.
+
+But you wondered: how does "example.com" become an IP address? How does data travel from your server to the user's browser? What happens behind the scenes?
+
+That's when you realized: you need to understand DNS and TCP/IP.
+
+**DNS (Domain Name System)** translates domain names to IP addresses. When you type "example.com", DNS finds the IP address. Your browser connects to that IP.
+
+**TCP/IP** is how data travels over the internet. TCP ensures data arrives correctly. IP routes data to the right destination. Together, they deliver data reliably.
+
+Think of it like mailing a letter.
+
+DNS is like a phone book. You look up a name (domain). You find the address (IP). You know where to send the letter.
+
+TCP/IP is like the postal system. IP is the address system. TCP is the delivery guarantee. Together, they ensure your letter arrives correctly.
+
+In your backend:
+
+**DNS:**
+- **Domain names** — human-readable names (example.com)
+- **IP addresses** — numeric addresses (192.168.1.1)
+- **DNS resolution** — looking up IP from domain
+- **DNS caching** — storing lookups for speed
+- **DNS records** — A, AAAA, CNAME, MX records
+
+**TCP/IP:**
+- **TCP (Transmission Control Protocol)** — reliable, ordered delivery
+- **IP (Internet Protocol)** — routing data to destination
+- **Packets** — data broken into small pieces
+- **Handshakes** — establishing connections
+- **Ports** — endpoints for connections (80, 443, 3306)
+
+Without DNS, you'd need to remember IP addresses. Users can't remember numbers. UX suffers.
+
+With DNS, users type domain names. DNS resolves to IPs. UX is good.
+
+Without TCP/IP, data wouldn't travel reliably. Packets would be lost. Connections would fail.
+
+With TCP/IP, data travels reliably. Packets arrive in order. Connections are stable.
+
+DNS and TCP/IP are the foundation of the internet. Understand them to build reliable backends.
+
+### Why do you need version control and Git workflows?
+
+The code was working. Features were being added. Everything seemed fine.
+
+But then someone made a change. It broke something. You didn't know what changed. You couldn't go back. You lost work.
+
+Another time, two people edited the same file. Changes conflicted. You didn't know how to merge them. You had to start over.
+
+That's when you realized: you need version control.
+
+**Version control** tracks changes to your code. You can see what changed. You can go back to previous versions. You can work together without conflicts.
+
+**Git** is a version control system. It tracks changes. It manages branches. It enables collaboration.
+
+Think of it like a time machine for code.
+
+Without version control, you can't go back. You lose work. You can't collaborate.
+
+With version control, you can go back. You never lose work. You can collaborate easily.
+
+In your backend, Git workflows include:
+
+- **Commits** — save changes with messages
+- **Branches** — work on features separately
+- **Merge** — combine changes together
+- **Pull requests** — review changes before merging
+- **Tags** — mark important versions
+
+Common workflows:
+- **Feature branches** — each feature gets its own branch
+- **Main/master branch** — production-ready code
+- **Development branch** — integration branch
+- **Hotfix branches** — quick fixes for production
+
+Git benefits:
+- **History** — see what changed and when
+- **Collaboration** — multiple people work together
+- **Backup** — code is never lost
+- **Experimentation** — try things safely
+- **Rollback** — revert to previous versions
+
+Without version control, you risk losing work. Collaboration is hard. Debugging is difficult.
+
+With version control, you never lose work. Collaboration is easy. Debugging is simpler.
+
+Version control is essential for development. Use Git to manage your code.
+
+### Why do you need request/response serialization?
+
+You built APIs. Data was sent and received. Everything worked.
+
+But then you wondered: how is data converted? JSON? XML? Binary? What format is best?
+
+That's when you realized: you need serialization.
+
+**Serialization** converts data structures to formats for transmission. It's how data is encoded and decoded.
+
+Think of it like translation.
+
+Without serialization, data can't be transmitted. Different systems can't communicate.
+
+With serialization, data is converted to common formats. Systems communicate.
+
+In your backend, serialization includes:
+
+- **JSON** — most common, human-readable
+- **XML** — structured, verbose
+- **Protocol Buffers** — binary, efficient
+- **MessagePack** — binary, compact
+- **Avro** — schema-based
+
+Serialization considerations:
+- **Performance** — binary is faster
+- **Size** — binary is smaller
+- **Readability** — JSON is readable
+- **Compatibility** — JSON is widely supported
+
+Without serialization, data can't be transmitted. APIs don't work.
+
+With serialization, data is transmitted efficiently. APIs work.
+
+Serialization is fundamental. Use it to transmit data.
+
+### Why do you need API middleware?
+
+You built APIs. Routes handled requests. Responses were returned.
+
+But then you needed: authentication, logging, error handling, rate limiting. You added them to every route. Code was duplicated.
+
+That's when you realized: you need middleware.
+
+**Middleware** is code that runs between request and response. It processes requests. It modifies responses. It's reusable.
+
+Think of it like a processing pipeline.
+
+Without middleware, each route handles everything. Code is duplicated. Maintenance is hard.
+
+With middleware, routes use middleware. Code is shared. Maintenance is easier.
+
+In your backend, middleware includes:
+
+- **Authentication middleware** — verify tokens
+- **Logging middleware** — log requests/responses
+- **Error handling middleware** — catch and format errors
+- **Rate limiting middleware** — limit request rates
+- **Validation middleware** — validate request data
+- **CORS middleware** — handle CORS headers
+- **Compression middleware** — compress responses
+
+Middleware chain:
+- **Order matters** — middleware executes in order
+- **Can modify** — can modify request/response
+- **Can stop** — can stop request processing
+- **Can call next** — pass to next middleware
+
+Middleware patterns:
+- **Request logging** — log before processing
+- **Authentication** — verify before processing
+- **Authorization** — check permissions
+- **Validation** — validate before processing
+- **Error handling** — catch errors globally
+
+Without middleware, code is duplicated. Changes require updating many places. Maintenance is hard.
+
+With middleware, code is shared. Changes in one place. Maintenance is easier.
+
+Middleware is essential for clean APIs. Use it to reduce duplication.
+
 ### Why can't the frontend and backend just... talk?
 
 The frontend team made new pages for users. The backend team added new features to the server. Both teams worked very quickly.
@@ -279,6 +870,103 @@ sequenceDiagram
     Note over BackendAPI: ...as long as the "Dish" matches the menu.
     BackendAPI-->>Frontend: Returns predictable JSON: {"id": 123, "name": "Alex"}
 ```
+
+### Why do you need API pagination strategies?
+
+You implemented pagination. Large datasets were manageable. Everything worked.
+
+But then you wondered: page-based? Cursor-based? Offset-based? What's the difference? When should you use which?
+
+That's when you realized: you need to understand pagination strategies.
+
+**Pagination strategies** are different ways to paginate data. Each has trade-offs. Each fits different scenarios.
+
+Think of it like different ways to navigate a book.
+
+Page-based is like page numbers. Simple but can skip.
+
+Cursor-based is like bookmarks. Reliable but more complex.
+
+In your backend, pagination strategies include:
+
+**Page-based Pagination:**
+- **Format** — `?page=1&limit=50`
+- **Pros** — simple, intuitive
+- **Cons** — can skip items, performance issues with large offsets
+- **Use case** — small to medium datasets
+
+**Cursor-based Pagination:**
+- **Format** — `?cursor=abc123&limit=50`
+- **Pros** — consistent, no skipping, better performance
+- **Cons** — more complex, not intuitive
+- **Use case** — large datasets, real-time data
+
+**Offset-based Pagination:**
+- **Format** — `?offset=100&limit=50`
+- **Pros** — simple, flexible
+- **Cons** — performance degrades with large offsets
+- **Use case** — small datasets
+
+Strategy selection:
+- **Page-based** — default, simple
+- **Cursor-based** — for large datasets, real-time
+- **Offset-based** — for small datasets, simple cases
+
+Without understanding strategies, you use default. It might not be optimal.
+
+With proper strategy, you optimize pagination. Performance improves.
+
+Pagination strategies matter. Choose the right one for your needs.
+
+### Why do you need API request queuing?
+
+You built APIs. Requests were processed. Everything worked.
+
+But then traffic spiked. Requests overwhelmed the server. Some requests failed. Some timed out.
+
+You wondered: how do you handle traffic spikes? How do you prevent overload?
+
+That's when you realized: you need request queuing.
+
+**Request queuing** buffers requests. Requests wait in queue. They're processed when capacity is available.
+
+Think of it like a waiting room.
+
+Without queuing, requests are rejected when busy. Users see errors.
+
+With queuing, requests wait. They're processed when ready. Users see success.
+
+In your backend, request queuing includes:
+
+- **Request queue** — buffer incoming requests
+- **Queue management** — manage queue size
+- **Priority queues** — prioritize important requests
+- **Timeout handling** — timeout queued requests
+- **Backpressure** — reject when queue is full
+
+Queue strategies:
+- **FIFO** — first in, first out
+- **Priority** — prioritize by type
+- **Fair** — fair distribution
+- **Weighted** — weighted distribution
+
+Queuing benefits:
+- **Handles spikes** — buffer traffic spikes
+- **Prevents overload** — prevents server overload
+- **Better UX** — requests wait instead of failing
+- **Smooths traffic** — smooths traffic patterns
+
+Queue considerations:
+- **Queue size** — how many requests to queue
+- **Timeout** — when to reject queued requests
+- **Memory** — queues use memory
+- **Monitoring** — monitor queue depth
+
+Without request queuing, traffic spikes cause failures. Users see errors.
+
+With request queuing, traffic spikes are buffered. Requests are processed. Users see success.
+
+Request queuing is essential for handling spikes. Use it to prevent overload.
 
 ### Why do you need API pagination, filtering, and sorting?
 
@@ -385,6 +1073,189 @@ With idempotency, duplicate requests are safe. Data stays consistent. Users are 
 
 Batch operations and idempotency are essential for production APIs. Implement them for reliability.
 
+### Why do you need API documentation (OpenAPI/Swagger)?
+
+You built an API. It worked. Clients were using it.
+
+But then developers asked: "What endpoints are available?" "What parameters do I send?" "What response will I get?" "What errors can occur?"
+
+You wrote documentation in a README. But it got outdated. It didn't match the code. Developers were confused.
+
+That's when you realized: you need API documentation.
+
+**API documentation** describes your API. It lists endpoints. It shows request/response formats. It explains errors. It provides examples.
+
+**OpenAPI (formerly Swagger)** is a standard format for API documentation. You define your API in YAML or JSON. Tools generate interactive documentation. Clients can explore and test your API.
+
+Think of it like a product manual.
+
+Without documentation, users guess. They try things. They make mistakes.
+
+With documentation, users know exactly what to do. They understand the API. They use it correctly.
+
+In your backend, API documentation includes:
+
+- **OpenAPI specification** — machine-readable API definition
+- **Interactive docs** — Swagger UI, ReDoc
+- **Code generation** — generate client SDKs from spec
+- **Testing** — validate requests against spec
+- **Versioning** — document API versions
+
+Documentation benefits:
+- **Developer experience** — easier to understand and use
+- **Onboarding** — new developers get started quickly
+- **Contract** — documentation is the contract
+- **Testing** — can test against documentation
+- **Code generation** — generate clients automatically
+
+OpenAPI features:
+- **Endpoints** — list all endpoints
+- **Parameters** — request parameters and types
+- **Responses** — response schemas and status codes
+- **Examples** — example requests and responses
+- **Authentication** — document auth methods
+
+Without API documentation, developers struggle. They guess. They waste time.
+
+With API documentation, developers understand. They use it correctly. They're productive.
+
+API documentation is essential for production APIs. Use OpenAPI/Swagger to document your APIs.
+
+### Why do you need OAuth 2.0 and OpenID Connect?
+
+You built authentication. Users could log in. Everything worked.
+
+But then users wanted to log in with Google. Or GitHub. Or Facebook. They didn't want to create another account.
+
+You could build integrations for each service. But that's complex. You'd need to handle different APIs. You'd need to store tokens. You'd need to refresh them.
+
+That's when you realized: you need OAuth 2.0 and OpenID Connect.
+
+**OAuth 2.0** is an authorization framework. It lets users grant access to their data on other services. Users log in with Google. Your app gets access to their profile. You don't handle passwords.
+
+**OpenID Connect** builds on OAuth 2.0. It adds authentication. It provides user identity. It's OAuth 2.0 + authentication.
+
+Think of it like a hotel key card.
+
+Without OAuth, you give users a key (password). You manage keys. You're responsible for security.
+
+With OAuth, users use their own key (Google account). Google manages keys. You just verify access.
+
+In your backend, OAuth 2.0 includes:
+
+- **Authorization server** — issues tokens (Google, GitHub)
+- **Resource server** — hosts protected resources
+- **Client** — your application
+- **Access token** — grants access to resources
+- **Refresh token** — gets new access tokens
+
+OAuth 2.0 flows:
+- **Authorization Code** — for web apps (most secure)
+- **Implicit** — for single-page apps (less secure)
+- **Client Credentials** — for server-to-server
+- **Resource Owner Password** — for trusted apps (not recommended)
+
+OpenID Connect adds:
+- **ID token** — contains user identity
+- **User info endpoint** — get user profile
+- **Standard claims** — email, name, picture
+
+Benefits:
+- **User convenience** — no new accounts
+- **Security** — you don't handle passwords
+- **Trust** — users trust Google more than you
+- **Standard** — works with many providers
+
+Without OAuth, you build custom integrations. Complex. Time-consuming. Less secure.
+
+With OAuth, you use standard protocols. Simple. Fast. More secure.
+
+OAuth 2.0 and OpenID Connect are essential for modern authentication. Use them to enable social login.
+
+### Why do you need Single Sign-On (SSO)?
+
+The app had authentication. Users could log in. Everything worked.
+
+But then your company had multiple apps. Users had to log in to each one. They had multiple passwords. They forgot them. They got frustrated.
+
+That's when you realized: you need Single Sign-On (SSO).
+
+**SSO** lets users log in once. They get access to multiple apps. They don't need separate passwords. They don't need to log in repeatedly.
+
+Think of it like a master key.
+
+Without SSO, each app needs its own key. Users have many keys. They get confused.
+
+With SSO, one key opens all apps. Users have one key. They're happy.
+
+In your backend, SSO includes:
+
+- **Identity Provider (IdP)** — manages authentication (Okta, Auth0, Azure AD)
+- **Service Provider (SP)** — your application
+- **SAML** — XML-based SSO protocol
+- **OAuth 2.0/OpenID Connect** — modern SSO protocols
+- **JWT tokens** — stateless authentication tokens
+
+SSO benefits:
+- **User experience** — log in once, access everything
+- **Security** — centralized password management
+- **Administration** — manage users in one place
+- **Compliance** — easier to revoke access
+
+SSO patterns:
+- **Federated SSO** — multiple organizations
+- **Enterprise SSO** — within one organization
+- **Social SSO** — using social providers
+
+Without SSO, users have multiple logins. They forget passwords. They're frustrated.
+
+With SSO, users log in once. They access everything. They're happy.
+
+SSO is essential for enterprise applications. Use it to improve UX and security.
+
+### Why do you need Multi-Factor Authentication (MFA)?
+
+You had authentication. Users logged in with passwords. Everything seemed secure.
+
+But then accounts were compromised. Passwords were weak. They were reused. They were stolen.
+
+That's when you realized: passwords aren't enough. You need Multi-Factor Authentication (MFA).
+
+**MFA** requires multiple forms of verification. Something you know (password). Something you have (phone). Something you are (fingerprint). Attackers need multiple factors to succeed.
+
+Think of it like a bank vault.
+
+Without MFA, one key opens the vault. If someone steals the key, they get in.
+
+With MFA, you need a key and a code. Even if someone steals the key, they can't get in without the code.
+
+In your backend, MFA includes:
+
+- **Password** — something you know
+- **SMS code** — something you have (phone)
+- **Authenticator app** — something you have (TOTP)
+- **Hardware token** — something you have (YubiKey)
+- **Biometrics** — something you are (fingerprint)
+
+MFA methods:
+- **SMS** — text message codes (less secure)
+- **TOTP** — time-based codes (authenticator apps)
+- **Push notifications** — approve on device
+- **Hardware tokens** — physical devices
+- **Biometrics** — fingerprint, face
+
+MFA benefits:
+- **Security** — much harder to compromise
+- **Compliance** — required for many regulations
+- **Trust** — users feel more secure
+- **Protection** — even if password is stolen
+
+Without MFA, passwords are the only protection. Weak passwords are vulnerable. Accounts get compromised.
+
+With MFA, multiple factors protect accounts. Even weak passwords are safer. Accounts are secure.
+
+MFA is essential for sensitive applications. Use it to protect user accounts.
+
 ### Why do you need authentication and authorization?
 
 The app was working. Users could sign up, log in, and access their data.
@@ -448,6 +1319,108 @@ sequenceDiagram
     ProtectedAPI-->>Frontend: Return response
 ```
 
+### Why do you need JWT (JSON Web Tokens)?
+
+You built authentication. Users logged in. They got tokens. Everything worked.
+
+But then you wondered: what's in the token? How is it secure? How does stateless authentication work?
+
+That's when you realized: you need to understand JWT.
+
+**JWT (JSON Web Token)** is a compact, URL-safe token format. It contains claims about the user. It's signed to prevent tampering. It's self-contained.
+
+Think of it like a ticket.
+
+Without JWT, you store sessions on the server. You need to look up sessions. Server needs to remember.
+
+With JWT, the token contains everything. No server lookup needed. Stateless.
+
+In your backend, JWT includes:
+
+- **Header** — algorithm and token type
+- **Payload** — claims (user ID, roles, expiration)
+- **Signature** — prevents tampering
+
+JWT structure:
+- **Header.Payload.Signature** — three parts separated by dots
+- **Base64 encoded** — URL-safe encoding
+- **Signed** — signed with secret/key
+
+JWT benefits:
+- **Stateless** — no server-side session storage
+- **Scalable** — works across multiple servers
+- **Self-contained** — contains all needed information
+- **Standard** — widely supported
+
+JWT considerations:
+- **Size** — larger than session IDs
+- **Revocation** — harder to revoke (need blacklist)
+- **Security** — must be signed properly
+- **Expiration** — tokens should expire
+
+JWT use cases:
+- **Stateless authentication** — no server sessions
+- **API authentication** — authenticate API requests
+- **Microservices** — share authentication across services
+- **Mobile apps** — works well for mobile
+
+Without JWT, you need server-side sessions. Less scalable. More complex.
+
+With JWT, you have stateless authentication. More scalable. Simpler.
+
+JWT is essential for stateless authentication. Use it for scalable systems.
+
+### Why do you need refresh tokens?
+
+You implemented JWT. Tokens worked. Users authenticated.
+
+But then you wondered: tokens expire. Users need to log in again. Short tokens are secure but annoying. Long tokens are convenient but risky.
+
+That's when you realized: you need refresh tokens.
+
+**Refresh tokens** are long-lived tokens. They're used to get new access tokens. They're stored securely. They're rotated.
+
+**Access tokens** are short-lived. They're used for API requests. They expire quickly.
+
+Think of it like a key system.
+
+Access tokens are like daily keys. They expire daily. You need new ones.
+
+Refresh tokens are like master keys. They get you new daily keys. They last longer.
+
+In your backend, refresh tokens include:
+
+- **Long-lived** — valid for days/weeks
+- **Secure storage** — stored in httpOnly cookies
+- **Rotation** — new refresh token on each use
+- **Revocation** — can be revoked immediately
+- **Single use** — invalidated after use
+
+Token flow:
+1. **User logs in** — gets access token + refresh token
+2. **Access token expires** — client uses refresh token
+3. **New access token** — server issues new access token
+4. **New refresh token** — server issues new refresh token (rotation)
+5. **Old refresh token** — invalidated
+
+Refresh token benefits:
+- **Security** — short-lived access tokens
+- **UX** — users stay logged in
+- **Revocation** — can revoke refresh tokens
+- **Rotation** — prevents token reuse
+
+Refresh token security:
+- **HttpOnly cookies** — prevent XSS attacks
+- **Secure flag** — only over HTTPS
+- **SameSite** — prevent CSRF
+- **Rotation** — new token on each use
+
+Without refresh tokens, users log in frequently. UX suffers. Or tokens last too long. Security suffers.
+
+With refresh tokens, users stay logged in. UX is good. Access tokens are short. Security is good.
+
+Refresh tokens balance security and UX. Use them for better authentication.
+
 ### Why do you need sessions, cookies, and stateless vs stateful authentication?
 
 The app used tokens for authentication. Users logged in, got a token, and included it in every request.
@@ -491,12 +1464,62 @@ Stateless authentication is like a key. You have a key (token) that proves who y
 
 Without understanding sessions and cookies, you store tokens unsafely. You're vulnerable to attacks. You can't manage user sessions properly.
 
-With sessions and cookies, you manage authentication securely. You protect user data. You control session lifecycle.
+### Why do you need to understand HTTP cookie attributes?
 
-Choose stateful if you need immediate logout, centralized session management.
-Choose stateless if you need horizontal scaling, microservices architecture.
+You used cookies. They stored session IDs. Everything worked.
 
-Your authentication strategy should fit your needs.
+But then security issues appeared. Cookies were accessible to JavaScript. Cookies were sent over HTTP. CSRF attacks worked.
+
+You wondered: how do you secure cookies? What attributes should you use?
+
+That's when you realized: you need to understand cookie attributes.
+
+**Cookie attributes** control cookie behavior. They control security. They control scope. They control lifetime.
+
+Think of it like security settings.
+
+Without proper attributes, cookies are insecure. Vulnerable to attacks.
+
+With proper attributes, cookies are secure. Protected from attacks.
+
+In your backend, cookie attributes include:
+
+**HttpOnly:**
+- **Prevents JavaScript access** — cookies not accessible via JavaScript
+- **Prevents XSS** — prevents XSS attacks from stealing cookies
+- **Use case** — session cookies, authentication tokens
+
+**Secure:**
+- **HTTPS only** — cookies only sent over HTTPS
+- **Prevents interception** — prevents man-in-the-middle attacks
+- **Use case** — all production cookies
+
+**SameSite:**
+- **Strict** — cookies never sent cross-site
+- **Lax** — cookies sent on top-level navigation
+- **None** — cookies sent cross-site (requires Secure)
+- **Prevents CSRF** — prevents cross-site request forgery
+
+**Domain:**
+- **Scope** — which domains can access cookie
+- **Subdomain sharing** — set domain to share across subdomains
+- **Security** — restrict to specific domains
+
+**Path:**
+- **Scope** — which paths can access cookie
+- **Restriction** — restrict to specific paths
+- **Security** — limit cookie scope
+
+**Expires/Max-Age:**
+- **Lifetime** — how long cookie is valid
+- **Session cookies** — deleted when browser closes
+- **Persistent cookies** — have expiration dates
+
+Without proper attributes, cookies are insecure. Vulnerable to XSS, CSRF, interception.
+
+With proper attributes, cookies are secure. Protected from attacks.
+
+Cookie attributes are essential. Use them to secure cookies.
 
 ### Why do you need roles and permissions?
 
@@ -631,6 +1654,288 @@ Without CORS, cross-origin requests fail. Or worse, they succeed when they shoul
 With CORS, cross-origin requests are controlled. Only authorized sites can access. Security is consistent.
 
 Security headers and CORS are essential for web APIs. Use them to protect your application.
+
+### Why do you need CSRF protection?
+
+The app had authentication. Security headers were set. Everything seemed secure.
+
+But then someone reported a security issue. A malicious website was making requests to your API. Users were logged in. The requests succeeded. Data was modified.
+
+That's when you realized: you need CSRF protection.
+
+**CSRF (Cross-Site Request Forgery)** attacks trick users into making unwanted requests. A malicious site sends a request. The user's browser includes cookies. Your server thinks it's legitimate. But it's not.
+
+Think of it like a forged signature.
+
+Without CSRF protection, anyone can forge requests. They look legitimate. They succeed.
+
+With CSRF protection, you verify the request origin. Forged requests are rejected. Only legitimate requests succeed.
+
+In your backend, CSRF protection includes:
+
+- **CSRF tokens** — unique tokens for each request
+- **SameSite cookies** — restrict cookie usage
+- **Origin checking** — verify request origin
+- **Referrer validation** — check referrer headers
+- **Double-submit cookies** — match cookie and token
+
+CSRF protection methods:
+- **Token-based** — include token in form/header
+- **SameSite cookies** — prevent cross-site cookie usage
+- **Origin checking** — verify request origin header
+- **Custom headers** — require custom headers (AJAX)
+
+Without CSRF protection, malicious sites can make requests. Users are tricked. Data is compromised.
+
+With CSRF protection, malicious requests are blocked. Users are protected. Data is secure.
+
+CSRF protection is essential for state-changing operations. Use it to prevent cross-site attacks.
+
+### Why do you need to understand OWASP Top 10 vulnerabilities?
+
+The app had authentication. Security headers were set. CSRF protection was enabled.
+
+But you wondered: what else could be vulnerable? What are common attack vectors? How do you protect against them?
+
+That's when you realized: you need to understand OWASP Top 10.
+
+**OWASP Top 10** lists the most common web application vulnerabilities. It's updated regularly. It's based on real-world data. It's a security checklist.
+
+Think of it like a security audit checklist.
+
+Without knowing vulnerabilities, you don't know what to protect. You're vulnerable.
+
+With OWASP Top 10 knowledge, you know what to protect. You're secure.
+
+The OWASP Top 10 includes:
+
+1. **Broken Access Control** — users access data they shouldn't
+2. **Cryptographic Failures** — sensitive data exposed
+3. **Injection** — SQL, NoSQL, command injection
+4. **Insecure Design** — security flaws in design
+5. **Security Misconfiguration** — insecure default configurations
+6. **Vulnerable Components** — outdated dependencies
+7. **Authentication Failures** — weak authentication
+8. **Software and Data Integrity Failures** — insecure CI/CD
+9. **Security Logging Failures** — insufficient logging
+10. **Server-Side Request Forgery (SSRF)** — forcing server to make requests
+
+Protection strategies:
+- **Input validation** — validate all inputs
+- **Output encoding** — encode outputs
+- **Access control** — enforce authorization
+- **Secure defaults** — secure by default
+- **Regular updates** — keep dependencies updated
+- **Security testing** — regular security audits
+
+Without OWASP Top 10 knowledge, you're vulnerable to common attacks. Security is reactive.
+
+With OWASP Top 10 knowledge, you protect against common attacks. Security is proactive.
+
+OWASP Top 10 is essential knowledge. Use it to secure your applications.
+
+### Why do you need ORM query patterns?
+
+You used an ORM. Queries were written. Data was retrieved.
+
+But then you wondered: how do you write efficient queries? What patterns should you use? How do you avoid N+1?
+
+That's when you realized: you need to understand ORM query patterns.
+
+**ORM query patterns** are common ways to query data. They optimize queries. They prevent problems.
+
+Think of it like cooking techniques.
+
+Without patterns, you cook inefficiently. Slow. Wasteful.
+
+With patterns, you cook efficiently. Fast. Efficient.
+
+In your backend, ORM patterns include:
+
+**Eager Loading:**
+- **Load related data** — load related data in one query
+- **Prevents N+1** — avoids N+1 query problems
+- **Use case** — when you need related data
+- **Example** — load users with orders
+
+**Lazy Loading:**
+- **Load on demand** — load when accessed
+- **Can cause N+1** — can cause N+1 problems
+- **Use case** — when you might not need related data
+- **Example** — load user, load orders only if accessed
+
+**Batch Loading:**
+- **Load in batches** — load related data in batches
+- **Efficient** — more efficient than N+1
+- **Use case** — when you have many relationships
+- **Example** — load orders for multiple users
+
+**Query Optimization:**
+- **Select specific fields** — only select needed columns
+- **Limit results** — use LIMIT to limit results
+- **Use indexes** — ensure queries use indexes
+- **Avoid N+1** — use eager loading
+
+**ORM Query Examples:**
+- **Eager load** — `User.includes(:orders).find(id)`
+- **Select fields** — `User.select(:id, :name).find(id)`
+- **Batch load** — `User.find_in_batches { |batch| ... }`
+
+Without understanding patterns, you write inefficient queries. N+1 problems occur. Performance suffers.
+
+With proper patterns, you write efficient queries. N+1 problems are avoided. Performance is good.
+
+ORM query patterns are essential. Use them to write efficient queries.
+
+### Why do you need Object-Relational Mappers (ORMs)?
+
+You wrote SQL queries. They worked. Data was being stored and retrieved.
+
+But then you noticed: you were writing the same queries repeatedly. You had SQL scattered across your code. Small changes required updating multiple queries. You had to manage database connections manually.
+
+That's when you realized: you need an ORM.
+
+**ORM (Object-Relational Mapper)** maps database tables to objects in your code. Instead of writing SQL, you work with objects. The ORM generates SQL for you.
+
+Think of it like a translator.
+
+Without an ORM, you speak SQL directly. You have to know SQL well. You write a lot of code.
+
+With an ORM, you speak your programming language. The ORM translates to SQL. You write less code.
+
+In your backend, ORMs provide:
+
+- **Object mapping** — tables become classes, rows become objects
+- **Query builders** — build queries with methods instead of SQL
+- **Relationships** — define relationships between models
+- **Migrations** — manage schema changes
+- **Connection pooling** — handle connections automatically
+
+ORM benefits:
+- **Productivity** — write less code
+- **Type safety** — catch errors at compile time
+- **Maintainability** — easier to understand and modify
+- **Database agnostic** — switch databases easily
+- **Security** — built-in protection against SQL injection
+
+ORM considerations:
+- **Performance** — sometimes less efficient than raw SQL
+- **Complex queries** — may need raw SQL for complex cases
+- **Learning curve** — need to learn ORM syntax
+- **Abstraction** — may hide database details
+
+Common ORMs:
+- **Python** — SQLAlchemy, Django ORM
+- **Node.js** — Sequelize, TypeORM, Prisma
+- **Java** — Hibernate, JPA
+- **Ruby** — ActiveRecord
+- **Go** — GORM
+
+Without ORMs, you write lots of SQL. Code is repetitive. Maintenance is hard.
+
+With ORMs, you write less code. Code is cleaner. Maintenance is easier.
+
+ORMs are essential for productivity. Use them to simplify database access.
+
+### Why do you need database normalization?
+
+You designed your database. Tables were created. Data was stored.
+
+But then you noticed: data was duplicated. User addresses appeared in multiple places. Order details repeated customer information. Updates required changing data in multiple places.
+
+That's when you realized: you need database normalization.
+
+**Normalization** organizes data to reduce redundancy. You split data into related tables. You eliminate duplicate data. You maintain data integrity.
+
+Think of it like organizing files.
+
+Without normalization, files are duplicated everywhere. You update one, you forget to update others. Data becomes inconsistent.
+
+With normalization, files are in one place. You update once. Data stays consistent.
+
+In your backend, normalization includes:
+
+**First Normal Form (1NF):**
+- Each column contains atomic values
+- No repeating groups
+- Each row is unique
+
+**Second Normal Form (2NF):**
+- Meets 1NF
+- All non-key columns depend on the full primary key
+
+**Third Normal Form (3NF):**
+- Meets 2NF
+- No transitive dependencies (columns depend on non-key columns)
+
+Normalization benefits:
+- **Reduced redundancy** — data stored once
+- **Data integrity** — easier to maintain consistency
+- **Storage efficiency** — less storage needed
+- **Update efficiency** — update in one place
+
+Normalization trade-offs:
+- **More joins** — need to join tables for queries
+- **Complexity** — more tables to manage
+- **Performance** — joins can be slower
+
+Denormalization:
+- Sometimes you denormalize for performance
+- Accept some redundancy for speed
+- Common in read-heavy systems
+
+Without normalization, data is duplicated. Updates are inconsistent. Storage is wasted.
+
+With normalization, data is organized. Updates are consistent. Storage is efficient.
+
+Normalization is essential for database design. Use it to organize data properly.
+
+### Why do you need database migration rollback?
+
+You ran migrations. Schema changed. Everything worked.
+
+But then a migration broke production. The new column caused issues. The index slowed down writes. You needed to undo it.
+
+That's when you realized: you need migration rollback.
+
+**Migration rollback** undoes migrations. You can revert changes. You can go back to previous schema.
+
+Think of it like undo for database changes.
+
+Without rollback, you can't undo migrations. Changes are permanent.
+
+With rollback, you can undo migrations. Changes are reversible.
+
+In your backend, rollback includes:
+
+- **Down migrations** — reverse operations
+- **Rollback scripts** — scripts to undo changes
+- **Version control** — track migration versions
+- **Safe rollback** — ensure rollback is safe
+
+Rollback strategies:
+- **Automatic** — migration framework handles rollback
+- **Manual** — write rollback scripts manually
+- **Partial** — rollback only some migrations
+- **Full** — rollback to specific version
+
+Rollback considerations:
+- **Data loss** — rollback might lose data
+- **Dependencies** — later migrations might depend on this one
+- **Testing** — test rollback in staging
+- **Backup** — backup before rollback
+
+Rollback best practices:
+- **Always write down migrations** — every up needs a down
+- **Test rollback** — test rollback in staging
+- **Backup first** — backup before rollback
+- **Document** — document rollback procedures
+
+Without rollback, you can't fix migration mistakes. Changes are permanent.
+
+With rollback, you can fix migration mistakes. Changes are reversible.
+
+Migration rollback is essential. Use it to safely change schemas.
 
 ### Why do you need database migrations?
 
@@ -777,6 +2082,111 @@ With secrets management, secrets are protected. Access is controlled. Security i
 
 Secrets management is essential for production. Use it to protect sensitive data.
 
+### Why do you need password hashing and salting?
+
+You stored passwords. Users could log in. Everything worked.
+
+But then the database was compromised. Passwords were exposed. They were stored in plain text. Anyone could read them.
+
+That's when you realized: you need password hashing and salting.
+
+**Password hashing** converts passwords to hashes. You store hashes, not passwords. Hashes can't be reversed.
+
+**Salting** adds random data before hashing. It prevents rainbow table attacks. It makes hashes unique.
+
+Think of it like a one-way lock.
+
+Without hashing, passwords are stored in plain text. Anyone can read them.
+
+With hashing, passwords are hashed. They can't be read.
+
+In your backend, password security includes:
+
+**Hashing:**
+- **One-way function** — can't reverse hash to password
+- **Deterministic** — same input = same hash
+- **Fast** — but not too fast (prevent brute force)
+- **Algorithms** — bcrypt, Argon2, scrypt
+
+**Salting:**
+- **Random salt** — unique random value per password
+- **Prevents rainbow tables** — can't use precomputed hashes
+- **Unique hashes** — same password = different hashes
+- **Storage** — store salt with hash
+
+Password hashing process:
+1. **Generate salt** — create random salt
+2. **Combine** — combine password + salt
+3. **Hash** — hash the combination
+4. **Store** — store hash + salt
+
+Verification process:
+1. **Get salt** — retrieve salt from database
+2. **Combine** — combine input password + salt
+3. **Hash** — hash the combination
+4. **Compare** — compare with stored hash
+
+Best practices:
+- **Use bcrypt/Argon2** — strong hashing algorithms
+- **Always salt** — never hash without salt
+- **Unique salts** — different salt per password
+- **Never store plain text** — always hash passwords
+
+Without hashing, passwords are exposed. Security is compromised.
+
+With hashing, passwords are protected. Security is maintained.
+
+Password hashing is essential. Never store plain text passwords.
+
+### Why do you need data encryption at rest and in transit?
+
+You stored data. You transmitted data. Everything seemed secure.
+
+But then you wondered: is data encrypted when stored? Is it encrypted when transmitted? What if someone steals the database? What if someone intercepts network traffic?
+
+That's when you realized: you need encryption at rest and in transit.
+
+**Encryption at rest** encrypts data when stored. Even if someone steals the database, they can't read the data. They need the encryption key.
+
+**Encryption in transit** encrypts data when transmitted. Even if someone intercepts network traffic, they can't read the data. They see encrypted gibberish.
+
+Think of it like a safe and a secure courier.
+
+Encryption at rest is like a safe. Data is locked in storage. Even if stolen, it's protected.
+
+Encryption in transit is like a secure courier. Data is locked during transport. Even if intercepted, it's protected.
+
+In your backend:
+
+**Encryption at rest:**
+- **Database encryption** — encrypt database files
+- **File encryption** — encrypt files on disk
+- **Key management** — secure encryption keys
+- **Transparent encryption** — automatic encryption/decryption
+
+**Encryption in transit:**
+- **HTTPS/TLS** — encrypt HTTP traffic
+- **Database connections** — encrypt database connections
+- **API calls** — encrypt API traffic
+- **Certificate management** — manage SSL/TLS certificates
+
+Encryption methods:
+- **Symmetric encryption** — same key for encrypt/decrypt (AES)
+- **Asymmetric encryption** — public/private keys (RSA)
+- **TLS/SSL** — standard for encryption in transit
+
+Benefits:
+- **Data protection** — data is unreadable without keys
+- **Compliance** — required for many regulations (GDPR, HIPAA)
+- **Trust** — users trust encrypted systems
+- **Security** — protects against data breaches
+
+Without encryption, data is readable. If stolen, it's exposed. If intercepted, it's visible.
+
+With encryption, data is protected. If stolen, it's unreadable. If intercepted, it's encrypted.
+
+Encryption is essential for sensitive data. Use it at rest and in transit.
+
 ### Why do you need testing strategies?
 
 The code was working. Features were shipping. Users were happy.
@@ -828,6 +2238,165 @@ flowchart TD
     E2ETests -->|Pass| Deploy[Deploy to Production]
     E2ETests -->|Fail| Fix
 ```
+
+### Why do you need unit testing vs integration testing?
+
+You wrote tests. They caught bugs. Everything seemed covered.
+
+But then you noticed: some tests were slow. They hit the database. They called external APIs. They tested everything together.
+
+You wondered: what's the difference? When should you test what? How do you structure tests?
+
+That's when you realized: you need to understand unit testing vs integration testing.
+
+**Unit testing** tests individual components in isolation. You test one function. You mock dependencies. Tests are fast. Tests are focused.
+
+**Integration testing** tests components working together. You test multiple components. You use real dependencies. Tests are slower. Tests are broader.
+
+Think of it like testing a car.
+
+Unit testing is like testing the engine separately. You test it in isolation. You know exactly what's wrong if it fails.
+
+Integration testing is like testing the engine with the transmission. You test them together. You know they work together.
+
+In your backend:
+
+**Unit testing:**
+- **Scope** — test individual functions/methods
+- **Dependencies** — mock external dependencies
+- **Speed** — fast (milliseconds)
+- **Isolation** — each test is independent
+- **Purpose** — verify logic works correctly
+
+**Integration testing:**
+- **Scope** — test multiple components together
+- **Dependencies** — use real dependencies (database, APIs)
+- **Speed** — slower (seconds)
+- **Integration** — test how components work together
+- **Purpose** — verify integration works correctly
+
+Test pyramid:
+- **Many unit tests** — fast, focused, catch logic errors
+- **Some integration tests** — slower, broader, catch integration errors
+- **Few end-to-end tests** — slowest, full system, catch system errors
+
+Benefits:
+- **Unit tests** — fast feedback, easy to debug, catch logic errors
+- **Integration tests** — catch integration issues, verify real behavior
+
+Without understanding the difference, you write slow tests. You test everything together. Debugging is hard.
+
+With proper separation, you write fast unit tests. You write focused integration tests. Debugging is easier.
+
+Unit and integration testing serve different purposes. Use both for comprehensive testing.
+
+### Why do you need test doubles (mocks, stubs, and fakes)?
+
+You wrote tests. You tested functions. Everything worked.
+
+But then you noticed: tests hit the database. Tests called external APIs. Tests were slow. Tests were fragile.
+
+You wondered: how do you test without dependencies? How do you isolate tests?
+
+That's when you realized: you need test doubles.
+
+**Test doubles** replace real dependencies. They simulate behavior. They make tests fast and isolated.
+
+Think of it like stunt doubles.
+
+Without doubles, you use real actors. Expensive. Risky.
+
+With doubles, you use stunt doubles. Cheaper. Safer.
+
+In your backend, test doubles include:
+
+**Mocks:**
+- **Verify behavior** — verify methods are called
+- **Expectations** — set expectations
+- **Interactions** — verify interactions
+- **Use case** — verify behavior
+
+**Stubs:**
+- **Return values** — return predefined values
+- **No verification** — don't verify behavior
+- **Simpler** — simpler than mocks
+- **Use case** — replace dependencies
+
+**Fakes:**
+- **Working implementation** — simplified working version
+- **In-memory** — in-memory database
+- **Test double** — full replacement
+- **Use case** — integration testing
+
+Test double benefits:
+- **Fast** — no real dependencies
+- **Isolated** — test one thing
+- **Reliable** — no external failures
+- **Controlled** — control behavior
+
+Test double patterns:
+- **Dependency injection** — inject doubles
+- **Interface-based** — use interfaces
+- **Factory pattern** — create doubles easily
+
+Without test doubles, tests are slow. Tests are fragile. Tests depend on external systems.
+
+With test doubles, tests are fast. Tests are isolated. Tests don't depend on external systems.
+
+Test doubles are essential for unit testing. Use them to isolate tests.
+
+### Why do you need code quality and linting?
+
+You wrote code. It worked. Features shipped. Everything seemed fine.
+
+But then you noticed: code style was inconsistent. Some files used tabs, others used spaces. Some had long functions, others were split. Bugs were harder to find.
+
+You wondered: how do you maintain code quality? How do you enforce standards? How do you catch issues early?
+
+That's when you realized: you need code quality tools and linting.
+
+**Linting** analyzes code for errors and style issues. It catches bugs before runtime. It enforces coding standards.
+
+**Code quality tools** measure code quality. They check complexity, maintainability, and best practices.
+
+Think of it like spell-check for code.
+
+Without linting, you have typos. You have style issues. You find them later.
+
+With linting, you catch issues immediately. Code is consistent. Quality is maintained.
+
+In your backend, code quality includes:
+
+- **Linters** — ESLint, Pylint, RuboCop
+- **Formatters** — Prettier, Black, gofmt
+- **Static analysis** — SonarQube, CodeClimate
+- **Complexity analysis** — cyclomatic complexity
+- **Code coverage** — test coverage metrics
+
+Linting benefits:
+- **Early detection** — catch bugs before runtime
+- **Consistency** — enforce coding standards
+- **Quality** — maintain code quality
+- **Team standards** — consistent style across team
+
+Code quality metrics:
+- **Complexity** — cyclomatic complexity
+- **Maintainability** — maintainability index
+- **Code smells** — potential issues
+- **Duplication** — code duplication
+- **Coverage** — test coverage
+
+Best practices:
+- **Automate** — run in CI/CD
+- **Fix early** — fix issues immediately
+- **Team standards** — agree on standards
+- **Gradual adoption** — adopt gradually
+
+Without code quality tools, code degrades. Bugs accumulate. Maintenance is hard.
+
+With code quality tools, code stays clean. Bugs are caught early. Maintenance is easier.
+
+Code quality tools are essential. Use them to maintain quality.
 
 ---
 
@@ -946,6 +2515,65 @@ With cache invalidation, your cache stays fresh. Users see current data. Your ca
 
 Cache invalidation is hard. But it's essential. Get it right, and caching works beautifully.
 
+### Why do you need to understand database index types?
+
+You created indexes. Queries were faster. But you wondered: what types of indexes exist? When should you use which?
+
+That's when you realized: you need to understand index types.
+
+**Index types** are different ways to organize data for fast lookups. Each type has different strengths. Each type fits different use cases.
+
+Think of it like different types of catalogs.
+
+A phone book index is alphabetical. Good for names.
+
+A library index is by topic. Good for subjects.
+
+In your backend, index types include:
+
+**B-tree Index:**
+- **Structure** — balanced tree structure
+- **Use case** — general purpose, most common
+- **Supports** — equality, range queries
+- **Examples** — PostgreSQL, MySQL default
+
+**Hash Index:**
+- **Structure** — hash table
+- **Use case** — exact matches only
+- **Supports** — equality only
+- **Examples** — PostgreSQL hash indexes
+
+**Bitmap Index:**
+- **Structure** — bitmap for each value
+- **Use case** — low-cardinality columns
+- **Supports** — equality, multiple conditions
+- **Examples** — Oracle, some NoSQL
+
+**Full-text Index:**
+- **Structure** — optimized for text search
+- **Use case** — text search, search engines
+- **Supports** — text matching, relevance
+- **Examples** — PostgreSQL GIN, Elasticsearch
+
+**Composite Index:**
+- **Structure** — multiple columns
+- **Use case** — queries on multiple columns
+- **Supports** — multi-column queries
+- **Examples** — all databases
+
+Index type selection:
+- **B-tree** — default choice, most versatile
+- **Hash** — only for exact matches
+- **Bitmap** — low-cardinality columns
+- **Full-text** — text search
+- **Composite** — multiple columns
+
+Without understanding types, you use default indexes. They might not be optimal.
+
+With proper types, you choose optimal indexes. Performance improves.
+
+Index types matter. Choose the right one for your needs.
+
 ### Why do you need database indexes?
 
 You wrote a query to find users by email. It worked. For ten users.
@@ -992,6 +2620,145 @@ Without indexes, queries are slow. As data grows, performance degrades.
 With indexes, queries are fast. Your database scales with your data.
 
 Indexes are performance. Use them wisely.
+
+### Why do you need to understand database query plans?
+
+You wrote a query. It worked. But you wondered: how does the database execute it? Is it using indexes? Is it scanning the whole table?
+
+That's when you realized: you need to understand query plans.
+
+**Query plans** show how the database executes queries. You see which indexes are used. You see which operations are performed. You see the cost.
+
+Think of it like a GPS route.
+
+Without query plans, you don't know the route. You just know you arrived.
+
+With query plans, you see the route. You know if it's efficient.
+
+In your backend, query plans include:
+
+- **EXPLAIN** — see query execution plan
+- **Index usage** — which indexes are used
+- **Table scans** — full table scans vs index scans
+- **Join algorithms** — how joins are performed
+- **Cost estimates** — estimated execution cost
+
+Query plan elements:
+- **Seq Scan** — sequential scan (slow)
+- **Index Scan** — index scan (fast)
+- **Index Only Scan** — index only (fastest)
+- **Nested Loop** — nested loop join
+- **Hash Join** — hash join
+- **Sort** — sorting operation
+
+Using query plans:
+- **EXPLAIN** — see plan
+- **EXPLAIN ANALYZE** — see plan and actual execution
+- **EXPLAIN VERBOSE** — detailed plan
+- **EXPLAIN BUFFERS** — see buffer usage
+
+Optimization steps:
+1. **Run EXPLAIN** — see the plan
+2. **Identify bottlenecks** — find slow operations
+3. **Add indexes** — if missing indexes
+4. **Rewrite query** — if query is inefficient
+5. **Verify** — run EXPLAIN again
+
+Without query plans, you optimize blindly. You don't know what's slow.
+
+With query plans, you optimize precisely. You know exactly what's slow.
+
+Query plans are essential for optimization. Use them to improve queries.
+
+### Why do you need database materialized views?
+
+You had views. They simplified queries. Everything worked.
+
+But then complex views were slow. They computed on demand. They joined many tables. They took seconds.
+
+That's when you realized: you need materialized views.
+
+**Materialized views** are pre-computed views. They store results. They're fast. They need refreshing.
+
+Think of it like a cache for views.
+
+Without materialized views, views compute on demand. Slow for complex queries.
+
+With materialized views, views are pre-computed. Fast. Instant results.
+
+In your backend, materialized views include:
+
+- **Pre-computed** — results stored in table
+- **Fast queries** — instant results
+- **Refresh required** — need to refresh when data changes
+- **Storage cost** — takes up storage space
+
+Materialized view benefits:
+- **Performance** — instant results
+- **Complex queries** — pre-compute complex joins/aggregations
+- **Reporting** — fast reports
+- **Analytics** — fast analytics queries
+
+Materialized view trade-offs:
+- **Storage** — takes up space
+- **Refresh** — need to refresh when data changes
+- **Staleness** — data might be slightly stale
+- **Complexity** — more complex than regular views
+
+Refresh strategies:
+- **Manual refresh** — refresh on demand
+- **Scheduled refresh** — refresh on schedule
+- **Incremental refresh** — refresh only changes
+- **Real-time refresh** — refresh on data changes
+
+Without materialized views, complex queries are slow. Users wait.
+
+With materialized views, complex queries are fast. Users get instant results.
+
+Materialized views are essential for complex queries. Use them for performance.
+
+### Why do you need database full-text search?
+
+You had search. Users could search. Everything worked.
+
+But then search was slow. It couldn't handle typos. It couldn't rank results. It couldn't search across fields.
+
+That's when you realized: you need full-text search.
+
+**Full-text search** searches text content. It indexes words. It ranks results. It handles typos.
+
+Think of it like a search engine.
+
+Without full-text search, you search exact matches. Slow. Limited.
+
+With full-text search, you search intelligently. Fast. Flexible.
+
+In your backend, full-text search includes:
+
+- **Text indexing** — index text content
+- **Word matching** — match words, not exact strings
+- **Ranking** — rank results by relevance
+- **Fuzzy matching** — handle typos
+- **Stemming** — match word variations
+
+Full-text search features:
+- **Relevance ranking** — rank by relevance
+- **Fuzzy search** — handle typos
+- **Phrase search** — search exact phrases
+- **Boolean operators** — AND, OR, NOT
+- **Field search** — search specific fields
+
+Full-text search tools:
+- **PostgreSQL** — built-in full-text search
+- **Elasticsearch** — dedicated search engine
+- **Algolia** — hosted search
+- **Meilisearch** — fast search engine
+
+Without full-text search, search is basic. Users can't find things easily.
+
+With full-text search, search is intelligent. Users find things easily.
+
+Full-text search is essential for search features. Use it for better UX.
 
 ### Why do you need database query optimization?
 
@@ -1132,6 +2899,93 @@ Without deadlock handling, deadlocks cause failures. Transactions abort. Users s
 With deadlock handling, deadlocks are detected and resolved. Transactions retry. Users see success.
 
 Locks and deadlocks are inevitable in concurrent systems. Understand them. Handle them. Your system will be stable.
+
+### Why do you need database connection limits per user?
+
+You had connection pooling. Connections were managed. Everything worked.
+
+But then you noticed: some users opened too many connections. They consumed all connections. Other users couldn't connect.
+
+That's when you realized: you need connection limits per user.
+
+**Connection limits per user** restrict how many connections each user can have. They prevent one user from consuming all connections.
+
+Think of it like a restaurant reservation.
+
+Without limits, one person books all tables. Others can't eat.
+
+With limits, each person gets a fair share. Everyone can eat.
+
+In your backend, connection limits include:
+
+- **Per-user limits** — maximum connections per user
+- **Per-application limits** — maximum per application
+- **Global limits** — total connections
+- **Connection timeout** — when to close idle connections
+
+Connection limit benefits:
+- **Fair usage** — prevents one user from consuming all
+- **Resource protection** — protects database resources
+- **Stability** — prevents connection exhaustion
+- **Monitoring** — track connection usage
+
+Without connection limits, one user can exhaust connections. Other users are blocked.
+
+With connection limits, connections are protected. All users can connect.
+
+Connection limits are essential. Use them to protect resources.
+
+### Why do you need database connection string parameters?
+
+You connected to databases. Connections worked. Everything was fine.
+
+But then you wondered: what parameters can you set? Connection timeout? SSL mode? Pool size?
+
+That's when you realized: you need to understand connection string parameters.
+
+**Connection string parameters** configure database connections. They control behavior. They optimize connections.
+
+Think of it like car settings.
+
+Without parameters, you use defaults. Might not be optimal.
+
+With parameters, you configure connections. Optimized for your needs.
+
+In your backend, connection parameters include:
+
+**Connection parameters:**
+- **host** — database host
+- **port** — database port
+- **database** — database name
+- **user** — username
+- **password** — password
+- **sslmode** — SSL mode (require, prefer, disable)
+
+**Timeout parameters:**
+- **connect_timeout** — connection timeout
+- **command_timeout** — query timeout
+- **idle_timeout** — idle connection timeout
+
+**Pool parameters:**
+- **max_connections** — maximum connections
+- **min_connections** — minimum connections
+- **pool_size** — connection pool size
+
+**Performance parameters:**
+- **application_name** — identify application
+- **statement_cache_size** — prepared statement cache
+- **prepared_statement_cache_queries** — cache queries
+
+Connection string format:
+```
+postgresql://user:password@host:port/database?sslmode=require&connect_timeout=10
+```
+
+Without understanding parameters, you use defaults. Connections might not be optimal.
+
+With proper parameters, you optimize connections. Performance improves.
+
+Connection string parameters are essential. Use them to optimize connections.
 
 ### Why do you need database connection pooling?
 
@@ -1307,6 +3161,64 @@ With scheduled tasks, maintenance is automated. Tasks run reliably. Systems stay
 
 Scheduled tasks are essential for production systems. Use them to automate routine work.
 
+### Why do you need health check strategies?
+
+You implemented health checks. The system knew if the app was ready. Everything worked.
+
+But then you wondered: what should health checks check? Database? Cache? External services? How often should they run? What if they're slow?
+
+That's when you realized: you need health check strategies.
+
+**Health check strategies** define what to check and how. Different checks for different purposes. Different frequencies for different checks.
+
+Think of it like different types of health checks.
+
+A quick check is like checking your pulse. Fast. Frequent.
+
+A comprehensive check is like a full medical exam. Slow. Less frequent.
+
+In your backend, health check types include:
+
+**Liveness Probe:**
+- **Purpose** — is the app running?
+- **Checks** — process is alive
+- **Frequency** — frequent (every few seconds)
+- **Action** — restart if fails
+- **Use case** — detect crashes
+
+**Readiness Probe:**
+- **Purpose** — is the app ready?
+- **Checks** — database connected, cache working, dependencies ready
+- **Frequency** — moderate (every 10-30 seconds)
+- **Action** — don't send traffic if not ready
+- **Use case** — prevent traffic before ready
+
+**Startup Probe:**
+- **Purpose** — is the app starting?
+- **Checks** — app is initializing
+- **Frequency** — frequent during startup
+- **Action** — wait before marking ready
+- **Use case** — handle slow startup
+
+Health check endpoints:
+- **Basic** — `/health` — simple check
+- **Liveness** — `/health/live` — process alive
+- **Readiness** — `/health/ready` — ready for traffic
+- **Detailed** — `/health/detailed` — comprehensive check
+
+Health check best practices:
+- **Fast** — respond quickly
+- **Lightweight** — don't overload system
+- **Meaningful** — check what matters
+- **Cached** — cache results briefly
+- **Timeout** — set reasonable timeouts
+
+Without health check strategies, you check everything. Checks are slow. System is overloaded.
+
+With health check strategies, you check appropriately. Checks are fast. System stays healthy.
+
+Health check strategies are essential. Use them to monitor effectively.
+
 ### Why do you need health checks and graceful shutdowns?
 
 The app was running. Users were using it. Everything seemed fine.
@@ -1359,6 +3271,122 @@ Without graceful shutdowns, requests are killed. Users see errors. Data is lost.
 With graceful shutdowns, requests complete. Users see success. Data is preserved.
 
 Health checks and graceful shutdowns are essential for production. Use them for reliable deployments.
+
+### Why do you need to understand metric types?
+
+You had monitoring. Metrics were collected. Dashboards showed numbers.
+
+But then you wondered: what types of metrics exist? What's a counter? What's a gauge? What's a histogram?
+
+That's when you realized: you need to understand metric types.
+
+**Metric types** categorize different kinds of measurements. Each type has different semantics. Each type is used differently.
+
+Think of it like different types of measurements.
+
+A counter is like an odometer. It only goes up.
+
+A gauge is like a speedometer. It goes up and down.
+
+In your backend, metric types include:
+
+**Counters:**
+- **Monotonic** — only increases
+- **Reset** — resets to zero
+- **Use case** — request count, error count
+- **Examples** — total requests, total errors
+
+**Gauges:**
+- **Current value** — can increase or decrease
+- **Snapshot** — value at a point in time
+- **Use case** — current memory, active connections
+- **Examples** — CPU usage, memory usage
+
+**Histograms:**
+- **Distribution** — distribution of values
+- **Percentiles** — p50, p95, p99
+- **Use case** — response times, request sizes
+- **Examples** — response time distribution
+
+**Summaries:**
+- **Distribution** — like histograms
+- **Quantiles** — calculated quantiles
+- **Use case** — response times
+- **Examples** — latency quantiles
+
+Metric type selection:
+- **Counters** — for counting events
+- **Gauges** — for current values
+- **Histograms** — for distributions
+- **Summaries** — for quantiles
+
+Without understanding types, you use wrong types. Metrics are misleading.
+
+With proper types, you use correct types. Metrics are accurate.
+
+Metric types are essential. Use them correctly.
+
+### Why do you need to understand log levels?
+
+You had logging. Events were logged. Everything was recorded.
+
+But then logs were overwhelming. Too much information. Hard to find errors. Hard to debug.
+
+You wondered: how do you control what gets logged? How do you filter logs?
+
+That's when you realized: you need log levels.
+
+**Log levels** categorize log messages by importance. They control what gets logged. They help filter logs.
+
+Think of it like a priority system.
+
+Without levels, everything is logged. Hard to find important messages.
+
+With levels, you filter by importance. Easy to find important messages.
+
+In your backend, log levels include:
+
+**DEBUG:**
+- **Detail** — detailed information for debugging
+- **Verbose** — very detailed
+- **Use case** — development, troubleshooting
+- **Example** — function entry/exit, variable values
+
+**INFO:**
+- **General** — general information
+- **Normal** — normal operation
+- **Use case** — production logging
+- **Example** — user logged in, request processed
+
+**WARN:**
+- **Warning** — something unusual happened
+- **Non-critical** — doesn't stop operation
+- **Use case** — potential issues
+- **Example** — deprecated API used, slow query
+
+**ERROR:**
+- **Error** — error occurred
+- **Recoverable** — operation can continue
+- **Use case** — errors that are handled
+- **Example** — validation error, retry failed
+
+**FATAL/CRITICAL:**
+- **Critical** — critical error
+- **Unrecoverable** — operation cannot continue
+- **Use case** — system failures
+- **Example** — database connection lost, out of memory
+
+Log level usage:
+- **Development** — DEBUG level
+- **Production** — INFO level or higher
+- **Troubleshooting** — DEBUG level temporarily
+- **Monitoring** — WARN and above
+
+Without log levels, logs are overwhelming. Hard to find important messages.
+
+With log levels, logs are manageable. Easy to find important messages.
+
+Log levels are essential. Use them to control logging.
 
 ### Why do you need monitoring and observability?
 
@@ -1648,6 +3676,97 @@ sequenceDiagram
     end
 ```
 
+### Why do you need build processes?
+
+You wrote code. It worked locally. You deployed it.
+
+But then you wondered: how do you build the code? How do you package it? How do you ensure consistency?
+
+That's when you realized: you need build processes.
+
+**Build processes** compile, test, and package code. They create deployable artifacts. They ensure consistency.
+
+Think of it like a factory.
+
+Without build processes, you build manually. Inconsistent. Error-prone.
+
+With build processes, you build automatically. Consistent. Reliable.
+
+In your backend, build processes include:
+
+- **Compilation** — compile source code
+- **Testing** — run tests
+- **Packaging** — create deployable artifacts
+- **Dependencies** — download dependencies
+- **Optimization** — minify, compress
+- **Versioning** — tag artifacts
+
+Build artifacts:
+- **Executables** — compiled binaries
+- **Containers** — Docker images
+- **Packages** — JAR, wheel, npm packages
+- **Archives** — tar, zip files
+
+Build tools:
+- **Make** — classic build tool
+- **Gradle/Maven** — Java build tools
+- **npm/yarn** — Node.js build tools
+- **Docker** — container builds
+
+Build best practices:
+- **Reproducible** — same inputs = same outputs
+- **Fast** — incremental builds
+- **Cached** — cache dependencies
+- **Versioned** — version artifacts
+
+Without build processes, builds are manual. Inconsistent. Error-prone.
+
+With build processes, builds are automated. Consistent. Reliable.
+
+Build processes are essential. Use them to create artifacts.
+
+### Why do you need artifact management?
+
+You built code. Artifacts were created. Everything worked.
+
+But then you wondered: where do you store artifacts? How do you version them? How do you share them?
+
+That's when you realized: you need artifact management.
+
+**Artifact management** stores and manages build artifacts. It versions artifacts. It enables sharing.
+
+Think of it like a warehouse.
+
+Without artifact management, artifacts are scattered. Hard to find. Hard to version.
+
+With artifact management, artifacts are organized. Easy to find. Easy to version.
+
+In your backend, artifact management includes:
+
+- **Artifact storage** — store built artifacts
+- **Versioning** — version artifacts
+- **Distribution** — distribute artifacts
+- **Dependencies** — manage dependencies
+- **Repositories** — organize artifacts
+
+Artifact repositories:
+- **Maven Central** — Java artifacts
+- **npm Registry** — Node.js packages
+- **Docker Hub** — container images
+- **Private repos** — internal artifacts
+
+Artifact management benefits:
+- **Versioning** — track artifact versions
+- **Distribution** — share artifacts easily
+- **Dependencies** — manage dependencies
+- **Reproducibility** — use exact versions
+
+Without artifact management, artifacts are scattered. Versioning is hard. Sharing is difficult.
+
+With artifact management, artifacts are organized. Versioning is easy. Sharing is simple.
+
+Artifact management is essential. Use it to manage builds.
+
 ### Why do you need CI/CD pipelines?
 
 The team was shipping code. They wrote features, tested them locally, and deployed them manually.
@@ -1778,6 +3897,110 @@ With deployment strategies, deployments are safe. Few users affected by bugs. Ro
 
 Choose the right strategy for your needs. Start simple. Evolve as you grow.
 
+### Why do you need rate limiting strategies (token bucket, sliding window)?
+
+You implemented rate limiting. Requests were throttled. Abuse was prevented.
+
+But then you wondered: how does rate limiting work? What algorithms are used? How do you choose the right strategy?
+
+That's when you realized: you need to understand rate limiting strategies.
+
+**Rate limiting** controls how many requests a client can make. Different algorithms have different behaviors. Some are simple. Some are complex. Some are more accurate.
+
+Think of it like a water faucet.
+
+Token bucket is like a faucet with a bucket. Tokens accumulate. You use tokens for requests. If bucket is empty, you wait.
+
+Sliding window is like a moving window. You count requests in a time window. As time passes, window slides. Old requests drop out.
+
+In your backend, rate limiting strategies include:
+
+**Token Bucket:**
+- **Tokens** — accumulate at a rate
+- **Bucket size** — maximum tokens
+- **Request cost** — each request costs tokens
+- **Behavior** — allows bursts, smooths over time
+
+**Sliding Window:**
+- **Time window** — count requests in window
+- **Window slides** — moves with time
+- **Accuracy** — more accurate than fixed window
+- **Complexity** — more complex to implement
+
+**Fixed Window:**
+- **Time window** — fixed time period
+- **Request count** — reset at window boundary
+- **Simplicity** — simple to implement
+- **Bursts** — allows bursts at window start
+
+**Leaky Bucket:**
+- **Bucket** — fixed size bucket
+- **Leak rate** — requests leak at constant rate
+- **Behavior** — smooths traffic, no bursts
+- **Use case** — when you need steady rate
+
+Each strategy has trade-offs:
+- **Token bucket** — allows bursts, smooths traffic
+- **Sliding window** — accurate, complex
+- **Fixed window** — simple, allows bursts
+- **Leaky bucket** — steady rate, no bursts
+
+Without understanding strategies, you choose wrong algorithm. Rate limiting doesn't work well.
+
+With proper strategy, you choose right algorithm. Rate limiting works effectively.
+
+Rate limiting strategies are essential knowledge. Choose the right one for your needs.
+
+### Why do you need rate limiting response headers?
+
+You implemented rate limiting. Requests were throttled. Everything worked.
+
+But then clients asked: how many requests can I make? How many are left? When can I retry?
+
+That's when you realized: you need rate limiting response headers.
+
+**Rate limiting headers** tell clients about rate limits. They communicate limits. They help clients handle limits.
+
+Think of it like a sign.
+
+Without headers, clients don't know limits. They guess. They fail.
+
+With headers, clients know limits. They can adapt. They succeed.
+
+In your backend, rate limiting headers include:
+
+**X-RateLimit-Limit:**
+- **Total limit** — total requests allowed
+- **Example** — `X-RateLimit-Limit: 100`
+- **Meaning** — 100 requests per window
+
+**X-RateLimit-Remaining:**
+- **Remaining requests** — requests left in window
+- **Example** — `X-RateLimit-Remaining: 45`
+- **Meaning** — 45 requests remaining
+
+**X-RateLimit-Reset:**
+- **Reset time** — when limit resets
+- **Example** — `X-RateLimit-Reset: 1640995200`
+- **Meaning** — Unix timestamp of reset
+
+**Retry-After:**
+- **When to retry** — seconds until retry allowed
+- **Example** — `Retry-After: 60`
+- **Meaning** — retry after 60 seconds
+
+Rate limiting header benefits:
+- **Client awareness** — clients know limits
+- **Better UX** — clients can show progress
+- **Compliance** — follows standards
+- **Debugging** — easier to debug rate limit issues
+
+Without headers, clients don't know limits. They guess. They fail randomly.
+
+With headers, clients know limits. They can adapt. They succeed.
+
+Rate limiting headers are essential. Use them to communicate limits.
+
 ### Why do you need rate limiting?
 
 The API was working. Users were making requests. Everything was fine.
@@ -1837,6 +4060,88 @@ sequenceDiagram
         RateLimiter-->>User: Return 429 Too Many Requests
     end
 ```
+
+### Why do you need database backup scheduling?
+
+You implemented backups. Data was backed up. Everything seemed safe.
+
+But then you wondered: when should backups run? How often? What if backups conflict with traffic?
+
+That's when you realized: you need backup scheduling.
+
+**Backup scheduling** runs backups automatically. It schedules backups during low traffic. It ensures backups run regularly.
+
+Think of it like a maintenance schedule.
+
+Without scheduling, backups are manual. You forget sometimes. Inconsistent.
+
+With scheduling, backups are automatic. You never forget. Consistent.
+
+In your backend, backup scheduling includes:
+
+- **Schedule** — when to run backups (daily, weekly)
+- **Time** — time of day (low traffic hours)
+- **Frequency** — how often (hourly, daily, weekly)
+- **Retention** — how long to keep backups
+- **Verification** — verify backups succeeded
+
+Scheduling strategies:
+- **Daily backups** — full backup daily
+- **Incremental backups** — incremental between full
+- **Point-in-time** — continuous backups
+- **On-demand** — manual backups when needed
+
+Backup scheduling considerations:
+- **Traffic patterns** — schedule during low traffic
+- **Storage** — backup storage requirements
+- **Duration** — how long backups take
+- **Impact** — backup impact on performance
+
+Without backup scheduling, backups are inconsistent. You risk losing data.
+
+With backup scheduling, backups are consistent. Data is protected.
+
+Backup scheduling is essential. Use it to protect data.
+
+### Why do you need database point-in-time recovery?
+
+You had backups. Data was backed up. Everything seemed safe.
+
+But then you needed: restore to a specific moment. Recover from a bad update. Recover to before corruption.
+
+That's when you realized: you need point-in-time recovery.
+
+**Point-in-time recovery** restores data to a specific moment. You use backups and transaction logs. You replay to the desired time.
+
+Think of it like a time machine.
+
+Without point-in-time recovery, you restore to backup time. You lose recent data.
+
+With point-in-time recovery, you restore to any moment. You lose nothing.
+
+In your backend, point-in-time recovery includes:
+
+- **Backups** — full backups as starting points
+- **Transaction logs** — WAL (Write-Ahead Log) or binlogs
+- **Replay** — replay transactions to desired time
+- **Recovery** — restore to specific timestamp
+
+Point-in-time recovery process:
+1. **Restore backup** — restore full backup
+2. **Replay logs** — replay transaction logs to desired time
+3. **Verify** — verify data is correct
+4. **Switch** — switch to recovered database
+
+Point-in-time recovery benefits:
+- **Precise recovery** — recover to exact moment
+- **Minimal data loss** — lose only transactions after recovery point
+- **Flexibility** — recover to any point in time
+
+Without point-in-time recovery, you lose data between backups. Recovery is limited.
+
+With point-in-time recovery, you recover to any moment. Data loss is minimal.
+
+Point-in-time recovery is essential for critical systems. Use it for precise recovery.
 
 ### Why do you need backups and disaster recovery?
 
@@ -1929,6 +4234,47 @@ With webhooks, you receive events in real-time. You're efficient. You're respons
 
 Webhooks connect systems. Use them to build integrations.
 
+### Why do you need API response streaming?
+
+You built APIs. They returned data. Everything worked.
+
+But then you needed: return large datasets. Stream responses. Return data as it's generated.
+
+That's when you realized: you need response streaming.
+
+**Response streaming** sends data as it's generated. You don't wait for all data. You send chunks. Client receives incrementally.
+
+Think of it like a water hose.
+
+Without streaming, you fill a bucket, then pour. You wait for everything.
+
+With streaming, you turn on the hose. Water flows continuously.
+
+In your backend, response streaming includes:
+
+- **Chunked responses** — send data in chunks
+- **Streaming API** — stream large responses
+- **Real-time data** — stream data as it's generated
+- **Memory efficient** — don't load everything in memory
+
+Streaming use cases:
+- **Large datasets** — return large datasets efficiently
+- **Real-time data** — stream real-time updates
+- **File downloads** — stream file downloads
+- **Long-running operations** — stream progress
+
+Streaming benefits:
+- **Memory efficient** — don't load all data in memory
+- **Faster first byte** — client receives data quickly
+- **Better UX** — users see progress
+- **Scalability** — handle large responses
+
+Without streaming, you load all data in memory. Memory usage is high. First byte is slow.
+
+With streaming, you send data incrementally. Memory usage is low. First byte is fast.
+
+Response streaming is essential for large responses. Use it for efficiency.
+
 ### Why do you need request and response compression?
 
 The API was working. Data was being sent. Responses were being returned.
@@ -1979,6 +4325,58 @@ Without compression, responses are large. Transfer is slow. Costs are high.
 With compression, responses are smaller. Transfer is fast. Costs are lower.
 
 Compression is essential for production APIs. Enable it to improve performance.
+
+### Why do you need exponential backoff strategies?
+
+You implemented retries. Failed requests were retried. Everything worked.
+
+But then you noticed: retries happened too quickly. They overwhelmed failing services. They made problems worse.
+
+You wondered: how do you retry intelligently? How long should you wait?
+
+That's when you realized: you need exponential backoff.
+
+**Exponential backoff** increases wait time between retries. Wait 1 second, then 2 seconds, then 4 seconds. Gives services time to recover.
+
+Think of it like being polite.
+
+Without backoff, you retry immediately. Overwhelming. Rude.
+
+With backoff, you wait longer each time. Polite. Gives time to recover.
+
+In your backend, backoff strategies include:
+
+**Exponential Backoff:**
+- **Wait time** — 1s, 2s, 4s, 8s, 16s
+- **Formula** — base * 2^attempt
+- **Max wait** — cap maximum wait time
+- **Use case** — standard retry strategy
+
+**Linear Backoff:**
+- **Wait time** — 1s, 2s, 3s, 4s, 5s
+- **Formula** — base * attempt
+- **Use case** — simpler strategy
+
+**Fixed Backoff:**
+- **Wait time** — same wait each time
+- **Use case** — simple cases
+
+**Jitter:**
+- **Randomness** — add randomness to wait time
+- **Prevents thundering herd** — prevents synchronized retries
+- **Use case** — when many clients retry
+
+Backoff parameters:
+- **Initial delay** — first retry delay
+- **Max delay** — maximum wait time
+- **Max attempts** — maximum retry count
+- **Multiplier** — how much to increase delay
+
+Without exponential backoff, retries overwhelm services. Problems get worse.
+
+With exponential backoff, retries are polite. Services have time to recover.
+
+Exponential backoff is essential for retries. Use it to retry intelligently.
 
 ### Why do you need request timeouts and retries?
 
@@ -2120,6 +4518,112 @@ graph TB
         S3 -.-> DB
     end
 ```
+
+### Why do you need a reverse proxy?
+
+You had multiple servers. You had a load balancer. Everything was working.
+
+But then you needed SSL termination. You needed request routing. You needed static file serving. You needed security features.
+
+The application server couldn't handle it all. You needed something in front.
+
+That's when you realized: you need a reverse proxy.
+
+**Reverse proxy** sits between clients and servers. It receives requests from clients. It forwards them to servers. It handles SSL, routing, and security.
+
+Think of it like a receptionist.
+
+Without a reverse proxy, clients talk directly to servers. Servers handle everything. Overwhelming.
+
+With a reverse proxy, clients talk to the proxy. The proxy handles routing and security. Servers focus on application logic.
+
+In your backend, reverse proxies provide:
+
+- **SSL termination** — handle SSL/TLS encryption
+- **Request routing** — route requests to appropriate servers
+- **Static file serving** — serve static files efficiently
+- **Security** — basic security features
+- **Compression** — compress responses
+- **Caching** — cache static content
+
+Common reverse proxies:
+- **Nginx** — high-performance, popular
+- **Apache** — feature-rich, widely used
+- **HAProxy** — load balancing focused
+- **Traefik** — modern, cloud-native
+
+Reverse proxy benefits:
+- **Performance** — optimized for serving requests
+- **Security** — first line of defense
+- **Flexibility** — easy to configure routing
+- **Offloading** — servers don't handle SSL/routing
+
+Without a reverse proxy, servers handle everything. They're overwhelmed. Performance suffers.
+
+With a reverse proxy, servers focus on application logic. The proxy handles infrastructure. Performance improves.
+
+Reverse proxies are essential for production. Use them to improve performance and security.
+
+### Why do you need load balancing algorithms?
+
+You had a load balancer. Traffic was distributed. Everything worked.
+
+But then you wondered: how does it decide which server? Round-robin? Least connections? What's the best algorithm?
+
+That's when you realized: you need to understand load balancing algorithms.
+
+**Load balancing algorithms** determine how traffic is distributed. Different algorithms fit different scenarios. Each has trade-offs.
+
+Think of it like different ways to distribute work.
+
+Round-robin is like taking turns. Fair but simple.
+
+Least connections is like giving work to the person with least work. More efficient.
+
+In your backend, load balancing algorithms include:
+
+**Round-Robin:**
+- **Method** — distribute requests in order
+- **Use case** — servers are similar
+- **Pros** — simple, fair
+- **Cons** — doesn't consider server load
+
+**Least Connections:**
+- **Method** — send to server with fewest connections
+- **Use case** — long-lived connections
+- **Pros** — considers actual load
+- **Cons** — more complex
+
+**Least Response Time:**
+- **Method** — send to fastest responding server
+- **Use case** — performance critical
+- **Pros** — fastest response
+- **Cons** — requires monitoring
+
+**IP Hash:**
+- **Method** — hash IP to determine server
+- **Use case** — session persistence
+- **Pros** — same IP goes to same server
+- **Cons** — less flexible
+
+**Weighted Round-Robin:**
+- **Method** — round-robin with weights
+- **Use case** — servers have different capacities
+- **Pros** — accounts for server capacity
+- **Cons** — need to set weights
+
+Algorithm selection:
+- **Round-robin** — default, simple
+- **Least connections** — for long connections
+- **Least response time** — for performance
+- **IP hash** — for session persistence
+- **Weighted** — for different capacities
+
+Without understanding algorithms, you use default. It might not be optimal.
+
+With proper algorithm, you optimize distribution. Performance improves.
+
+Load balancing algorithms matter. Choose the right one for your needs.
 
 ### Why do you need a load balancer?
 
@@ -2447,6 +4951,54 @@ With WebSockets, users see updates instantly. They don't need to refresh. The ex
 
 Real-time communication is essential for modern apps. Use it to build engaging experiences.
 
+### Why do you need Server-Sent Events (SSE)?
+
+You had WebSockets. Real-time communication worked. Users got live updates.
+
+But then you needed one-way communication. Server sends updates to clients. Clients don't need to send anything back.
+
+WebSockets were overkill. You didn't need bidirectional communication. You needed simpler.
+
+That's when you realized: you need Server-Sent Events (SSE).
+
+**SSE** is a one-way communication protocol. Server sends events to clients over HTTP. Clients receive updates in real-time. Simple. Efficient.
+
+Think of it like a radio.
+
+WebSockets are like a phone. Both sides can talk. Bidirectional.
+
+SSE is like a radio. Only one side talks. Unidirectional.
+
+In your backend, SSE includes:
+
+- **HTTP connection** — long-lived HTTP connection
+- **Event stream** — server sends events
+- **Automatic reconnection** — client reconnects if disconnected
+- **Simple protocol** — text-based, easy to implement
+- **One-way** — server to client only
+
+SSE use cases:
+- **Live updates** — stock prices, scores
+- **Notifications** — real-time notifications
+- **Progress updates** — long-running task progress
+- **Live feeds** — news feeds, social feeds
+
+SSE vs WebSockets:
+- **SSE** — one-way, simpler, HTTP-based
+- **WebSockets** — bidirectional, more complex, custom protocol
+
+SSE benefits:
+- **Simplicity** — easier than WebSockets
+- **HTTP-based** — works through firewalls/proxies
+- **Automatic reconnection** — built-in reconnection
+- **Efficient** — less overhead than polling
+
+Without SSE, you poll for updates. Inefficient. Slow.
+
+With SSE, you get push updates. Efficient. Real-time.
+
+SSE is essential for one-way real-time updates. Use it when you don't need bidirectional communication.
+
 ### Why do you need message queues?
 
 The app was working. Users were making requests. Background jobs were processing tasks.
@@ -2487,6 +5039,105 @@ Without message queues, your system is tightly coupled. If workers are slow, the
 With message queues, your system is decoupled. The API stays fast. Workers process at their own pace. Jobs are safe, even when things fail.
 
 Your system becomes more resilient, more scalable, and more reliable.
+
+### Why do you need event sourcing?
+
+You stored current state. You updated records. Everything worked.
+
+But then you needed to know: what happened? When did it change? Who changed it? Why did it change?
+
+You couldn't answer. You only had current state. You lost history.
+
+That's when you realized: you need event sourcing.
+
+**Event sourcing** stores events, not state. Instead of updating records, you append events. You rebuild state by replaying events. You never lose history.
+
+Think of it like a bank statement.
+
+Without event sourcing, you only see current balance. You don't know how it changed.
+
+With event sourcing, you see every transaction. You know the complete history.
+
+In your backend, event sourcing includes:
+
+- **Event store** — append-only log of events
+- **Events** — immutable records of what happened
+- **State reconstruction** — rebuild state from events
+- **Event replay** — replay events to rebuild state
+- **Snapshots** — periodic state snapshots for performance
+
+Event sourcing benefits:
+- **Complete history** — never lose events
+- **Audit trail** — see what happened and when
+- **Time travel** — rebuild state at any point
+- **Debugging** — understand how state was reached
+- **Flexibility** — new views from existing events
+
+Event sourcing challenges:
+- **Complexity** — more complex than CRUD
+- **Storage** — events accumulate over time
+- **Performance** — rebuilding state can be slow
+- **Learning curve** — different mental model
+
+Use event sourcing when:
+- You need complete audit trail
+- You need to replay events
+- You need time-travel queries
+- You need to rebuild state
+
+Without event sourcing, you lose history. You can't audit. You can't debug.
+
+With event sourcing, you have complete history. You can audit. You can debug.
+
+Event sourcing is powerful. Use it when you need complete history.
+
+### Why do you need CQRS (Command Query Responsibility Segregation)?
+
+You had a single model. You read from it. You wrote to it. Everything worked.
+
+But then reads got slow. Writes got slow. They interfered with each other. You couldn't optimize them separately.
+
+That's when you realized: you need CQRS.
+
+**CQRS** separates reads and writes. You have separate models for reading and writing. You optimize them independently.
+
+Think of it like a library.
+
+Without CQRS, one catalog serves readers and writers. They interfere with each other.
+
+With CQRS, separate catalogs for readers and writers. They don't interfere.
+
+In your backend, CQRS includes:
+
+- **Command model** — optimized for writes
+- **Query model** — optimized for reads
+- **Separate databases** — different databases for reads/writes
+- **Event synchronization** — sync read model from write events
+- **Eventual consistency** — reads might be slightly stale
+
+CQRS benefits:
+- **Independent optimization** — optimize reads and writes separately
+- **Scalability** — scale reads and writes independently
+- **Performance** — better performance for both
+- **Flexibility** — different models for different needs
+
+CQRS challenges:
+- **Complexity** — more complex architecture
+- **Consistency** — eventual consistency
+- **Synchronization** — need to sync models
+- **Learning curve** — different approach
+
+Use CQRS when:
+- Reads and writes have different patterns
+- You need to scale reads independently
+- You need different models for reads/writes
+- You have high read/write load
+
+Without CQRS, reads and writes interfere. Performance suffers. Scaling is difficult.
+
+With CQRS, reads and writes are optimized independently. Performance improves. Scaling is easier.
+
+CQRS is powerful. Use it when reads and writes have different needs.
 
 ### Why do you need event-driven architecture?
 
@@ -2596,6 +5247,153 @@ sequenceDiagram
     Subscriber2->>Subscriber2: Create analytics record
     Subscriber3->>Subscriber3: Update marketing system
 ```
+
+### Why do you need to understand ACID properties?
+
+You had transactions. They worked. Data stayed consistent.
+
+But then you wondered: what makes transactions reliable? What guarantees do they provide? Why are they atomic?
+
+That's when you realized: you need to understand ACID properties.
+
+**ACID** stands for Atomicity, Consistency, Isolation, Durability. These are the properties that make transactions reliable.
+
+Think of it like a contract.
+
+Without ACID, transactions are unreliable. Data might be inconsistent. Changes might be lost.
+
+With ACID, transactions are reliable. Data stays consistent. Changes are guaranteed.
+
+In your backend, ACID includes:
+
+**Atomicity:**
+- **All or nothing** — all operations succeed or all fail
+- **No partial updates** — can't have half-completed transactions
+- **Rollback** — if any operation fails, everything rolls back
+
+**Consistency:**
+- **Valid state** — database stays in valid state
+- **Constraints** — all constraints are maintained
+- **Rules** — business rules are enforced
+
+**Isolation:**
+- **Concurrent transactions** — transactions don't interfere
+- **Isolation levels** — different levels of isolation
+- **Prevents conflicts** — prevents dirty reads, phantoms
+
+**Durability:**
+- **Permanent** — committed changes are permanent
+- **Survives crashes** — data survives system crashes
+- **Persistent** — written to disk
+
+ACID trade-offs:
+- **Strong guarantees** — but slower
+- **Consistency** — but less scalable
+- **Reliability** — but more complex
+
+Without ACID, transactions are unreliable. Data might be inconsistent. Changes might be lost.
+
+With ACID, transactions are reliable. Data stays consistent. Changes are permanent.
+
+ACID is essential for reliable databases. Understand it to build trustworthy systems.
+
+### Why do you need database transaction savepoints?
+
+You had transactions. They worked. Data stayed consistent.
+
+But then you needed: partial rollbacks. Nested transactions. Complex error handling.
+
+That's when you realized: you need transaction savepoints.
+
+**Savepoints** are markers within transactions. You can roll back to a savepoint. You don't need to roll back the entire transaction.
+
+Think of it like bookmarks.
+
+Without savepoints, you roll back everything. All or nothing.
+
+With savepoints, you roll back to a bookmark. Partial rollback.
+
+In your backend, savepoints include:
+
+- **Create savepoint** — mark a point in transaction
+- **Rollback to savepoint** — roll back to that point
+- **Release savepoint** — remove savepoint
+- **Nested transactions** — simulate nested transactions
+
+Savepoint use cases:
+- **Partial rollbacks** — roll back part of transaction
+- **Complex operations** — handle complex workflows
+- **Error recovery** — recover from errors
+- **Testing** — test transaction logic
+
+Savepoint benefits:
+- **Flexibility** — partial rollbacks
+- **Error handling** — recover from errors
+- **Complex logic** — handle complex operations
+
+Without savepoints, you roll back entire transactions. Can't recover partially.
+
+With savepoints, you roll back partially. Can recover from errors.
+
+Savepoints are powerful. Use them for complex transactions.
+
+### Why do you need database transaction isolation levels?
+
+You had transactions. Data stayed consistent. Everything worked.
+
+But then you noticed: sometimes transactions saw uncommitted data. Sometimes reads were inconsistent. Sometimes performance was slow.
+
+You wondered: what isolation level should you use? What are the trade-offs? How do you choose?
+
+That's when you realized: you need to understand transaction isolation levels.
+
+**Isolation levels** control what transactions can see. They balance consistency and performance. Higher isolation = more consistency, less performance. Lower isolation = less consistency, more performance.
+
+Think of it like privacy settings.
+
+READ UNCOMMITTED is like a public room. You see everything, even unfinished work.
+
+SERIALIZABLE is like a private room. You see only committed work. Most isolated.
+
+In your backend, isolation levels include:
+
+**READ UNCOMMITTED:**
+- **Dirty reads** — can read uncommitted data
+- **Performance** — fastest
+- **Consistency** — lowest
+- **Use case** — rarely used
+
+**READ COMMITTED:**
+- **No dirty reads** — only committed data
+- **Phantom reads** — can occur
+- **Performance** — good
+- **Consistency** — moderate
+- **Use case** — default in many databases
+
+**REPEATABLE READ:**
+- **No dirty reads** — only committed data
+- **No non-repeatable reads** — same read returns same data
+- **Phantom reads** — can still occur
+- **Performance** — moderate
+- **Consistency** — good
+- **Use case** — when you need consistent reads
+
+**SERIALIZABLE:**
+- **Highest isolation** — transactions are serialized
+- **No anomalies** — no dirty reads, no phantoms
+- **Performance** — slowest
+- **Consistency** — highest
+- **Use case** — when you need strict consistency
+
+Trade-offs:
+- **Higher isolation** — more consistent, slower
+- **Lower isolation** — less consistent, faster
+
+Without understanding isolation, you choose wrong level. Performance suffers or consistency is compromised.
+
+With proper isolation, you choose right level. Performance and consistency are balanced.
+
+Transaction isolation levels are essential knowledge. Choose the right one for your needs.
 
 ### Why do you need data consistency and transactions?
 
@@ -2948,6 +5746,103 @@ The choice isn't about which is better. It's about which fits your needs.
 
 Your API design should serve your clients, not your preferences.
 
+### Why do you need gRPC and Protocol Buffers?
+
+You built REST APIs. They worked. They were simple.
+
+But then you needed high-performance APIs. You needed streaming. You needed type safety. You needed efficient binary protocols.
+
+REST couldn't handle it well. JSON is verbose. HTTP/1.1 is slow. No streaming support.
+
+That's when you realized: maybe you need gRPC.
+
+**gRPC** is a high-performance RPC framework. It uses HTTP/2. It supports streaming. It's fast. It's efficient.
+
+**Protocol Buffers** are gRPC's data format. They're binary. They're compact. They're type-safe. They're faster than JSON.
+
+Think of it like communication.
+
+REST is like talking. It's human-readable. It's flexible. But it's slower.
+
+gRPC is like telepathy. It's fast. It's efficient. But it's binary.
+
+In your backend, gRPC includes:
+
+- **HTTP/2** — multiplexed, binary protocol
+- **Protocol Buffers** — efficient serialization
+- **Streaming** — bidirectional streaming
+- **Type safety** — strong typing
+- **Code generation** — auto-generate client/server code
+
+gRPC features:
+- **Unary RPC** — single request/response
+- **Server streaming** — server sends multiple responses
+- **Client streaming** — client sends multiple requests
+- **Bidirectional streaming** — both stream simultaneously
+
+Protocol Buffers:
+- **Binary format** — more efficient than JSON
+- **Type definitions** — .proto files define types
+- **Code generation** — generate code for languages
+- **Backward compatible** — evolve schemas safely
+
+gRPC is good when:
+- You need high performance
+- You need streaming
+- You need type safety
+- You're building microservices
+
+REST is good when:
+- You need human-readable APIs
+- You need browser compatibility
+- You need simple APIs
+- You want HTTP caching
+
+Without gRPC, REST limits performance. JSON is verbose. HTTP/1.1 is slow.
+
+With gRPC, you get high performance. Binary is efficient. HTTP/2 is fast.
+
+gRPC is essential for microservices. Use it for high-performance APIs.
+
+### Why do you need to understand the CAP Theorem?
+
+You built a distributed system. You had multiple databases. You had replication.
+
+But then you noticed: you couldn't have everything. Strong consistency meant slower responses. High availability meant eventual consistency. You had to choose.
+
+That's when you realized: you need to understand the CAP Theorem.
+
+**CAP Theorem** states that in a distributed system, you can only guarantee two of three properties: Consistency, Availability, Partition tolerance.
+
+Think of it like a triangle. You can only be at two corners at once.
+
+**Consistency** — all nodes see the same data at the same time.
+
+**Availability** — system remains operational.
+
+**Partition tolerance** — system continues despite network failures.
+
+CAP combinations:
+- **CA** — consistency and availability (no partitions)
+- **CP** — consistency and partition tolerance (sacrifice availability)
+- **AP** — availability and partition tolerance (sacrifice consistency)
+
+Real-world examples:
+- **CP systems** — databases (PostgreSQL, MongoDB) — consistent, but may be unavailable
+- **AP systems** — distributed caches (Redis cluster) — available, but eventually consistent
+- **CA systems** — single-node databases — consistent and available, but not partitioned
+
+CAP implications:
+- **Choose based on needs** — different systems need different guarantees
+- **Trade-offs** — you can't have everything
+- **Design decisions** — guide architecture choices
+
+Without understanding CAP, you try to have everything. You fail.
+
+With CAP understanding, you make informed choices. You design appropriately.
+
+CAP Theorem is essential knowledge. Use it to understand distributed systems.
+
 ### Why do you need to choose between microservices and monoliths?
 
 The app was growing. Features were piling up. The codebase was getting large.
@@ -3025,6 +5920,51 @@ graph TB
         Payment --> PaymentDB[(Payment DB)]
     end
 ```
+
+### Why do you need Infrastructure as Code (IaC)?
+
+You deployed servers. You configured databases. You set up load balancers. Everything worked.
+
+But then you needed to deploy to a new region. Or restore after a disaster. Or create a staging environment.
+
+You had to configure everything manually. You had to remember all the settings. You had to hope you didn't miss anything.
+
+That's when you realized: you need Infrastructure as Code.
+
+**Infrastructure as Code (IaC)** defines infrastructure in code. You write configuration files. You version them. You apply them. Infrastructure is reproducible.
+
+Think of it like a recipe.
+
+Without IaC, you cook from memory. Each time is different. You forget ingredients.
+
+With IaC, you follow a recipe. Each time is the same. Nothing is forgotten.
+
+In your backend, IaC includes:
+
+- **Terraform** — infrastructure provisioning
+- **Ansible** — configuration management
+- **CloudFormation** — AWS-specific
+- **Pulumi** — code-based IaC
+- **Configuration files** — YAML, JSON, HCL
+
+IaC benefits:
+- **Reproducibility** — same infrastructure every time
+- **Version control** — track changes to infrastructure
+- **Consistency** — environments are identical
+- **Automation** — deploy infrastructure automatically
+- **Documentation** — code documents infrastructure
+
+IaC practices:
+- **Version control** — store configs in Git
+- **Modularity** — reuse modules
+- **Testing** — test infrastructure changes
+- **Review** — review infrastructure changes
+
+Without IaC, infrastructure is manual. It's inconsistent. It's error-prone.
+
+With IaC, infrastructure is automated. It's consistent. It's reliable.
+
+Infrastructure as Code is essential for cloud-native systems. Use it to manage infrastructure.
 
 ### Why do you need containerization and orchestration?
 
@@ -3507,20 +6447,33 @@ You learned why you need:
 - Databases — to persist data that survives restarts
 - SQL vs NoSQL — choosing the right database type
 - Database schema design — planning your data structure
+- Database normalization — organizing data efficiently
 - HTTP and HTTPS — understanding the web protocol
+- DNS and TCP/IP — understanding network fundamentals
+- Version control and Git workflows — managing code changes
 - APIs — to create clear contracts between systems
 - API pagination, filtering, and sorting — handling large datasets efficiently
+- API documentation (OpenAPI/Swagger) — documenting APIs
 - Batch operations and idempotency — reliable bulk operations
 - Authentication and authorization — to secure your system
+- OAuth 2.0 and OpenID Connect — modern authentication
+- Single Sign-On (SSO) — enterprise authentication
+- Multi-Factor Authentication (MFA) — enhanced security
 - Sessions, cookies, and stateless vs stateful — managing user sessions
 - Roles and permissions — fine-grained access control
 - Input validation and security — protecting beyond authentication
 - Security headers and CORS — protecting web applications
+- CSRF protection — preventing cross-site attacks
+- OWASP Top 10 vulnerabilities — understanding common threats
+- Data encryption at rest and in transit — protecting sensitive data
 - Database migrations — to change schemas safely
+- Object-Relational Mappers (ORMs) — simplifying database access
 - Database deadlocks and locks — handling concurrency
+- Database transaction isolation levels — balancing consistency and performance
 - Environment configuration — managing settings per environment
 - Secrets management — securing sensitive data
 - Testing strategies — to catch bugs early
+- Unit testing vs integration testing — understanding test types
 
 **Early Growth:**
 - Caching — to serve responses faster
@@ -3543,6 +6496,7 @@ You learned why you need:
 - CI/CD pipelines — to deploy automatically and safely
 - Deployment strategies — reducing deployment risk (rolling, blue-green, canary)
 - Rate limiting — to protect your API
+- Rate limiting strategies — token bucket, sliding window, fixed window
 - Backups and disaster recovery — to survive failures
 - Webhooks — to integrate with external systems
 - Performance profiling and load testing — understanding system limits
@@ -3556,6 +6510,7 @@ You learned why you need:
 - Search and indexing — to find data quickly
 - CDN — to serve content globally
 - WebSockets and real-time — for live communication
+- Server-Sent Events (SSE) — one-way real-time updates
 - Message queues — to decouple producers and consumers
 - Event-driven architecture — services communicate through events
 - Pub/sub (publish-subscribe) — broadcasting events to multiple subscribers
@@ -3568,8 +6523,10 @@ You learned why you need:
 **Advanced Scaling:**
 - API versioning — to evolve without breaking clients
 - REST vs GraphQL — choosing the right API style
+- gRPC and Protocol Buffers — high-performance APIs
 - Architecture choices — microservices vs monoliths
 - Containerization and orchestration — to run consistently everywhere
+- Infrastructure as Code (IaC) — managing infrastructure with code
 - Serverless architecture — focusing on code, not infrastructure
 - Cloud-managed services — letting experts handle infrastructure
 - API Gateway — to manage microservices complexity
