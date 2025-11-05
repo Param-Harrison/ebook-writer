@@ -55,6 +55,13 @@
       "template": "afrinenglish",
       "category": "english-learning",
       "description": "Polite, practical English for 40+ real-life situations with model responses and explanations."
+    },
+    "ai-simulation": {
+      "title": "AI Agent Simulation Platform: A Use Case & MVP Guide",
+      "author": "AI Simulation Platform",
+      "template": "backendchallenges",
+      "category": "coding",
+      "description": "A Comprehensive Guide to Building Multi-Agent AI Simulation Systems"
     }
   },
   "templates": {
