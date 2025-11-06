@@ -62,6 +62,13 @@
       "template": "backendchallenges",
       "category": "coding",
       "description": "A Comprehensive Guide to Building Multi-Agent AI Simulation Systems"
+    }, 
+    "know-the-why": {
+      "title": "Know the Why behind Backend Engineering?",
+      "author": "Param Harrison",
+      "template": "backendchallenges",
+      "category": "coding",
+      "description": "A simple novel with a happy ending in every chapter — revealing the \"why\" behind backend engineering."
     }
   },
   "templates": {
