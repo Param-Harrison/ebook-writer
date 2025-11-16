@@ -14,48 +14,6 @@
       "category": "coding",
       "description": "Intense coding challenges for backend developers"
     },
-    "speak-english-work": {
-      "title": "Speak English at Work – The Friendly Way",
-      "author": "AfrinEnglish.com",
-      "template": "afrinenglish",
-      "category": "general",
-      "description": "Real Office Conversations Made Simple"
-    },
-    "small-talk-without-stress": {
-      "title": "Small Talk Without Stress – The Friendly Way",
-      "author": "AfrinEnglish.com",
-      "template": "afrinenglish",
-      "category": "english-learning",
-      "description": "Friendly English for Everyday Conversations"
-    },
-    "30-english-mistakes-i-fixed": {
-      "title": "30 English Mistakes I Fixed (And How)",
-      "author": "AfrinEnglish.com",
-      "template": "afrinenglish",
-      "category": "english-learning",
-      "description": "Common Grammar Mistakes and How to Fix Them"
-    },
-    "afrinenglish-daily-practice-kit": {
-      "title": "Afrin English Daily Practice Templates",
-      "author": "AfrinEnglish.com",
-      "template": "daily-practice-kit",
-      "category": "english-learning",
-      "description": "Build Your English Speaking Habit – One Day at a Time"
-    },
-    "chatgpt-prompt-guide": {
-      "title": "ChatGPT Prompt Guide for English Learners",
-      "author": "AfrinEnglish.com",
-      "template": "afrinenglish",
-      "category": "english-learning",
-      "description": "Use AI to Practice Speaking, Listening, and Reading — Anytime, Anywhere"
-    },
-    "what-would-you-say": {
-      "title": "What Would You Say? Real English for Real Situations",
-      "author": "AfrinEnglish.com",
-      "template": "afrinenglish",
-      "category": "english-learning",
-      "description": "Polite, practical English for 40+ real-life situations with model responses and explanations."
-    },
     "ai-simulation": {
       "title": "AI Agent Simulation Platform: A Use Case & MVP Guide",
       "author": "AI Simulation Platform",
